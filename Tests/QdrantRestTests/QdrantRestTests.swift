@@ -219,19 +219,19 @@ struct QdrantRestTests {
         #expect(String(data: dotData, encoding: .utf8) == "\"Dot\"")
     }
 
-    @Test("HTTPError descriptions")
-    func httpErrorDescriptions() {
-        let error = HTTPError.collectionNotFound("test_collection")
+    @Test("RESTError descriptions")
+    func restErrorDescriptions() {
+        let error = RESTError.collectionNotFound("test_collection")
         #expect(error.errorDescription?.contains("test_collection") == true)
 
-        let networkError = HTTPError.unauthenticated
+        let networkError = RESTError.unauthenticated
         #expect(networkError.errorDescription?.contains("Authentication") == true)
     }
 
     @Test("REST Client TLS Required For Remote Host")
     func restClientTLSRequired() {
         // Disabling TLS for remote host should throw
-        #expect(throws: HTTPError.self) {
+        #expect(throws: RESTError.self) {
             _ = try QdrantRESTClient(host: "cloud.qdrant.io", useTLS: false)
         }
 

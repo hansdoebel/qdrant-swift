@@ -125,11 +125,39 @@ Both clients have identical APIs. Use gRPC for production, REST for simplicity.
 docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant
 ```
 
+## Project Structure
+
+```
+qdrant-swift/
+├── Sources/
+│   ├── QdrantCore/          # Shared models and protocols (used by both clients)
+│   │   ├── Models/          # Point, Filter, Distance, PayloadValue, etc.
+│   │   └── Protocols/       # Service protocols for dependency injection
+│   ├── QdrantGRPC/          # gRPC client implementation
+│   │   ├── Configuration/   # Client configuration
+│   │   ├── Errors/          # gRPC-specific errors
+│   │   ├── ProtoExtensions/ # Swift extensions for proto type conversion
+│   │   ├── Protos/          # Raw .proto definition files
+│   │   └── Services/        # Collection, Points, Snapshots services
+│   ├── QdrantProto/         # Auto-generated Swift code from .proto files
+│   └── QdrantREST/          # REST client implementation
+│       ├── Client/          # HTTP client wrapper
+│       ├── Errors/          # REST-specific errors (RESTError)
+│       ├── Models/          # REST-specific response models
+│       └── Services/        # Collection, Points, Snapshots services
+├── Tests/
+│   ├── IntegrationTests/    # End-to-end tests (requires Qdrant server)
+│   ├── Mocks/               # Mock implementations for unit testing
+│   └── Qdrant*Tests/        # Unit tests for each module
+├── Docs/                    # Documentation
+└── Package.swift            # Swift Package Manager manifest
+```
+
 ## Documentation
 
-- [Usage Examples](docs/USAGE.md) - Detailed examples and common patterns
-- [API Reference](docs/API.md) - Complete API documentation
-- [Testing Guide](docs/TESTING.md) - How to run and write tests
+- [Usage Examples](Docs/USAGE.md) - Detailed examples and common patterns
+- [API Reference](Docs/API.md) - Complete API documentation
+- [Testing Guide](Docs/TESTING.md) - How to run and write tests
 
 ## Resources
 

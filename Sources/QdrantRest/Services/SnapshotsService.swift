@@ -2,7 +2,7 @@ import Foundation
 import QdrantCore
 
 /// Service for managing Qdrant snapshots via REST API.
-public final class RestSnapshotsService: Sendable {
+public final class SnapshotsService: Sendable {
     private let client: HTTPClient
 
     internal init(client: HTTPClient) {
@@ -35,7 +35,7 @@ public final class RestSnapshotsService: Sendable {
             queryItems: queryItems
         )
         guard let result = response.result else {
-            throw HTTPError.unexpectedResponse("No snapshot info returned")
+            throw RESTError.unexpectedResponse("No snapshot info returned")
         }
         return result
     }
@@ -75,7 +75,7 @@ public final class RestSnapshotsService: Sendable {
             queryItems: queryItems
         )
         guard let result = response.result else {
-            throw HTTPError.unexpectedResponse("No snapshot info returned")
+            throw RESTError.unexpectedResponse("No snapshot info returned")
         }
         return result
     }

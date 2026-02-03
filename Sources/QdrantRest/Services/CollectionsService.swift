@@ -2,7 +2,7 @@ import Foundation
 import QdrantCore
 
 /// Service for managing Qdrant collections via REST API.
-public final class RestCollectionsService: Sendable {
+public final class CollectionsService: Sendable {
     private let client: HTTPClient
 
     internal init(client: HTTPClient) {
@@ -22,7 +22,7 @@ public final class RestCollectionsService: Sendable {
     public func get(name: String) async throws -> CollectionInfo {
         let response: GetCollectionResponse = try await client.get(path: "/collections/\(name)")
         guard let result = response.result else {
-            throw HTTPError.unexpectedResponse("No collection info returned")
+            throw RESTError.unexpectedResponse("No collection info returned")
         }
         return result
     }
@@ -144,7 +144,7 @@ public final class RestCollectionsService: Sendable {
             path: "/collections/\(name)/cluster"
         )
         guard let result = response.result else {
-            throw HTTPError.unexpectedResponse("No cluster info returned")
+            throw RESTError.unexpectedResponse("No cluster info returned")
         }
         return result
     }

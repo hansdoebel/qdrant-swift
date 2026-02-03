@@ -5,18 +5,18 @@ import QdrantCore
 public final class QdrantRESTClient: Sendable {
     private let httpClient: HTTPClient
 
-    private let _collections: RestCollectionsService
-    private let _points: RestPointsService
-    private let _snapshots: RestSnapshotsService
+    private let _collections: CollectionsService
+    private let _points: PointsService
+    private let _snapshots: SnapshotsService
 
     /// Service for managing collections.
-    public var collections: RestCollectionsService { _collections }
+    public var collections: CollectionsService { _collections }
 
     /// Service for managing points.
-    public var points: RestPointsService { _points }
+    public var points: PointsService { _points }
 
     /// Service for managing snapshots.
-    public var snapshots: RestSnapshotsService { _snapshots }
+    public var snapshots: SnapshotsService { _snapshots }
 
     /// Creates a new Qdrant REST client.
     /// - Parameters:
@@ -25,7 +25,7 @@ public final class QdrantRESTClient: Sendable {
     ///   - useTLS: Whether to use HTTPS (default: auto-detected based on host).
     ///   - apiKey: Optional API key for authentication.
     ///   - session: URLSession to use (default: shared session).
-    /// - Throws: `HTTPError.tlsRequiredForRemoteHost` if TLS is explicitly disabled for a remote host.
+    /// - Throws: `RESTError.tlsRequiredForRemoteHost` if TLS is explicitly disabled for a remote host.
     public init(
         host: String = "localhost",
         port: Int = 6333,
@@ -40,7 +40,7 @@ public final class QdrantRESTClient: Sendable {
             // User explicitly specified TLS setting
             if !explicitTLS && !isLocalhost {
                 // Security: Refuse to disable TLS for remote hosts
-                throw HTTPError.tlsRequiredForRemoteHost(host)
+                throw RESTError.tlsRequiredForRemoteHost(host)
             }
             shouldUseTLS = explicitTLS
         } else {
@@ -56,9 +56,9 @@ public final class QdrantRESTClient: Sendable {
             session: session
         )
 
-        self._collections = RestCollectionsService(client: httpClient)
-        self._points = RestPointsService(client: httpClient)
-        self._snapshots = RestSnapshotsService(client: httpClient)
+        self._collections = CollectionsService(client: httpClient)
+        self._points = PointsService(client: httpClient)
+        self._snapshots = SnapshotsService(client: httpClient)
     }
 
     /// Checks if the given host is a localhost address.

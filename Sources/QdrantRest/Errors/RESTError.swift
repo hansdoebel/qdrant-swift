@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HTTPError: Error, Sendable {
+public enum RESTError: Error, Sendable {
     case statusCode(Int, message: String?)
     case decodingFailed(Error)
     case encodingFailed(Error)
@@ -17,7 +17,7 @@ public enum HTTPError: Error, Sendable {
     case tlsRequiredForRemoteHost(String)
 }
 
-extension HTTPError: LocalizedError {
+extension RESTError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .statusCode(let code, let message):

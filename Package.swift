@@ -52,7 +52,8 @@ let package = Package(
                 .product(name: "GRPCNIOTransportHTTP2", package: "grpc-swift-nio-transport"),
                 .product(name: "GRPCProtobuf", package: "grpc-swift-protobuf"),
             ],
-            path: "Sources/QdrantGRPC"
+            path: "Sources/QdrantGRPC",
+            exclude: ["Protos"]
         ),
         .target(
             name: "QdrantREST",

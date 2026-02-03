@@ -2,7 +2,7 @@ import Foundation
 import QdrantCore
 
 /// Service for managing points in Qdrant collections via REST API.
-public final class RestPointsService: Sendable {
+public final class PointsService: Sendable {
     private let client: HTTPClient
 
     internal init(client: HTTPClient) {

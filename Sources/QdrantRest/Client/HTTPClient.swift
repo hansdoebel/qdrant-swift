@@ -36,7 +36,7 @@ public actor HTTPClient {
     ) throws {
         let scheme = useTLS ? "https" : "http"
         guard let url = URL(string: "\(scheme)://\(host):\(port)") else {
-            throw HTTPError.invalidURL("\(scheme)://\(host):\(port)")
+            throw RESTError.invalidURL("\(scheme)://\(host):\(port)")
         }
 
         self.baseURL = url
@@ -78,7 +78,7 @@ public actor HTTPClient {
         let (data, response) = try await performRequest(request)
         try validateResponse(response, data: data)
         guard let text = String(data: data, encoding: .utf8) else {
-            throw HTTPError.decodingFailed(
+            throw RESTError.decodingFailed(
                 NSError(
                     domain: "HTTPClient", code: -1,
                     userInfo: [NSLocalizedDescriptionKey: "Could not decode response as UTF-8 text"]
@@ -224,11 +224,11 @@ public actor HTTPClient {
         let (tempURL, response) = try await session.download(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw HTTPError.unexpectedResponse("Not an HTTP response")
+            throw RESTError.unexpectedResponse("Not an HTTP response")
         }
 
         guard (200...299).contains(httpResponse.statusCode) else {
-            throw HTTPError.statusCode(httpResponse.statusCode, message: "Download failed")
+            throw RESTError.statusCode(httpResponse.statusCode, message: "Download failed")
         }
 
         let fileManager = FileManager.default
@@ -253,7 +253,7 @@ public actor HTTPClient {
         components?.queryItems = queryItems
 
         guard let url = components?.url else {
-            throw HTTPError.invalidURL(path)
+            throw RESTError.invalidURL(path)
         }
 
         var request = URLRequest(url: url)
@@ -285,7 +285,7 @@ public actor HTTPClient {
         do {
             return try encoder.encode(value)
         } catch {
-            throw HTTPError.encodingFailed(error)
+            throw RESTError.encodingFailed(error)
         }
     }
 
@@ -296,7 +296,7 @@ public actor HTTPClient {
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw HTTPError.decodingFailed(error)
+            throw RESTError.decodingFailed(error)
         }
     }
 
@@ -309,13 +309,13 @@ public actor HTTPClient {
         do {
             return try await session.data(for: request)
         } catch {
-            throw HTTPError.networkError(error)
+            throw RESTError.networkError(error)
         }
     }
 
     private func validateResponse(_ response: URLResponse, data: Data) throws {
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw HTTPError.unexpectedResponse("Not an HTTP response")
+            throw RESTError.unexpectedResponse("Not an HTTP response")
         }
 
         let statusCode = httpResponse.statusCode
@@ -325,22 +325,22 @@ public actor HTTPClient {
 
             switch statusCode {
             case 400:
-                throw HTTPError.badRequest(message ?? "Bad request")
+                throw RESTError.badRequest(message ?? "Bad request")
             case 401:
-                throw HTTPError.unauthenticated
+                throw RESTError.unauthenticated
             case 403:
-                throw HTTPError.permissionDenied
+                throw RESTError.permissionDenied
             case 404:
                 if let message = message, message.lowercased().contains("collection") {
-                    throw HTTPError.collectionNotFound(message)
+                    throw RESTError.collectionNotFound(message)
                 } else if let message = message, message.lowercased().contains("point") {
-                    throw HTTPError.pointNotFound(message)
+                    throw RESTError.pointNotFound(message)
                 }
-                throw HTTPError.statusCode(statusCode, message: message)
+                throw RESTError.statusCode(statusCode, message: message)
             case 500...599:
-                throw HTTPError.serverError(message ?? "Internal server error")
+                throw RESTError.serverError(message ?? "Internal server error")
             default:
-                throw HTTPError.statusCode(statusCode, message: message)
+                throw RESTError.statusCode(statusCode, message: message)
             }
         }
     }
