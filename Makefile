@@ -1,4 +1,4 @@
-.PHONY: generate clean
+.PHONY: generate clean check-tools update-deps
 
 PROTO_DIR = protos
 OUTPUT_DIR = Sources/QdrantGRPC
@@ -23,6 +23,10 @@ clean:
 	@echo "Cleaning generated files..."
 	rm -f $(OUTPUT_DIR)/*.pb.swift $(OUTPUT_DIR)/*.grpc.swift
 	@echo "Done"
+
+# Check for outdated dependencies
+update-deps:
+	swift package update --dry-run
 
 # Check if protoc plugins are installed
 check-tools:

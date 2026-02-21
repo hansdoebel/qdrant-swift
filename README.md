@@ -153,6 +153,14 @@ qdrant-swift/
 └── Package.swift            # Swift Package Manager manifest
 ```
 
+## Development
+
+Check for outdated dependencies:
+
+```bash
+make update-deps
+```
+
 ## Documentation
 
 - [Usage Examples](Docs/USAGE.md) - Detailed examples and common patterns
