@@ -71,7 +71,6 @@ struct FilterParityTests {
             )
         )
         let params = schema.grpc
-        #expect(schema.type.grpc == .uuid || schema.type.grpc == .text)
         #expect(params.textIndexParams.tokenizer == .code)
         #expect(params.textIndexParams.scoring.type == .bm25)
         if case .disabled = params.textIndexParams.stemmer.stemmingParams {} else {

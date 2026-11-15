@@ -114,8 +114,9 @@ let exists = try await client.collections.exists(name: "documents")
 // Get info
 let info = try await client.collections.get(name: "documents")
 print("Status: \(info.status)")
-print("Points count: \(info.pointsCount)")
-print("Vectors count: \(info.vectorsCount)")
+print("Points count: \(info.pointsCount ?? 0)")
+print("Indexed vectors: \(info.indexedVectorsCount ?? 0)")
+print("Created: \(String(describing: info.createdAt))")
 
 // List all collections
 let collections = try await client.collections.list()
@@ -164,7 +165,7 @@ try await client.collections.update(
 try await restClient.collections.update(
     name: "documents",
     optimizersConfig: RestOptimizersConfigDiff(indexingThreshold: 20000),
-    params: RestCollectionParamsDiff(onDiskPayload: true)
+    params: RestCollectionParamsDiff(replicationFactor: 2)
 )
 ```
 
@@ -404,12 +405,12 @@ let results = try await client.points.query(
 let results = try await client.points.query(
     collection: "documents",
     prefetch: [
-        RestPrefetchQuery(
+        PrefetchQuery(
             query: .nearest(queryEmbedding),
-            limit: 100  // Get top 100 candidates
+            limit: 100
         )
     ],
-    query: .nearest(rerankEmbedding),  // Re-rank with different embedding
+    query: .nearest(rerankEmbedding),
     limit: 10,
     withPayload: true
 )
@@ -452,12 +453,12 @@ let filter = Filter(must: [
 
 // Multiple values (match any)
 let filter = Filter(must: [
-    .field(FieldCondition(key: "tag", match: .keywords(["swift", "ios", "macos"])))
+    .field(FieldCondition(key: "tag", match: .any(["swift", "ios", "macos"])))
 ])
 
 // Exclude values
 let filter = Filter(must: [
-    .field(FieldCondition(key: "status", match: .exceptKeywords(["draft", "archived"])))
+    .field(FieldCondition(key: "status", match: .exceptKeyword(["draft", "archived"])))
 ])
 
 // Range filter
@@ -600,6 +601,50 @@ try await client.points.deleteFieldIndex(
     fieldName: "old_field"
 )
 ```
+
+### Qdrant 1.20 queries and filters
+
+```swift
+let mmr = try await client.points.query(
+    collection: "documents",
+    query: .nearestWithMmr(
+        nearest: queryEmbedding,
+        mmr: Mmr(diversity: 0.6, candidatesLimit: 50)
+    ),
+    limit: 10
+)
+
+let text = try await client.points.query(
+    collection: "documents",
+    query: .text(TextQuery(query: "time travel", bm25: Bm25Params(b: 0.75))),
+    using: "title",
+    limit: 10
+)
+
+let filter = Filter(
+    must: [
+        .field(key: "path", match: .substring("/src/")),
+        .nested(key: "offers", filter: Filter(must: [
+            .field(key: "price", range: .lessThan(20))
+        ]))
+    ],
+    minShould: MinShould(conditions: [.hasVector("image")], minCount: 1)
+)
+
+try await client.points.createFieldIndex(
+    collection: "documents",
+    fieldName: "body",
+    schema: .text(TextIndexOptions(tokenizer: .code, scoring: .bm25, stemmer: .disabled))
+)
+
+try await client.points.upsert(
+    collection: "documents",
+    points: points,
+    updateMode: .insertOnly
+)
+```
+
+`onDiskPayload` still works and is deprecated. Prefer `CollectionOptions` with `payload: PayloadStorageParams(memory: .cold)` and `datatype: .turbo16`.
 
 ## Recommendations
 
