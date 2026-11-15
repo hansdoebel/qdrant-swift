@@ -9,6 +9,7 @@ A native Swift client library for [Qdrant](https://qdrant.tech/) vector database
 - **Swift 6 Concurrency**: Full async/await support
 - **Minimal Dependencies**: REST client has zero external dependencies
 - **Type-Safe API**: Strong typing with Swift literals for payloads
+- **Qdrant 1.20**: Query API, filters, TurboQuant, and memory placement
 
 ## Installation
 
@@ -18,7 +19,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/hansdoebel/qdrant-swift.git", from: "1.0.0")
+    .package(url: "https://github.com/hansdoebel/qdrant-swift.git", from: "2.0.0")
 ]
 ```
 
@@ -115,14 +116,14 @@ Both clients have identical APIs. Use gRPC for production, REST for simplicity.
 
 ## Requirements
 
-- Swift 6.0+
-- macOS 15+ / iOS 18+
-- Qdrant 1.x
+- Swift 6.4+
+- macOS 27+ / iOS 27+
+- Qdrant 1.20.1
 
 ## Running Qdrant
 
 ```bash
-docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant
+docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant:v1.20.1
 ```
 
 ## Project Structure
