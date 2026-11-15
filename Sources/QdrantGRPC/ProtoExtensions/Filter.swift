@@ -192,9 +192,16 @@ extension Date {
     var protobufTimestamp: SwiftProtobuf.Google_Protobuf_Timestamp {
         var timestamp = SwiftProtobuf.Google_Protobuf_Timestamp()
         let interval = timeIntervalSince1970
-        let seconds = Int64(interval)
-        timestamp.seconds = seconds
-        timestamp.nanos = Int32((interval - Double(seconds)) * 1_000_000_000)
+        let seconds = Int64(floor(interval))
+        var nanos = Int32(((interval - Double(seconds)) * 1_000_000_000).rounded())
+        if nanos >= 1_000_000_000 {
+            timestamp.seconds = seconds + 1
+            nanos = 0
+        } else {
+            timestamp.seconds = seconds
+            if nanos < 0 { nanos = 0 }
+        }
+        timestamp.nanos = nanos
         return timestamp
     }
 }

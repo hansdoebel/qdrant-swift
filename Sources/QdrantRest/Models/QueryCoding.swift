@@ -140,7 +140,8 @@ extension QueryImage: Codable {
         let container = try decoder.container(keyedBy: DynamicKey.self)
         self.init(
             image: try container.decode(PayloadValue.self, forKey: DynamicKey(stringValue: "image")!),
-            model: try container.decode(String.self, forKey: DynamicKey(stringValue: "model")!)
+            model: try container.decode(String.self, forKey: DynamicKey(stringValue: "model")!),
+            options: try inferenceOptions(in: container, reserved: ["image", "model"])
         )
     }
 
@@ -159,7 +160,8 @@ extension InferenceObject: Codable {
         let container = try decoder.container(keyedBy: DynamicKey.self)
         self.init(
             object: try container.decode(PayloadValue.self, forKey: DynamicKey(stringValue: "object")!),
-            model: try container.decode(String.self, forKey: DynamicKey(stringValue: "model")!)
+            model: try container.decode(String.self, forKey: DynamicKey(stringValue: "model")!),
+            options: try inferenceOptions(in: container, reserved: ["object", "model"])
         )
     }
 
@@ -197,13 +199,9 @@ extension VectorInput: Codable {
         } else if keyed.contains(.text) {
             self = .document(try Document(from: decoder))
         } else if keyed.contains(.image) {
-            let image = try keyed.decode(PayloadValue.self, forKey: .image)
-            let model = try keyed.decode(String.self, forKey: .model)
-            self = .image(QueryImage(image: image, model: model))
+            self = .image(try QueryImage(from: decoder))
         } else if keyed.contains(.object) {
-            let object = try keyed.decode(PayloadValue.self, forKey: .object)
-            let model = try keyed.decode(String.self, forKey: .model)
-            self = .inferenceObject(InferenceObject(object: object, model: model))
+            self = .inferenceObject(try InferenceObject(from: decoder))
         } else {
             throw DecodingError.dataCorrupted(
                 .init(codingPath: decoder.codingPath, debugDescription: "Unable to decode vector"))
@@ -404,6 +402,30 @@ extension QdrantCore.Expression: Codable {
                 right: try div.decode(QdrantCore.Expression.self, forKey: .right),
                 byZeroDefault: try div.decodeIfPresent(Float.self, forKey: .byZeroDefault)
             )
+        } else if let value = try keyed.decodeIfPresent(QdrantCore.Expression.self, forKey: .neg) {
+            self = .neg(value)
+        } else if let value = try keyed.decodeIfPresent(QdrantCore.Expression.self, forKey: .abs) {
+            self = .abs(value)
+        } else if let value = try keyed.decodeIfPresent(QdrantCore.Expression.self, forKey: .sqrt) {
+            self = .sqrt(value)
+        } else if let value = try keyed.decodeIfPresent(QdrantCore.Expression.self, forKey: .exp) {
+            self = .exp(value)
+        } else if let value = try keyed.decodeIfPresent(QdrantCore.Expression.self, forKey: .log10) {
+            self = .log10(value)
+        } else if let value = try keyed.decodeIfPresent(QdrantCore.Expression.self, forKey: .ln) {
+            self = .ln(value)
+        } else if keyed.contains(.pow) {
+            let pow = try keyed.nestedContainer(keyedBy: PowKey.self, forKey: .pow)
+            self = .pow(
+                base: try pow.decode(QdrantCore.Expression.self, forKey: .base),
+                exponent: try pow.decode(QdrantCore.Expression.self, forKey: .exponent)
+            )
+        } else if let params = try keyed.decodeIfPresent(DecayParams.self, forKey: .expDecay) {
+            self = .expDecay(params)
+        } else if let params = try keyed.decodeIfPresent(DecayParams.self, forKey: .gaussDecay) {
+            self = .gaussDecay(params)
+        } else if let params = try keyed.decodeIfPresent(DecayParams.self, forKey: .linDecay) {
+            self = .linDecay(params)
         } else {
             self = .condition(try Condition(from: decoder))
         }
@@ -534,12 +556,32 @@ extension QueryInput: Codable {
             self = .rrf(rrf)
         } else if container.contains(.formula) {
             self = .formula(try Formula(from: decoder))
+        } else if isDocument(decoder) {
+            self = .nearest(.document(try Document(from: decoder)))
         } else if container.contains(.text) {
             if let plain = try? container.decode(String.self, forKey: .text) {
                 self = .text(TextQuery(query: plain))
             } else {
                 self = .text(try container.decode(TextQuery.self, forKey: .text))
             }
+        } else if container.contains(.recommend) {
+            let recommend = try container.nestedContainer(keyedBy: RecommendKey.self, forKey: .recommend)
+            self = .recommend(
+                positive: try recommend.decode([VectorInput].self, forKey: .positive),
+                negative: try recommend.decodeIfPresent([VectorInput].self, forKey: .negative) ?? []
+            )
+        } else if container.contains(.discover) {
+            let discover = try container.nestedContainer(keyedBy: DiscoverKey.self, forKey: .discover)
+            self = .discover(
+                target: try discover.decode(VectorInput.self, forKey: .target),
+                context: try discover.decode([ContextInputPair].self, forKey: .context)
+            )
+        } else if container.contains(.orderBy) {
+            let order = try container.nestedContainer(keyedBy: OrderKey.self, forKey: .orderBy)
+            self = .orderBy(
+                field: try order.decode(String.self, forKey: .key),
+                direction: try order.decodeIfPresent(OrderDirection.self, forKey: .direction)
+            )
         } else if let feedback = try container.decodeIfPresent(
             RelevanceFeedback.self, forKey: .relevanceFeedback)
         {
@@ -657,6 +699,25 @@ private enum DivKey: String, CodingKey {
     case byZeroDefault = "by_zero_default"
 }
 private enum PowKey: String, CodingKey { case base, exponent }
+
+private func inferenceOptions(
+    in container: KeyedDecodingContainer<DynamicKey>,
+    reserved: Set<String>
+) throws -> [String: PayloadValue] {
+    var options: [String: PayloadValue] = [:]
+    for key in container.allKeys where !reserved.contains(key.stringValue) {
+        options[key.stringValue] = try container.decode(PayloadValue.self, forKey: key)
+    }
+    return options
+}
+
+private func isDocument(_ decoder: Decoder) -> Bool {
+    guard let container = try? decoder.container(keyedBy: DynamicKey.self),
+        let text = DynamicKey(stringValue: "text"),
+        let model = DynamicKey(stringValue: "model")
+    else { return false }
+    return container.contains(text) && container.contains(model)
+}
 
 private struct DynamicKey: CodingKey {
     var stringValue: String

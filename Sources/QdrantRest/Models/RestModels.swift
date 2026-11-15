@@ -401,6 +401,7 @@ struct GeoLineJSON: Codable {
 }
 
 private func parseTimestamp(_ value: String) -> Date? {
+    if let parsed = parseZuluTimestamp(value) { return parsed }
     let formatter = ISO8601DateFormatter()
     formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
     if let date = formatter.date(from: value) { return date }
@@ -408,10 +409,39 @@ private func parseTimestamp(_ value: String) -> Date? {
     return formatter.date(from: value)
 }
 
-private func formatTimestamp(_ date: Date) -> String {
+private func parseZuluTimestamp(_ value: String) -> Date? {
+    guard value.hasSuffix("Z") else { return nil }
+    let body = String(value.dropLast())
+    let pieces = body.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
+    guard pieces.count == 1 || pieces.count == 2 else { return nil }
     let formatter = ISO8601DateFormatter()
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
     formatter.formatOptions = [.withInternetDateTime]
-    return formatter.string(from: date)
+    guard let whole = formatter.date(from: pieces[0] + "Z") else { return nil }
+    guard pieces.count == 2 else { return whole }
+    let digits = pieces[1]
+    guard !digits.isEmpty, digits.allSatisfy({ $0 >= "0" && $0 <= "9" }) else { return nil }
+    var scale = 1.0
+    for _ in digits { scale *= 10 }
+    guard let numerator = Double(digits) else { return nil }
+    return whole.addingTimeInterval(numerator / scale)
+}
+
+private func formatTimestamp(_ date: Date) -> String {
+    let interval = date.timeIntervalSince1970
+    var seconds = Int64(floor(interval))
+    var micros = Int(((interval - Double(seconds)) * 1_000_000).rounded())
+    if micros >= 1_000_000 {
+        seconds += 1
+        micros = 0
+    }
+    if micros < 0 { micros = 0 }
+    let formatter = ISO8601DateFormatter()
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.formatOptions = [.withInternetDateTime]
+    let stamp = formatter.string(from: Date(timeIntervalSince1970: Double(seconds)))
+    let prefix = stamp.hasSuffix("Z") ? String(stamp.dropLast()) : stamp
+    return String(format: "%@.%06dZ", prefix, micros)
 }
 
 extension Point: Codable {
@@ -497,12 +527,35 @@ extension CollectionDescription: Codable {
     }
 }
 
+extension UpdateQueueInfo: Codable {
+    enum CodingKeys: String, CodingKey {
+        case length
+        case deferredPoints
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            length: try container.decodeIfPresent(UInt64.self, forKey: .length) ?? 0,
+            deferredPoints: try container.decodeIfPresent(UInt64.self, forKey: .deferredPoints)
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(length, forKey: .length)
+        try container.encodeIfPresent(deferredPoints, forKey: .deferredPoints)
+    }
+}
+
 extension CollectionInfo: Codable {
     enum CodingKeys: String, CodingKey {
         case status
         case indexedVectorsCount = "indexed_vectors_count"
         case pointsCount = "points_count"
         case segmentsCount = "segments_count"
+        case createdAt
+        case updateQueue
     }
 
     public init(from decoder: Decoder) throws {
@@ -520,9 +573,12 @@ extension CollectionInfo: Codable {
             UInt64.self, forKey: .indexedVectorsCount)
         let pointsCount = try container.decodeIfPresent(UInt64.self, forKey: .pointsCount)
         let segmentsCount = try container.decodeIfPresent(UInt64.self, forKey: .segmentsCount)
+        let createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt).flatMap(parseTimestamp)
+        let updateQueue = try container.decodeIfPresent(UpdateQueueInfo.self, forKey: .updateQueue)
         self.init(
             name: "", status: status, indexedVectorsCount: indexedVectorsCount,
-            pointsCount: pointsCount, segmentsCount: segmentsCount)
+            pointsCount: pointsCount, segmentsCount: segmentsCount,
+            createdAt: createdAt, updateQueue: updateQueue)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -539,6 +595,8 @@ extension CollectionInfo: Codable {
         try container.encodeIfPresent(indexedVectorsCount, forKey: .indexedVectorsCount)
         try container.encodeIfPresent(pointsCount, forKey: .pointsCount)
         try container.encodeIfPresent(segmentsCount, forKey: .segmentsCount)
+        try container.encodeIfPresent(createdAt.map(formatTimestamp), forKey: .createdAt)
+        try container.encodeIfPresent(updateQueue, forKey: .updateQueue)
     }
 }
 
@@ -868,6 +926,7 @@ public struct SearchBatchQuery: Codable, Sendable {
 public struct QueryBatchQuery: Codable, Sendable {
     public let query: QueryInput?
     public let prefetch: [RestPrefetchQuery]?
+    public let using: String?
     public let filter: Filter?
     public let limit: Int?
     public let offset: Int?
@@ -875,7 +934,7 @@ public struct QueryBatchQuery: Codable, Sendable {
     public let withVector: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case query, prefetch, filter, limit, offset
+        case query, prefetch, using, filter, limit, offset
         case withPayload = "with_payload"
         case withVector = "with_vector"
     }
@@ -883,6 +942,7 @@ public struct QueryBatchQuery: Codable, Sendable {
     public init(
         query: QueryInput? = nil,
         prefetch: [RestPrefetchQuery]? = nil,
+        using: String? = nil,
         filter: Filter? = nil,
         limit: Int? = nil,
         offset: Int? = nil,
@@ -891,6 +951,7 @@ public struct QueryBatchQuery: Codable, Sendable {
     ) {
         self.query = query
         self.prefetch = prefetch
+        self.using = using
         self.filter = filter
         self.limit = limit
         self.offset = offset

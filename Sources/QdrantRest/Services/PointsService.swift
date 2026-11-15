@@ -505,6 +505,7 @@ public final class PointsService: Sendable {
     ///   - filter: Optional filter to apply.
     ///   - withPayload: Whether to include payload.
     ///   - withVectors: Whether to include vectors.
+    ///   - using: Vector or text-index name to search.
     /// - Returns: Grouped query results.
     public func queryGroups(
         collection: String,
@@ -515,7 +516,8 @@ public final class PointsService: Sendable {
         filter: Filter? = nil,
         withPayload: Bool = true,
         withVectors: Bool = false,
-        idf: IdfParams? = nil
+        idf: IdfParams? = nil,
+        using: String? = nil
     ) async throws -> RestSearchGroupsResult {
         let request = QueryGroupsRequest(
             query: query,
@@ -525,7 +527,8 @@ public final class PointsService: Sendable {
             filter: filter,
             withPayload: withPayload,
             withVector: withVectors,
-            params: idf.map { SearchParamsBody(idf: IdfParamsBody(corpus: $0.corpus)) }
+            params: idf.map { SearchParamsBody(idf: IdfParamsBody(corpus: $0.corpus)) },
+            using: using
         )
         let response: QueryGroupsResponse = try await client.post(
             path: "/collections/\(collection)/points/query/groups",
@@ -954,6 +957,7 @@ struct QueryGroupsRequest: Encodable {
     let withPayload: Bool
     let withVector: Bool
     let params: SearchParamsBody?
+    let using: String?
 }
 
 struct RecommendGroupsRequest: Encodable {

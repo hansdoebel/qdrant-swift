@@ -57,7 +57,14 @@ internal final class PointsCRUDService: Sendable {
             grpcRequest.sparseConfig = sparse
         }
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
-        _ = try await client.createVectorName(request: request)
+        do {
+            let response = try await client.createVectorName(request: request)
+            try response.ensureApplied("Create vector name")
+        } catch let error as QdrantError {
+            throw error
+        } catch {
+            throw QdrantError.from(error)
+        }
     }
 
     func deleteVectorName(
@@ -71,7 +78,14 @@ internal final class PointsCRUDService: Sendable {
         grpcRequest.vectorName = name
         grpcRequest.wait = wait
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
-        _ = try await client.deleteVectorName(request: request)
+        do {
+            let response = try await client.deleteVectorName(request: request)
+            try response.ensureApplied("Delete vector name")
+        } catch let error as QdrantError {
+            throw error
+        } catch {
+            throw QdrantError.from(error)
+        }
     }
 
     /// Retrieves points by their IDs.
