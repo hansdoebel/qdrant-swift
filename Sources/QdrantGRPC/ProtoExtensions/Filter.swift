@@ -3,14 +3,6 @@ import QdrantCore
 import QdrantProto
 import SwiftProtobuf
 
-public typealias Filter = QdrantCore.Filter
-public typealias Condition = QdrantCore.Condition
-public typealias FieldCondition = QdrantCore.FieldCondition
-public typealias Match = QdrantCore.Match
-public typealias Range = QdrantCore.Range
-public typealias GeoPoint = QdrantCore.GeoPoint
-public typealias GeoCondition = QdrantCore.GeoCondition
-
 extension Filter {
     /// Converts to the gRPC Filter representation.
     internal var grpc: Qdrant_Filter {

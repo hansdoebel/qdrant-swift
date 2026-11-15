@@ -57,13 +57,9 @@ internal final class QueryService: Sendable {
             grpcRequest.params = .idf(idf)
         }
 
-        var payloadSelector = Qdrant_WithPayloadSelector()
-        payloadSelector.enable = withPayload
-        grpcRequest.withPayload = payloadSelector
+        grpcRequest.withPayload = .enabled(withPayload)
 
-        var vectorsSelector = Qdrant_WithVectorsSelector()
-        vectorsSelector.enable = withVectors
-        grpcRequest.withVectors = vectorsSelector
+        grpcRequest.withVectors = .enabled(withVectors)
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 
@@ -110,9 +106,7 @@ internal final class QueryService: Sendable {
                 qp.params = .idf(idf)
             }
 
-            var payloadSelector = Qdrant_WithPayloadSelector()
-            payloadSelector.enable = queryReq.withPayload
-            qp.withPayload = payloadSelector
+            qp.withPayload = .enabled(queryReq.withPayload)
 
             return qp
         }
@@ -172,9 +166,7 @@ internal final class QueryService: Sendable {
             grpcRequest.params = .idf(idf)
         }
 
-        var payloadSelector = Qdrant_WithPayloadSelector()
-        payloadSelector.enable = withPayload
-        grpcRequest.withPayload = payloadSelector
+        grpcRequest.withPayload = .enabled(withPayload)
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 

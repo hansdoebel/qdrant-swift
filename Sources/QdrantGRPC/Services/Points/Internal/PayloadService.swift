@@ -40,11 +40,7 @@ internal final class PayloadService: Sendable {
         do {
             let response: Qdrant_PointsOperationResponse = try await client.setPayload(
                 request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Set payload failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Set payload")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -80,11 +76,7 @@ internal final class PayloadService: Sendable {
         do {
             let response: Qdrant_PointsOperationResponse = try await client.overwritePayload(
                 request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Overwrite payload failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Overwrite payload")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -117,11 +109,7 @@ internal final class PayloadService: Sendable {
         do {
             let response: Qdrant_PointsOperationResponse = try await client.deletePayload(
                 request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Delete payload failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Delete payload")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -152,11 +140,7 @@ internal final class PayloadService: Sendable {
         do {
             let response: Qdrant_PointsOperationResponse = try await client.clearPayload(
                 request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Clear payload failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Clear payload")
         } catch let error as QdrantError {
             throw error
         } catch {

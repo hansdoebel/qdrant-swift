@@ -31,11 +31,7 @@ internal final class PointsCRUDService: Sendable {
 
         do {
             let response: Qdrant_PointsOperationResponse = try await client.upsert(request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Upsert failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Upsert")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -91,13 +87,9 @@ internal final class PointsCRUDService: Sendable {
         grpcRequest.collectionName = collection
         grpcRequest.ids = ids.map { $0.grpc }
 
-        var payloadSelector = Qdrant_WithPayloadSelector()
-        payloadSelector.enable = withPayload
-        grpcRequest.withPayload = payloadSelector
+        grpcRequest.withPayload = .enabled(withPayload)
 
-        var vectorsSelector = Qdrant_WithVectorsSelector()
-        vectorsSelector.enable = withVectors
-        grpcRequest.withVectors = vectorsSelector
+        grpcRequest.withVectors = .enabled(withVectors)
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 
@@ -131,11 +123,7 @@ internal final class PointsCRUDService: Sendable {
 
         do {
             let response: Qdrant_PointsOperationResponse = try await client.delete(request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Delete failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Delete")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -163,11 +151,7 @@ internal final class PointsCRUDService: Sendable {
 
         do {
             let response: Qdrant_PointsOperationResponse = try await client.delete(request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Delete failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Delete")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -198,13 +182,9 @@ internal final class PointsCRUDService: Sendable {
             grpcRequest.offset = offset.grpc
         }
 
-        var payloadSelector = Qdrant_WithPayloadSelector()
-        payloadSelector.enable = withPayload
-        grpcRequest.withPayload = payloadSelector
+        grpcRequest.withPayload = .enabled(withPayload)
 
-        var vectorsSelector = Qdrant_WithVectorsSelector()
-        vectorsSelector.enable = withVectors
-        grpcRequest.withVectors = vectorsSelector
+        grpcRequest.withVectors = .enabled(withVectors)
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 

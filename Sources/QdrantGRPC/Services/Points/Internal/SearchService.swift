@@ -47,13 +47,9 @@ internal final class SearchService: Sendable {
             grpcRequest.vectorName = vectorName
         }
 
-        var payloadSelector = Qdrant_WithPayloadSelector()
-        payloadSelector.enable = withPayload
-        grpcRequest.withPayload = payloadSelector
+        grpcRequest.withPayload = .enabled(withPayload)
 
-        var vectorsSelector = Qdrant_WithVectorsSelector()
-        vectorsSelector.enable = withVectors
-        grpcRequest.withVectors = vectorsSelector
+        grpcRequest.withVectors = .enabled(withVectors)
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 
@@ -88,9 +84,7 @@ internal final class SearchService: Sendable {
                 searchPoints.scoreThreshold = scoreThreshold
             }
 
-            var payloadSelector = Qdrant_WithPayloadSelector()
-            payloadSelector.enable = search.withPayload
-            searchPoints.withPayload = payloadSelector
+            searchPoints.withPayload = .enabled(search.withPayload)
 
             return searchPoints
         }
@@ -131,9 +125,7 @@ internal final class SearchService: Sendable {
             grpcRequest.filter = filter.grpc
         }
 
-        var payloadSelector = Qdrant_WithPayloadSelector()
-        payloadSelector.enable = withPayload
-        grpcRequest.withPayload = payloadSelector
+        grpcRequest.withPayload = .enabled(withPayload)
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 

@@ -2,7 +2,7 @@ import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
-import QdrantCore
+@_exported import QdrantCore
 
 /// A REST client for interacting with Qdrant vector database.
 public final class QdrantRESTClient: Sendable {

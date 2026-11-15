@@ -224,7 +224,7 @@ extension Formula {
     }
 }
 
-extension Expression {
+extension QdrantCore.Expression {
     internal var grpc: Qdrant_Expression {
         var message = Qdrant_Expression()
         switch self {

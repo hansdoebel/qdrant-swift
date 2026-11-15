@@ -2,8 +2,6 @@ import Foundation
 import QdrantCore
 import QdrantProto
 
-public typealias PayloadValue = QdrantCore.PayloadValue
-
 extension PayloadValue {
     /// Converts to the gRPC Value representation.
     internal var grpc: Qdrant_Value {

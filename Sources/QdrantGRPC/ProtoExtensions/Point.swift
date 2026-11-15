@@ -2,13 +2,6 @@ import Foundation
 import QdrantCore
 import QdrantProto
 
-public typealias PointID = QdrantCore.PointID
-public typealias VectorData = QdrantCore.VectorData
-public typealias Point = QdrantCore.Point
-public typealias ScoredPoint = QdrantCore.ScoredPoint
-public typealias RetrievedPoint = QdrantCore.RetrievedPoint
-public typealias ScrollResult = QdrantCore.ScrollResult
-
 extension PointID {
     internal var grpc: Qdrant_PointId {
         var id = Qdrant_PointId()

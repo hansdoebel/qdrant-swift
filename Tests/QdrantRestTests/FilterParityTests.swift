@@ -22,7 +22,7 @@ struct RestFilterParityTests {
                 minCount: 1
             )
         )
-        let object = try json(filter)
+        let object = try jsonObject(filter)
         let must = object["must"] as? [[String: Any]]
         #expect((must?[0]["match"] as? [String: Any])?["prefix"] as? String == "usr_")
         #expect((must?[1]["match"] as? [String: Any])?["substring"] as? String == "token")
@@ -43,10 +43,10 @@ struct RestFilterParityTests {
             key: "created",
             datetimeRange: DatetimeRange(gte: Date(timeIntervalSince1970: 1_700_000_000))
         )
-        let datedJSON = try json(dated)
+        let datedJSON = try jsonObject(dated)
         #expect((datedJSON["datetime_range"] as? [String: Any])?["gte"] as? String == "2023-11-14T22:13:20Z")
 
-        let counted = try json(FieldCondition(key: "tags", valuesCount: ValuesCount(gte: 2)))
+        let counted = try jsonObject(FieldCondition(key: "tags", valuesCount: ValuesCount(gte: 2)))
         #expect((counted["values_count"] as? [String: Any])?["gte"] != nil)
 
         let polygon = GeoPolygon(exterior: [
@@ -55,7 +55,7 @@ struct RestFilterParityTests {
             GeoPoint(lat: 1, lon: 1),
             GeoPoint(lat: 0, lon: 0),
         ])
-        let geo = try json(FieldCondition(key: "location", geo: .polygon(polygon)))
+        let geo = try jsonObject(FieldCondition(key: "location", geo: .polygon(polygon)))
         let body = geo["geo_polygon"] as? [String: Any]
         let exterior = body?["exterior"] as? [String: Any]
         #expect((exterior?["points"] as? [Any])?.count == 4)
@@ -66,7 +66,7 @@ struct RestFilterParityTests {
         let schema = FieldIndexSchema.text(
             TextIndexOptions(tokenizer: .code, scoring: .bm25, stemmer: .disabled, nested: "offers")
         )
-        let object = try json(schema)
+        let object = try jsonObject(schema)
         #expect(object["type"] as? String == "text")
         #expect(object["tokenizer"] as? String == "code")
         #expect((object["scoring"] as? [String: Any])?["type"] as? String == "bm25")
@@ -74,13 +74,5 @@ struct RestFilterParityTests {
         #expect(object["nested"] as? String == "offers")
         let uuid = try JSONEncoder().encode(FieldIndexSchema(type: .uuid))
         #expect(String(data: uuid, encoding: .utf8) == "\"uuid\"")
-    }
-
-    private func json(_ value: some Encodable) throws -> [String: Any] {
-        let data = try JSONEncoder().encode(value)
-        if let object = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-            return object
-        }
-        return ["value": try JSONSerialization.jsonObject(with: data)]
     }
 }

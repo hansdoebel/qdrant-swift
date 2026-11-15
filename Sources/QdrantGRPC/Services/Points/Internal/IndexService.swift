@@ -32,11 +32,7 @@ internal final class IndexService: Sendable {
         do {
             let response: Qdrant_PointsOperationResponse = try await client.createFieldIndex(
                 request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Create field index failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Create field index")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -64,11 +60,7 @@ internal final class IndexService: Sendable {
         do {
             let response: Qdrant_PointsOperationResponse = try await client.createFieldIndex(
                 request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Create field index failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Create field index")
         } catch let error as QdrantError {
             throw error
         } catch {
@@ -94,11 +86,7 @@ internal final class IndexService: Sendable {
         do {
             let response: Qdrant_PointsOperationResponse = try await client.deleteFieldIndex(
                 request: request)
-            guard response.result.status == .completed || response.result.status == .acknowledged
-            else {
-                throw QdrantError.unexpectedResponse(
-                    "Delete field index failed with status: \(response.result.status)")
-            }
+            try response.ensureApplied("Delete field index")
         } catch let error as QdrantError {
             throw error
         } catch {

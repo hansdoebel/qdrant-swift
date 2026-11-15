@@ -1,32 +1,6 @@
 import Foundation
 import QdrantCore
 
-// Re-export types from QdrantCore
-public typealias PointID = QdrantCore.PointID
-public typealias VectorData = QdrantCore.VectorData
-public typealias Point = QdrantCore.Point
-public typealias ScoredPoint = QdrantCore.ScoredPoint
-public typealias RetrievedPoint = QdrantCore.RetrievedPoint
-public typealias ScrollResult = QdrantCore.ScrollResult
-public typealias PayloadValue = QdrantCore.PayloadValue
-public typealias Filter = QdrantCore.Filter
-public typealias Condition = QdrantCore.Condition
-public typealias FieldCondition = QdrantCore.FieldCondition
-public typealias Match = QdrantCore.Match
-public typealias Range = QdrantCore.Range
-public typealias GeoPoint = QdrantCore.GeoPoint
-public typealias GeoCondition = QdrantCore.GeoCondition
-public typealias Distance = QdrantCore.Distance
-public typealias FieldType = QdrantCore.FieldType
-public typealias VectorConfig = QdrantCore.VectorConfig
-public typealias VectorsConfig = QdrantCore.VectorsConfig
-public typealias CollectionDescription = QdrantCore.CollectionDescription
-public typealias CollectionInfo = QdrantCore.CollectionInfo
-public typealias CollectionStatus = QdrantCore.CollectionStatus
-public typealias AliasDescription = QdrantCore.AliasDescription
-public typealias HealthCheckResult = QdrantCore.HealthCheckResult
-public typealias SnapshotDescription = QdrantCore.SnapshotDescription
-
 extension Filter: Codable {
     enum CodingKeys: String, CodingKey {
         case must, should

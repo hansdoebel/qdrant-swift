@@ -1,5 +1,3 @@
-import Foundation
-
 public enum Tokenizer: String, Sendable, Codable {
     case prefix
     case whitespace

@@ -20,6 +20,30 @@ extension GRPCPointsClientProvider {
     }
 }
 
+extension Qdrant_WithPayloadSelector {
+    static func enabled(_ enabled: Bool) -> Self {
+        var selector = Self()
+        selector.enable = enabled
+        return selector
+    }
+}
+
+extension Qdrant_WithVectorsSelector {
+    static func enabled(_ enabled: Bool) -> Self {
+        var selector = Self()
+        selector.enable = enabled
+        return selector
+    }
+}
+
+extension Qdrant_PointsOperationResponse {
+    func ensureApplied(_ action: String) throws {
+        guard result.status == .completed || result.status == .acknowledged else {
+            throw QdrantError.unexpectedResponse("\(action) failed with status: \(result.status)")
+        }
+    }
+}
+
 /// Base class for internal points services.
 internal final class PointsServiceBase: GRPCPointsClientProvider, Sendable {
     let grpcClient: GRPCClient<HTTP2ClientTransport.Posix>

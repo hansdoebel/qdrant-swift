@@ -1,5 +1,3 @@
-import Foundation
-
 public enum VectorDatatype: String, Sendable, Codable {
     case `default`
     case float32
