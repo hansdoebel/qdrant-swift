@@ -72,6 +72,13 @@ public final class CollectionsService: Sendable {
         let _: OperationResponse = try await client.put(path: "/collections/\(name)", body: request)
     }
 
+    public func create(name: String, options: CollectionOptions) async throws {
+        let _: OperationResponse = try await client.put(
+            path: "/collections/\(name)",
+            body: options
+        )
+    }
+
     /// Deletes a collection.
     /// - Parameter name: The name of the collection to delete.
     public func delete(name: String) async throws {
@@ -241,6 +248,80 @@ struct ListAliasesResponse: Codable {
 struct CreateCollectionRequest: Encodable {
     let vectors: VectorsConfig
     let onDiskPayload: Bool?
+}
+
+extension CollectionOptions: Encodable {
+    enum CodingKeys: String, CodingKey {
+        case vectors
+        case quantizationConfig = "quantization_config"
+        case payload
+        case idTracker = "id_tracker"
+        case strictMode = "strict_mode_config"
+        case onDiskPayload = "on_disk_payload"
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(vectors, forKey: .vectors)
+        if let quantization {
+            switch quantization {
+            case .turbo(let turbo):
+                try container.encode(TurboQuantizationBody(turbo: turbo), forKey: .quantizationConfig)
+            }
+        }
+        try container.encodeIfPresent(payload, forKey: .payload)
+        try container.encodeIfPresent(idTracker, forKey: .idTracker)
+        try container.encodeIfPresent(strictMode, forKey: .strictMode)
+        try container.encodeIfPresent(onDiskPayload, forKey: .onDiskPayload)
+    }
+}
+
+extension PayloadStorageParams: Encodable {
+    enum CodingKeys: String, CodingKey { case memory }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(memory, forKey: .memory)
+    }
+}
+
+extension IdTrackerParams: Encodable {
+    enum CodingKeys: String, CodingKey { case memory }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(memory, forKey: .memory)
+    }
+}
+
+extension StrictModeConfig: Encodable {
+    enum CodingKeys: String, CodingKey {
+        case requireTenantFilter = "require_tenant_filter"
+        case searchMaxBatchsize = "search_max_batchsize"
+        case maxResidentMemoryPercent = "max_resident_memory_percent"
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(requireTenantFilter, forKey: .requireTenantFilter)
+        try container.encodeIfPresent(searchMaxBatchsize, forKey: .searchMaxBatchsize)
+        try container.encodeIfPresent(maxResidentMemoryPercent, forKey: .maxResidentMemoryPercent)
+    }
+}
+
+private struct TurboQuantizationBody: Encodable {
+    var turbo: TurboQuantization
+}
+
+extension TurboQuantization: Encodable {
+    enum CodingKeys: String, CodingKey { case bits, memory, alwaysRam = "always_ram" }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(bits, forKey: .bits)
+        try container.encodeIfPresent(memory, forKey: .memory)
+        try container.encodeIfPresent(alwaysRam, forKey: .alwaysRam)
+    }
 }
 
 struct ChangeAliasesRequest: Encodable {

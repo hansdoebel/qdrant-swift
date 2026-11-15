@@ -703,7 +703,7 @@ public enum RestVectorQuery: Encodable, Sendable {
 
 extension VectorConfig: Codable {
     enum CodingKeys: String, CodingKey {
-        case size, distance
+        case size, distance, datatype, memory
         case onDisk = "on_disk"
     }
 
@@ -712,13 +712,21 @@ extension VectorConfig: Codable {
         let size = try container.decode(UInt64.self, forKey: .size)
         let distance = try container.decode(Distance.self, forKey: .distance)
         let onDisk = try container.decodeIfPresent(Bool.self, forKey: .onDisk)
-        self.init(size: size, distance: distance, onDisk: onDisk)
+        self.init(
+            size: size,
+            distance: distance,
+            datatype: try container.decodeIfPresent(VectorDatatype.self, forKey: .datatype),
+            memory: try container.decodeIfPresent(MemoryTier.self, forKey: .memory),
+            onDisk: onDisk
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(size, forKey: .size)
         try container.encode(distance, forKey: .distance)
+        try container.encodeIfPresent(datatype, forKey: .datatype)
+        try container.encodeIfPresent(memory, forKey: .memory)
         try container.encodeIfPresent(onDisk, forKey: .onDisk)
     }
 }

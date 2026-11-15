@@ -17,9 +17,13 @@ public final class PointsService: Sendable {
     public func upsert(
         collection: String,
         points: [Point],
-        wait: Bool = true
+        wait: Bool = true,
+        updateMode: UpdateMode = .upsert
     ) async throws {
-        let request = UpsertPointsRequest(points: points)
+        let request = UpsertPointsRequest(
+            points: points,
+            updateMode: updateMode == .upsert ? nil : updateMode
+        )
         let queryItems = [URLQueryItem(name: "wait", value: wait ? "true" : "false")]
         let _: PointsOperationResponse = try await client.put(
             path: "/collections/\(collection)/points",
@@ -723,6 +727,32 @@ public final class PointsService: Sendable {
         )
     }
 
+    public func createVectorName(
+        collection: String,
+        name: String,
+        spec: NamedVectorSpec,
+        wait: Bool = true
+    ) async throws {
+        let queryItems = [URLQueryItem(name: "wait", value: wait ? "true" : "false")]
+        let _: PointsOperationResponse = try await client.put(
+            path: "/collections/\(collection)/vectors/\(name)",
+            body: NamedVectorSpecBody(spec: spec),
+            queryItems: queryItems
+        )
+    }
+
+    public func deleteVectorName(
+        collection: String,
+        name: String,
+        wait: Bool = true
+    ) async throws {
+        let queryItems = [URLQueryItem(name: "wait", value: wait ? "true" : "false")]
+        let _: PointsOperationResponse = try await client.delete(
+            path: "/collections/\(collection)/vectors/\(name)",
+            queryItems: queryItems
+        )
+    }
+
     /// Deletes an index on a payload field.
     /// - Parameters:
     ///   - collection: The collection name.
@@ -743,6 +773,41 @@ public final class PointsService: Sendable {
 
 struct UpsertPointsRequest: Encodable {
     let points: [Point]
+    let updateMode: UpdateMode?
+}
+
+struct NamedVectorSpecBody: Encodable {
+    let spec: NamedVectorSpec
+
+    func encode(to encoder: Encoder) throws {
+        switch spec {
+        case .dense(let dense):
+            try dense.encode(to: encoder)
+        case .sparse(let sparse):
+            try sparse.encode(to: encoder)
+        }
+    }
+}
+
+extension DenseVectorSpec: Encodable {
+    enum CodingKeys: String, CodingKey { case size, distance, datatype }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(size, forKey: .size)
+        try container.encode(distance, forKey: .distance)
+        try container.encodeIfPresent(datatype, forKey: .datatype)
+    }
+}
+
+extension SparseVectorSpec: Encodable {
+    enum CodingKeys: String, CodingKey { case modifier, datatype }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(modifier, forKey: .modifier)
+        try container.encodeIfPresent(datatype, forKey: .datatype)
+    }
 }
 
 struct GetPointsRequest: Encodable {

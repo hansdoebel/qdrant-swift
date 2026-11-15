@@ -16,7 +16,8 @@ internal final class PointsCRUDService: Sendable {
     func upsert(
         collection: String,
         points: [Point],
-        wait: Bool
+        wait: Bool,
+        updateMode: UpdateMode
     ) async throws {
         let client = Qdrant_Points.Client(wrapping: base.grpcClient)
 
@@ -24,6 +25,7 @@ internal final class PointsCRUDService: Sendable {
         grpcRequest.collectionName = collection
         grpcRequest.points = points.map { $0.grpc }
         grpcRequest.wait = wait
+        grpcRequest.updateMode = updateMode.grpc
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 
@@ -39,6 +41,41 @@ internal final class PointsCRUDService: Sendable {
         } catch {
             throw QdrantError.from(error)
         }
+    }
+
+    func createVectorName(
+        collection: String,
+        name: String,
+        spec: NamedVectorSpec,
+        wait: Bool
+    ) async throws {
+        let client = Qdrant_Points.Client(wrapping: base.grpcClient)
+        var grpcRequest = Qdrant_CreateVectorNameRequest()
+        grpcRequest.collectionName = collection
+        grpcRequest.vectorName = name
+        grpcRequest.wait = wait
+        if let dense = spec.dense {
+            grpcRequest.denseConfig = dense
+        }
+        if let sparse = spec.sparse {
+            grpcRequest.sparseConfig = sparse
+        }
+        let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
+        _ = try await client.createVectorName(request: request)
+    }
+
+    func deleteVectorName(
+        collection: String,
+        name: String,
+        wait: Bool
+    ) async throws {
+        let client = Qdrant_Points.Client(wrapping: base.grpcClient)
+        var grpcRequest = Qdrant_DeleteVectorNameRequest()
+        grpcRequest.collectionName = collection
+        grpcRequest.vectorName = name
+        grpcRequest.wait = wait
+        let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
+        _ = try await client.deleteVectorName(request: request)
     }
 
     /// Retrieves points by their IDs.

@@ -14,6 +14,12 @@ extension VectorConfig {
         if let onDisk = onDisk {
             params.onDisk = onDisk
         }
+        if let datatype {
+            params.datatype = datatype.grpc
+        }
+        if let memory {
+            params.memory = memory.grpc
+        }
         return params
     }
 }

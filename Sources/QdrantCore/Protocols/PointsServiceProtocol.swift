@@ -4,6 +4,20 @@ public protocol PointsServiceProtocol: Sendable {
     func upsert(
         collection: String,
         points: [Point],
+        wait: Bool,
+        updateMode: UpdateMode
+    ) async throws
+
+    func createVectorName(
+        collection: String,
+        name: String,
+        spec: NamedVectorSpec,
+        wait: Bool
+    ) async throws
+
+    func deleteVectorName(
+        collection: String,
+        name: String,
         wait: Bool
     ) async throws
 

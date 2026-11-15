@@ -140,11 +140,33 @@ public final class MockPointsService: PointsServiceProtocol, @unchecked Sendable
     public func upsert(
         collection: String,
         points: [Point],
-        wait: Bool
+        wait: Bool,
+        updateMode: UpdateMode
     ) async throws {
         upsertCallCount += 1
         upsertCalls.append((collection: collection, points: points, wait: wait))
+        lastUpdateMode = updateMode
         try upsertResult.get()
+    }
+
+    public private(set) var lastUpdateMode: UpdateMode?
+    public private(set) var vectorNameCalls: [(collection: String, name: String, spec: NamedVectorSpec?, wait: Bool)] = []
+
+    public func createVectorName(
+        collection: String,
+        name: String,
+        spec: NamedVectorSpec,
+        wait: Bool
+    ) async throws {
+        vectorNameCalls.append((collection, name, spec, wait))
+    }
+
+    public func deleteVectorName(
+        collection: String,
+        name: String,
+        wait: Bool
+    ) async throws {
+        vectorNameCalls.append((collection, name, nil, wait))
     }
 
     public func get(
