@@ -708,6 +708,21 @@ public final class PointsService: Sendable {
         )
     }
 
+    public func createFieldIndex(
+        collection: String,
+        fieldName: String,
+        schema: FieldIndexSchema,
+        wait: Bool = true
+    ) async throws {
+        let request = CreateFieldIndexSchemaRequest(fieldName: fieldName, fieldSchema: schema)
+        let queryItems = [URLQueryItem(name: "wait", value: wait ? "true" : "false")]
+        let _: PointsOperationResponse = try await client.put(
+            path: "/collections/\(collection)/index",
+            body: request,
+            queryItems: queryItems
+        )
+    }
+
     /// Deletes an index on a payload field.
     /// - Parameters:
     ///   - collection: The collection name.
@@ -813,6 +828,11 @@ struct ClearPayloadRequest: Encodable {
 struct CreateFieldIndexRequest: Encodable {
     let fieldName: String
     let fieldSchema: FieldType
+}
+
+struct CreateFieldIndexSchemaRequest: Encodable {
+    let fieldName: String
+    let fieldSchema: FieldIndexSchema
 }
 
 struct OverwritePayloadRequest: Encodable {

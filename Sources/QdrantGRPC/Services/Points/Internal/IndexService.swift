@@ -44,6 +44,38 @@ internal final class IndexService: Sendable {
         }
     }
 
+    func createFieldIndex(
+        collection: String,
+        fieldName: String,
+        schema: FieldIndexSchema,
+        wait: Bool
+    ) async throws {
+        let client = Qdrant_Points.Client(wrapping: base.grpcClient)
+
+        var grpcRequest = Qdrant_CreateFieldIndexCollection()
+        grpcRequest.collectionName = collection
+        grpcRequest.fieldName = fieldName
+        grpcRequest.fieldType = schema.type.grpc
+        grpcRequest.fieldIndexParams = schema.grpc
+        grpcRequest.wait = wait
+
+        let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
+
+        do {
+            let response: Qdrant_PointsOperationResponse = try await client.createFieldIndex(
+                request: request)
+            guard response.result.status == .completed || response.result.status == .acknowledged
+            else {
+                throw QdrantError.unexpectedResponse(
+                    "Create field index failed with status: \(response.result.status)")
+            }
+        } catch let error as QdrantError {
+            throw error
+        } catch {
+            throw QdrantError.from(error)
+        }
+    }
+
     /// Deletes an index on a payload field.
     func deleteFieldIndex(
         collection: String,

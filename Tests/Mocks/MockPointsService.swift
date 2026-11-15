@@ -291,6 +291,19 @@ public final class MockPointsService: PointsServiceProtocol, @unchecked Sendable
         try createFieldIndexResult.get()
     }
 
+    public private(set) var createFieldSchemaCalls: [(collection: String, fieldName: String, schema: FieldIndexSchema, wait: Bool)] = []
+
+    public func createFieldIndex(
+        collection: String,
+        fieldName: String,
+        schema: FieldIndexSchema,
+        wait: Bool
+    ) async throws {
+        createFieldIndexCallCount += 1
+        createFieldSchemaCalls.append((collection, fieldName, schema, wait))
+        try createFieldIndexResult.get()
+    }
+
     public func deleteFieldIndex(
         collection: String,
         fieldName: String,

@@ -31,6 +31,7 @@ extension Filter: Codable {
     enum CodingKeys: String, CodingKey {
         case must, should
         case mustNot = "must_not"
+        case minShould = "min_should"
     }
 
     public init(from decoder: Decoder) throws {
@@ -38,7 +39,8 @@ extension Filter: Codable {
         let must = try container.decodeIfPresent([Condition].self, forKey: .must) ?? []
         let should = try container.decodeIfPresent([Condition].self, forKey: .should) ?? []
         let mustNot = try container.decodeIfPresent([Condition].self, forKey: .mustNot) ?? []
-        self.init(must: must, should: should, mustNot: mustNot)
+        let minShould = try container.decodeIfPresent(MinShould.self, forKey: .minShould)
+        self.init(must: must, should: should, mustNot: mustNot, minShould: minShould)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -46,12 +48,40 @@ extension Filter: Codable {
         if !must.isEmpty { try container.encode(must, forKey: .must) }
         if !should.isEmpty { try container.encode(should, forKey: .should) }
         if !mustNot.isEmpty { try container.encode(mustNot, forKey: .mustNot) }
+        try container.encodeIfPresent(minShould, forKey: .minShould)
+    }
+}
+
+extension MinShould: Codable {
+    enum CodingKeys: String, CodingKey {
+        case conditions
+        case minCount = "min_count"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            conditions: try container.decode([Condition].self, forKey: .conditions),
+            minCount: try container.decode(UInt64.self, forKey: .minCount)
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(conditions, forKey: .conditions)
+        try container.encode(minCount, forKey: .minCount)
     }
 }
 
 extension Condition: Codable {
     enum CodingKeys: String, CodingKey {
-        case key, match, range, isEmpty, isNull, hasId, filter
+        case key, match, range, filter
+        case isEmpty = "is_empty"
+        case isNull = "is_null"
+        case hasId = "has_id"
+        case nested
+        case hasVector = "has_vector"
+        case slice
     }
 
     public init(from decoder: Decoder) throws {
@@ -65,6 +95,12 @@ extension Condition: Codable {
             self = .isEmpty(key: isEmpty.key)
         } else if let isNull = try? container.decode(IsNullCodable.self, forKey: .isNull) {
             self = .isNull(key: isNull.key)
+        } else if let nested = try? container.decode(NestedCodable.self, forKey: .nested) {
+            self = .nested(key: nested.key, filter: nested.filter)
+        } else if let name = try? container.decode(String.self, forKey: .hasVector) {
+            self = .hasVector(name)
+        } else if let slice = try? container.decode(SliceCodable.self, forKey: .slice) {
+            self = .slice(total: slice.total, index: slice.index)
         } else {
             self = .field(try FieldCondition(from: decoder))
         }
@@ -84,6 +120,12 @@ extension Condition: Codable {
             try container.encode(ids, forKey: .hasId)
         case .filter(let filter):
             try container.encode(filter, forKey: .filter)
+        case .nested(let key, let filter):
+            try container.encode(NestedCodable(key: key, filter: filter), forKey: .nested)
+        case .hasVector(let name):
+            try container.encode(name, forKey: .hasVector)
+        case .slice(let total, let index):
+            try container.encode(SliceCodable(total: total, index: index), forKey: .slice)
         }
     }
 
@@ -94,25 +136,42 @@ extension Condition: Codable {
     private struct IsNullCodable: Codable {
         let key: String
     }
+
+    private struct NestedCodable: Codable {
+        let key: String
+        let filter: Filter
+    }
+
+    private struct SliceCodable: Codable {
+        let total: UInt32
+        let index: UInt32
+    }
 }
 
 extension FieldCondition: Codable {
     enum CodingKeys: String, CodingKey {
         case key, match, range
+        case valuesCount = "values_count"
+        case datetimeRange = "datetime_range"
+        case geoRadius = "geo_radius"
+        case geoBoundingBox = "geo_bounding_box"
+        case geoPolygon = "geo_polygon"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let key = try container.decode(String.self, forKey: .key)
-        let match = try container.decodeIfPresent(Match.self, forKey: .match)
-        let range = try container.decodeIfPresent(Range.self, forKey: .range)
-
-        if let match = match {
+        if let match = try container.decodeIfPresent(Match.self, forKey: .match) {
             self.init(key: key, match: match)
-        } else if let range = range {
+        } else if let range = try container.decodeIfPresent(Range.self, forKey: .range) {
             self.init(key: key, range: range)
+        } else if let valuesCount = try container.decodeIfPresent(ValuesCount.self, forKey: .valuesCount) {
+            self.init(key: key, valuesCount: valuesCount)
+        } else if let datetimeRange = try container.decodeIfPresent(DatetimeRange.self, forKey: .datetimeRange) {
+            self.init(key: key, datetimeRange: datetimeRange)
+        } else if container.contains(.geoRadius) || container.contains(.geoBoundingBox) || container.contains(.geoPolygon) {
+            self.init(key: key, geo: try GeoCondition(from: decoder))
         } else {
-            // Default to match with empty keyword if nothing else
             self.init(key: key, match: .keyword(""))
         }
     }
@@ -122,12 +181,31 @@ extension FieldCondition: Codable {
         try container.encode(key, forKey: .key)
         try container.encodeIfPresent(match, forKey: .match)
         try container.encodeIfPresent(range, forKey: .range)
+        try container.encodeIfPresent(valuesCount, forKey: .valuesCount)
+        try container.encodeIfPresent(datetimeRange, forKey: .datetimeRange)
+        if let geo {
+            switch geo {
+            case .radius(let center, let radius):
+                try container.encode(GeoRadiusJSON(center: center, radius: radius), forKey: .geoRadius)
+            case .boundingBox(let topLeft, let bottomRight):
+                try container.encode(
+                    GeoBoxJSON(topLeft: topLeft, bottomRight: bottomRight),
+                    forKey: .geoBoundingBox
+                )
+            case .polygon(let polygon):
+                try container.encode(polygon, forKey: .geoPolygon)
+            }
+        }
     }
 }
 
 extension Match: Codable {
     enum CodingKeys: String, CodingKey {
         case value, text, any, except, keywords, integers, exceptKeywords, exceptIntegers
+        case phrase
+        case textAny = "text_any"
+        case prefix
+        case substring
     }
 
     public init(from decoder: Decoder) throws {
@@ -143,6 +221,14 @@ extension Match: Codable {
             self = .exceptKeyword(except)
         } else if let except = try? container.decode([Int64].self, forKey: .except) {
             self = .exceptInteger(except)
+        } else if let phrase = try? container.decode(String.self, forKey: .phrase) {
+            self = .phrase(phrase)
+        } else if let textAny = try? container.decode(String.self, forKey: .textAny) {
+            self = .textAny(textAny)
+        } else if let prefix = try? container.decode(String.self, forKey: .prefix) {
+            self = .prefix(prefix)
+        } else if let substring = try? container.decode(String.self, forKey: .substring) {
+            self = .substring(substring)
         } else if let value = try? container.decode(PayloadValue.self, forKey: .value) {
             // Convert PayloadValue to appropriate Match type
             self =
@@ -173,6 +259,10 @@ extension Match: Codable {
         case .anyInteger(let a): try container.encode(a, forKey: .any)
         case .exceptKeyword(let e): try container.encode(e, forKey: .except)
         case .exceptInteger(let e): try container.encode(e, forKey: .except)
+        case .phrase(let value): try container.encode(value, forKey: .phrase)
+        case .textAny(let value): try container.encode(value, forKey: .textAny)
+        case .prefix(let value): try container.encode(value, forKey: .prefix)
+        case .substring(let value): try container.encode(value, forKey: .substring)
         }
     }
 }
@@ -199,6 +289,155 @@ extension Range: Codable {
     enum CodingKeys: String, CodingKey {
         case lt, gt, lte, gte
     }
+}
+
+extension ValuesCount: Codable {
+    enum CodingKeys: String, CodingKey { case lt, gt, lte, gte }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            lt: try container.decodeIfPresent(UInt64.self, forKey: .lt),
+            gt: try container.decodeIfPresent(UInt64.self, forKey: .gt),
+            lte: try container.decodeIfPresent(UInt64.self, forKey: .lte),
+            gte: try container.decodeIfPresent(UInt64.self, forKey: .gte)
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(lt, forKey: .lt)
+        try container.encodeIfPresent(gt, forKey: .gt)
+        try container.encodeIfPresent(lte, forKey: .lte)
+        try container.encodeIfPresent(gte, forKey: .gte)
+    }
+}
+
+extension DatetimeRange: Codable {
+    enum CodingKeys: String, CodingKey { case lt, gt, lte, gte }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            lt: try container.decodeIfPresent(String.self, forKey: .lt).flatMap(parseTimestamp),
+            gt: try container.decodeIfPresent(String.self, forKey: .gt).flatMap(parseTimestamp),
+            lte: try container.decodeIfPresent(String.self, forKey: .lte).flatMap(parseTimestamp),
+            gte: try container.decodeIfPresent(String.self, forKey: .gte).flatMap(parseTimestamp)
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(lt.map(formatTimestamp), forKey: .lt)
+        try container.encodeIfPresent(gt.map(formatTimestamp), forKey: .gt)
+        try container.encodeIfPresent(lte.map(formatTimestamp), forKey: .lte)
+        try container.encodeIfPresent(gte.map(formatTimestamp), forKey: .gte)
+    }
+}
+
+extension GeoPoint: Codable {
+    enum CodingKeys: String, CodingKey { case lat, lon }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            lat: try container.decode(Double.self, forKey: .lat),
+            lon: try container.decode(Double.self, forKey: .lon)
+        )
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(lat, forKey: .lat)
+        try container.encode(lon, forKey: .lon)
+    }
+}
+
+extension GeoPolygon: Codable {
+    enum CodingKeys: String, CodingKey { case exterior, interiors }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let exterior = try container.decode(GeoLineJSON.self, forKey: .exterior)
+        let interiors = try container.decodeIfPresent([GeoLineJSON].self, forKey: .interiors) ?? []
+        self.init(exterior: exterior.points, interiors: interiors.map(\.points))
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(GeoLineJSON(points: exterior), forKey: .exterior)
+        if !interiors.isEmpty {
+            try container.encode(interiors.map(GeoLineJSON.init(points:)), forKey: .interiors)
+        }
+    }
+}
+
+extension GeoCondition: Codable {
+    enum CodingKeys: String, CodingKey {
+        case geoRadius = "geo_radius"
+        case geoBoundingBox = "geo_bounding_box"
+        case geoPolygon = "geo_polygon"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let radius = try container.decodeIfPresent(GeoRadiusJSON.self, forKey: .geoRadius) {
+            self = .radius(center: radius.center, radius: radius.radius)
+        } else if let box = try container.decodeIfPresent(GeoBoxJSON.self, forKey: .geoBoundingBox) {
+            self = .boundingBox(topLeft: box.topLeft, bottomRight: box.bottomRight)
+        } else if let polygon = try container.decodeIfPresent(GeoPolygon.self, forKey: .geoPolygon) {
+            self = .polygon(polygon)
+        } else {
+            throw DecodingError.dataCorrupted(
+                .init(codingPath: decoder.codingPath, debugDescription: "Unable to decode geo condition")
+            )
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .radius(let center, let radius):
+            try container.encode(GeoRadiusJSON(center: center, radius: radius), forKey: .geoRadius)
+        case .boundingBox(let topLeft, let bottomRight):
+            try container.encode(GeoBoxJSON(topLeft: topLeft, bottomRight: bottomRight), forKey: .geoBoundingBox)
+        case .polygon(let polygon):
+            try container.encode(polygon, forKey: .geoPolygon)
+        }
+    }
+}
+
+struct GeoRadiusJSON: Codable {
+    var center: GeoPoint
+    var radius: Double
+}
+
+struct GeoBoxJSON: Codable {
+    var topLeft: GeoPoint
+    var bottomRight: GeoPoint
+
+    enum CodingKeys: String, CodingKey {
+        case topLeft = "top_left"
+        case bottomRight = "bottom_right"
+    }
+}
+
+struct GeoLineJSON: Codable {
+    var points: [GeoPoint]
+}
+
+private func parseTimestamp(_ value: String) -> Date? {
+    let formatter = ISO8601DateFormatter()
+    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    if let date = formatter.date(from: value) { return date }
+    formatter.formatOptions = [.withInternetDateTime]
+    return formatter.date(from: value)
+}
+
+private func formatTimestamp(_ date: Date) -> String {
+    let formatter = ISO8601DateFormatter()
+    formatter.formatOptions = [.withInternetDateTime]
+    return formatter.string(from: date)
 }
 
 extension Point: Codable {
@@ -523,6 +762,7 @@ extension FieldType: Codable {
             case "text": .text
             case "bool": .bool
             case "datetime": .datetime
+            case "uuid": .uuid
             default:
                 throw DecodingError.dataCorruptedError(
                     in: container,
@@ -542,8 +782,56 @@ extension FieldType: Codable {
             case .text: "text"
             case .bool: "bool"
             case .datetime: "datetime"
+            case .uuid: "uuid"
             }
         try container.encode(value)
+    }
+}
+
+extension FieldIndexSchema: Encodable {
+    enum CodingKeys: String, CodingKey {
+        case type, tokenizer, scoring, stemmer, nested
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        if text == nil && nested == nil {
+            var container = encoder.singleValueContainer()
+            try container.encode(type)
+            return
+        }
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type, forKey: .type)
+        if let text {
+            try container.encode(text.tokenizer, forKey: .tokenizer)
+            if let scoring = text.scoring {
+                try container.encode(TextScoringBody(type: scoring), forKey: .scoring)
+            }
+            if let stemmer = text.stemmer {
+                try container.encode(stemmer, forKey: .stemmer)
+            }
+        }
+        if let nested = text?.nested ?? nested {
+            try container.encode(nested, forKey: .nested)
+        }
+    }
+}
+
+private struct TextScoringBody: Encodable {
+    var type: TextScoring
+}
+
+extension Stemmer: Encodable {
+    enum CodingKeys: String, CodingKey { case type, language }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .disabled:
+            try container.encode("none", forKey: .type)
+        case .snowball(let language):
+            try container.encode("snowball", forKey: .type)
+            try container.encode(language, forKey: .language)
+        }
     }
 }
 

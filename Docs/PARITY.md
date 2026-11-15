@@ -15,11 +15,11 @@ Public protos are vendored under `Sources/QdrantGRPC/Protos` and generated into 
 | `VectorInput`: sparse, multi-dense, `Document`, `Image`, `InferenceObject` | generated | done | done |
 | `TextQuery` + `Bm25Params`, `IdfParams`, `RelevanceFeedbackInput`, prefetch nesting | generated | done | done |
 | `query` / `queryBatch` / `queryGroups` on `PointsServiceProtocol` (mocks) | generated | done | done |
-| Filter: `minShould`, nested, `hasVector`, phrase, `textAny`, `valuesCount`, datetime range, geo polygon | generated | pending | pending |
-| Match: `prefix`, `substring` | generated | pending | pending |
-| `SliceCondition` | generated | pending | pending |
-| `FieldType` uuid | generated | pending | pending |
-| Text index: BM25 `TextScoringParams`, `code` tokenizer, `DisabledStemmer`, per-element `nested` | generated | pending | pending |
+| Filter: `minShould`, nested, `hasVector`, phrase, `textAny`, `valuesCount`, datetime range, geo polygon | generated | done | done |
+| Match: `prefix`, `substring` | generated | done | done |
+| `SliceCondition` | generated | done | done |
+| `FieldType` uuid | generated | done | done |
+| Text index: BM25 `TextScoringParams`, `code` tokenizer, `DisabledStemmer`, per-element `nested` | generated | done | done |
 | TurboQuant datatypes (`turbo8` / `turbo16`) and `TurboQuantization` | generated | pending | pending |
 | Memory placement; `on_disk` / `always_ram` / `on_disk_payload` deprecated, not removed | generated | pending | pending |
 | `IdTrackerParams`, `PayloadStorageParams` | generated | pending | pending |

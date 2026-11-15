@@ -422,6 +422,16 @@ public final class PointsService: PointsServiceProtocol, Sendable {
             collection: collection, fieldName: fieldName, fieldType: fieldType, wait: wait)
     }
 
+    public func createFieldIndex(
+        collection: String,
+        fieldName: String,
+        schema: FieldIndexSchema,
+        wait: Bool = true
+    ) async throws {
+        try await index.createFieldIndex(
+            collection: collection, fieldName: fieldName, schema: schema, wait: wait)
+    }
+
     /// Deletes an index on a payload field.
     public func deleteFieldIndex(
         collection: String,
