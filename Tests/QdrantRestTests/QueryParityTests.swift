@@ -1,4 +1,3 @@
-import Foundation
 import Testing
 
 @testable import QdrantCore
@@ -8,7 +7,7 @@ import Testing
 struct RestQueryParityTests {
     @Test("MMR, DBSF, weighted RRF, and BM25 text encode with the REST field names")
     func queryObjects() throws {
-        let mmr = try json(
+        let mmr = try jsonObject(
             QueryInput.nearestWithMmr(
                 nearest: .sparse(indices: [3], values: [1]),
                 mmr: Mmr(diversity: 0.4, candidatesLimit: 8)
@@ -19,15 +18,15 @@ struct RestQueryParityTests {
         #expect(mmrBody?["diversity"] as? Float == 0.4 || (mmrBody?["diversity"] as? Double) == 0.4)
         #expect(mmrBody?["candidates_limit"] as? Int == 8 || (mmrBody?["candidates_limit"] as? UInt32) == 8)
 
-        let dbsf = try json(QueryInput.fusion(.dbsf))
+        let dbsf = try jsonObject(QueryInput.fusion(.dbsf))
         #expect(dbsf["fusion"] as? String == "dbsf")
 
-        let rrf = try json(QueryInput.rrf(Rrf(k: 10, weights: [2, 1])))
+        let rrf = try jsonObject(QueryInput.rrf(Rrf(k: 10, weights: [2, 1])))
         let rrfBody = rrf["rrf"] as? [String: Any]
         #expect(rrfBody?["k"] as? Int == 10 || (rrfBody?["k"] as? UInt32) == 10)
         #expect((rrfBody?["weights"] as? [Double])?.count == 2 || (rrfBody?["weights"] as? [Float])?.count == 2)
 
-        let text = try json(QueryInput.text(TextQuery(query: "time travel", bm25: Bm25Params(k: 1.2, b: 0.75))))
+        let text = try jsonObject(QueryInput.text(TextQuery(query: "time travel", bm25: Bm25Params(k: 1.2, b: 0.75))))
         let textBody = text["text"] as? [String: Any]
         #expect(textBody?["query"] as? String == "time travel")
         let bm25 = textBody?["bm25"] as? [String: Any]
@@ -37,7 +36,7 @@ struct RestQueryParityTests {
 
     @Test("Formula JSON uses acosh, max, and min")
     func formula() throws {
-        let encoded = try json(
+        let encoded = try jsonObject(
             QueryInput.formula(
                 Formula(
                     expression: .sum([
@@ -60,17 +59,17 @@ struct RestQueryParityTests {
 
     @Test("Document, image, and inference object use their REST fields")
     func inferenceVectors() throws {
-        let document = try json(VectorInput.document(Document(text: "hello", model: "qdrant/bm25")))
+        let document = try jsonObject(VectorInput.document(Document(text: "hello", model: "qdrant/bm25")))
         #expect(document["text"] as? String == "hello")
         #expect(document["model"] as? String == "qdrant/bm25")
 
-        let image = try json(
+        let image = try jsonObject(
             VectorInput.image(QueryImage(image: .string("https://example.test/a.png"), model: "clip"))
         )
         #expect(image["image"] as? String == "https://example.test/a.png")
         #expect(image["model"] as? String == "clip")
 
-        let object = try json(
+        let object = try jsonObject(
             VectorInput.inferenceObject(InferenceObject(object: .string("sku-1"), model: "custom"))
         )
         #expect(object["object"] as? String == "sku-1")
@@ -79,7 +78,7 @@ struct RestQueryParityTests {
 
     @Test("Prefetch nesting and relevance feedback encode")
     func prefetchAndFeedback() throws {
-        let prefetch = try json(
+        let prefetch = try jsonObject(
             PrefetchQuery(
                 prefetch: [PrefetchQuery(query: .text(TextQuery(query: "nested")), using: "body")],
                 query: .relevanceFeedback(
@@ -96,11 +95,5 @@ struct RestQueryParityTests {
         let feedback = (prefetch["query"] as? [String: Any])?["relevance_feedback"] as? [String: Any]
         let strategy = feedback?["strategy"] as? [String: Any]
         #expect((strategy?["naive"] as? [String: Any])?["b"] != nil)
-    }
-
-    private func json(_ value: some Encodable) throws -> [String: Any] {
-        let data = try JSONEncoder().encode(value)
-        let object = try JSONSerialization.jsonObject(with: data)
-        return object as? [String: Any] ?? [:]
     }
 }

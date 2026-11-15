@@ -25,7 +25,7 @@ public enum QdrantError: Error, Sendable {
     }
 
     public static func from(_ error: RPCError) -> QdrantError {
-        let message = error.message ?? "Unknown error"
+        let message = error.message
 
         return switch error.code {
         case .invalidArgument: .invalidArgument(message)

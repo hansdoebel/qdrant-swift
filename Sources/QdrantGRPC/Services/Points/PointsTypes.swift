@@ -1,22 +1,5 @@
-import Foundation
-import GRPCCore
-import GRPCNIOTransportHTTP2
 import QdrantCore
 import QdrantProto
-
-public typealias QueryInput = QdrantCore.QueryInput
-public typealias VectorInput = QdrantCore.VectorInput
-public typealias PrefetchQuery = QdrantCore.PrefetchQuery
-public typealias QueryRequest = QdrantCore.QueryRequest
-public typealias FusionType = QdrantCore.FusionType
-public typealias SampleType = QdrantCore.SampleType
-public typealias PointGroup = QdrantCore.PointGroup
-public typealias GroupId = QdrantCore.GroupId
-public typealias Formula = QdrantCore.Formula
-public typealias Expression = QdrantCore.Expression
-public typealias TextQuery = QdrantCore.TextQuery
-public typealias Mmr = QdrantCore.Mmr
-public typealias Rrf = QdrantCore.Rrf
 
 /// A search request for batch search operations.
 public struct SearchRequest: Sendable {

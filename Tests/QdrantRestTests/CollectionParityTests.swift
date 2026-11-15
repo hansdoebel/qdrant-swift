@@ -1,4 +1,3 @@
-import Foundation
 import Testing
 
 @testable import QdrantCore
@@ -20,7 +19,7 @@ struct RestCollectionParityTests {
             ),
             onDiskPayload: false
         )
-        let object = try json(options)
+        let object = try jsonObject(options, snakeCase: true)
         let vectors = object["vectors"] as? [String: Any]
         #expect(vectors?["datatype"] as? String == "turbo8")
         #expect(vectors?["memory"] as? String == "pinned")
@@ -39,18 +38,11 @@ struct RestCollectionParityTests {
 
     @Test("Named vector specs and upsert mode use the REST names")
     func vectors() throws {
-        let dense = try json(NamedVectorSpecBody(spec: .dense(DenseVectorSpec(size: 8, distance: .dot, datatype: .turbo16))))
+        let dense = try jsonObject(NamedVectorSpecBody(spec: .dense(DenseVectorSpec(size: 8, distance: .dot, datatype: .turbo16))), snakeCase: true)
         #expect(dense["datatype"] as? String == "turbo16")
-        let sparse = try json(NamedVectorSpecBody(spec: .sparse(SparseVectorSpec(modifier: .idf))))
+        let sparse = try jsonObject(NamedVectorSpecBody(spec: .sparse(SparseVectorSpec(modifier: .idf))), snakeCase: true)
         #expect(sparse["modifier"] as? String == "idf")
-        let upsert = try json(UpsertPointsRequest(points: [], updateMode: .updateOnly))
+        let upsert = try jsonObject(UpsertPointsRequest(points: [], updateMode: .updateOnly), snakeCase: true)
         #expect(upsert["update_mode"] as? String == "update_only" || upsert["updateMode"] as? String == "update_only")
-    }
-
-    private func json(_ value: some Encodable) throws -> [String: Any] {
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        let data = try encoder.encode(value)
-        return try JSONSerialization.jsonObject(with: data) as? [String: Any] ?? [:]
     }
 }

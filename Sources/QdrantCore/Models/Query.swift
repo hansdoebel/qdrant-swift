@@ -1,5 +1,3 @@
-import Foundation
-
 /// A point id or an explicit vector used by the query API.
 public enum VectorInput: Sendable {
     case dense([Float])

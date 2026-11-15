@@ -1,12 +1,8 @@
 import Foundation
 import GRPCCore
 import GRPCNIOTransportHTTP2
-import QdrantCore
+@_exported import QdrantCore
 import QdrantProto
-
-public typealias HealthCheckResult = QdrantCore.HealthCheckResult
-public typealias SnapshotDescription = QdrantCore.SnapshotDescription
-public typealias FieldType = QdrantCore.FieldType
 
 /// A gRPC client for interacting with Qdrant vector database.
 public final class QdrantGRPCClient: Sendable {

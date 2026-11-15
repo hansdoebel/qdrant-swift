@@ -3,11 +3,6 @@ import QdrantCore
 import QdrantProto
 import SwiftProtobuf
 
-public typealias CollectionStatus = QdrantCore.CollectionStatus
-public typealias CollectionInfo = QdrantCore.CollectionInfo
-public typealias CollectionDescription = QdrantCore.CollectionDescription
-public typealias AliasDescription = QdrantCore.AliasDescription
-
 extension CollectionStatus {
     internal init(grpc: Qdrant_CollectionStatus) {
         self =

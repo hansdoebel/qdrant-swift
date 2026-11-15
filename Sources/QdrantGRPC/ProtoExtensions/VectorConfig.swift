@@ -2,9 +2,6 @@ import Foundation
 import QdrantCore
 import QdrantProto
 
-public typealias VectorConfig = QdrantCore.VectorConfig
-public typealias VectorsConfig = QdrantCore.VectorsConfig
-
 extension VectorConfig {
     /// Converts to the gRPC VectorParams representation.
     internal var grpcParams: Qdrant_VectorParams {

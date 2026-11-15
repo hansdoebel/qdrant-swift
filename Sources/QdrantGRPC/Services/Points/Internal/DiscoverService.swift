@@ -83,9 +83,7 @@ internal final class DiscoverService: Sendable {
             grpcRequest.filter = filter.grpc
         }
 
-        var payloadSelector = Qdrant_WithPayloadSelector()
-        payloadSelector.enable = withPayload
-        grpcRequest.withPayload = payloadSelector
+        grpcRequest.withPayload = .enabled(withPayload)
 
         let request = ClientRequest(message: grpcRequest, metadata: base.metadata)
 
@@ -167,9 +165,7 @@ internal final class DiscoverService: Sendable {
                 dp.filter = filter.grpc
             }
 
-            var payloadSelector = Qdrant_WithPayloadSelector()
-            payloadSelector.enable = req.withPayload
-            dp.withPayload = payloadSelector
+            dp.withPayload = .enabled(req.withPayload)
 
             return dp
         }

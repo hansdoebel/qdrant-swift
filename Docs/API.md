@@ -332,7 +332,7 @@ let results = try await client.points.query(
 // Query by point ID
 let results = try await client.points.query(
     collection: "vectors",
-    query: .recommend(positive: [.integer(1)], negative: []),
+    query: .recommend(positive: [.id(.integer(1))], negative: []),
     limit: 10
 )
 ```
@@ -703,9 +703,10 @@ enum Distance {
 
 ```swift
 let filter = Filter(
-    must: [Condition],      // All must match (AND)
-    should: [Condition],    // At least one must match (OR)
-    mustNot: [Condition]    // None must match (NOT)
+    must: [Condition],
+    should: [Condition],
+    mustNot: [Condition],
+    minShould: MinShould(conditions: [Condition], minCount: 1)
 )
 ```
 
@@ -721,20 +722,26 @@ let filter = Filter(
 .isNull(key: "nullable_field")
 
 // Match by IDs
-.hasId(ids: [.integer(1), .integer(2)])
+.hasId([.integer(1), .integer(2)])
 
 // Nested filter
 .filter(nestedFilter)
+.nested(key: "offers", filter: nestedFilter)
+.hasVector("image")
+.slice(total: 4, index: 1)
 ```
 
 ### Match
 
 ```swift
-.keyword("exact_value")           // Exact string match
-.keywords(["a", "b", "c"])        // Match any
-.except("not_this")               // Exclude value
-.exceptKeywords(["x", "y"])       // Exclude any
-.text("full text search")         // Full-text search
+.keyword("exact_value")
+.any(["a", "b", "c"])
+.exceptKeyword(["x", "y"])
+.text("full text search")
+.phrase("time travel")
+.textAny("qdrant")
+.prefix("usr_")
+.substring("token")
 ```
 
 ### Range
@@ -745,5 +752,65 @@ Range(gte: 10)                    // Greater than or equal
 Range(lt: 100)                    // Less than
 Range(lte: 100)                   // Less than or equal
 Range(gte: 10, lte: 100)          // Between
-Range.between(10, 100)            // Convenience method
+Range.between(10, 100)
+```
+
+### Query variants
+
+`QueryInput` is shared by both clients.
+
+```swift
+.nearest([0.1, 0.2])
+.nearest(.sparse(indices: [1, 4], values: [0.5, 0.2]))
+.nearest(.document(Document(text: "hello", model: "qdrant/bm25")))
+.nearestWithMmr(nearest: [0.1, 0.2], mmr: Mmr(diversity: 0.5, candidatesLimit: 20))
+.fusion(.dbsf)
+.rrf(Rrf(k: 60, weights: [1, 0.5]))
+.formula(Formula(expression: .acosh(.variable("$score"))))
+.text(TextQuery(query: "time travel", bm25: Bm25Params(k: 1.2, b: 0.75)))
+```
+
+Pass `idf: IdfParams(corpus: filter)` to limit the IDF population.
+
+### Collection options
+
+```swift
+try await client.collections.create(
+    name: "books",
+    options: CollectionOptions(
+        vectors: .single(VectorConfig(size: 128, distance: .cosine, datatype: .turbo16, memory: .cached)),
+        quantization: .turbo(TurboQuantization(bits: .bits8, memory: .cold)),
+        payload: PayloadStorageParams(memory: .cached),
+        idTracker: IdTrackerParams(memory: .cold),
+        strictMode: StrictModeConfig(requireTenantFilter: true, searchMaxBatchsize: 64)
+    )
+)
+```
+
+`onDisk`, `alwaysRam`, and `onDiskPayload` are deprecated. Use `MemoryTier`.
+
+### Upsert mode and named vectors
+
+```swift
+try await client.points.upsert(
+    collection: "books",
+    points: points,
+    updateMode: .insertOnly
+)
+try await client.points.createVectorName(
+    collection: "books",
+    name: "title",
+    spec: .dense(DenseVectorSpec(size: 128, distance: .cosine, datatype: .turbo8))
+)
+try await client.points.deleteVectorName(collection: "books", name: "title")
+```
+
+### Text index
+
+```swift
+try await client.points.createFieldIndex(
+    collection: "books",
+    fieldName: "title",
+    schema: .text(TextIndexOptions(tokenizer: .code, scoring: .bm25, stemmer: .disabled, nested: "offers"))
+)
 ```

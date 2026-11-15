@@ -156,17 +156,22 @@ qdrant-swift/
 
 ## Development
 
-Check for outdated dependencies:
+Check for outdated dependencies, or regenerate the proto sources:
 
 ```bash
 make update-deps
+make generate
 ```
+
+`AGENTS.md` describes the layout, the generated sources, and how CI is run.
 
 ## Documentation
 
 - [Usage Examples](Docs/USAGE.md) - Detailed examples and common patterns
 - [API Reference](Docs/API.md) - Complete API documentation
 - [Testing Guide](Docs/TESTING.md) - How to run and write tests
+- [Parity checklist](Docs/PARITY.md) - Qdrant 1.20.1 coverage
+- [Changelog](CHANGELOG.md) - 2.0.0 notes. The tag is not created.
 
 ## Resources
 

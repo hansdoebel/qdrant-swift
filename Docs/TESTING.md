@@ -1,5 +1,7 @@
 # Testing Guide
 
+Unit tests run on Swift 6.4. The macOS CI job uses Xcode 27.2 at `/Applications/Xcode_27.2.app`. Integration tests use `qdrant/qdrant:v1.20.1`.
+
 This guide explains how to run tests and use mocks for the Qdrant Swift client.
 
 ## Table of Contents

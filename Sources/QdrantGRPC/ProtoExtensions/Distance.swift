@@ -2,8 +2,6 @@ import Foundation
 import QdrantCore
 import QdrantProto
 
-public typealias Distance = QdrantCore.Distance
-
 extension Distance {
     /// Converts to the gRPC representation.
     internal var grpc: Qdrant_Distance {
