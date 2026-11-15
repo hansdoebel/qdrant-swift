@@ -36,7 +36,9 @@ Field names come from the protos and the Qdrant REST schema. Do not invent field
 
 ## Build and test
 
-Toolchain: Swift 6.4. Apple platforms: macOS 27 and iOS 27. The macOS CI job uses the `xcode-27` runner and `/Applications/Xcode_27.2.app`.
+Toolchain: Swift 6.4. Apple platforms: macOS 27 and iOS 27. The macOS CI job uses the GitHub-hosted `xcode-27` runner (macOS, 3-core) and `/Applications/Xcode_27.2.app`. It runs on push to `main` and on `workflow_dispatch`. Pull requests run only the Linux job: the same unit tests, plus integration tests against `qdrant/qdrant:v1.20.1`.
+
+Docs-only changes skip CI: `README.md`, `CHANGELOG.md`, `Docs/**`, and `AGENTS.md`. `AGENTS.md` is in that ignore list, so an edit that touches only this file does not run CI. A pull request that also changes the workflow under `.github/` still runs CI.
 
 ```bash
 swift test --skip IntegrationTests
@@ -59,6 +61,6 @@ A public behavior change needs a unit test that checks the gRPC message or the R
 
 Open each pull request against `main`. Keep it focused. The body lists the unit test command and counts, plus anything that still needs a live Qdrant or a manual check.
 
-Squash-merge only after the unit tests and both CI jobs are green: Xcode 27.2 unit tests, and the Linux job against `qdrant/qdrant:v1.20.1`.
+Squash-merge a pull request only after the Linux job is green. That job runs the unit tests and the integration tests against `qdrant/qdrant:v1.20.1`. macOS unit tests run on push to `main` and via `workflow_dispatch`, not on the pull request.
 
 Do not create or push a git tag or GitHub release.
