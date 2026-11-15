@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 
 @testable import QdrantCore
@@ -44,5 +45,19 @@ struct RestCollectionParityTests {
         #expect(sparse["modifier"] as? String == "idf")
         let upsert = try jsonObject(UpsertPointsRequest(points: [], updateMode: .updateOnly), snakeCase: true)
         #expect(upsert["update_mode"] as? String == "update_only" || upsert["updateMode"] as? String == "update_only")
+    }
+
+    @Test("Collection info keeps created_at and the update queue")
+    func collectionDetails() throws {
+        let json = """
+        {"status":"green","created_at":"2023-11-14T22:13:20.500Z","update_queue":{"length":3,"deferred_points":1}}
+        """.data(using: .utf8)!
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let info = try decoder.decode(CollectionInfo.self, from: json)
+        if case .green = info.status {} else { Issue.record("Expected green") }
+        #expect(info.createdAt != nil)
+        #expect(info.updateQueue?.length == 3)
+        #expect(info.updateQueue?.deferredPoints == 1)
     }
 }

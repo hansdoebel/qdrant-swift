@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import QdrantProto
 
 @testable import QdrantCore
 @testable import QdrantGRPC
@@ -87,5 +88,26 @@ struct FilterParityTests {
         try await mock.createFieldIndex(collection: "books", fieldName: "title", schema: schema, wait: true)
         #expect(mock.createFieldSchemaCalls.count == 1)
         #expect(mock.createFieldSchemaCalls[0].schema.text?.tokenizer == .code)
+    }
+
+    @Test("Pre-1970 timestamps keep nanos non-negative")
+    func historicalTimestamp() {
+        let timestamp = Date(timeIntervalSince1970: -0.5).protobufTimestamp
+        #expect(timestamp.seconds == -1)
+        #expect(timestamp.nanos == 500_000_000)
+    }
+
+    @Test("A wait timeout is not treated as an applied update")
+    func operationStatus() throws {
+        var response = Qdrant_PointsOperationResponse()
+        var result = Qdrant_UpdateResult()
+        result.status = .waitTimeout
+        response.result = result
+        #expect(throws: QdrantError.self) {
+            try response.ensureApplied("Create vector name")
+        }
+        result.status = .completed
+        response.result = result
+        try response.ensureApplied("Create vector name")
     }
 }

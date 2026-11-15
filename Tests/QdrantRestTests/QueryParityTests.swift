@@ -96,4 +96,92 @@ struct RestQueryParityTests {
         let strategy = feedback?["strategy"] as? [String: Any]
         #expect((strategy?["naive"] as? [String: Any])?["b"] != nil)
     }
+
+    @Test("Query JSON round-trips recommend, discover, order, document, and expressions")
+    func roundTrips() throws {
+        let document = try roundTrip(
+            QueryInput.nearest(.document(Document(text: "hello", model: "qdrant/bm25", options: ["lang": "en"])))
+        )
+        if case .nearest(.document(let value)) = document {
+            #expect(value.text == "hello")
+            #expect(value.model == "qdrant/bm25")
+            #expect(value.options["lang"] == .string("en"))
+        } else {
+            Issue.record("Expected a document query")
+        }
+
+        let image = try roundTrip(
+            VectorInput.image(QueryImage(image: .string("https://example.test/a.png"), model: "clip", options: ["size": "large"]))
+        )
+        if case .image(let value) = image {
+            #expect(value.model == "clip")
+            #expect(value.options["size"] == .string("large"))
+        } else {
+            Issue.record("Expected an image query")
+        }
+
+        let object = try roundTrip(
+            VectorInput.inferenceObject(InferenceObject(object: .string("sku-1"), model: "custom", options: ["lang": "en"]))
+        )
+        if case .inferenceObject(let value) = object {
+            #expect(value.options["lang"] == .string("en"))
+        } else {
+            Issue.record("Expected an inference object")
+        }
+
+        let recommend = try roundTrip(QueryInput.recommend(positive: [.dense([1])], negative: [.id(.integer(2))]))
+        if case .recommend(let positive, let negative) = recommend {
+            #expect(positive.count == 1)
+            #expect(negative.count == 1)
+        } else {
+            Issue.record("Expected recommend")
+        }
+
+        let discover = try roundTrip(
+            QueryInput.discover(
+                target: .dense([1]),
+                context: [ContextInputPair(positive: .dense([1]), negative: .dense([0]))]
+            )
+        )
+        if case .discover(_, let context) = discover {
+            #expect(context.count == 1)
+        } else {
+            Issue.record("Expected discover")
+        }
+
+        let ordered = try roundTrip(QueryInput.orderBy(field: "price", direction: .descending))
+        if case .orderBy(let field, let direction) = ordered {
+            #expect(field == "price")
+            if case .descending = direction {} else { Issue.record("Expected descending") }
+        } else {
+            Issue.record("Expected order_by")
+        }
+
+        let negative = try roundTrip(QdrantCore.Expression.neg(.constant(1)))
+        if case .neg(.constant) = negative {} else { Issue.record("Expected neg") }
+        let power = try roundTrip(QdrantCore.Expression.pow(base: .constant(2), exponent: .constant(3)))
+        if case .pow = power {} else { Issue.record("Expected pow") }
+    }
+
+    @Test("Grouped and batch text queries send using")
+    func textQueryField() throws {
+        let batch = try jsonObject(QueryBatchQuery(query: .text(TextQuery(query: "hello")), using: "body"))
+        #expect(batch["using"] as? String == "body")
+        let groups = try jsonObject(
+            QueryGroupsRequest(
+                query: .text(TextQuery(query: "hello")),
+                groupBy: "lang",
+                groupSize: 2,
+                limit: 3,
+                filter: nil,
+                withPayload: true,
+                withVector: false,
+                params: nil,
+                using: "body"
+            ),
+            snakeCase: true
+        )
+        #expect(groups["using"] as? String == "body")
+        #expect(groups["group_by"] as? String == "lang")
+    }
 }
