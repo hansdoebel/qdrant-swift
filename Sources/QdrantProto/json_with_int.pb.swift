@@ -17,7 +17,7 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
@@ -26,7 +26,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 /// `Value` type union.
 ///
 ///  The JSON representation for `NullValue` is JSON `null`.
-public enum Qdrant_NullValue: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_NullValue: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Null value.
@@ -51,6 +51,7 @@ public enum Qdrant_NullValue: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_NullValue] = [
     .nullValue,
   ]
@@ -65,7 +66,7 @@ public enum Qdrant_NullValue: SwiftProtobuf.Enum, Swift.CaseIterable {
 /// with the proto support for the language.
 ///
 /// The JSON representation for `Struct` is a JSON object.
-public struct Qdrant_Struct: Sendable {
+public nonisolated struct Qdrant_Struct: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -84,7 +85,7 @@ public struct Qdrant_Struct: Sendable {
 /// variants, absence of any variant indicates an error.
 ///
 /// The JSON representation for `Value` is a JSON value.
-public struct Qdrant_Value: Sendable {
+public nonisolated struct Qdrant_Value: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -158,7 +159,7 @@ public struct Qdrant_Value: Sendable {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// The kind of value.
-  public enum OneOf_Kind: Equatable, Sendable {
+  public nonisolated enum OneOf_Kind: Equatable, Sendable {
     /// Represents a null value.
     case nullValue(Qdrant_NullValue)
     /// Represents a double value.
@@ -182,7 +183,7 @@ public struct Qdrant_Value: Sendable {
 /// `ListValue` is a wrapper around a repeated field of values.
 ///
 /// The JSON representation for `ListValue` is a JSON array.
-public struct Qdrant_ListValue: Sendable {
+public nonisolated struct Qdrant_ListValue: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -197,13 +198,13 @@ public struct Qdrant_ListValue: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "qdrant"
+fileprivate nonisolated let _protobuf_package = "qdrant"
 
-extension Qdrant_NullValue: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_NullValue: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0NULL_VALUE\0")
 }
 
-extension Qdrant_Struct: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Struct: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Struct"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}fields\0")
 
@@ -233,7 +234,7 @@ extension Qdrant_Struct: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   }
 }
 
-extension Qdrant_Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Value"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}null_value\0\u{3}double_value\0\u{3}integer_value\0\u{3}string_value\0\u{3}bool_value\0\u{3}struct_value\0\u{3}list_value\0")
 
@@ -360,7 +361,7 @@ extension Qdrant_Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension Qdrant_ListValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ListValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListValue"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}values\0")
 

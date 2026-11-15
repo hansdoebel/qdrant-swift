@@ -373,7 +373,9 @@ struct GRPCIntegrationTests {
         )
 
         if case .dense(let vector) = retrieved[0].vector {
-            #expect(vector[0] > 0.8)  // Should be close to 0.9
+            // Cosine collections store the normalized vector. The updated
+            // vector [0.9, 0.8, 0.7, 0.6] has its largest component first.
+            #expect(vector[0] > vector[3])
         }
 
         // Clean up

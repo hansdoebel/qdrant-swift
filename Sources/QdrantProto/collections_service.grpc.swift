@@ -6,7 +6,7 @@
 // Source: collections_service.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -29,7 +29,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "Get".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "Get"
+                method: "Get",
+                type: .unary
             )
         }
         /// Namespace for "List" metadata.
@@ -41,7 +42,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "List".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "List"
+                method: "List",
+                type: .unary
             )
         }
         /// Namespace for "Create" metadata.
@@ -53,7 +55,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "Create".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "Create"
+                method: "Create",
+                type: .unary
             )
         }
         /// Namespace for "Update" metadata.
@@ -65,7 +68,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "Update".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "Update"
+                method: "Update",
+                type: .unary
             )
         }
         /// Namespace for "Delete" metadata.
@@ -77,7 +81,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "Delete".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "Delete"
+                method: "Delete",
+                type: .unary
             )
         }
         /// Namespace for "UpdateAliases" metadata.
@@ -89,7 +94,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "UpdateAliases".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "UpdateAliases"
+                method: "UpdateAliases",
+                type: .unary
             )
         }
         /// Namespace for "ListCollectionAliases" metadata.
@@ -101,7 +107,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "ListCollectionAliases".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "ListCollectionAliases"
+                method: "ListCollectionAliases",
+                type: .unary
             )
         }
         /// Namespace for "ListAliases" metadata.
@@ -113,7 +120,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "ListAliases".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "ListAliases"
+                method: "ListAliases",
+                type: .unary
             )
         }
         /// Namespace for "CollectionClusterInfo" metadata.
@@ -125,7 +133,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "CollectionClusterInfo".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "CollectionClusterInfo"
+                method: "CollectionClusterInfo",
+                type: .unary
             )
         }
         /// Namespace for "CollectionExists" metadata.
@@ -137,7 +146,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "CollectionExists".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "CollectionExists"
+                method: "CollectionExists",
+                type: .unary
             )
         }
         /// Namespace for "UpdateCollectionClusterSetup" metadata.
@@ -149,7 +159,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "UpdateCollectionClusterSetup".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "UpdateCollectionClusterSetup"
+                method: "UpdateCollectionClusterSetup",
+                type: .unary
             )
         }
         /// Namespace for "CreateShardKey" metadata.
@@ -161,7 +172,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "CreateShardKey".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "CreateShardKey"
+                method: "CreateShardKey",
+                type: .unary
             )
         }
         /// Namespace for "DeleteShardKey" metadata.
@@ -173,7 +185,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "DeleteShardKey".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "DeleteShardKey"
+                method: "DeleteShardKey",
+                type: .unary
             )
         }
         /// Namespace for "ListShardKeys" metadata.
@@ -185,7 +198,8 @@ public enum Qdrant_Collections: Sendable {
             /// Descriptor for "ListShardKeys".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Collections"),
-                method: "ListShardKeys"
+                method: "ListShardKeys",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "qdrant.Collections" service.
@@ -234,9 +248,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_GetCollectionInfoRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_GetCollectionInfoResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func get<Result>(
             request: GRPCCore.ClientRequest<Qdrant_GetCollectionInfoRequest>,
@@ -257,9 +271,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListCollectionsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListCollectionsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func list<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListCollectionsRequest>,
@@ -280,9 +294,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CreateCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func create<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateCollection>,
@@ -303,9 +317,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_UpdateCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func update<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdateCollection>,
@@ -326,9 +340,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_DeleteCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func delete<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteCollection>,
@@ -349,9 +363,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ChangeAliases` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func updateAliases<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ChangeAliases>,
@@ -372,9 +386,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListCollectionAliasesRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListAliasesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listCollectionAliases<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListCollectionAliasesRequest>,
@@ -395,9 +409,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListAliasesRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListAliasesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listAliases<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListAliasesRequest>,
@@ -418,9 +432,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CollectionClusterInfoRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionClusterInfoResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func collectionClusterInfo<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CollectionClusterInfoRequest>,
@@ -441,9 +455,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CollectionExistsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionExistsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func collectionExists<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CollectionExistsRequest>,
@@ -464,9 +478,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_UpdateCollectionClusterSetupRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_UpdateCollectionClusterSetupResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func updateCollectionClusterSetup<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdateCollectionClusterSetupRequest>,
@@ -487,9 +501,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CreateShardKeyRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CreateShardKeyResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func createShardKey<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateShardKeyRequest>,
@@ -510,9 +524,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_DeleteShardKeyRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_DeleteShardKeyResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func deleteShardKey<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteShardKeyRequest>,
@@ -533,9 +547,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListShardKeysRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListShardKeysResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listShardKeys<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListShardKeysRequest>,
@@ -573,9 +587,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_GetCollectionInfoRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_GetCollectionInfoResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func get<Result>(
             request: GRPCCore.ClientRequest<Qdrant_GetCollectionInfoRequest>,
@@ -607,9 +621,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListCollectionsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListCollectionsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func list<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListCollectionsRequest>,
@@ -641,9 +655,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CreateCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func create<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateCollection>,
@@ -675,9 +689,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_UpdateCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func update<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdateCollection>,
@@ -709,9 +723,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_DeleteCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func delete<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteCollection>,
@@ -743,9 +757,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ChangeAliases` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func updateAliases<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ChangeAliases>,
@@ -777,9 +791,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListCollectionAliasesRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListAliasesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listCollectionAliases<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListCollectionAliasesRequest>,
@@ -811,9 +825,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListAliasesRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListAliasesResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listAliases<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListAliasesRequest>,
@@ -845,9 +859,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CollectionClusterInfoRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionClusterInfoResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func collectionClusterInfo<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CollectionClusterInfoRequest>,
@@ -879,9 +893,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CollectionExistsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CollectionExistsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func collectionExists<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CollectionExistsRequest>,
@@ -913,9 +927,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_UpdateCollectionClusterSetupRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_UpdateCollectionClusterSetupResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func updateCollectionClusterSetup<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdateCollectionClusterSetupRequest>,
@@ -947,9 +961,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_CreateShardKeyRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CreateShardKeyResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func createShardKey<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateShardKeyRequest>,
@@ -981,9 +995,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_DeleteShardKeyRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_DeleteShardKeyResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func deleteShardKey<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteShardKeyRequest>,
@@ -1015,9 +1029,9 @@ extension Qdrant_Collections {
         ///   - serializer: A serializer for `Qdrant_ListShardKeysRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListShardKeysResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listShardKeys<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListShardKeysRequest>,
@@ -1052,9 +1066,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_GetCollectionInfoRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func get<Result>(
         request: GRPCCore.ClientRequest<Qdrant_GetCollectionInfoRequest>,
@@ -1081,9 +1095,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ListCollectionsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func list<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ListCollectionsRequest>,
@@ -1110,9 +1124,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CreateCollection` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func create<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CreateCollection>,
@@ -1139,9 +1153,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_UpdateCollection` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func update<Result>(
         request: GRPCCore.ClientRequest<Qdrant_UpdateCollection>,
@@ -1168,9 +1182,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeleteCollection` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func delete<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeleteCollection>,
@@ -1197,9 +1211,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ChangeAliases` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateAliases<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ChangeAliases>,
@@ -1226,9 +1240,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ListCollectionAliasesRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listCollectionAliases<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ListCollectionAliasesRequest>,
@@ -1255,9 +1269,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ListAliasesRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listAliases<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ListAliasesRequest>,
@@ -1284,9 +1298,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CollectionClusterInfoRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func collectionClusterInfo<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CollectionClusterInfoRequest>,
@@ -1313,9 +1327,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CollectionExistsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func collectionExists<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CollectionExistsRequest>,
@@ -1342,9 +1356,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_UpdateCollectionClusterSetupRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateCollectionClusterSetup<Result>(
         request: GRPCCore.ClientRequest<Qdrant_UpdateCollectionClusterSetupRequest>,
@@ -1371,9 +1385,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CreateShardKeyRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createShardKey<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CreateShardKeyRequest>,
@@ -1400,9 +1414,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeleteShardKeyRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteShardKey<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeleteShardKeyRequest>,
@@ -1429,9 +1443,9 @@ extension Qdrant_Collections.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ListShardKeysRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listShardKeys<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ListShardKeysRequest>,
@@ -1463,9 +1477,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func get<Result>(
         _ message: Qdrant_GetCollectionInfoRequest,
@@ -1496,9 +1510,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func list<Result>(
         _ message: Qdrant_ListCollectionsRequest,
@@ -1529,9 +1543,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func create<Result>(
         _ message: Qdrant_CreateCollection,
@@ -1562,9 +1576,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func update<Result>(
         _ message: Qdrant_UpdateCollection,
@@ -1595,9 +1609,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func delete<Result>(
         _ message: Qdrant_DeleteCollection,
@@ -1628,9 +1642,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateAliases<Result>(
         _ message: Qdrant_ChangeAliases,
@@ -1661,9 +1675,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listCollectionAliases<Result>(
         _ message: Qdrant_ListCollectionAliasesRequest,
@@ -1694,9 +1708,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listAliases<Result>(
         _ message: Qdrant_ListAliasesRequest,
@@ -1727,9 +1741,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func collectionClusterInfo<Result>(
         _ message: Qdrant_CollectionClusterInfoRequest,
@@ -1760,9 +1774,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func collectionExists<Result>(
         _ message: Qdrant_CollectionExistsRequest,
@@ -1793,9 +1807,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateCollectionClusterSetup<Result>(
         _ message: Qdrant_UpdateCollectionClusterSetupRequest,
@@ -1826,9 +1840,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createShardKey<Result>(
         _ message: Qdrant_CreateShardKeyRequest,
@@ -1859,9 +1873,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteShardKey<Result>(
         _ message: Qdrant_DeleteShardKeyRequest,
@@ -1892,9 +1906,9 @@ extension Qdrant_Collections.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listShardKeys<Result>(
         _ message: Qdrant_ListShardKeysRequest,

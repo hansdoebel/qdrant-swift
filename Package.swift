@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.4
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,8 +6,8 @@ import PackageDescription
 let package = Package(
     name: "qdrant-swift",
     platforms: [
-        .macOS(.v15),
-        .iOS(.v18),
+        .macOS(.v27),
+        .iOS(.v27),
     ],
     products: [
         .library(
@@ -24,10 +24,10 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/grpc/grpc-swift.git", from: "2.0.0"),
-        .package(url: "https://github.com/grpc/grpc-swift-nio-transport.git", from: "1.0.0"),
-        .package(url: "https://github.com/grpc/grpc-swift-protobuf.git", from: "1.0.0"),
-        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.28.0"),
+        .package(url: "https://github.com/grpc/grpc-swift-2.git", from: "2.4.4"),
+        .package(url: "https://github.com/grpc/grpc-swift-nio-transport.git", from: "2.0.0"),
+        .package(url: "https://github.com/grpc/grpc-swift-protobuf.git", from: "2.0.0"),
+        .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.41.0"),
     ],
     targets: [
         .target(
@@ -48,7 +48,7 @@ let package = Package(
             dependencies: [
                 "QdrantCore",
                 "QdrantProto",
-                .product(name: "GRPCCore", package: "grpc-swift"),
+                .product(name: "GRPCCore", package: "grpc-swift-2"),
                 .product(name: "GRPCNIOTransportHTTP2", package: "grpc-swift-nio-transport"),
                 .product(name: "GRPCProtobuf", package: "grpc-swift-protobuf"),
             ],
@@ -60,7 +60,7 @@ let package = Package(
             dependencies: [
                 "QdrantCore"
             ],
-            path: "Sources/QdrantREST"
+            path: "Sources/QdrantRest"
         ),
         .target(
             name: "QdrantMocks",
@@ -74,13 +74,13 @@ let package = Package(
         ),
         .testTarget(
             name: "QdrantGRPCTests",
-            dependencies: ["QdrantGRPC", "QdrantMocks"],
+            dependencies: ["QdrantGRPC", "QdrantProto", "QdrantMocks"],
             path: "Tests/QdrantGRPCTests"
         ),
         .testTarget(
             name: "QdrantRESTTests",
             dependencies: ["QdrantREST", "QdrantMocks"],
-            path: "Tests/QdrantRESTTests"
+            path: "Tests/QdrantRestTests"
         ),
         .testTarget(
             name: "IntegrationTests",

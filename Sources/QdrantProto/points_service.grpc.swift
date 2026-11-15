@@ -6,7 +6,7 @@
 // Source: points_service.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -29,7 +29,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Upsert".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Upsert"
+                method: "Upsert",
+                type: .unary
             )
         }
         /// Namespace for "Delete" metadata.
@@ -41,7 +42,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Delete".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Delete"
+                method: "Delete",
+                type: .unary
             )
         }
         /// Namespace for "Get" metadata.
@@ -53,7 +55,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Get".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Get"
+                method: "Get",
+                type: .unary
             )
         }
         /// Namespace for "UpdateVectors" metadata.
@@ -65,7 +68,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "UpdateVectors".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "UpdateVectors"
+                method: "UpdateVectors",
+                type: .unary
             )
         }
         /// Namespace for "DeleteVectors" metadata.
@@ -77,7 +81,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "DeleteVectors".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "DeleteVectors"
+                method: "DeleteVectors",
+                type: .unary
             )
         }
         /// Namespace for "SetPayload" metadata.
@@ -89,7 +94,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "SetPayload".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "SetPayload"
+                method: "SetPayload",
+                type: .unary
             )
         }
         /// Namespace for "OverwritePayload" metadata.
@@ -101,7 +107,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "OverwritePayload".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "OverwritePayload"
+                method: "OverwritePayload",
+                type: .unary
             )
         }
         /// Namespace for "DeletePayload" metadata.
@@ -113,7 +120,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "DeletePayload".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "DeletePayload"
+                method: "DeletePayload",
+                type: .unary
             )
         }
         /// Namespace for "ClearPayload" metadata.
@@ -125,7 +133,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "ClearPayload".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "ClearPayload"
+                method: "ClearPayload",
+                type: .unary
             )
         }
         /// Namespace for "CreateFieldIndex" metadata.
@@ -137,7 +146,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "CreateFieldIndex".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "CreateFieldIndex"
+                method: "CreateFieldIndex",
+                type: .unary
             )
         }
         /// Namespace for "DeleteFieldIndex" metadata.
@@ -149,7 +159,34 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "DeleteFieldIndex".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "DeleteFieldIndex"
+                method: "DeleteFieldIndex",
+                type: .unary
+            )
+        }
+        /// Namespace for "CreateVectorName" metadata.
+        public enum CreateVectorName: Sendable {
+            /// Request type for "CreateVectorName".
+            public typealias Input = Qdrant_CreateVectorNameRequest
+            /// Response type for "CreateVectorName".
+            public typealias Output = Qdrant_PointsOperationResponse
+            /// Descriptor for "CreateVectorName".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
+                method: "CreateVectorName",
+                type: .unary
+            )
+        }
+        /// Namespace for "DeleteVectorName" metadata.
+        public enum DeleteVectorName: Sendable {
+            /// Request type for "DeleteVectorName".
+            public typealias Input = Qdrant_DeleteVectorNameRequest
+            /// Response type for "DeleteVectorName".
+            public typealias Output = Qdrant_PointsOperationResponse
+            /// Descriptor for "DeleteVectorName".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
+                method: "DeleteVectorName",
+                type: .unary
             )
         }
         /// Namespace for "Search" metadata.
@@ -161,7 +198,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Search".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Search"
+                method: "Search",
+                type: .unary
             )
         }
         /// Namespace for "SearchBatch" metadata.
@@ -173,7 +211,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "SearchBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "SearchBatch"
+                method: "SearchBatch",
+                type: .unary
             )
         }
         /// Namespace for "SearchGroups" metadata.
@@ -185,7 +224,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "SearchGroups".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "SearchGroups"
+                method: "SearchGroups",
+                type: .unary
             )
         }
         /// Namespace for "Scroll" metadata.
@@ -197,7 +237,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Scroll".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Scroll"
+                method: "Scroll",
+                type: .unary
             )
         }
         /// Namespace for "Recommend" metadata.
@@ -209,7 +250,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Recommend".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Recommend"
+                method: "Recommend",
+                type: .unary
             )
         }
         /// Namespace for "RecommendBatch" metadata.
@@ -221,7 +263,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "RecommendBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "RecommendBatch"
+                method: "RecommendBatch",
+                type: .unary
             )
         }
         /// Namespace for "RecommendGroups" metadata.
@@ -233,7 +276,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "RecommendGroups".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "RecommendGroups"
+                method: "RecommendGroups",
+                type: .unary
             )
         }
         /// Namespace for "Discover" metadata.
@@ -245,7 +289,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Discover".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Discover"
+                method: "Discover",
+                type: .unary
             )
         }
         /// Namespace for "DiscoverBatch" metadata.
@@ -257,7 +302,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "DiscoverBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "DiscoverBatch"
+                method: "DiscoverBatch",
+                type: .unary
             )
         }
         /// Namespace for "Count" metadata.
@@ -269,7 +315,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Count".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Count"
+                method: "Count",
+                type: .unary
             )
         }
         /// Namespace for "UpdateBatch" metadata.
@@ -281,7 +328,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "UpdateBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "UpdateBatch"
+                method: "UpdateBatch",
+                type: .unary
             )
         }
         /// Namespace for "Query" metadata.
@@ -293,7 +341,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Query".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Query"
+                method: "Query",
+                type: .unary
             )
         }
         /// Namespace for "QueryBatch" metadata.
@@ -305,7 +354,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "QueryBatch".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "QueryBatch"
+                method: "QueryBatch",
+                type: .unary
             )
         }
         /// Namespace for "QueryGroups" metadata.
@@ -317,7 +367,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "QueryGroups".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "QueryGroups"
+                method: "QueryGroups",
+                type: .unary
             )
         }
         /// Namespace for "Facet" metadata.
@@ -329,7 +380,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "Facet".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "Facet"
+                method: "Facet",
+                type: .unary
             )
         }
         /// Namespace for "SearchMatrixPairs" metadata.
@@ -341,7 +393,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "SearchMatrixPairs".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "SearchMatrixPairs"
+                method: "SearchMatrixPairs",
+                type: .unary
             )
         }
         /// Namespace for "SearchMatrixOffsets" metadata.
@@ -353,7 +406,8 @@ public enum Qdrant_Points: Sendable {
             /// Descriptor for "SearchMatrixOffsets".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Points"),
-                method: "SearchMatrixOffsets"
+                method: "SearchMatrixOffsets",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "qdrant.Points" service.
@@ -369,6 +423,8 @@ public enum Qdrant_Points: Sendable {
             ClearPayload.descriptor,
             CreateFieldIndex.descriptor,
             DeleteFieldIndex.descriptor,
+            CreateVectorName.descriptor,
+            DeleteVectorName.descriptor,
             Search.descriptor,
             SearchBatch.descriptor,
             SearchGroups.descriptor,
@@ -417,9 +473,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_UpsertPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func upsert<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpsertPoints>,
@@ -440,9 +496,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeletePoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func delete<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeletePoints>,
@@ -463,9 +519,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_GetPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_GetResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func get<Result>(
             request: GRPCCore.ClientRequest<Qdrant_GetPoints>,
@@ -486,9 +542,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_UpdatePointVectors` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func updateVectors<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdatePointVectors>,
@@ -509,9 +565,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeletePointVectors` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func deleteVectors<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeletePointVectors>,
@@ -532,9 +588,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SetPayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func setPayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SetPayloadPoints>,
@@ -555,9 +611,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SetPayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func overwritePayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SetPayloadPoints>,
@@ -578,9 +634,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeletePayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func deletePayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeletePayloadPoints>,
@@ -601,9 +657,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_ClearPayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func clearPayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ClearPayloadPoints>,
@@ -624,9 +680,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_CreateFieldIndexCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func createFieldIndex<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateFieldIndexCollection>,
@@ -647,13 +703,59 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeleteFieldIndexCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func deleteFieldIndex<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteFieldIndexCollection>,
             serializer: some GRPCCore.MessageSerializer<Qdrant_DeleteFieldIndexCollection>,
+            deserializer: some GRPCCore.MessageDeserializer<Qdrant_PointsOperationResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "CreateVectorName" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Create a new named vector on the collection
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Qdrant_CreateVectorNameRequest` message.
+        ///   - serializer: A serializer for `Qdrant_CreateVectorNameRequest` messages.
+        ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        func createVectorName<Result>(
+            request: GRPCCore.ClientRequest<Qdrant_CreateVectorNameRequest>,
+            serializer: some GRPCCore.MessageSerializer<Qdrant_CreateVectorNameRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Qdrant_PointsOperationResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "DeleteVectorName" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Delete a named vector from the collection
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Qdrant_DeleteVectorNameRequest` message.
+        ///   - serializer: A serializer for `Qdrant_DeleteVectorNameRequest` messages.
+        ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        func deleteVectorName<Result>(
+            request: GRPCCore.ClientRequest<Qdrant_DeleteVectorNameRequest>,
+            serializer: some GRPCCore.MessageSerializer<Qdrant_DeleteVectorNameRequest>,
             deserializer: some GRPCCore.MessageDeserializer<Qdrant_PointsOperationResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result
@@ -665,15 +767,17 @@ extension Qdrant_Points {
         /// >
         /// > Retrieve closest points based on vector similarity and given filtering
         /// > conditions
+        /// > 
+        /// > Deprecated: use `Query` instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_SearchPoints` message.
         ///   - serializer: A serializer for `Qdrant_SearchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func search<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchPoints>,
@@ -689,15 +793,17 @@ extension Qdrant_Points {
         /// >
         /// > Retrieve closest points based on vector similarity and given filtering
         /// > conditions
+        /// > 
+        /// > Deprecated: use `QueryBatch` instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_SearchBatchPoints` message.
         ///   - serializer: A serializer for `Qdrant_SearchBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func searchBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchBatchPoints>,
@@ -713,15 +819,17 @@ extension Qdrant_Points {
         /// >
         /// > Retrieve closest points based on vector similarity and given filtering
         /// > conditions, grouped by a given field
+        /// > 
+        /// > Deprecated: use `QueryGroups` instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_SearchPointGroups` message.
         ///   - serializer: A serializer for `Qdrant_SearchPointGroups` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchGroupsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func searchGroups<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchPointGroups>,
@@ -742,9 +850,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_ScrollPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_ScrollResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func scroll<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ScrollPoints>,
@@ -760,15 +868,17 @@ extension Qdrant_Points {
         /// >
         /// > Look for the points which are closer to stored positive examples and at
         /// > the same time further to negative examples.
+        /// > 
+        /// > Deprecated: use `Query` with a `recommend` query instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_RecommendPoints` message.
         ///   - serializer: A serializer for `Qdrant_RecommendPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_RecommendResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func recommend<Result>(
             request: GRPCCore.ClientRequest<Qdrant_RecommendPoints>,
@@ -784,15 +894,17 @@ extension Qdrant_Points {
         /// >
         /// > Look for the points which are closer to stored positive examples and at
         /// > the same time further to negative examples.
+        /// > 
+        /// > Deprecated: use `QueryBatch` with `recommend` queries instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_RecommendBatchPoints` message.
         ///   - serializer: A serializer for `Qdrant_RecommendBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_RecommendBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func recommendBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_RecommendBatchPoints>,
@@ -808,15 +920,17 @@ extension Qdrant_Points {
         /// >
         /// > Look for the points which are closer to stored positive examples and at
         /// > the same time further to negative examples, grouped by a given field
+        /// > 
+        /// > Deprecated: use `QueryGroups` with a `recommend` query instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_RecommendPointGroups` message.
         ///   - serializer: A serializer for `Qdrant_RecommendPointGroups` messages.
         ///   - deserializer: A deserializer for `Qdrant_RecommendGroupsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func recommendGroups<Result>(
             request: GRPCCore.ClientRequest<Qdrant_RecommendPointGroups>,
@@ -849,15 +963,17 @@ extension Qdrant_Points {
         /// > distance to the target. The context part of the score for each pair is
         /// > calculated +1 if the point is closer to a positive than to a negative part
         /// > of a pair, and -1 otherwise.
+        /// > 
+        /// > Deprecated: use `Query` with a `discover` or `context` query instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_DiscoverPoints` message.
         ///   - serializer: A serializer for `Qdrant_DiscoverPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_DiscoverResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func discover<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DiscoverPoints>,
@@ -872,15 +988,17 @@ extension Qdrant_Points {
         /// > Source IDL Documentation:
         /// >
         /// > Batch request points based on { positive, negative } pairs of examples, and/or a target
+        /// > 
+        /// > Deprecated: use `QueryBatch` with `discover` or `context` queries instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_DiscoverBatchPoints` message.
         ///   - serializer: A serializer for `Qdrant_DiscoverBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_DiscoverBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func discoverBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DiscoverBatchPoints>,
@@ -901,9 +1019,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_CountPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_CountResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func count<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CountPoints>,
@@ -924,9 +1042,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_UpdateBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_UpdateBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func updateBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdateBatchPoints>,
@@ -949,9 +1067,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_QueryPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_QueryResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func query<Result>(
             request: GRPCCore.ClientRequest<Qdrant_QueryPoints>,
@@ -974,9 +1092,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_QueryBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_QueryBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func queryBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_QueryBatchPoints>,
@@ -999,9 +1117,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_QueryPointGroups` messages.
         ///   - deserializer: A deserializer for `Qdrant_QueryGroupsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func queryGroups<Result>(
             request: GRPCCore.ClientRequest<Qdrant_QueryPointGroups>,
@@ -1024,9 +1142,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_FacetCounts` messages.
         ///   - deserializer: A deserializer for `Qdrant_FacetResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func facet<Result>(
             request: GRPCCore.ClientRequest<Qdrant_FacetCounts>,
@@ -1047,9 +1165,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SearchMatrixPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchMatrixPairsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func searchMatrixPairs<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchMatrixPoints>,
@@ -1070,9 +1188,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SearchMatrixPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchMatrixOffsetsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func searchMatrixOffsets<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchMatrixPoints>,
@@ -1111,9 +1229,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_UpsertPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func upsert<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpsertPoints>,
@@ -1145,9 +1263,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeletePoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func delete<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeletePoints>,
@@ -1179,9 +1297,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_GetPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_GetResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func get<Result>(
             request: GRPCCore.ClientRequest<Qdrant_GetPoints>,
@@ -1213,9 +1331,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_UpdatePointVectors` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func updateVectors<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdatePointVectors>,
@@ -1247,9 +1365,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeletePointVectors` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func deleteVectors<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeletePointVectors>,
@@ -1281,9 +1399,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SetPayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func setPayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SetPayloadPoints>,
@@ -1315,9 +1433,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SetPayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func overwritePayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SetPayloadPoints>,
@@ -1349,9 +1467,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeletePayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func deletePayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeletePayloadPoints>,
@@ -1383,9 +1501,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_ClearPayloadPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func clearPayload<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ClearPayloadPoints>,
@@ -1417,9 +1535,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_CreateFieldIndexCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func createFieldIndex<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateFieldIndexCollection>,
@@ -1451,9 +1569,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_DeleteFieldIndexCollection` messages.
         ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func deleteFieldIndex<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteFieldIndexCollection>,
@@ -1474,21 +1592,91 @@ extension Qdrant_Points {
             )
         }
 
+        /// Call the "CreateVectorName" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Create a new named vector on the collection
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Qdrant_CreateVectorNameRequest` message.
+        ///   - serializer: A serializer for `Qdrant_CreateVectorNameRequest` messages.
+        ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func createVectorName<Result>(
+            request: GRPCCore.ClientRequest<Qdrant_CreateVectorNameRequest>,
+            serializer: some GRPCCore.MessageSerializer<Qdrant_CreateVectorNameRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Qdrant_PointsOperationResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Qdrant_Points.Method.CreateVectorName.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
+        /// Call the "DeleteVectorName" method.
+        ///
+        /// > Source IDL Documentation:
+        /// >
+        /// > Delete a named vector from the collection
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Qdrant_DeleteVectorNameRequest` message.
+        ///   - serializer: A serializer for `Qdrant_DeleteVectorNameRequest` messages.
+        ///   - deserializer: A deserializer for `Qdrant_PointsOperationResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func deleteVectorName<Result>(
+            request: GRPCCore.ClientRequest<Qdrant_DeleteVectorNameRequest>,
+            serializer: some GRPCCore.MessageSerializer<Qdrant_DeleteVectorNameRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Qdrant_PointsOperationResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result = { response in
+                try response.message
+            }
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.unary(
+                request: request,
+                descriptor: Qdrant_Points.Method.DeleteVectorName.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
+
         /// Call the "Search" method.
         ///
         /// > Source IDL Documentation:
         /// >
         /// > Retrieve closest points based on vector similarity and given filtering
         /// > conditions
+        /// > 
+        /// > Deprecated: use `Query` instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_SearchPoints` message.
         ///   - serializer: A serializer for `Qdrant_SearchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func search<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchPoints>,
@@ -1515,15 +1703,17 @@ extension Qdrant_Points {
         /// >
         /// > Retrieve closest points based on vector similarity and given filtering
         /// > conditions
+        /// > 
+        /// > Deprecated: use `QueryBatch` instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_SearchBatchPoints` message.
         ///   - serializer: A serializer for `Qdrant_SearchBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func searchBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchBatchPoints>,
@@ -1550,15 +1740,17 @@ extension Qdrant_Points {
         /// >
         /// > Retrieve closest points based on vector similarity and given filtering
         /// > conditions, grouped by a given field
+        /// > 
+        /// > Deprecated: use `QueryGroups` instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_SearchPointGroups` message.
         ///   - serializer: A serializer for `Qdrant_SearchPointGroups` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchGroupsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func searchGroups<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchPointGroups>,
@@ -1590,9 +1782,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_ScrollPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_ScrollResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func scroll<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ScrollPoints>,
@@ -1619,15 +1811,17 @@ extension Qdrant_Points {
         /// >
         /// > Look for the points which are closer to stored positive examples and at
         /// > the same time further to negative examples.
+        /// > 
+        /// > Deprecated: use `Query` with a `recommend` query instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_RecommendPoints` message.
         ///   - serializer: A serializer for `Qdrant_RecommendPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_RecommendResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func recommend<Result>(
             request: GRPCCore.ClientRequest<Qdrant_RecommendPoints>,
@@ -1654,15 +1848,17 @@ extension Qdrant_Points {
         /// >
         /// > Look for the points which are closer to stored positive examples and at
         /// > the same time further to negative examples.
+        /// > 
+        /// > Deprecated: use `QueryBatch` with `recommend` queries instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_RecommendBatchPoints` message.
         ///   - serializer: A serializer for `Qdrant_RecommendBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_RecommendBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func recommendBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_RecommendBatchPoints>,
@@ -1689,15 +1885,17 @@ extension Qdrant_Points {
         /// >
         /// > Look for the points which are closer to stored positive examples and at
         /// > the same time further to negative examples, grouped by a given field
+        /// > 
+        /// > Deprecated: use `QueryGroups` with a `recommend` query instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_RecommendPointGroups` message.
         ///   - serializer: A serializer for `Qdrant_RecommendPointGroups` messages.
         ///   - deserializer: A deserializer for `Qdrant_RecommendGroupsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func recommendGroups<Result>(
             request: GRPCCore.ClientRequest<Qdrant_RecommendPointGroups>,
@@ -1741,15 +1939,17 @@ extension Qdrant_Points {
         /// > distance to the target. The context part of the score for each pair is
         /// > calculated +1 if the point is closer to a positive than to a negative part
         /// > of a pair, and -1 otherwise.
+        /// > 
+        /// > Deprecated: use `Query` with a `discover` or `context` query instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_DiscoverPoints` message.
         ///   - serializer: A serializer for `Qdrant_DiscoverPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_DiscoverResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func discover<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DiscoverPoints>,
@@ -1775,15 +1975,17 @@ extension Qdrant_Points {
         /// > Source IDL Documentation:
         /// >
         /// > Batch request points based on { positive, negative } pairs of examples, and/or a target
+        /// > 
+        /// > Deprecated: use `QueryBatch` with `discover` or `context` queries instead.
         ///
         /// - Parameters:
         ///   - request: A request containing a single `Qdrant_DiscoverBatchPoints` message.
         ///   - serializer: A serializer for `Qdrant_DiscoverBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_DiscoverBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func discoverBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DiscoverBatchPoints>,
@@ -1815,9 +2017,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_CountPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_CountResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func count<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CountPoints>,
@@ -1849,9 +2051,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_UpdateBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_UpdateBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func updateBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_UpdateBatchPoints>,
@@ -1885,9 +2087,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_QueryPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_QueryResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func query<Result>(
             request: GRPCCore.ClientRequest<Qdrant_QueryPoints>,
@@ -1921,9 +2123,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_QueryBatchPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_QueryBatchResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func queryBatch<Result>(
             request: GRPCCore.ClientRequest<Qdrant_QueryBatchPoints>,
@@ -1957,9 +2159,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_QueryPointGroups` messages.
         ///   - deserializer: A deserializer for `Qdrant_QueryGroupsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func queryGroups<Result>(
             request: GRPCCore.ClientRequest<Qdrant_QueryPointGroups>,
@@ -1993,9 +2195,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_FacetCounts` messages.
         ///   - deserializer: A deserializer for `Qdrant_FacetResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func facet<Result>(
             request: GRPCCore.ClientRequest<Qdrant_FacetCounts>,
@@ -2027,9 +2229,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SearchMatrixPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchMatrixPairsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func searchMatrixPairs<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchMatrixPoints>,
@@ -2061,9 +2263,9 @@ extension Qdrant_Points {
         ///   - serializer: A serializer for `Qdrant_SearchMatrixPoints` messages.
         ///   - deserializer: A deserializer for `Qdrant_SearchMatrixOffsetsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func searchMatrixOffsets<Result>(
             request: GRPCCore.ClientRequest<Qdrant_SearchMatrixPoints>,
@@ -2099,9 +2301,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_UpsertPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func upsert<Result>(
         request: GRPCCore.ClientRequest<Qdrant_UpsertPoints>,
@@ -2128,9 +2330,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeletePoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func delete<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeletePoints>,
@@ -2157,9 +2359,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_GetPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func get<Result>(
         request: GRPCCore.ClientRequest<Qdrant_GetPoints>,
@@ -2186,9 +2388,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_UpdatePointVectors` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateVectors<Result>(
         request: GRPCCore.ClientRequest<Qdrant_UpdatePointVectors>,
@@ -2215,9 +2417,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeletePointVectors` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteVectors<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeletePointVectors>,
@@ -2244,9 +2446,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_SetPayloadPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setPayload<Result>(
         request: GRPCCore.ClientRequest<Qdrant_SetPayloadPoints>,
@@ -2273,9 +2475,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_SetPayloadPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func overwritePayload<Result>(
         request: GRPCCore.ClientRequest<Qdrant_SetPayloadPoints>,
@@ -2302,9 +2504,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeletePayloadPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deletePayload<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeletePayloadPoints>,
@@ -2331,9 +2533,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ClearPayloadPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func clearPayload<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ClearPayloadPoints>,
@@ -2360,9 +2562,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CreateFieldIndexCollection` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createFieldIndex<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CreateFieldIndexCollection>,
@@ -2389,9 +2591,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeleteFieldIndexCollection` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteFieldIndex<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeleteFieldIndexCollection>,
@@ -2409,19 +2611,79 @@ extension Qdrant_Points.ClientProtocol {
         )
     }
 
+    /// Call the "CreateVectorName" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Create a new named vector on the collection
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Qdrant_CreateVectorNameRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createVectorName<Result>(
+        request: GRPCCore.ClientRequest<Qdrant_CreateVectorNameRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.createVectorName(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Qdrant_CreateVectorNameRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Qdrant_PointsOperationResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "DeleteVectorName" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Delete a named vector from the collection
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Qdrant_DeleteVectorNameRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func deleteVectorName<Result>(
+        request: GRPCCore.ClientRequest<Qdrant_DeleteVectorNameRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        try await self.deleteVectorName(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Qdrant_DeleteVectorNameRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Qdrant_PointsOperationResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "Search" method.
     ///
     /// > Source IDL Documentation:
     /// >
     /// > Retrieve closest points based on vector similarity and given filtering
     /// > conditions
+    /// > 
+    /// > Deprecated: use `Query` instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_SearchPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func search<Result>(
         request: GRPCCore.ClientRequest<Qdrant_SearchPoints>,
@@ -2445,13 +2707,15 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Retrieve closest points based on vector similarity and given filtering
     /// > conditions
+    /// > 
+    /// > Deprecated: use `QueryBatch` instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_SearchBatchPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchBatch<Result>(
         request: GRPCCore.ClientRequest<Qdrant_SearchBatchPoints>,
@@ -2475,13 +2739,15 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Retrieve closest points based on vector similarity and given filtering
     /// > conditions, grouped by a given field
+    /// > 
+    /// > Deprecated: use `QueryGroups` instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_SearchPointGroups` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchGroups<Result>(
         request: GRPCCore.ClientRequest<Qdrant_SearchPointGroups>,
@@ -2508,9 +2774,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ScrollPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func scroll<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ScrollPoints>,
@@ -2534,13 +2800,15 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Look for the points which are closer to stored positive examples and at
     /// > the same time further to negative examples.
+    /// > 
+    /// > Deprecated: use `Query` with a `recommend` query instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_RecommendPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func recommend<Result>(
         request: GRPCCore.ClientRequest<Qdrant_RecommendPoints>,
@@ -2564,13 +2832,15 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Look for the points which are closer to stored positive examples and at
     /// > the same time further to negative examples.
+    /// > 
+    /// > Deprecated: use `QueryBatch` with `recommend` queries instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_RecommendBatchPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func recommendBatch<Result>(
         request: GRPCCore.ClientRequest<Qdrant_RecommendBatchPoints>,
@@ -2594,13 +2864,15 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Look for the points which are closer to stored positive examples and at
     /// > the same time further to negative examples, grouped by a given field
+    /// > 
+    /// > Deprecated: use `QueryGroups` with a `recommend` query instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_RecommendPointGroups` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func recommendGroups<Result>(
         request: GRPCCore.ClientRequest<Qdrant_RecommendPointGroups>,
@@ -2641,13 +2913,15 @@ extension Qdrant_Points.ClientProtocol {
     /// > distance to the target. The context part of the score for each pair is
     /// > calculated +1 if the point is closer to a positive than to a negative part
     /// > of a pair, and -1 otherwise.
+    /// > 
+    /// > Deprecated: use `Query` with a `discover` or `context` query instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DiscoverPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func discover<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DiscoverPoints>,
@@ -2670,13 +2944,15 @@ extension Qdrant_Points.ClientProtocol {
     /// > Source IDL Documentation:
     /// >
     /// > Batch request points based on { positive, negative } pairs of examples, and/or a target
+    /// > 
+    /// > Deprecated: use `QueryBatch` with `discover` or `context` queries instead.
     ///
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DiscoverBatchPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func discoverBatch<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DiscoverBatchPoints>,
@@ -2703,9 +2979,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CountPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func count<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CountPoints>,
@@ -2732,9 +3008,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_UpdateBatchPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateBatch<Result>(
         request: GRPCCore.ClientRequest<Qdrant_UpdateBatchPoints>,
@@ -2763,9 +3039,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_QueryPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func query<Result>(
         request: GRPCCore.ClientRequest<Qdrant_QueryPoints>,
@@ -2794,9 +3070,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_QueryBatchPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func queryBatch<Result>(
         request: GRPCCore.ClientRequest<Qdrant_QueryBatchPoints>,
@@ -2825,9 +3101,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_QueryPointGroups` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func queryGroups<Result>(
         request: GRPCCore.ClientRequest<Qdrant_QueryPointGroups>,
@@ -2856,9 +3132,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_FacetCounts` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func facet<Result>(
         request: GRPCCore.ClientRequest<Qdrant_FacetCounts>,
@@ -2885,9 +3161,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_SearchMatrixPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchMatrixPairs<Result>(
         request: GRPCCore.ClientRequest<Qdrant_SearchMatrixPoints>,
@@ -2914,9 +3190,9 @@ extension Qdrant_Points.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_SearchMatrixPoints` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchMatrixOffsets<Result>(
         request: GRPCCore.ClientRequest<Qdrant_SearchMatrixPoints>,
@@ -2949,9 +3225,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func upsert<Result>(
         _ message: Qdrant_UpsertPoints,
@@ -2982,9 +3258,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func delete<Result>(
         _ message: Qdrant_DeletePoints,
@@ -3015,9 +3291,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func get<Result>(
         _ message: Qdrant_GetPoints,
@@ -3048,9 +3324,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateVectors<Result>(
         _ message: Qdrant_UpdatePointVectors,
@@ -3081,9 +3357,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteVectors<Result>(
         _ message: Qdrant_DeletePointVectors,
@@ -3114,9 +3390,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func setPayload<Result>(
         _ message: Qdrant_SetPayloadPoints,
@@ -3147,9 +3423,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func overwritePayload<Result>(
         _ message: Qdrant_SetPayloadPoints,
@@ -3180,9 +3456,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deletePayload<Result>(
         _ message: Qdrant_DeletePayloadPoints,
@@ -3213,9 +3489,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func clearPayload<Result>(
         _ message: Qdrant_ClearPayloadPoints,
@@ -3246,9 +3522,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createFieldIndex<Result>(
         _ message: Qdrant_CreateFieldIndexCollection,
@@ -3279,9 +3555,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteFieldIndex<Result>(
         _ message: Qdrant_DeleteFieldIndexCollection,
@@ -3302,20 +3578,88 @@ extension Qdrant_Points.ClientProtocol {
         )
     }
 
+    /// Call the "CreateVectorName" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Create a new named vector on the collection
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func createVectorName<Result>(
+        _ message: Qdrant_CreateVectorNameRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Qdrant_CreateVectorNameRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.createVectorName(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "DeleteVectorName" method.
+    ///
+    /// > Source IDL Documentation:
+    /// >
+    /// > Delete a named vector from the collection
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func deleteVectorName<Result>(
+        _ message: Qdrant_DeleteVectorNameRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Qdrant_PointsOperationResponse>) async throws -> Result = { response in
+            try response.message
+        }
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Qdrant_DeleteVectorNameRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.deleteVectorName(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
     /// Call the "Search" method.
     ///
     /// > Source IDL Documentation:
     /// >
     /// > Retrieve closest points based on vector similarity and given filtering
     /// > conditions
+    /// > 
+    /// > Deprecated: use `Query` instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func search<Result>(
         _ message: Qdrant_SearchPoints,
@@ -3342,14 +3686,16 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Retrieve closest points based on vector similarity and given filtering
     /// > conditions
+    /// > 
+    /// > Deprecated: use `QueryBatch` instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchBatch<Result>(
         _ message: Qdrant_SearchBatchPoints,
@@ -3376,14 +3722,16 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Retrieve closest points based on vector similarity and given filtering
     /// > conditions, grouped by a given field
+    /// > 
+    /// > Deprecated: use `QueryGroups` instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchGroups<Result>(
         _ message: Qdrant_SearchPointGroups,
@@ -3414,9 +3762,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func scroll<Result>(
         _ message: Qdrant_ScrollPoints,
@@ -3443,14 +3791,16 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Look for the points which are closer to stored positive examples and at
     /// > the same time further to negative examples.
+    /// > 
+    /// > Deprecated: use `Query` with a `recommend` query instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func recommend<Result>(
         _ message: Qdrant_RecommendPoints,
@@ -3477,14 +3827,16 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Look for the points which are closer to stored positive examples and at
     /// > the same time further to negative examples.
+    /// > 
+    /// > Deprecated: use `QueryBatch` with `recommend` queries instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func recommendBatch<Result>(
         _ message: Qdrant_RecommendBatchPoints,
@@ -3511,14 +3863,16 @@ extension Qdrant_Points.ClientProtocol {
     /// >
     /// > Look for the points which are closer to stored positive examples and at
     /// > the same time further to negative examples, grouped by a given field
+    /// > 
+    /// > Deprecated: use `QueryGroups` with a `recommend` query instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func recommendGroups<Result>(
         _ message: Qdrant_RecommendPointGroups,
@@ -3562,14 +3916,16 @@ extension Qdrant_Points.ClientProtocol {
     /// > distance to the target. The context part of the score for each pair is
     /// > calculated +1 if the point is closer to a positive than to a negative part
     /// > of a pair, and -1 otherwise.
+    /// > 
+    /// > Deprecated: use `Query` with a `discover` or `context` query instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func discover<Result>(
         _ message: Qdrant_DiscoverPoints,
@@ -3595,14 +3951,16 @@ extension Qdrant_Points.ClientProtocol {
     /// > Source IDL Documentation:
     /// >
     /// > Batch request points based on { positive, negative } pairs of examples, and/or a target
+    /// > 
+    /// > Deprecated: use `QueryBatch` with `discover` or `context` queries instead.
     ///
     /// - Parameters:
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func discoverBatch<Result>(
         _ message: Qdrant_DiscoverBatchPoints,
@@ -3633,9 +3991,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func count<Result>(
         _ message: Qdrant_CountPoints,
@@ -3666,9 +4024,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func updateBatch<Result>(
         _ message: Qdrant_UpdateBatchPoints,
@@ -3701,9 +4059,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func query<Result>(
         _ message: Qdrant_QueryPoints,
@@ -3736,9 +4094,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func queryBatch<Result>(
         _ message: Qdrant_QueryBatchPoints,
@@ -3771,9 +4129,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func queryGroups<Result>(
         _ message: Qdrant_QueryPointGroups,
@@ -3806,9 +4164,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func facet<Result>(
         _ message: Qdrant_FacetCounts,
@@ -3839,9 +4197,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchMatrixPairs<Result>(
         _ message: Qdrant_SearchMatrixPoints,
@@ -3872,9 +4230,9 @@ extension Qdrant_Points.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func searchMatrixOffsets<Result>(
         _ message: Qdrant_SearchMatrixPoints,

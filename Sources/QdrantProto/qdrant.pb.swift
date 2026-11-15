@@ -8,6 +8,12 @@
 // For information on using the generated types, please see the documentation:
 //   https://github.com/apple/swift-protobuf/
 
+/// Public client subset of Qdrant v1.20.1 lib/api/src/grpc/proto/qdrant.proto.
+/// Internal service imports (collections_internal_service, points_internal_service,
+/// qdrant_internal_service, raft_service, shard_snapshots_service, storage_read_service,
+/// and the public service imports that only exist to register those RPCs) are omitted.
+/// HealthCheckRequest / HealthCheckReply match the upstream message definitions.
+
 import SwiftProtobuf
 
 // If the compiler emits an error on this type, it is because this file
@@ -15,12 +21,12 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
-public struct Qdrant_HealthCheckRequest: Sendable {
+public nonisolated struct Qdrant_HealthCheckRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -30,7 +36,7 @@ public struct Qdrant_HealthCheckRequest: Sendable {
   public init() {}
 }
 
-public struct Qdrant_HealthCheckReply: Sendable {
+public nonisolated struct Qdrant_HealthCheckReply: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -40,11 +46,11 @@ public struct Qdrant_HealthCheckReply: Sendable {
   public var version: String = String()
 
   public var commit: String {
-    get {return _commit ?? String()}
+    get {_commit ?? String()}
     set {_commit = newValue}
   }
   /// Returns true if `commit` has been explicitly set.
-  public var hasCommit: Bool {return self._commit != nil}
+  public var hasCommit: Bool {self._commit != nil}
   /// Clears the value of `commit`. Subsequent reads from it will return its default value.
   public mutating func clearCommit() {self._commit = nil}
 
@@ -57,9 +63,9 @@ public struct Qdrant_HealthCheckReply: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "qdrant"
+fileprivate nonisolated let _protobuf_package = "qdrant"
 
-extension Qdrant_HealthCheckRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_HealthCheckRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HealthCheckRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -78,7 +84,7 @@ extension Qdrant_HealthCheckRequest: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_HealthCheckReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_HealthCheckReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HealthCheckReply"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}title\0\u{1}version\0\u{1}commit\0")
 

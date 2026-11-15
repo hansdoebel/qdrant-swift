@@ -15,12 +15,12 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
-public enum Qdrant_WriteOrderingType: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_WriteOrderingType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Write operations may be reordered, works faster, default
@@ -57,6 +57,7 @@ public enum Qdrant_WriteOrderingType: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_WriteOrderingType] = [
     .weak,
     .medium,
@@ -65,7 +66,52 @@ public enum Qdrant_WriteOrderingType: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum Qdrant_ReadConsistencyType: SwiftProtobuf.Enum, Swift.CaseIterable {
+/// Defines the mode of the upsert operation
+public nonisolated enum Qdrant_UpdateMode: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+
+  /// Default mode - insert new points, update existing points
+  case upsert // = 0
+
+  /// Only insert new points, do not update existing points
+  case insertOnly // = 1
+
+  /// Only update existing points, do not insert new points
+  case updateOnly // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .upsert
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .upsert
+    case 1: self = .insertOnly
+    case 2: self = .updateOnly
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .upsert: return 0
+    case .insertOnly: return 1
+    case .updateOnly: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Qdrant_UpdateMode] = [
+    .upsert,
+    .insertOnly,
+    .updateOnly,
+  ]
+
+}
+
+public nonisolated enum Qdrant_ReadConsistencyType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Send request to all nodes and return points which are present on all of them
@@ -100,6 +146,7 @@ public enum Qdrant_ReadConsistencyType: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_ReadConsistencyType] = [
     .all,
     .majority,
@@ -108,7 +155,7 @@ public enum Qdrant_ReadConsistencyType: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum Qdrant_FieldType: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_FieldType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case keyword // = 0
   case integer // = 1
@@ -152,6 +199,7 @@ public enum Qdrant_FieldType: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_FieldType] = [
     .keyword,
     .integer,
@@ -165,7 +213,7 @@ public enum Qdrant_FieldType: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum Qdrant_Direction: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_Direction: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case asc // = 0
   case desc // = 1
@@ -191,6 +239,7 @@ public enum Qdrant_Direction: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_Direction] = [
     .asc,
     .desc,
@@ -199,7 +248,7 @@ public enum Qdrant_Direction: SwiftProtobuf.Enum, Swift.CaseIterable {
 }
 
 /// How to use positive and negative vectors to find the results, default is `AverageVector`.
-public enum Qdrant_RecommendStrategy: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_RecommendStrategy: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Average positive and negative vectors and create a single query with the formula
@@ -238,6 +287,7 @@ public enum Qdrant_RecommendStrategy: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_RecommendStrategy] = [
     .averageVector,
     .bestScore,
@@ -246,7 +296,7 @@ public enum Qdrant_RecommendStrategy: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum Qdrant_Fusion: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_Fusion: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
 
   /// Reciprocal Rank Fusion (with default parameters)
@@ -276,6 +326,7 @@ public enum Qdrant_Fusion: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_Fusion] = [
     .rrf,
     .dbsf,
@@ -288,7 +339,7 @@ public enum Qdrant_Fusion: SwiftProtobuf.Enum, Swift.CaseIterable {
 /// Available sampling methods:
 ///
 /// * `random` - Random sampling
-public enum Qdrant_Sample: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_Sample: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case random // = 0
   case UNRECOGNIZED(Int)
@@ -311,13 +362,14 @@ public enum Qdrant_Sample: SwiftProtobuf.Enum, Swift.CaseIterable {
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_Sample] = [
     .random,
   ]
 
 }
 
-public enum Qdrant_UpdateStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+public nonisolated enum Qdrant_UpdateStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case unknownUpdateStatus // = 0
 
@@ -329,6 +381,9 @@ public enum Qdrant_UpdateStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
 
   /// Internal: update is rejected due to an outdated clock
   case clockRejected // = 3
+
+  /// Timeout of awaited operations
+  case waitTimeout // = 4
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -341,6 +396,7 @@ public enum Qdrant_UpdateStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     case 1: self = .acknowledged
     case 2: self = .completed
     case 3: self = .clockRejected
+    case 4: self = .waitTimeout
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -351,20 +407,27 @@ public enum Qdrant_UpdateStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     case .acknowledged: return 1
     case .completed: return 2
     case .clockRejected: return 3
+    case .waitTimeout: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
 
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
   public static let allCases: [Qdrant_UpdateStatus] = [
     .unknownUpdateStatus,
     .acknowledged,
     .completed,
     .clockRejected,
+    .waitTimeout,
   ]
 
 }
 
-public struct Qdrant_WriteOrdering: Sendable {
+public nonisolated struct Qdrant_WriteOrdering: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Write ordering guarantees
   public var type: Qdrant_WriteOrderingType = .weak
 
@@ -373,7 +436,11 @@ public struct Qdrant_WriteOrdering: Sendable {
   public init() {}
 }
 
-public struct Qdrant_ReadConsistency: Sendable {
+public nonisolated struct Qdrant_ReadConsistency: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var value: Qdrant_ReadConsistency.OneOf_Value? = nil
 
   /// Common read consistency configurations
@@ -397,7 +464,7 @@ public struct Qdrant_ReadConsistency: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Value: Equatable, Sendable {
+  public nonisolated enum OneOf_Value: Equatable, Sendable {
     /// Common read consistency configurations
     case type(Qdrant_ReadConsistencyType)
     /// Send request to a specified number of nodes,
@@ -409,7 +476,11 @@ public struct Qdrant_ReadConsistency: Sendable {
   public init() {}
 }
 
-public struct Qdrant_SparseIndices: Sendable {
+public nonisolated struct Qdrant_SparseIndices: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var data: [UInt32] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -417,7 +488,11 @@ public struct Qdrant_SparseIndices: Sendable {
   public init() {}
 }
 
-public struct Qdrant_Document: Sendable {
+public nonisolated struct Qdrant_Document: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Text of the document
   public var text: String = String()
 
@@ -432,13 +507,19 @@ public struct Qdrant_Document: Sendable {
   public init() {}
 }
 
-public struct Qdrant_Image: Sendable {
+public nonisolated struct Qdrant_Image: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Image data, either base64 encoded or URL
   public var image: Qdrant_Value {
-    get {return _image ?? Qdrant_Value()}
+    get {_image ?? Qdrant_Value()}
     set {_image = newValue}
   }
-  public var hasImage: Bool {return self._image != nil}
+  /// Returns true if `image` has been explicitly set.
+  public var hasImage: Bool {self._image != nil}
+  /// Clears the value of `image`. Subsequent reads from it will return its default value.
   public mutating func clearImage() {self._image = nil}
 
   /// Model name
@@ -454,13 +535,19 @@ public struct Qdrant_Image: Sendable {
   fileprivate var _image: Qdrant_Value? = nil
 }
 
-public struct Qdrant_InferenceObject: Sendable {
+public nonisolated struct Qdrant_InferenceObject: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Object to infer
   public var object: Qdrant_Value {
-    get {return _object ?? Qdrant_Value()}
+    get {_object ?? Qdrant_Value()}
     set {_object = newValue}
   }
-  public var hasObject: Bool {return self._object != nil}
+  /// Returns true if `object` has been explicitly set.
+  public var hasObject: Bool {self._object != nil}
+  /// Clears the value of `object`. Subsequent reads from it will return its default value.
   public mutating func clearObject() {self._object = nil}
 
   /// Model name
@@ -476,7 +563,11 @@ public struct Qdrant_InferenceObject: Sendable {
   fileprivate var _object: Qdrant_Value? = nil
 }
 
-public struct Qdrant_Vector: Sendable {
+public nonisolated struct Qdrant_Vector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Vector data (flatten for multi vectors), deprecated
   ///
   /// NOTE: This field was marked as deprecated in the .proto file.
@@ -486,20 +577,24 @@ public struct Qdrant_Vector: Sendable {
   ///
   /// NOTE: This field was marked as deprecated in the .proto file.
   public var indices: Qdrant_SparseIndices {
-    get {return _indices ?? Qdrant_SparseIndices()}
+    get {_indices ?? Qdrant_SparseIndices()}
     set {_indices = newValue}
   }
-  public var hasIndices: Bool {return self._indices != nil}
+  /// Returns true if `indices` has been explicitly set.
+  public var hasIndices: Bool {self._indices != nil}
+  /// Clears the value of `indices`. Subsequent reads from it will return its default value.
   public mutating func clearIndices() {self._indices = nil}
 
   /// Number of vectors per multi vector, deprecated
   ///
   /// NOTE: This field was marked as deprecated in the .proto file.
   public var vectorsCount: UInt32 {
-    get {return _vectorsCount ?? 0}
+    get {_vectorsCount ?? 0}
     set {_vectorsCount = newValue}
   }
-  public var hasVectorsCount: Bool {return self._vectorsCount != nil}
+  /// Returns true if `vectorsCount` has been explicitly set.
+  public var hasVectorsCount: Bool {self._vectorsCount != nil}
+  /// Clears the value of `vectorsCount`. Subsequent reads from it will return its default value.
   public mutating func clearVectorsCount() {self._vectorsCount = nil}
 
   public var vector: Qdrant_Vector.OneOf_Vector? = nil
@@ -557,7 +652,7 @@ public struct Qdrant_Vector: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Vector: Equatable, Sendable {
+  public nonisolated enum OneOf_Vector: Equatable, Sendable {
     /// Dense vector
     case dense(Qdrant_DenseVector)
     /// Sparse vector
@@ -576,7 +671,11 @@ public struct Qdrant_Vector: Sendable {
   fileprivate var _vectorsCount: UInt32? = nil
 }
 
-public struct Qdrant_VectorOutput: Sendable {
+public nonisolated struct Qdrant_VectorOutput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Vector data (flatten for multi vectors), deprecated
   ///
   /// NOTE: This field was marked as deprecated in the .proto file.
@@ -586,20 +685,24 @@ public struct Qdrant_VectorOutput: Sendable {
   ///
   /// NOTE: This field was marked as deprecated in the .proto file.
   public var indices: Qdrant_SparseIndices {
-    get {return _indices ?? Qdrant_SparseIndices()}
+    get {_indices ?? Qdrant_SparseIndices()}
     set {_indices = newValue}
   }
-  public var hasIndices: Bool {return self._indices != nil}
+  /// Returns true if `indices` has been explicitly set.
+  public var hasIndices: Bool {self._indices != nil}
+  /// Clears the value of `indices`. Subsequent reads from it will return its default value.
   public mutating func clearIndices() {self._indices = nil}
 
   /// Number of vectors per multi vector, deprecated
   ///
   /// NOTE: This field was marked as deprecated in the .proto file.
   public var vectorsCount: UInt32 {
-    get {return _vectorsCount ?? 0}
+    get {_vectorsCount ?? 0}
     set {_vectorsCount = newValue}
   }
-  public var hasVectorsCount: Bool {return self._vectorsCount != nil}
+  /// Returns true if `vectorsCount` has been explicitly set.
+  public var hasVectorsCount: Bool {self._vectorsCount != nil}
+  /// Clears the value of `vectorsCount`. Subsequent reads from it will return its default value.
   public mutating func clearVectorsCount() {self._vectorsCount = nil}
 
   public var vector: Qdrant_VectorOutput.OneOf_Vector? = nil
@@ -633,7 +736,7 @@ public struct Qdrant_VectorOutput: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Vector: Equatable, Sendable {
+  public nonisolated enum OneOf_Vector: Equatable, Sendable {
     /// Dense vector
     case dense(Qdrant_DenseVector)
     /// Sparse vector
@@ -649,7 +752,11 @@ public struct Qdrant_VectorOutput: Sendable {
   fileprivate var _vectorsCount: UInt32? = nil
 }
 
-public struct Qdrant_DenseVector: Sendable {
+public nonisolated struct Qdrant_DenseVector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var data: [Float] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -657,7 +764,11 @@ public struct Qdrant_DenseVector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_SparseVector: Sendable {
+public nonisolated struct Qdrant_SparseVector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var values: [Float] = []
 
   public var indices: [UInt32] = []
@@ -667,7 +778,11 @@ public struct Qdrant_SparseVector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_MultiDenseVector: Sendable {
+public nonisolated struct Qdrant_MultiDenseVector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var vectors: [Qdrant_DenseVector] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -677,7 +792,11 @@ public struct Qdrant_MultiDenseVector: Sendable {
 
 /// Vector type to be used in queries.
 /// Ids will be substituted with their corresponding vectors from the collection.
-public struct Qdrant_VectorInput: Sendable {
+public nonisolated struct Qdrant_VectorInput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var variant: Qdrant_VectorInput.OneOf_Variant? = nil
 
   public var id: Qdrant_PointId {
@@ -738,7 +857,7 @@ public struct Qdrant_VectorInput: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Variant: Equatable, Sendable {
+  public nonisolated enum OneOf_Variant: Equatable, Sendable {
     case id(Qdrant_PointId)
     case dense(Qdrant_DenseVector)
     case sparse(Qdrant_SparseVector)
@@ -752,15 +871,21 @@ public struct Qdrant_VectorInput: Sendable {
   public init() {}
 }
 
-public struct Qdrant_ShardKeySelector: Sendable {
+public nonisolated struct Qdrant_ShardKeySelector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// List of shard keys which should be used in the request
   public var shardKeys: [Qdrant_ShardKey] = []
 
   public var fallback: Qdrant_ShardKey {
-    get {return _fallback ?? Qdrant_ShardKey()}
+    get {_fallback ?? Qdrant_ShardKey()}
     set {_fallback = newValue}
   }
-  public var hasFallback: Bool {return self._fallback != nil}
+  /// Returns true if `fallback` has been explicitly set.
+  public var hasFallback: Bool {self._fallback != nil}
+  /// Clears the value of `fallback`. Subsequent reads from it will return its default value.
   public mutating func clearFallback() {self._fallback = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -770,51 +895,76 @@ public struct Qdrant_ShardKeySelector: Sendable {
   fileprivate var _fallback: Qdrant_ShardKey? = nil
 }
 
-public struct Qdrant_UpsertPoints: Sendable {
+public nonisolated struct Qdrant_UpsertPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   public var points: [Qdrant_PointStruct] = []
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Option for custom sharding to specify used shard keys
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
-  /// If specified, only points that match this filter will be updated, others will be inserted
+  /// Filter to apply when updating existing points. Only points matching this filter will be updated.
+  /// Points that don't match will keep their current state. New points will be inserted regardless of the filter.
   public var updateFilter: Qdrant_Filter {
-    get {return _updateFilter ?? Qdrant_Filter()}
+    get {_updateFilter ?? Qdrant_Filter()}
     set {_updateFilter = newValue}
   }
-  public var hasUpdateFilter: Bool {return self._updateFilter != nil}
+  /// Returns true if `updateFilter` has been explicitly set.
+  public var hasUpdateFilter: Bool {self._updateFilter != nil}
+  /// Clears the value of `updateFilter`. Subsequent reads from it will return its default value.
   public mutating func clearUpdateFilter() {self._updateFilter = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
+
+  /// Mode of the upsert operation: insert_only, upsert (default), update_only
+  public var updateMode: Qdrant_UpdateMode {
+    get {_updateMode ?? .upsert}
+    set {_updateMode = newValue}
+  }
+  /// Returns true if `updateMode` has been explicitly set.
+  public var hasUpdateMode: Bool {self._updateMode != nil}
+  /// Clears the value of `updateMode`. Subsequent reads from it will return its default value.
+  public mutating func clearUpdateMode() {self._updateMode = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -825,50 +975,65 @@ public struct Qdrant_UpsertPoints: Sendable {
   fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
   fileprivate var _updateFilter: Qdrant_Filter? = nil
   fileprivate var _timeout: UInt64? = nil
+  fileprivate var _updateMode: Qdrant_UpdateMode? = nil
 }
 
-public struct Qdrant_DeletePoints: Sendable {
+public nonisolated struct Qdrant_DeletePoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   /// Affected points
   public var points: Qdrant_PointsSelector {
-    get {return _points ?? Qdrant_PointsSelector()}
+    get {_points ?? Qdrant_PointsSelector()}
     set {_points = newValue}
   }
-  public var hasPoints: Bool {return self._points != nil}
+  /// Returns true if `points` has been explicitly set.
+  public var hasPoints: Bool {self._points != nil}
+  /// Clears the value of `points`. Subsequent reads from it will return its default value.
   public mutating func clearPoints() {self._points = nil}
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Option for custom sharding to specify used shard keys
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -882,7 +1047,11 @@ public struct Qdrant_DeletePoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_GetPoints: Sendable {
+public nonisolated struct Qdrant_GetPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
@@ -891,42 +1060,52 @@ public struct Qdrant_GetPoints: Sendable {
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_withPayload ?? Qdrant_WithPayloadSelector()}
     set {_withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return self._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {self._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {self._withPayload = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_withVectors ?? Qdrant_WithVectorsSelector()}
     set {_withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return self._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {self._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {self._withVectors = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -940,16 +1119,22 @@ public struct Qdrant_GetPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_UpdatePointVectors: Sendable {
+public nonisolated struct Qdrant_UpdatePointVectors: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   /// List of points and vectors to update
@@ -957,34 +1142,42 @@ public struct Qdrant_UpdatePointVectors: Sendable {
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Option for custom sharding to specify used shard keys
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// If specified, only points that match this filter will be updated
   public var updateFilter: Qdrant_Filter {
-    get {return _updateFilter ?? Qdrant_Filter()}
+    get {_updateFilter ?? Qdrant_Filter()}
     set {_updateFilter = newValue}
   }
-  public var hasUpdateFilter: Bool {return self._updateFilter != nil}
+  /// Returns true if `updateFilter` has been explicitly set.
+  public var hasUpdateFilter: Bool {self._updateFilter != nil}
+  /// Clears the value of `updateFilter`. Subsequent reads from it will return its default value.
   public mutating func clearUpdateFilter() {self._updateFilter = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -998,21 +1191,29 @@ public struct Qdrant_UpdatePointVectors: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_PointVectors: Sendable {
+public nonisolated struct Qdrant_PointVectors: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// ID to update vectors for
   public var id: Qdrant_PointId {
-    get {return _id ?? Qdrant_PointId()}
+    get {_id ?? Qdrant_PointId()}
     set {_id = newValue}
   }
-  public var hasID: Bool {return self._id != nil}
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {self._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
   /// Named vectors to update, leave others intact
   public var vectors: Qdrant_Vectors {
-    get {return _vectors ?? Qdrant_Vectors()}
+    get {_vectors ?? Qdrant_Vectors()}
     set {_vectors = newValue}
   }
-  public var hasVectors: Bool {return self._vectors != nil}
+  /// Returns true if `vectors` has been explicitly set.
+  public var hasVectors: Bool {self._vectors != nil}
+  /// Clears the value of `vectors`. Subsequent reads from it will return its default value.
   public mutating func clearVectors() {self._vectors = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1023,56 +1224,72 @@ public struct Qdrant_PointVectors: Sendable {
   fileprivate var _vectors: Qdrant_Vectors? = nil
 }
 
-public struct Qdrant_DeletePointVectors: Sendable {
+public nonisolated struct Qdrant_DeletePointVectors: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   /// Affected points
   public var pointsSelector: Qdrant_PointsSelector {
-    get {return _pointsSelector ?? Qdrant_PointsSelector()}
+    get {_pointsSelector ?? Qdrant_PointsSelector()}
     set {_pointsSelector = newValue}
   }
-  public var hasPointsSelector: Bool {return self._pointsSelector != nil}
+  /// Returns true if `pointsSelector` has been explicitly set.
+  public var hasPointsSelector: Bool {self._pointsSelector != nil}
+  /// Clears the value of `pointsSelector`. Subsequent reads from it will return its default value.
   public mutating func clearPointsSelector() {self._pointsSelector = nil}
 
   /// List of vector names to delete
   public var vectors: Qdrant_VectorsSelector {
-    get {return _vectors ?? Qdrant_VectorsSelector()}
+    get {_vectors ?? Qdrant_VectorsSelector()}
     set {_vectors = newValue}
   }
-  public var hasVectors: Bool {return self._vectors != nil}
+  /// Returns true if `vectors` has been explicitly set.
+  public var hasVectors: Bool {self._vectors != nil}
+  /// Clears the value of `vectors`. Subsequent reads from it will return its default value.
   public mutating func clearVectors() {self._vectors = nil}
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Option for custom sharding to specify used shard keys
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1087,16 +1304,22 @@ public struct Qdrant_DeletePointVectors: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_SetPayloadPoints: Sendable {
+public nonisolated struct Qdrant_SetPayloadPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   /// New payload values
@@ -1104,42 +1327,52 @@ public struct Qdrant_SetPayloadPoints: Sendable {
 
   /// Affected points
   public var pointsSelector: Qdrant_PointsSelector {
-    get {return _pointsSelector ?? Qdrant_PointsSelector()}
+    get {_pointsSelector ?? Qdrant_PointsSelector()}
     set {_pointsSelector = newValue}
   }
-  public var hasPointsSelector: Bool {return self._pointsSelector != nil}
+  /// Returns true if `pointsSelector` has been explicitly set.
+  public var hasPointsSelector: Bool {self._pointsSelector != nil}
+  /// Clears the value of `pointsSelector`. Subsequent reads from it will return its default value.
   public mutating func clearPointsSelector() {self._pointsSelector = nil}
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Option for custom sharding to specify used shard keys
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// Option for indicate property of payload
   public var key: String {
-    get {return _key ?? String()}
+    get {_key ?? String()}
     set {_key = newValue}
   }
-  public var hasKey: Bool {return self._key != nil}
+  /// Returns true if `key` has been explicitly set.
+  public var hasKey: Bool {self._key != nil}
+  /// Clears the value of `key`. Subsequent reads from it will return its default value.
   public mutating func clearKey() {self._key = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1154,16 +1387,22 @@ public struct Qdrant_SetPayloadPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_DeletePayloadPoints: Sendable {
+public nonisolated struct Qdrant_DeletePayloadPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   /// List of keys to delete
@@ -1171,34 +1410,42 @@ public struct Qdrant_DeletePayloadPoints: Sendable {
 
   /// Affected points
   public var pointsSelector: Qdrant_PointsSelector {
-    get {return _pointsSelector ?? Qdrant_PointsSelector()}
+    get {_pointsSelector ?? Qdrant_PointsSelector()}
     set {_pointsSelector = newValue}
   }
-  public var hasPointsSelector: Bool {return self._pointsSelector != nil}
+  /// Returns true if `pointsSelector` has been explicitly set.
+  public var hasPointsSelector: Bool {self._pointsSelector != nil}
+  /// Clears the value of `pointsSelector`. Subsequent reads from it will return its default value.
   public mutating func clearPointsSelector() {self._pointsSelector = nil}
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Option for custom sharding to specify used shard keys
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1212,48 +1459,62 @@ public struct Qdrant_DeletePayloadPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_ClearPayloadPoints: Sendable {
+public nonisolated struct Qdrant_ClearPayloadPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   /// Affected points
   public var points: Qdrant_PointsSelector {
-    get {return _points ?? Qdrant_PointsSelector()}
+    get {_points ?? Qdrant_PointsSelector()}
     set {_points = newValue}
   }
-  public var hasPoints: Bool {return self._points != nil}
+  /// Returns true if `points` has been explicitly set.
+  public var hasPoints: Bool {self._points != nil}
+  /// Clears the value of `points`. Subsequent reads from it will return its default value.
   public mutating func clearPoints() {self._points = nil}
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Option for custom sharding to specify used shard keys
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1267,74 +1528,96 @@ public struct Qdrant_ClearPayloadPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_CreateFieldIndexCollection: Sendable {
+public nonisolated struct Qdrant_CreateFieldIndexCollection: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
-  public var collectionName: String = String()
+  public var collectionName: String {
+    get {_storage._collectionName}
+    set {_uniqueStorage()._collectionName = newValue}
+  }
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
-    set {_wait = newValue}
+    get {_storage._wait ?? false}
+    set {_uniqueStorage()._wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
-  public mutating func clearWait() {self._wait = nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {_storage._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
+  public mutating func clearWait() {_uniqueStorage()._wait = nil}
 
   /// Field name to index
-  public var fieldName: String = String()
+  public var fieldName: String {
+    get {_storage._fieldName}
+    set {_uniqueStorage()._fieldName = newValue}
+  }
 
   /// Field type.
   public var fieldType: Qdrant_FieldType {
-    get {return _fieldType ?? .keyword}
-    set {_fieldType = newValue}
+    get {_storage._fieldType ?? .keyword}
+    set {_uniqueStorage()._fieldType = newValue}
   }
-  public var hasFieldType: Bool {return self._fieldType != nil}
-  public mutating func clearFieldType() {self._fieldType = nil}
+  /// Returns true if `fieldType` has been explicitly set.
+  public var hasFieldType: Bool {_storage._fieldType != nil}
+  /// Clears the value of `fieldType`. Subsequent reads from it will return its default value.
+  public mutating func clearFieldType() {_uniqueStorage()._fieldType = nil}
 
   /// Payload index params.
   public var fieldIndexParams: Qdrant_PayloadIndexParams {
-    get {return _fieldIndexParams ?? Qdrant_PayloadIndexParams()}
-    set {_fieldIndexParams = newValue}
+    get {_storage._fieldIndexParams ?? Qdrant_PayloadIndexParams()}
+    set {_uniqueStorage()._fieldIndexParams = newValue}
   }
-  public var hasFieldIndexParams: Bool {return self._fieldIndexParams != nil}
-  public mutating func clearFieldIndexParams() {self._fieldIndexParams = nil}
+  /// Returns true if `fieldIndexParams` has been explicitly set.
+  public var hasFieldIndexParams: Bool {_storage._fieldIndexParams != nil}
+  /// Clears the value of `fieldIndexParams`. Subsequent reads from it will return its default value.
+  public mutating func clearFieldIndexParams() {_uniqueStorage()._fieldIndexParams = nil}
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
-    set {_ordering = newValue}
+    get {_storage._ordering ?? Qdrant_WriteOrdering()}
+    set {_uniqueStorage()._ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
-  public mutating func clearOrdering() {self._ordering = nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {_storage._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
+  public mutating func clearOrdering() {_uniqueStorage()._ordering = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
-    set {_timeout = newValue}
+    get {_storage._timeout ?? 0}
+    set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
-  public mutating func clearTimeout() {self._timeout = nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
+  public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _wait: Bool? = nil
-  fileprivate var _fieldType: Qdrant_FieldType? = nil
-  fileprivate var _fieldIndexParams: Qdrant_PayloadIndexParams? = nil
-  fileprivate var _ordering: Qdrant_WriteOrdering? = nil
-  fileprivate var _timeout: UInt64? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_DeleteFieldIndexCollection: Sendable {
+public nonisolated struct Qdrant_DeleteFieldIndexCollection: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   /// Field name to delete
@@ -1342,18 +1625,22 @@ public struct Qdrant_DeleteFieldIndexCollection: Sendable {
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Timeout for the request in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1365,7 +1652,218 @@ public struct Qdrant_DeleteFieldIndexCollection: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_PayloadIncludeSelector: Sendable {
+/// Dense vector creation parameters.
+/// Only includes immutable properties that define the vector space.
+/// Storage type, index, and quantization are configured separately.
+public nonisolated struct Qdrant_DenseVectorCreationConfig: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Size/dimensionality of the vectors
+  public var size: UInt64 = 0
+
+  /// Distance function used for comparing vectors
+  public var distance: Qdrant_Distance = .unknownDistance
+
+  /// Configuration for multi-vector search (e.g., ColBERT)
+  public var multivectorConfig: Qdrant_MultiVectorConfig {
+    get {_multivectorConfig ?? Qdrant_MultiVectorConfig()}
+    set {_multivectorConfig = newValue}
+  }
+  /// Returns true if `multivectorConfig` has been explicitly set.
+  public var hasMultivectorConfig: Bool {self._multivectorConfig != nil}
+  /// Clears the value of `multivectorConfig`. Subsequent reads from it will return its default value.
+  public mutating func clearMultivectorConfig() {self._multivectorConfig = nil}
+
+  /// Data type of the vectors (Float32, Float16, Uint8, Turbo4, Turbo8, Turbo16)
+  public var datatype: Qdrant_Datatype {
+    get {_datatype ?? .default}
+    set {_datatype = newValue}
+  }
+  /// Returns true if `datatype` has been explicitly set.
+  public var hasDatatype: Bool {self._datatype != nil}
+  /// Clears the value of `datatype`. Subsequent reads from it will return its default value.
+  public mutating func clearDatatype() {self._datatype = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _multivectorConfig: Qdrant_MultiVectorConfig? = nil
+  fileprivate var _datatype: Qdrant_Datatype? = nil
+}
+
+/// Sparse vector creation parameters.
+/// Only includes immutable properties that define the vector space.
+public nonisolated struct Qdrant_SparseVectorCreationConfig: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// If set - apply modifier to the vector values (e.g., IDF)
+  public var modifier: Qdrant_Modifier {
+    get {_modifier ?? .none}
+    set {_modifier = newValue}
+  }
+  /// Returns true if `modifier` has been explicitly set.
+  public var hasModifier: Bool {self._modifier != nil}
+  /// Clears the value of `modifier`. Subsequent reads from it will return its default value.
+  public mutating func clearModifier() {self._modifier = nil}
+
+  /// Data type used to store weights in the index
+  public var datatype: Qdrant_Datatype {
+    get {_datatype ?? .default}
+    set {_datatype = newValue}
+  }
+  /// Returns true if `datatype` has been explicitly set.
+  public var hasDatatype: Bool {self._datatype != nil}
+  /// Clears the value of `datatype`. Subsequent reads from it will return its default value.
+  public mutating func clearDatatype() {self._datatype = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _modifier: Qdrant_Modifier? = nil
+  fileprivate var _datatype: Qdrant_Datatype? = nil
+}
+
+public nonisolated struct Qdrant_CreateVectorNameRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Name of the collection
+  public var collectionName: String = String()
+
+  /// Wait until the changes have been applied?
+  public var wait: Bool {
+    get {_wait ?? false}
+    set {_wait = newValue}
+  }
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
+  public mutating func clearWait() {self._wait = nil}
+
+  /// Name of the new vector
+  public var vectorName: String = String()
+
+  /// Configuration for the new vector - either dense or sparse
+  public var vectorConfig: Qdrant_CreateVectorNameRequest.OneOf_VectorConfig? = nil
+
+  /// Dense vector parameters
+  public var denseConfig: Qdrant_DenseVectorCreationConfig {
+    get {
+      if case .denseConfig(let v)? = vectorConfig {return v}
+      return Qdrant_DenseVectorCreationConfig()
+    }
+    set {vectorConfig = .denseConfig(newValue)}
+  }
+
+  /// Sparse vector parameters
+  public var sparseConfig: Qdrant_SparseVectorCreationConfig {
+    get {
+      if case .sparseConfig(let v)? = vectorConfig {return v}
+      return Qdrant_SparseVectorCreationConfig()
+    }
+    set {vectorConfig = .sparseConfig(newValue)}
+  }
+
+  /// If set, overrides global timeout setting for this request. Unit is seconds.
+  public var timeout: UInt64 {
+    get {_timeout ?? 0}
+    set {_timeout = newValue}
+  }
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
+  public mutating func clearTimeout() {self._timeout = nil}
+
+  /// Write ordering guarantees
+  public var ordering: Qdrant_WriteOrdering {
+    get {_ordering ?? Qdrant_WriteOrdering()}
+    set {_ordering = newValue}
+  }
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
+  public mutating func clearOrdering() {self._ordering = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  /// Configuration for the new vector - either dense or sparse
+  public nonisolated enum OneOf_VectorConfig: Equatable, Sendable {
+    /// Dense vector parameters
+    case denseConfig(Qdrant_DenseVectorCreationConfig)
+    /// Sparse vector parameters
+    case sparseConfig(Qdrant_SparseVectorCreationConfig)
+
+  }
+
+  public init() {}
+
+  fileprivate var _wait: Bool? = nil
+  fileprivate var _timeout: UInt64? = nil
+  fileprivate var _ordering: Qdrant_WriteOrdering? = nil
+}
+
+public nonisolated struct Qdrant_DeleteVectorNameRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Name of the collection
+  public var collectionName: String = String()
+
+  /// Wait until the changes have been applied?
+  public var wait: Bool {
+    get {_wait ?? false}
+    set {_wait = newValue}
+  }
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
+  public mutating func clearWait() {self._wait = nil}
+
+  /// Name of the vector to delete
+  public var vectorName: String = String()
+
+  /// If set, overrides global timeout setting for this request. Unit is seconds.
+  public var timeout: UInt64 {
+    get {_timeout ?? 0}
+    set {_timeout = newValue}
+  }
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
+  public mutating func clearTimeout() {self._timeout = nil}
+
+  /// Write ordering guarantees
+  public var ordering: Qdrant_WriteOrdering {
+    get {_ordering ?? Qdrant_WriteOrdering()}
+    set {_ordering = newValue}
+  }
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
+  public mutating func clearOrdering() {self._ordering = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _wait: Bool? = nil
+  fileprivate var _timeout: UInt64? = nil
+  fileprivate var _ordering: Qdrant_WriteOrdering? = nil
+}
+
+public nonisolated struct Qdrant_PayloadIncludeSelector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// List of payload keys to include into result
   public var fields: [String] = []
 
@@ -1374,7 +1872,11 @@ public struct Qdrant_PayloadIncludeSelector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_PayloadExcludeSelector: Sendable {
+public nonisolated struct Qdrant_PayloadExcludeSelector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// List of payload keys to exclude from the result
   public var fields: [String] = []
 
@@ -1383,7 +1885,11 @@ public struct Qdrant_PayloadExcludeSelector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_WithPayloadSelector: Sendable {
+public nonisolated struct Qdrant_WithPayloadSelector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var selectorOptions: Qdrant_WithPayloadSelector.OneOf_SelectorOptions? = nil
 
   /// If `true` - return all payload, if `false` - none
@@ -1413,7 +1919,7 @@ public struct Qdrant_WithPayloadSelector: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_SelectorOptions: Equatable, Sendable {
+  public nonisolated enum OneOf_SelectorOptions: Equatable, Sendable {
     /// If `true` - return all payload, if `false` - none
     case enable(Bool)
     case include(Qdrant_PayloadIncludeSelector)
@@ -1424,7 +1930,11 @@ public struct Qdrant_WithPayloadSelector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_NamedVectors: Sendable {
+public nonisolated struct Qdrant_NamedVectors: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var vectors: Dictionary<String,Qdrant_Vector> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1432,7 +1942,11 @@ public struct Qdrant_NamedVectors: Sendable {
   public init() {}
 }
 
-public struct Qdrant_NamedVectorsOutput: Sendable {
+public nonisolated struct Qdrant_NamedVectorsOutput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var vectors: Dictionary<String,Qdrant_VectorOutput> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1440,7 +1954,11 @@ public struct Qdrant_NamedVectorsOutput: Sendable {
   public init() {}
 }
 
-public struct Qdrant_Vectors: Sendable {
+public nonisolated struct Qdrant_Vectors: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var vectorsOptions: Qdrant_Vectors.OneOf_VectorsOptions? = nil
 
   public var vector: Qdrant_Vector {
@@ -1461,7 +1979,7 @@ public struct Qdrant_Vectors: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_VectorsOptions: Equatable, Sendable {
+  public nonisolated enum OneOf_VectorsOptions: Equatable, Sendable {
     case vector(Qdrant_Vector)
     case vectors(Qdrant_NamedVectors)
 
@@ -1470,7 +1988,11 @@ public struct Qdrant_Vectors: Sendable {
   public init() {}
 }
 
-public struct Qdrant_VectorsOutput: Sendable {
+public nonisolated struct Qdrant_VectorsOutput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var vectorsOptions: Qdrant_VectorsOutput.OneOf_VectorsOptions? = nil
 
   public var vector: Qdrant_VectorOutput {
@@ -1491,7 +2013,7 @@ public struct Qdrant_VectorsOutput: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_VectorsOptions: Equatable, Sendable {
+  public nonisolated enum OneOf_VectorsOptions: Equatable, Sendable {
     case vector(Qdrant_VectorOutput)
     case vectors(Qdrant_NamedVectorsOutput)
 
@@ -1500,7 +2022,11 @@ public struct Qdrant_VectorsOutput: Sendable {
   public init() {}
 }
 
-public struct Qdrant_VectorsSelector: Sendable {
+public nonisolated struct Qdrant_VectorsSelector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// List of vectors to include into result
   public var names: [String] = []
 
@@ -1509,7 +2035,11 @@ public struct Qdrant_VectorsSelector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_WithVectorsSelector: Sendable {
+public nonisolated struct Qdrant_WithVectorsSelector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var selectorOptions: Qdrant_WithVectorsSelector.OneOf_SelectorOptions? = nil
 
   /// If `true` - return all vectors, if `false` - none
@@ -1532,7 +2062,7 @@ public struct Qdrant_WithVectorsSelector: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_SelectorOptions: Equatable, Sendable {
+  public nonisolated enum OneOf_SelectorOptions: Equatable, Sendable {
     /// If `true` - return all vectors, if `false` - none
     case enable(Bool)
     /// List of vectors to include into result
@@ -1543,37 +2073,47 @@ public struct Qdrant_WithVectorsSelector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_QuantizationSearchParams: Sendable {
+public nonisolated struct Qdrant_QuantizationSearchParams: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// If set to true, search will ignore quantized vector data
   public var ignore: Bool {
-    get {return _ignore ?? false}
+    get {_ignore ?? false}
     set {_ignore = newValue}
   }
-  public var hasIgnore: Bool {return self._ignore != nil}
+  /// Returns true if `ignore` has been explicitly set.
+  public var hasIgnore: Bool {self._ignore != nil}
+  /// Clears the value of `ignore`. Subsequent reads from it will return its default value.
   public mutating func clearIgnore() {self._ignore = nil}
 
   /// If true, use original vectors to re-score top-k results.
   /// If ignored, qdrant decides automatically does rescore enabled or not.
   public var rescore: Bool {
-    get {return _rescore ?? false}
+    get {_rescore ?? false}
     set {_rescore = newValue}
   }
-  public var hasRescore: Bool {return self._rescore != nil}
+  /// Returns true if `rescore` has been explicitly set.
+  public var hasRescore: Bool {self._rescore != nil}
+  /// Clears the value of `rescore`. Subsequent reads from it will return its default value.
   public mutating func clearRescore() {self._rescore = nil}
 
   /// Oversampling factor for quantization.
   ///
-  /// Defines how many extra vectors should be pre-selected using quantized index,
+  /// Defines how many extra vectors should be preselected using quantized index,
   /// and then re-scored using original vectors.
   ///
   /// For example, if `oversampling` is 2.4 and `limit` is 100,
-  /// then 240 vectors will be pre-selected using quantized index,
+  /// then 240 vectors will be preselected using quantized index,
   /// and then top-100 will be returned after re-scoring.
   public var oversampling: Double {
-    get {return _oversampling ?? 0}
+    get {_oversampling ?? 0}
     set {_oversampling = newValue}
   }
-  public var hasOversampling: Bool {return self._oversampling != nil}
+  /// Returns true if `oversampling` has been explicitly set.
+  public var hasOversampling: Bool {self._oversampling != nil}
+  /// Clears the value of `oversampling`. Subsequent reads from it will return its default value.
   public mutating func clearOversampling() {self._oversampling = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1585,17 +2125,23 @@ public struct Qdrant_QuantizationSearchParams: Sendable {
   fileprivate var _oversampling: Double? = nil
 }
 
-public struct Qdrant_AcornSearchParams: Sendable {
+public nonisolated struct Qdrant_AcornSearchParams: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// If true, then ACORN may be used for the HNSW search based on filters
   /// selectivity.
   ///
   /// Improves search recall for searches with multiple low-selectivity
   /// payload filters, at cost of performance.
   public var enable: Bool {
-    get {return _enable ?? false}
+    get {_enable ?? false}
     set {_enable = newValue}
   }
-  public var hasEnable: Bool {return self._enable != nil}
+  /// Returns true if `enable` has been explicitly set.
+  public var hasEnable: Bool {self._enable != nil}
+  /// Clears the value of `enable`. Subsequent reads from it will return its default value.
   public mutating func clearEnable() {self._enable = nil}
 
   /// Maximum selectivity of filters to enable ACORN.
@@ -1606,10 +2152,12 @@ public struct Qdrant_AcornSearchParams: Sendable {
   ///
   /// 0.0 for never, 1.0 for always. Default is 0.4.
   public var maxSelectivity: Double {
-    get {return _maxSelectivity ?? 0}
+    get {_maxSelectivity ?? 0}
     set {_maxSelectivity = newValue}
   }
-  public var hasMaxSelectivity: Bool {return self._maxSelectivity != nil}
+  /// Returns true if `maxSelectivity` has been explicitly set.
+  public var hasMaxSelectivity: Bool {self._maxSelectivity != nil}
+  /// Clears the value of `maxSelectivity`. Subsequent reads from it will return its default value.
   public mutating func clearMaxSelectivity() {self._maxSelectivity = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1620,49 +2168,99 @@ public struct Qdrant_AcornSearchParams: Sendable {
   fileprivate var _maxSelectivity: Double? = nil
 }
 
-public struct Qdrant_SearchParams: Sendable {
+/// Population over which IDF statistics are computed for scoring - the IDF corpus.
+/// Only applicable to sparse vectors with the IDF modifier enabled, and to BM25 over a text index.
+public nonisolated struct Qdrant_IdfParams: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Filter defining the corpus: IDF statistics are computed over the points matching this filter.
+  /// If unset, statistics are collection-wide (global) - same as omitting `idf` entirely.
+  public var corpus: Qdrant_Filter {
+    get {_corpus ?? Qdrant_Filter()}
+    set {_corpus = newValue}
+  }
+  /// Returns true if `corpus` has been explicitly set.
+  public var hasCorpus: Bool {self._corpus != nil}
+  /// Clears the value of `corpus`. Subsequent reads from it will return its default value.
+  public mutating func clearCorpus() {self._corpus = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _corpus: Qdrant_Filter? = nil
+}
+
+public nonisolated struct Qdrant_SearchParams: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Params relevant to HNSW index. Size of the beam in a beam-search.
   /// Larger the value - more accurate the result, more time required for search.
   public var hnswEf: UInt64 {
-    get {return _hnswEf ?? 0}
+    get {_hnswEf ?? 0}
     set {_hnswEf = newValue}
   }
-  public var hasHnswEf: Bool {return self._hnswEf != nil}
+  /// Returns true if `hnswEf` has been explicitly set.
+  public var hasHnswEf: Bool {self._hnswEf != nil}
+  /// Clears the value of `hnswEf`. Subsequent reads from it will return its default value.
   public mutating func clearHnswEf() {self._hnswEf = nil}
 
   /// Search without approximation. If set to true, search may run long but with exact results.
   public var exact: Bool {
-    get {return _exact ?? false}
+    get {_exact ?? false}
     set {_exact = newValue}
   }
-  public var hasExact: Bool {return self._exact != nil}
+  /// Returns true if `exact` has been explicitly set.
+  public var hasExact: Bool {self._exact != nil}
+  /// Clears the value of `exact`. Subsequent reads from it will return its default value.
   public mutating func clearExact() {self._exact = nil}
 
   /// If set to true, search will ignore quantized vector data
   public var quantization: Qdrant_QuantizationSearchParams {
-    get {return _quantization ?? Qdrant_QuantizationSearchParams()}
+    get {_quantization ?? Qdrant_QuantizationSearchParams()}
     set {_quantization = newValue}
   }
-  public var hasQuantization: Bool {return self._quantization != nil}
+  /// Returns true if `quantization` has been explicitly set.
+  public var hasQuantization: Bool {self._quantization != nil}
+  /// Clears the value of `quantization`. Subsequent reads from it will return its default value.
   public mutating func clearQuantization() {self._quantization = nil}
 
   /// If enabled, the engine will only perform search among indexed or small segments.
   /// Using this option prevents slow searches in case of delayed index, but does not
   /// guarantee that all uploaded vectors will be included in search results
   public var indexedOnly: Bool {
-    get {return _indexedOnly ?? false}
+    get {_indexedOnly ?? false}
     set {_indexedOnly = newValue}
   }
-  public var hasIndexedOnly: Bool {return self._indexedOnly != nil}
+  /// Returns true if `indexedOnly` has been explicitly set.
+  public var hasIndexedOnly: Bool {self._indexedOnly != nil}
+  /// Clears the value of `indexedOnly`. Subsequent reads from it will return its default value.
   public mutating func clearIndexedOnly() {self._indexedOnly = nil}
 
   /// ACORN search params
   public var acorn: Qdrant_AcornSearchParams {
-    get {return _acorn ?? Qdrant_AcornSearchParams()}
+    get {_acorn ?? Qdrant_AcornSearchParams()}
     set {_acorn = newValue}
   }
-  public var hasAcorn: Bool {return self._acorn != nil}
+  /// Returns true if `acorn` has been explicitly set.
+  public var hasAcorn: Bool {self._acorn != nil}
+  /// Clears the value of `acorn`. Subsequent reads from it will return its default value.
   public mutating func clearAcorn() {self._acorn = nil}
+
+  /// Which population IDF statistics are computed over.
+  /// If unset, statistics are collection-wide (global).
+  public var idf: Qdrant_IdfParams {
+    get {_idf ?? Qdrant_IdfParams()}
+    set {_idf = newValue}
+  }
+  /// Returns true if `idf` has been explicitly set.
+  public var hasIdf: Bool {self._idf != nil}
+  /// Clears the value of `idf`. Subsequent reads from it will return its default value.
+  public mutating func clearIdf() {self._idf = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -1673,112 +2271,139 @@ public struct Qdrant_SearchParams: Sendable {
   fileprivate var _quantization: Qdrant_QuantizationSearchParams? = nil
   fileprivate var _indexedOnly: Bool? = nil
   fileprivate var _acorn: Qdrant_AcornSearchParams? = nil
+  fileprivate var _idf: Qdrant_IdfParams? = nil
 }
 
-public struct Qdrant_SearchPoints: @unchecked Sendable {
+public nonisolated struct Qdrant_SearchPoints: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// vector
   public var vector: [Float] {
-    get {return _storage._vector}
+    get {_storage._vector}
     set {_uniqueStorage()._vector = newValue}
   }
 
   /// Filter conditions - return only those points that satisfy the specified conditions
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Max number of result
   public var limit: UInt64 {
-    get {return _storage._limit}
+    get {_storage._limit}
     set {_uniqueStorage()._limit = newValue}
   }
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Search config
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// If provided - cut off results with worse scores
   public var scoreThreshold: Float {
-    get {return _storage._scoreThreshold ?? 0}
+    get {_storage._scoreThreshold ?? 0}
     set {_uniqueStorage()._scoreThreshold = newValue}
   }
-  public var hasScoreThreshold: Bool {return _storage._scoreThreshold != nil}
+  /// Returns true if `scoreThreshold` has been explicitly set.
+  public var hasScoreThreshold: Bool {_storage._scoreThreshold != nil}
+  /// Clears the value of `scoreThreshold`. Subsequent reads from it will return its default value.
   public mutating func clearScoreThreshold() {_uniqueStorage()._scoreThreshold = nil}
 
   /// Offset of the result
   public var offset: UInt64 {
-    get {return _storage._offset ?? 0}
+    get {_storage._offset ?? 0}
     set {_uniqueStorage()._offset = newValue}
   }
-  public var hasOffset: Bool {return _storage._offset != nil}
+  /// Returns true if `offset` has been explicitly set.
+  public var hasOffset: Bool {_storage._offset != nil}
+  /// Clears the value of `offset`. Subsequent reads from it will return its default value.
   public mutating func clearOffset() {_uniqueStorage()._offset = nil}
 
   /// Which vector to use for search, if not specified - use default vector
   public var vectorName: String {
-    get {return _storage._vectorName ?? String()}
+    get {_storage._vectorName ?? String()}
     set {_uniqueStorage()._vectorName = newValue}
   }
-  public var hasVectorName: Bool {return _storage._vectorName != nil}
+  /// Returns true if `vectorName` has been explicitly set.
+  public var hasVectorName: Bool {_storage._vectorName != nil}
+  /// Clears the value of `vectorName`. Subsequent reads from it will return its default value.
   public mutating func clearVectorName() {_uniqueStorage()._vectorName = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   public var sparseIndices: Qdrant_SparseIndices {
-    get {return _storage._sparseIndices ?? Qdrant_SparseIndices()}
+    get {_storage._sparseIndices ?? Qdrant_SparseIndices()}
     set {_uniqueStorage()._sparseIndices = newValue}
   }
-  public var hasSparseIndices: Bool {return _storage._sparseIndices != nil}
+  /// Returns true if `sparseIndices` has been explicitly set.
+  public var hasSparseIndices: Bool {_storage._sparseIndices != nil}
+  /// Clears the value of `sparseIndices`. Subsequent reads from it will return its default value.
   public mutating func clearSparseIndices() {_uniqueStorage()._sparseIndices = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1788,7 +2413,11 @@ public struct Qdrant_SearchPoints: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_SearchBatchPoints: Sendable {
+public nonisolated struct Qdrant_SearchBatchPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String = String()
 
@@ -1796,18 +2425,22 @@ public struct Qdrant_SearchBatchPoints: Sendable {
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1818,24 +2451,32 @@ public struct Qdrant_SearchBatchPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_WithLookup: Sendable {
+public nonisolated struct Qdrant_WithLookup: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection to use for points lookup
   public var collection: String = String()
 
   /// Options for specifying which payload to include (or not)
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_withPayload ?? Qdrant_WithPayloadSelector()}
     set {_withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return self._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {self._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {self._withPayload = nil}
 
   /// Options for specifying which vectors to include (or not)
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_withVectors ?? Qdrant_WithVectorsSelector()}
     set {_withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return self._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {self._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {self._withVectors = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1846,124 +2487,150 @@ public struct Qdrant_WithLookup: Sendable {
   fileprivate var _withVectors: Qdrant_WithVectorsSelector? = nil
 }
 
-public struct Qdrant_SearchPointGroups: @unchecked Sendable {
+public nonisolated struct Qdrant_SearchPointGroups: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// Vector to compare against
   public var vector: [Float] {
-    get {return _storage._vector}
+    get {_storage._vector}
     set {_uniqueStorage()._vector = newValue}
   }
 
   /// Filter conditions - return only those points that satisfy the specified conditions
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Max number of result
   public var limit: UInt32 {
-    get {return _storage._limit}
+    get {_storage._limit}
     set {_uniqueStorage()._limit = newValue}
   }
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Search config
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// If provided - cut off results with worse scores
   public var scoreThreshold: Float {
-    get {return _storage._scoreThreshold ?? 0}
+    get {_storage._scoreThreshold ?? 0}
     set {_uniqueStorage()._scoreThreshold = newValue}
   }
-  public var hasScoreThreshold: Bool {return _storage._scoreThreshold != nil}
+  /// Returns true if `scoreThreshold` has been explicitly set.
+  public var hasScoreThreshold: Bool {_storage._scoreThreshold != nil}
+  /// Clears the value of `scoreThreshold`. Subsequent reads from it will return its default value.
   public mutating func clearScoreThreshold() {_uniqueStorage()._scoreThreshold = nil}
 
   /// Which vector to use for search, if not specified - use default vector
   public var vectorName: String {
-    get {return _storage._vectorName ?? String()}
+    get {_storage._vectorName ?? String()}
     set {_uniqueStorage()._vectorName = newValue}
   }
-  public var hasVectorName: Bool {return _storage._vectorName != nil}
+  /// Returns true if `vectorName` has been explicitly set.
+  public var hasVectorName: Bool {_storage._vectorName != nil}
+  /// Clears the value of `vectorName`. Subsequent reads from it will return its default value.
   public mutating func clearVectorName() {_uniqueStorage()._vectorName = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// Payload field to group by, must be a string or number field.
   /// If there are multiple values for the field, all of them will be used.
   /// One point can be in multiple groups.
   public var groupBy: String {
-    get {return _storage._groupBy}
+    get {_storage._groupBy}
     set {_uniqueStorage()._groupBy = newValue}
   }
 
   /// Maximum amount of points to return per group
   public var groupSize: UInt32 {
-    get {return _storage._groupSize}
+    get {_storage._groupSize}
     set {_uniqueStorage()._groupSize = newValue}
   }
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// Options for specifying how to use the group id to lookup points in another collection
   public var withLookup: Qdrant_WithLookup {
-    get {return _storage._withLookup ?? Qdrant_WithLookup()}
+    get {_storage._withLookup ?? Qdrant_WithLookup()}
     set {_uniqueStorage()._withLookup = newValue}
   }
-  public var hasWithLookup: Bool {return _storage._withLookup != nil}
+  /// Returns true if `withLookup` has been explicitly set.
+  public var hasWithLookup: Bool {_storage._withLookup != nil}
+  /// Clears the value of `withLookup`. Subsequent reads from it will return its default value.
   public mutating func clearWithLookup() {_uniqueStorage()._withLookup = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   public var sparseIndices: Qdrant_SparseIndices {
-    get {return _storage._sparseIndices ?? Qdrant_SparseIndices()}
+    get {_storage._sparseIndices ?? Qdrant_SparseIndices()}
     set {_uniqueStorage()._sparseIndices = newValue}
   }
-  public var hasSparseIndices: Bool {return _storage._sparseIndices != nil}
+  /// Returns true if `sparseIndices` has been explicitly set.
+  public var hasSparseIndices: Bool {_storage._sparseIndices != nil}
+  /// Clears the value of `sparseIndices`. Subsequent reads from it will return its default value.
   public mutating func clearSparseIndices() {_uniqueStorage()._sparseIndices = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1973,7 +2640,11 @@ public struct Qdrant_SearchPointGroups: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_StartFrom: Sendable {
+public nonisolated struct Qdrant_StartFrom: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var value: Qdrant_StartFrom.OneOf_Value? = nil
 
   public var float: Double {
@@ -2010,7 +2681,7 @@ public struct Qdrant_StartFrom: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Value: Equatable, Sendable {
+  public nonisolated enum OneOf_Value: Equatable, Sendable {
     case float(Double)
     case integer(Int64)
     case timestamp(SwiftProtobuf.Google_Protobuf_Timestamp)
@@ -2021,24 +2692,32 @@ public struct Qdrant_StartFrom: Sendable {
   public init() {}
 }
 
-public struct Qdrant_OrderBy: Sendable {
+public nonisolated struct Qdrant_OrderBy: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Payload key to order by
   public var key: String = String()
 
   /// Ascending or descending order
   public var direction: Qdrant_Direction {
-    get {return _direction ?? .asc}
+    get {_direction ?? .asc}
     set {_direction = newValue}
   }
-  public var hasDirection: Bool {return self._direction != nil}
+  /// Returns true if `direction` has been explicitly set.
+  public var hasDirection: Bool {self._direction != nil}
+  /// Clears the value of `direction`. Subsequent reads from it will return its default value.
   public mutating func clearDirection() {self._direction = nil}
 
   /// Start from this value
   public var startFrom: Qdrant_StartFrom {
-    get {return _startFrom ?? Qdrant_StartFrom()}
+    get {_startFrom ?? Qdrant_StartFrom()}
     set {_startFrom = newValue}
   }
-  public var hasStartFrom: Bool {return self._startFrom != nil}
+  /// Returns true if `startFrom` has been explicitly set.
+  public var hasStartFrom: Bool {self._startFrom != nil}
+  /// Clears the value of `startFrom`. Subsequent reads from it will return its default value.
   public mutating func clearStartFrom() {self._startFrom = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2049,82 +2728,104 @@ public struct Qdrant_OrderBy: Sendable {
   fileprivate var _startFrom: Qdrant_StartFrom? = nil
 }
 
-public struct Qdrant_ScrollPoints: @unchecked Sendable {
+public nonisolated struct Qdrant_ScrollPoints: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// Filter conditions - return only those points that satisfy the specified conditions
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Start with this ID
   public var offset: Qdrant_PointId {
-    get {return _storage._offset ?? Qdrant_PointId()}
+    get {_storage._offset ?? Qdrant_PointId()}
     set {_uniqueStorage()._offset = newValue}
   }
-  public var hasOffset: Bool {return _storage._offset != nil}
+  /// Returns true if `offset` has been explicitly set.
+  public var hasOffset: Bool {_storage._offset != nil}
+  /// Clears the value of `offset`. Subsequent reads from it will return its default value.
   public mutating func clearOffset() {_uniqueStorage()._offset = nil}
 
   /// Max number of result
   public var limit: UInt32 {
-    get {return _storage._limit ?? 0}
+    get {_storage._limit ?? 0}
     set {_uniqueStorage()._limit = newValue}
   }
-  public var hasLimit: Bool {return _storage._limit != nil}
+  /// Returns true if `limit` has been explicitly set.
+  public var hasLimit: Bool {_storage._limit != nil}
+  /// Clears the value of `limit`. Subsequent reads from it will return its default value.
   public mutating func clearLimit() {_uniqueStorage()._limit = nil}
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   /// Order the records by a payload field
   public var orderBy: Qdrant_OrderBy {
-    get {return _storage._orderBy ?? Qdrant_OrderBy()}
+    get {_storage._orderBy ?? Qdrant_OrderBy()}
     set {_uniqueStorage()._orderBy = newValue}
   }
-  public var hasOrderBy: Bool {return _storage._orderBy != nil}
+  /// Returns true if `orderBy` has been explicitly set.
+  public var hasOrderBy: Bool {_storage._orderBy != nil}
+  /// Clears the value of `orderBy`. Subsequent reads from it will return its default value.
   public mutating func clearOrderBy() {_uniqueStorage()._orderBy = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2134,23 +2835,31 @@ public struct Qdrant_ScrollPoints: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_LookupLocation: Sendable {
+public nonisolated struct Qdrant_LookupLocation: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var collectionName: String = String()
 
   /// Which vector to use for search, if not specified - use default vector
   public var vectorName: String {
-    get {return _vectorName ?? String()}
+    get {_vectorName ?? String()}
     set {_vectorName = newValue}
   }
-  public var hasVectorName: Bool {return self._vectorName != nil}
+  /// Returns true if `vectorName` has been explicitly set.
+  public var hasVectorName: Bool {self._vectorName != nil}
+  /// Clears the value of `vectorName`. Subsequent reads from it will return its default value.
   public mutating func clearVectorName() {self._vectorName = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2161,137 +2870,165 @@ public struct Qdrant_LookupLocation: Sendable {
   fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
 }
 
-public struct Qdrant_RecommendPoints: @unchecked Sendable {
+public nonisolated struct Qdrant_RecommendPoints: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// Look for vectors closest to the vectors from these points
   public var positive: [Qdrant_PointId] {
-    get {return _storage._positive}
+    get {_storage._positive}
     set {_uniqueStorage()._positive = newValue}
   }
 
   /// Try to avoid vectors like the vector from these points
   public var negative: [Qdrant_PointId] {
-    get {return _storage._negative}
+    get {_storage._negative}
     set {_uniqueStorage()._negative = newValue}
   }
 
   /// Filter conditions - return only those points that satisfy the specified conditions
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Max number of result
   public var limit: UInt64 {
-    get {return _storage._limit}
+    get {_storage._limit}
     set {_uniqueStorage()._limit = newValue}
   }
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Search config
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// If provided - cut off results with worse scores
   public var scoreThreshold: Float {
-    get {return _storage._scoreThreshold ?? 0}
+    get {_storage._scoreThreshold ?? 0}
     set {_uniqueStorage()._scoreThreshold = newValue}
   }
-  public var hasScoreThreshold: Bool {return _storage._scoreThreshold != nil}
+  /// Returns true if `scoreThreshold` has been explicitly set.
+  public var hasScoreThreshold: Bool {_storage._scoreThreshold != nil}
+  /// Clears the value of `scoreThreshold`. Subsequent reads from it will return its default value.
   public mutating func clearScoreThreshold() {_uniqueStorage()._scoreThreshold = nil}
 
   /// Offset of the result
   public var offset: UInt64 {
-    get {return _storage._offset ?? 0}
+    get {_storage._offset ?? 0}
     set {_uniqueStorage()._offset = newValue}
   }
-  public var hasOffset: Bool {return _storage._offset != nil}
+  /// Returns true if `offset` has been explicitly set.
+  public var hasOffset: Bool {_storage._offset != nil}
+  /// Clears the value of `offset`. Subsequent reads from it will return its default value.
   public mutating func clearOffset() {_uniqueStorage()._offset = nil}
 
   /// Define which vector to use for recommendation, if not specified - default vector
   public var using: String {
-    get {return _storage._using ?? String()}
+    get {_storage._using ?? String()}
     set {_uniqueStorage()._using = newValue}
   }
-  public var hasUsing: Bool {return _storage._using != nil}
+  /// Returns true if `using` has been explicitly set.
+  public var hasUsing: Bool {_storage._using != nil}
+  /// Clears the value of `using`. Subsequent reads from it will return its default value.
   public mutating func clearUsing() {_uniqueStorage()._using = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// Name of the collection to use for points lookup, if not specified - use current collection
   public var lookupFrom: Qdrant_LookupLocation {
-    get {return _storage._lookupFrom ?? Qdrant_LookupLocation()}
+    get {_storage._lookupFrom ?? Qdrant_LookupLocation()}
     set {_uniqueStorage()._lookupFrom = newValue}
   }
-  public var hasLookupFrom: Bool {return _storage._lookupFrom != nil}
+  /// Returns true if `lookupFrom` has been explicitly set.
+  public var hasLookupFrom: Bool {_storage._lookupFrom != nil}
+  /// Clears the value of `lookupFrom`. Subsequent reads from it will return its default value.
   public mutating func clearLookupFrom() {_uniqueStorage()._lookupFrom = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// How to use the example vectors to find the results
   public var strategy: Qdrant_RecommendStrategy {
-    get {return _storage._strategy ?? .averageVector}
+    get {_storage._strategy ?? .averageVector}
     set {_uniqueStorage()._strategy = newValue}
   }
-  public var hasStrategy: Bool {return _storage._strategy != nil}
+  /// Returns true if `strategy` has been explicitly set.
+  public var hasStrategy: Bool {_storage._strategy != nil}
+  /// Clears the value of `strategy`. Subsequent reads from it will return its default value.
   public mutating func clearStrategy() {_uniqueStorage()._strategy = nil}
 
   /// Look for vectors closest to those
   public var positiveVectors: [Qdrant_Vector] {
-    get {return _storage._positiveVectors}
+    get {_storage._positiveVectors}
     set {_uniqueStorage()._positiveVectors = newValue}
   }
 
   /// Try to avoid vectors like this
   public var negativeVectors: [Qdrant_Vector] {
-    get {return _storage._negativeVectors}
+    get {_storage._negativeVectors}
     set {_uniqueStorage()._negativeVectors = newValue}
   }
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2301,7 +3038,11 @@ public struct Qdrant_RecommendPoints: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_RecommendBatchPoints: Sendable {
+public nonisolated struct Qdrant_RecommendBatchPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String = String()
 
@@ -2309,18 +3050,22 @@ public struct Qdrant_RecommendBatchPoints: Sendable {
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2331,151 +3076,179 @@ public struct Qdrant_RecommendBatchPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_RecommendPointGroups: @unchecked Sendable {
+public nonisolated struct Qdrant_RecommendPointGroups: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// Look for vectors closest to the vectors from these points
   public var positive: [Qdrant_PointId] {
-    get {return _storage._positive}
+    get {_storage._positive}
     set {_uniqueStorage()._positive = newValue}
   }
 
   /// Try to avoid vectors like the vector from these points
   public var negative: [Qdrant_PointId] {
-    get {return _storage._negative}
+    get {_storage._negative}
     set {_uniqueStorage()._negative = newValue}
   }
 
   /// Filter conditions - return only those points that satisfy the specified conditions
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Max number of groups in result
   public var limit: UInt32 {
-    get {return _storage._limit}
+    get {_storage._limit}
     set {_uniqueStorage()._limit = newValue}
   }
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Search config
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// If provided - cut off results with worse scores
   public var scoreThreshold: Float {
-    get {return _storage._scoreThreshold ?? 0}
+    get {_storage._scoreThreshold ?? 0}
     set {_uniqueStorage()._scoreThreshold = newValue}
   }
-  public var hasScoreThreshold: Bool {return _storage._scoreThreshold != nil}
+  /// Returns true if `scoreThreshold` has been explicitly set.
+  public var hasScoreThreshold: Bool {_storage._scoreThreshold != nil}
+  /// Clears the value of `scoreThreshold`. Subsequent reads from it will return its default value.
   public mutating func clearScoreThreshold() {_uniqueStorage()._scoreThreshold = nil}
 
   /// Define which vector to use for recommendation, if not specified - default vector
   public var using: String {
-    get {return _storage._using ?? String()}
+    get {_storage._using ?? String()}
     set {_uniqueStorage()._using = newValue}
   }
-  public var hasUsing: Bool {return _storage._using != nil}
+  /// Returns true if `using` has been explicitly set.
+  public var hasUsing: Bool {_storage._using != nil}
+  /// Clears the value of `using`. Subsequent reads from it will return its default value.
   public mutating func clearUsing() {_uniqueStorage()._using = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// Name of the collection to use for points lookup, if not specified - use current collection
   public var lookupFrom: Qdrant_LookupLocation {
-    get {return _storage._lookupFrom ?? Qdrant_LookupLocation()}
+    get {_storage._lookupFrom ?? Qdrant_LookupLocation()}
     set {_uniqueStorage()._lookupFrom = newValue}
   }
-  public var hasLookupFrom: Bool {return _storage._lookupFrom != nil}
+  /// Returns true if `lookupFrom` has been explicitly set.
+  public var hasLookupFrom: Bool {_storage._lookupFrom != nil}
+  /// Clears the value of `lookupFrom`. Subsequent reads from it will return its default value.
   public mutating func clearLookupFrom() {_uniqueStorage()._lookupFrom = nil}
 
   /// Payload field to group by, must be a string or number field.
   /// If there are multiple values for the field, all of them will be used.
   /// One point can be in multiple groups.
   public var groupBy: String {
-    get {return _storage._groupBy}
+    get {_storage._groupBy}
     set {_uniqueStorage()._groupBy = newValue}
   }
 
   /// Maximum amount of points to return per group
   public var groupSize: UInt32 {
-    get {return _storage._groupSize}
+    get {_storage._groupSize}
     set {_uniqueStorage()._groupSize = newValue}
   }
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// Options for specifying how to use the group id to lookup points in another collection
   public var withLookup: Qdrant_WithLookup {
-    get {return _storage._withLookup ?? Qdrant_WithLookup()}
+    get {_storage._withLookup ?? Qdrant_WithLookup()}
     set {_uniqueStorage()._withLookup = newValue}
   }
-  public var hasWithLookup: Bool {return _storage._withLookup != nil}
+  /// Returns true if `withLookup` has been explicitly set.
+  public var hasWithLookup: Bool {_storage._withLookup != nil}
+  /// Clears the value of `withLookup`. Subsequent reads from it will return its default value.
   public mutating func clearWithLookup() {_uniqueStorage()._withLookup = nil}
 
   /// How to use the example vectors to find the results
   public var strategy: Qdrant_RecommendStrategy {
-    get {return _storage._strategy ?? .averageVector}
+    get {_storage._strategy ?? .averageVector}
     set {_uniqueStorage()._strategy = newValue}
   }
-  public var hasStrategy: Bool {return _storage._strategy != nil}
+  /// Returns true if `strategy` has been explicitly set.
+  public var hasStrategy: Bool {_storage._strategy != nil}
+  /// Clears the value of `strategy`. Subsequent reads from it will return its default value.
   public mutating func clearStrategy() {_uniqueStorage()._strategy = nil}
 
   /// Look for vectors closest to those
   public var positiveVectors: [Qdrant_Vector] {
-    get {return _storage._positiveVectors}
+    get {_storage._positiveVectors}
     set {_uniqueStorage()._positiveVectors = newValue}
   }
 
   /// Try to avoid vectors like this
   public var negativeVectors: [Qdrant_Vector] {
-    get {return _storage._negativeVectors}
+    get {_storage._negativeVectors}
     set {_uniqueStorage()._negativeVectors = newValue}
   }
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2485,7 +3258,11 @@ public struct Qdrant_RecommendPointGroups: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_TargetVector: Sendable {
+public nonisolated struct Qdrant_TargetVector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var target: Qdrant_TargetVector.OneOf_Target? = nil
 
   public var single: Qdrant_VectorExample {
@@ -2498,7 +3275,7 @@ public struct Qdrant_TargetVector: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Target: Equatable, Sendable {
+  public nonisolated enum OneOf_Target: Equatable, Sendable {
     case single(Qdrant_VectorExample)
 
   }
@@ -2506,7 +3283,11 @@ public struct Qdrant_TargetVector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_VectorExample: Sendable {
+public nonisolated struct Qdrant_VectorExample: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var example: Qdrant_VectorExample.OneOf_Example? = nil
 
   public var id: Qdrant_PointId {
@@ -2527,7 +3308,7 @@ public struct Qdrant_VectorExample: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Example: Equatable, Sendable {
+  public nonisolated enum OneOf_Example: Equatable, Sendable {
     case id(Qdrant_PointId)
     case vector(Qdrant_Vector)
 
@@ -2536,19 +3317,27 @@ public struct Qdrant_VectorExample: Sendable {
   public init() {}
 }
 
-public struct Qdrant_ContextExamplePair: Sendable {
+public nonisolated struct Qdrant_ContextExamplePair: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var positive: Qdrant_VectorExample {
-    get {return _positive ?? Qdrant_VectorExample()}
+    get {_positive ?? Qdrant_VectorExample()}
     set {_positive = newValue}
   }
-  public var hasPositive: Bool {return self._positive != nil}
+  /// Returns true if `positive` has been explicitly set.
+  public var hasPositive: Bool {self._positive != nil}
+  /// Clears the value of `positive`. Subsequent reads from it will return its default value.
   public mutating func clearPositive() {self._positive = nil}
 
   public var negative: Qdrant_VectorExample {
-    get {return _negative ?? Qdrant_VectorExample()}
+    get {_negative ?? Qdrant_VectorExample()}
     set {_negative = newValue}
   }
-  public var hasNegative: Bool {return self._negative != nil}
+  /// Returns true if `negative` has been explicitly set.
+  public var hasNegative: Bool {self._negative != nil}
+  /// Clears the value of `negative`. Subsequent reads from it will return its default value.
   public mutating func clearNegative() {self._negative = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2559,111 +3348,137 @@ public struct Qdrant_ContextExamplePair: Sendable {
   fileprivate var _negative: Qdrant_VectorExample? = nil
 }
 
-public struct Qdrant_DiscoverPoints: @unchecked Sendable {
+public nonisolated struct Qdrant_DiscoverPoints: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// Use this as the primary search objective
   public var target: Qdrant_TargetVector {
-    get {return _storage._target ?? Qdrant_TargetVector()}
+    get {_storage._target ?? Qdrant_TargetVector()}
     set {_uniqueStorage()._target = newValue}
   }
-  public var hasTarget: Bool {return _storage._target != nil}
+  /// Returns true if `target` has been explicitly set.
+  public var hasTarget: Bool {_storage._target != nil}
+  /// Clears the value of `target`. Subsequent reads from it will return its default value.
   public mutating func clearTarget() {_uniqueStorage()._target = nil}
 
   /// Search will be constrained by these pairs of examples
   public var context: [Qdrant_ContextExamplePair] {
-    get {return _storage._context}
+    get {_storage._context}
     set {_uniqueStorage()._context = newValue}
   }
 
   /// Filter conditions - return only those points that satisfy the specified conditions
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Max number of result
   public var limit: UInt64 {
-    get {return _storage._limit}
+    get {_storage._limit}
     set {_uniqueStorage()._limit = newValue}
   }
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Search config
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// Offset of the result
   public var offset: UInt64 {
-    get {return _storage._offset ?? 0}
+    get {_storage._offset ?? 0}
     set {_uniqueStorage()._offset = newValue}
   }
-  public var hasOffset: Bool {return _storage._offset != nil}
+  /// Returns true if `offset` has been explicitly set.
+  public var hasOffset: Bool {_storage._offset != nil}
+  /// Clears the value of `offset`. Subsequent reads from it will return its default value.
   public mutating func clearOffset() {_uniqueStorage()._offset = nil}
 
   /// Define which vector to use for recommendation, if not specified - default vector
   public var using: String {
-    get {return _storage._using ?? String()}
+    get {_storage._using ?? String()}
     set {_uniqueStorage()._using = newValue}
   }
-  public var hasUsing: Bool {return _storage._using != nil}
+  /// Returns true if `using` has been explicitly set.
+  public var hasUsing: Bool {_storage._using != nil}
+  /// Clears the value of `using`. Subsequent reads from it will return its default value.
   public mutating func clearUsing() {_uniqueStorage()._using = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// Name of the collection to use for points lookup, if not specified - use current collection
   public var lookupFrom: Qdrant_LookupLocation {
-    get {return _storage._lookupFrom ?? Qdrant_LookupLocation()}
+    get {_storage._lookupFrom ?? Qdrant_LookupLocation()}
     set {_uniqueStorage()._lookupFrom = newValue}
   }
-  public var hasLookupFrom: Bool {return _storage._lookupFrom != nil}
+  /// Returns true if `lookupFrom` has been explicitly set.
+  public var hasLookupFrom: Bool {_storage._lookupFrom != nil}
+  /// Clears the value of `lookupFrom`. Subsequent reads from it will return its default value.
   public mutating func clearLookupFrom() {_uniqueStorage()._lookupFrom = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2673,7 +3488,11 @@ public struct Qdrant_DiscoverPoints: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_DiscoverBatchPoints: Sendable {
+public nonisolated struct Qdrant_DiscoverBatchPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String = String()
 
@@ -2681,18 +3500,22 @@ public struct Qdrant_DiscoverBatchPoints: Sendable {
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2703,48 +3526,62 @@ public struct Qdrant_DiscoverBatchPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_CountPoints: Sendable {
+public nonisolated struct Qdrant_CountPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String = String()
 
   /// Filter conditions - return only those points that satisfy the specified conditions
   public var filter: Qdrant_Filter {
-    get {return _filter ?? Qdrant_Filter()}
+    get {_filter ?? Qdrant_Filter()}
     set {_filter = newValue}
   }
-  public var hasFilter: Bool {return self._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {self._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {self._filter = nil}
 
   /// If `true` - return exact count, if `false` - return approximate count
   public var exact: Bool {
-    get {return _exact ?? false}
+    get {_exact ?? false}
     set {_exact = newValue}
   }
-  public var hasExact: Bool {return self._exact != nil}
+  /// Returns true if `exact` has been explicitly set.
+  public var hasExact: Bool {self._exact != nil}
+  /// Clears the value of `exact`. Subsequent reads from it will return its default value.
   public mutating func clearExact() {self._exact = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2758,7 +3595,11 @@ public struct Qdrant_CountPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_RecommendInput: Sendable {
+public nonisolated struct Qdrant_RecommendInput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Look for vectors closest to the vectors from these points
   public var positive: [Qdrant_VectorInput] = []
 
@@ -2767,10 +3608,12 @@ public struct Qdrant_RecommendInput: Sendable {
 
   /// How to use the provided vectors to find the results
   public var strategy: Qdrant_RecommendStrategy {
-    get {return _strategy ?? .averageVector}
+    get {_strategy ?? .averageVector}
     set {_strategy = newValue}
   }
-  public var hasStrategy: Bool {return self._strategy != nil}
+  /// Returns true if `strategy` has been explicitly set.
+  public var hasStrategy: Bool {self._strategy != nil}
+  /// Clears the value of `strategy`. Subsequent reads from it will return its default value.
   public mutating func clearStrategy() {self._strategy = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2780,21 +3623,29 @@ public struct Qdrant_RecommendInput: Sendable {
   fileprivate var _strategy: Qdrant_RecommendStrategy? = nil
 }
 
-public struct Qdrant_ContextInputPair: Sendable {
+public nonisolated struct Qdrant_ContextInputPair: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// A positive vector
   public var positive: Qdrant_VectorInput {
-    get {return _positive ?? Qdrant_VectorInput()}
+    get {_positive ?? Qdrant_VectorInput()}
     set {_positive = newValue}
   }
-  public var hasPositive: Bool {return self._positive != nil}
+  /// Returns true if `positive` has been explicitly set.
+  public var hasPositive: Bool {self._positive != nil}
+  /// Clears the value of `positive`. Subsequent reads from it will return its default value.
   public mutating func clearPositive() {self._positive = nil}
 
   /// Repel from this vector
   public var negative: Qdrant_VectorInput {
-    get {return _negative ?? Qdrant_VectorInput()}
+    get {_negative ?? Qdrant_VectorInput()}
     set {_negative = newValue}
   }
-  public var hasNegative: Bool {return self._negative != nil}
+  /// Returns true if `negative` has been explicitly set.
+  public var hasNegative: Bool {self._negative != nil}
+  /// Clears the value of `negative`. Subsequent reads from it will return its default value.
   public mutating func clearNegative() {self._negative = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2805,21 +3656,29 @@ public struct Qdrant_ContextInputPair: Sendable {
   fileprivate var _negative: Qdrant_VectorInput? = nil
 }
 
-public struct Qdrant_DiscoverInput: Sendable {
+public nonisolated struct Qdrant_DiscoverInput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Use this as the primary search objective
   public var target: Qdrant_VectorInput {
-    get {return _target ?? Qdrant_VectorInput()}
+    get {_target ?? Qdrant_VectorInput()}
     set {_target = newValue}
   }
-  public var hasTarget: Bool {return self._target != nil}
+  /// Returns true if `target` has been explicitly set.
+  public var hasTarget: Bool {self._target != nil}
+  /// Clears the value of `target`. Subsequent reads from it will return its default value.
   public mutating func clearTarget() {self._target = nil}
 
   /// Search space will be constrained by these pairs of vectors
   public var context: Qdrant_ContextInput {
-    get {return _context ?? Qdrant_ContextInput()}
+    get {_context ?? Qdrant_ContextInput()}
     set {_context = newValue}
   }
-  public var hasContext: Bool {return self._context != nil}
+  /// Returns true if `context` has been explicitly set.
+  public var hasContext: Bool {self._context != nil}
+  /// Clears the value of `context`. Subsequent reads from it will return its default value.
   public mutating func clearContext() {self._context = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2830,7 +3689,11 @@ public struct Qdrant_DiscoverInput: Sendable {
   fileprivate var _context: Qdrant_ContextInput? = nil
 }
 
-public struct Qdrant_ContextInput: Sendable {
+public nonisolated struct Qdrant_ContextInput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Search space will be constrained by these pairs of vectors
   public var pairs: [Qdrant_ContextInputPair] = []
 
@@ -2839,12 +3702,122 @@ public struct Qdrant_ContextInput: Sendable {
   public init() {}
 }
 
-public struct Qdrant_Formula: Sendable {
+public nonisolated struct Qdrant_RelevanceFeedbackInput: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// The original query vector
+  public var target: Qdrant_VectorInput {
+    get {_target ?? Qdrant_VectorInput()}
+    set {_target = newValue}
+  }
+  /// Returns true if `target` has been explicitly set.
+  public var hasTarget: Bool {self._target != nil}
+  /// Clears the value of `target`. Subsequent reads from it will return its default value.
+  public mutating func clearTarget() {self._target = nil}
+
+  /// Previous results scored by the feedback provider.
+  public var feedback: [Qdrant_FeedbackItem] = []
+
+  /// Formula and trained coefficients to use.
+  public var strategy: Qdrant_FeedbackStrategy {
+    get {_strategy ?? Qdrant_FeedbackStrategy()}
+    set {_strategy = newValue}
+  }
+  /// Returns true if `strategy` has been explicitly set.
+  public var hasStrategy: Bool {self._strategy != nil}
+  /// Clears the value of `strategy`. Subsequent reads from it will return its default value.
+  public mutating func clearStrategy() {self._strategy = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _target: Qdrant_VectorInput? = nil
+  fileprivate var _strategy: Qdrant_FeedbackStrategy? = nil
+}
+
+public nonisolated struct Qdrant_FeedbackItem: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// The id or vector from the original model
+  public var example: Qdrant_VectorInput {
+    get {_example ?? Qdrant_VectorInput()}
+    set {_example = newValue}
+  }
+  /// Returns true if `example` has been explicitly set.
+  public var hasExample: Bool {self._example != nil}
+  /// Clears the value of `example`. Subsequent reads from it will return its default value.
+  public mutating func clearExample() {self._example = nil}
+
+  /// Score for this vector as determined by the feedback provider
+  public var score: Float = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _example: Qdrant_VectorInput? = nil
+}
+
+public nonisolated struct Qdrant_FeedbackStrategy: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var variant: Qdrant_FeedbackStrategy.OneOf_Variant? = nil
+
+  /// a * score + sim(confidence^b * c * delta)
+  public var naive: Qdrant_NaiveFeedbackStrategy {
+    get {
+      if case .naive(let v)? = variant {return v}
+      return Qdrant_NaiveFeedbackStrategy()
+    }
+    set {variant = .naive(newValue)}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public nonisolated enum OneOf_Variant: Equatable, Sendable {
+    /// a * score + sim(confidence^b * c * delta)
+    case naive(Qdrant_NaiveFeedbackStrategy)
+
+  }
+
+  public init() {}
+}
+
+public nonisolated struct Qdrant_NaiveFeedbackStrategy: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var a: Float = 0
+
+  public var b: Float = 0
+
+  public var c: Float = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public nonisolated struct Qdrant_Formula: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var expression: Qdrant_Expression {
-    get {return _expression ?? Qdrant_Expression()}
+    get {_expression ?? Qdrant_Expression()}
     set {_expression = newValue}
   }
-  public var hasExpression: Bool {return self._expression != nil}
+  /// Returns true if `expression` has been explicitly set.
+  public var hasExpression: Bool {self._expression != nil}
+  /// Clears the value of `expression`. Subsequent reads from it will return its default value.
   public mutating func clearExpression() {self._expression = nil}
 
   public var defaults: Dictionary<String,Qdrant_Value> = [:]
@@ -2856,7 +3829,11 @@ public struct Qdrant_Formula: Sendable {
   fileprivate var _expression: Qdrant_Expression? = nil
 }
 
-public struct Qdrant_Expression: @unchecked Sendable {
+public nonisolated struct Qdrant_Expression: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var variant: OneOf_Variant? {
     get {return _storage._variant}
     set {_uniqueStorage()._variant = newValue}
@@ -3032,9 +4009,36 @@ public struct Qdrant_Expression: @unchecked Sendable {
     set {_uniqueStorage()._variant = .linDecay(newValue)}
   }
 
+  /// Inverse hyperbolic cosine
+  public var acosh: Qdrant_Expression {
+    get {
+      if case .acosh(let v)? = _storage._variant {return v}
+      return Qdrant_Expression()
+    }
+    set {_uniqueStorage()._variant = .acosh(newValue)}
+  }
+
+  /// Maximum
+  public var max: Qdrant_MaxExpression {
+    get {
+      if case .max(let v)? = _storage._variant {return v}
+      return Qdrant_MaxExpression()
+    }
+    set {_uniqueStorage()._variant = .max(newValue)}
+  }
+
+  /// Minimum
+  public var min: Qdrant_MinExpression {
+    get {
+      if case .min(let v)? = _storage._variant {return v}
+      return Qdrant_MinExpression()
+    }
+    set {_uniqueStorage()._variant = .min(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Variant: Equatable, Sendable {
+  public nonisolated enum OneOf_Variant: Equatable, Sendable {
     case constant(Float)
     /// Payload key or reference to score.
     case variable(String)
@@ -3072,6 +4076,12 @@ public struct Qdrant_Expression: @unchecked Sendable {
     case gaussDecay(Qdrant_DecayParamsExpression)
     /// Linear decay
     case linDecay(Qdrant_DecayParamsExpression)
+    /// Inverse hyperbolic cosine
+    case acosh(Qdrant_Expression)
+    /// Maximum
+    case max(Qdrant_MaxExpression)
+    /// Minimum
+    case min(Qdrant_MinExpression)
 
   }
 
@@ -3080,14 +4090,22 @@ public struct Qdrant_Expression: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_GeoDistance: Sendable {
+public nonisolated struct Qdrant_GeoDistance: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// The origin geo point to measure from
   public var origin: Qdrant_GeoPoint {
-    get {return _origin ?? Qdrant_GeoPoint()}
+    get {_origin ?? Qdrant_GeoPoint()}
     set {_origin = newValue}
   }
-  public var hasOrigin: Bool {return self._origin != nil}
+  /// Returns true if `origin` has been explicitly set.
+  public var hasOrigin: Bool {self._origin != nil}
+  /// Clears the value of `origin`. Subsequent reads from it will return its default value.
   public mutating func clearOrigin() {self._origin = nil}
 
+  /// Payload field with the destination geo point. If the field holds several geo points, the distance to the nearest one is used
   public var to: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3097,7 +4115,11 @@ public struct Qdrant_GeoDistance: Sendable {
   fileprivate var _origin: Qdrant_GeoPoint? = nil
 }
 
-public struct Qdrant_MultExpression: Sendable {
+public nonisolated struct Qdrant_MultExpression: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var mult: [Qdrant_Expression] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3105,7 +4127,11 @@ public struct Qdrant_MultExpression: Sendable {
   public init() {}
 }
 
-public struct Qdrant_SumExpression: Sendable {
+public nonisolated struct Qdrant_SumExpression: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var sum: [Qdrant_Expression] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3113,26 +4139,60 @@ public struct Qdrant_SumExpression: Sendable {
   public init() {}
 }
 
-public struct Qdrant_DivExpression: @unchecked Sendable {
+public nonisolated struct Qdrant_MaxExpression: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var max: [Qdrant_Expression] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public nonisolated struct Qdrant_MinExpression: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var min: [Qdrant_Expression] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public nonisolated struct Qdrant_DivExpression: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var left: Qdrant_Expression {
-    get {return _storage._left ?? Qdrant_Expression()}
+    get {_storage._left ?? Qdrant_Expression()}
     set {_uniqueStorage()._left = newValue}
   }
-  public var hasLeft: Bool {return _storage._left != nil}
+  /// Returns true if `left` has been explicitly set.
+  public var hasLeft: Bool {_storage._left != nil}
+  /// Clears the value of `left`. Subsequent reads from it will return its default value.
   public mutating func clearLeft() {_uniqueStorage()._left = nil}
 
   public var right: Qdrant_Expression {
-    get {return _storage._right ?? Qdrant_Expression()}
+    get {_storage._right ?? Qdrant_Expression()}
     set {_uniqueStorage()._right = newValue}
   }
-  public var hasRight: Bool {return _storage._right != nil}
+  /// Returns true if `right` has been explicitly set.
+  public var hasRight: Bool {_storage._right != nil}
+  /// Clears the value of `right`. Subsequent reads from it will return its default value.
   public mutating func clearRight() {_uniqueStorage()._right = nil}
 
   public var byZeroDefault: Float {
-    get {return _storage._byZeroDefault ?? 0}
+    get {_storage._byZeroDefault ?? 0}
     set {_uniqueStorage()._byZeroDefault = newValue}
   }
-  public var hasByZeroDefault: Bool {return _storage._byZeroDefault != nil}
+  /// Returns true if `byZeroDefault` has been explicitly set.
+  public var hasByZeroDefault: Bool {_storage._byZeroDefault != nil}
+  /// Clears the value of `byZeroDefault`. Subsequent reads from it will return its default value.
   public mutating func clearByZeroDefault() {_uniqueStorage()._byZeroDefault = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3142,19 +4202,27 @@ public struct Qdrant_DivExpression: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_PowExpression: @unchecked Sendable {
+public nonisolated struct Qdrant_PowExpression: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var base: Qdrant_Expression {
-    get {return _storage._base ?? Qdrant_Expression()}
+    get {_storage._base ?? Qdrant_Expression()}
     set {_uniqueStorage()._base = newValue}
   }
-  public var hasBase: Bool {return _storage._base != nil}
+  /// Returns true if `base` has been explicitly set.
+  public var hasBase: Bool {_storage._base != nil}
+  /// Clears the value of `base`. Subsequent reads from it will return its default value.
   public mutating func clearBase() {_uniqueStorage()._base = nil}
 
   public var exponent: Qdrant_Expression {
-    get {return _storage._exponent ?? Qdrant_Expression()}
+    get {_storage._exponent ?? Qdrant_Expression()}
     set {_uniqueStorage()._exponent = newValue}
   }
-  public var hasExponent: Bool {return _storage._exponent != nil}
+  /// Returns true if `exponent` has been explicitly set.
+  public var hasExponent: Bool {_storage._exponent != nil}
+  /// Clears the value of `exponent`. Subsequent reads from it will return its default value.
   public mutating func clearExponent() {_uniqueStorage()._exponent = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3164,40 +4232,52 @@ public struct Qdrant_PowExpression: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_DecayParamsExpression: @unchecked Sendable {
+public nonisolated struct Qdrant_DecayParamsExpression: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// The variable to decay
   public var x: Qdrant_Expression {
-    get {return _storage._x ?? Qdrant_Expression()}
+    get {_storage._x ?? Qdrant_Expression()}
     set {_uniqueStorage()._x = newValue}
   }
-  public var hasX: Bool {return _storage._x != nil}
+  /// Returns true if `x` has been explicitly set.
+  public var hasX: Bool {_storage._x != nil}
+  /// Clears the value of `x`. Subsequent reads from it will return its default value.
   public mutating func clearX() {_uniqueStorage()._x = nil}
 
   /// The target value to start decaying from. Defaults to 0.
   public var target: Qdrant_Expression {
-    get {return _storage._target ?? Qdrant_Expression()}
+    get {_storage._target ?? Qdrant_Expression()}
     set {_uniqueStorage()._target = newValue}
   }
-  public var hasTarget: Bool {return _storage._target != nil}
+  /// Returns true if `target` has been explicitly set.
+  public var hasTarget: Bool {_storage._target != nil}
+  /// Clears the value of `target`. Subsequent reads from it will return its default value.
   public mutating func clearTarget() {_uniqueStorage()._target = nil}
 
   /// The scale factor of the decay, in terms of `x`.
   /// Defaults to 1.0. Must be a non-zero positive number.
   public var scale: Float {
-    get {return _storage._scale ?? 0}
+    get {_storage._scale ?? 0}
     set {_uniqueStorage()._scale = newValue}
   }
-  public var hasScale: Bool {return _storage._scale != nil}
+  /// Returns true if `scale` has been explicitly set.
+  public var hasScale: Bool {_storage._scale != nil}
+  /// Clears the value of `scale`. Subsequent reads from it will return its default value.
   public mutating func clearScale() {_uniqueStorage()._scale = nil}
 
   /// The midpoint of the decay.
   /// Should be between 0 and 1. Defaults to 0.5.
   /// Output will be this value when `|x - target| == scale`.
   public var midpoint: Float {
-    get {return _storage._midpoint ?? 0}
+    get {_storage._midpoint ?? 0}
     set {_uniqueStorage()._midpoint = newValue}
   }
-  public var hasMidpoint: Bool {return _storage._midpoint != nil}
+  /// Returns true if `midpoint` has been explicitly set.
+  public var hasMidpoint: Bool {_storage._midpoint != nil}
+  /// Clears the value of `midpoint`. Subsequent reads from it will return its default value.
   public mutating func clearMidpoint() {_uniqueStorage()._midpoint = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3207,22 +4287,30 @@ public struct Qdrant_DecayParamsExpression: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_NearestInputWithMmr: Sendable {
+public nonisolated struct Qdrant_NearestInputWithMmr: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// The vector to search for nearest neighbors.
   public var nearest: Qdrant_VectorInput {
-    get {return _nearest ?? Qdrant_VectorInput()}
+    get {_nearest ?? Qdrant_VectorInput()}
     set {_nearest = newValue}
   }
-  public var hasNearest: Bool {return self._nearest != nil}
+  /// Returns true if `nearest` has been explicitly set.
+  public var hasNearest: Bool {self._nearest != nil}
+  /// Clears the value of `nearest`. Subsequent reads from it will return its default value.
   public mutating func clearNearest() {self._nearest = nil}
 
   /// Perform MMR (Maximal Marginal Relevance) reranking after search,
   /// using the same vector in this query to calculate relevance.
   public var mmr: Qdrant_Mmr {
-    get {return _mmr ?? Qdrant_Mmr()}
+    get {_mmr ?? Qdrant_Mmr()}
     set {_mmr = newValue}
   }
-  public var hasMmr: Bool {return self._mmr != nil}
+  /// Returns true if `mmr` has been explicitly set.
+  public var hasMmr: Bool {self._mmr != nil}
+  /// Clears the value of `mmr`. Subsequent reads from it will return its default value.
   public mutating func clearMmr() {self._mmr = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3234,7 +4322,11 @@ public struct Qdrant_NearestInputWithMmr: Sendable {
 }
 
 /// Maximal Marginal Relevance (MMR) algorithm for re-ranking the points.
-public struct Qdrant_Mmr: Sendable {
+public nonisolated struct Qdrant_Mmr: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Tunable parameter for the MMR algorithm.
   /// Determines the balance between diversity and relevance.
   ///
@@ -3244,20 +4336,24 @@ public struct Qdrant_Mmr: Sendable {
   /// Must be in the range [0, 1].
   /// Default value is 0.5.
   public var diversity: Float {
-    get {return _diversity ?? 0}
+    get {_diversity ?? 0}
     set {_diversity = newValue}
   }
-  public var hasDiversity: Bool {return self._diversity != nil}
+  /// Returns true if `diversity` has been explicitly set.
+  public var hasDiversity: Bool {self._diversity != nil}
+  /// Clears the value of `diversity`. Subsequent reads from it will return its default value.
   public mutating func clearDiversity() {self._diversity = nil}
 
   /// The maximum number of candidates to consider for re-ranking.
   ///
   /// If not specified, the `limit` value is used.
   public var candidatesLimit: UInt32 {
-    get {return _candidatesLimit ?? 0}
+    get {_candidatesLimit ?? 0}
     set {_candidatesLimit = newValue}
   }
-  public var hasCandidatesLimit: Bool {return self._candidatesLimit != nil}
+  /// Returns true if `candidatesLimit` has been explicitly set.
+  public var hasCandidatesLimit: Bool {self._candidatesLimit != nil}
+  /// Clears the value of `candidatesLimit`. Subsequent reads from it will return its default value.
   public mutating func clearCandidatesLimit() {self._candidatesLimit = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3269,14 +4365,26 @@ public struct Qdrant_Mmr: Sendable {
 }
 
 /// Parameterized reciprocal rank fusion
-public struct Qdrant_Rrf: Sendable {
+public nonisolated struct Qdrant_Rrf: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// K parameter for reciprocal rank fusion
   public var k: UInt32 {
-    get {return _k ?? 0}
+    get {_k ?? 0}
     set {_k = newValue}
   }
-  public var hasK: Bool {return self._k != nil}
+  /// Returns true if `k` has been explicitly set.
+  public var hasK: Bool {self._k != nil}
+  /// Clears the value of `k`. Subsequent reads from it will return its default value.
   public mutating func clearK() {self._k = nil}
+
+  /// Weights for each prefetch source.
+  /// Higher weight gives more influence on the final ranking.
+  /// If not specified, all prefetches are weighted equally.
+  /// The number of weights should match the number of prefetches.
+  public var weights: [Float] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -3285,7 +4393,11 @@ public struct Qdrant_Rrf: Sendable {
   fileprivate var _k: UInt32? = nil
 }
 
-public struct Qdrant_Query: Sendable {
+public nonisolated struct Qdrant_Query: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var variant: Qdrant_Query.OneOf_Variant? = nil
 
   /// Find the nearest neighbors to this vector.
@@ -3378,9 +4490,27 @@ public struct Qdrant_Query: Sendable {
     set {variant = .rrf(newValue)}
   }
 
+  /// Search with feedback from some oracle.
+  public var relevanceFeedback: Qdrant_RelevanceFeedbackInput {
+    get {
+      if case .relevanceFeedback(let v)? = variant {return v}
+      return Qdrant_RelevanceFeedbackInput()
+    }
+    set {variant = .relevanceFeedback(newValue)}
+  }
+
+  /// Rank by BM25 over the text index of the payload field named by `using`.
+  public var text: Qdrant_TextQuery {
+    get {
+      if case .text(let v)? = variant {return v}
+      return Qdrant_TextQuery()
+    }
+    set {variant = .text(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Variant: Equatable, Sendable {
+  public nonisolated enum OneOf_Variant: Equatable, Sendable {
     /// Find the nearest neighbors to this vector.
     case nearest(Qdrant_VectorInput)
     /// Use multiple positive and negative vectors to find the results.
@@ -3401,77 +4531,172 @@ public struct Qdrant_Query: Sendable {
     case nearestWithMmr(Qdrant_NearestInputWithMmr)
     /// Parameterized reciprocal rank fusion
     case rrf(Qdrant_Rrf)
+    /// Search with feedback from some oracle.
+    case relevanceFeedback(Qdrant_RelevanceFeedbackInput)
+    /// Rank by BM25 over the text index of the payload field named by `using`.
+    case text(Qdrant_TextQuery)
 
   }
 
   public init() {}
 }
 
-public struct Qdrant_PrefetchQuery: @unchecked Sendable {
+/// Rank by BM25 over the text index of the payload field named by `using`,
+/// which must have `scoring` set. A point scores when it holds any of the
+/// query's terms: required or excluded terms belong in the request's filter.
+public nonisolated struct Qdrant_TextQuery: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Text to search for, tokenized by the field's text index.
+  public var query: String = String()
+
+  /// Parameters of the scorer, keyed by its name. They must match the
+  /// `scoring` type of the field's text index. If absent, the scorer runs
+  /// with its defaults.
+  public var scoring: Qdrant_TextQuery.OneOf_Scoring? = nil
+
+  /// BM25 parameters, for a field scored with BM25.
+  public var bm25: Qdrant_Bm25Params {
+    get {
+      if case .bm25(let v)? = scoring {return v}
+      return Qdrant_Bm25Params()
+    }
+    set {scoring = .bm25(newValue)}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  /// Parameters of the scorer, keyed by its name. They must match the
+  /// `scoring` type of the field's text index. If absent, the scorer runs
+  /// with its defaults.
+  public nonisolated enum OneOf_Scoring: Equatable, Sendable {
+    /// BM25 parameters, for a field scored with BM25.
+    case bm25(Qdrant_Bm25Params)
+
+  }
+
+  public init() {}
+}
+
+public nonisolated struct Qdrant_Bm25Params: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Term frequency saturation. Default is 1.2.
+  public var k: Float {
+    get {_k ?? 0}
+    set {_k = newValue}
+  }
+  /// Returns true if `k` has been explicitly set.
+  public var hasK: Bool {self._k != nil}
+  /// Clears the value of `k`. Subsequent reads from it will return its default value.
+  public mutating func clearK() {self._k = nil}
+
+  /// Document length normalization, from 0 (none) to 1 (full). Default is 0.75.
+  public var b: Float {
+    get {_b ?? 0}
+    set {_b = newValue}
+  }
+  /// Returns true if `b` has been explicitly set.
+  public var hasB: Bool {self._b != nil}
+  /// Clears the value of `b`. Subsequent reads from it will return its default value.
+  public mutating func clearB() {self._b = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _k: Float? = nil
+  fileprivate var _b: Float? = nil
+}
+
+public nonisolated struct Qdrant_PrefetchQuery: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Sub-requests to perform first.
   /// If present, the query will be performed on the results of the prefetches.
   public var prefetch: [Qdrant_PrefetchQuery] {
-    get {return _storage._prefetch}
+    get {_storage._prefetch}
     set {_uniqueStorage()._prefetch = newValue}
   }
 
   /// Query to perform.
   /// If missing, returns points ordered by their IDs.
   public var query: Qdrant_Query {
-    get {return _storage._query ?? Qdrant_Query()}
+    get {_storage._query ?? Qdrant_Query()}
     set {_uniqueStorage()._query = newValue}
   }
-  public var hasQuery: Bool {return _storage._query != nil}
+  /// Returns true if `query` has been explicitly set.
+  public var hasQuery: Bool {_storage._query != nil}
+  /// Clears the value of `query`. Subsequent reads from it will return its default value.
   public mutating func clearQuery() {_uniqueStorage()._query = nil}
 
   /// Define which vector to use for querying.
   /// If missing, the default vector is used.
+  /// For a `text` query, the payload field whose text index to search.
   public var using: String {
-    get {return _storage._using ?? String()}
+    get {_storage._using ?? String()}
     set {_uniqueStorage()._using = newValue}
   }
-  public var hasUsing: Bool {return _storage._using != nil}
+  /// Returns true if `using` has been explicitly set.
+  public var hasUsing: Bool {_storage._using != nil}
+  /// Clears the value of `using`. Subsequent reads from it will return its default value.
   public mutating func clearUsing() {_uniqueStorage()._using = nil}
 
   /// Filter conditions - return only those points that satisfy the specified conditions.
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Search params for when there is no prefetch.
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// Return points with scores better than this threshold.
   public var scoreThreshold: Float {
-    get {return _storage._scoreThreshold ?? 0}
+    get {_storage._scoreThreshold ?? 0}
     set {_uniqueStorage()._scoreThreshold = newValue}
   }
-  public var hasScoreThreshold: Bool {return _storage._scoreThreshold != nil}
+  /// Returns true if `scoreThreshold` has been explicitly set.
+  public var hasScoreThreshold: Bool {_storage._scoreThreshold != nil}
+  /// Clears the value of `scoreThreshold`. Subsequent reads from it will return its default value.
   public mutating func clearScoreThreshold() {_uniqueStorage()._scoreThreshold = nil}
 
   /// Max number of points. Default is 10
   public var limit: UInt64 {
-    get {return _storage._limit ?? 0}
+    get {_storage._limit ?? 0}
     set {_uniqueStorage()._limit = newValue}
   }
-  public var hasLimit: Bool {return _storage._limit != nil}
+  /// Returns true if `limit` has been explicitly set.
+  public var hasLimit: Bool {_storage._limit != nil}
+  /// Clears the value of `limit`. Subsequent reads from it will return its default value.
   public mutating func clearLimit() {_uniqueStorage()._limit = nil}
 
   /// The location to use for IDs lookup.
   /// If not specified - use the current collection and the 'using' vector.
   public var lookupFrom: Qdrant_LookupLocation {
-    get {return _storage._lookupFrom ?? Qdrant_LookupLocation()}
+    get {_storage._lookupFrom ?? Qdrant_LookupLocation()}
     set {_uniqueStorage()._lookupFrom = newValue}
   }
-  public var hasLookupFrom: Bool {return _storage._lookupFrom != nil}
+  /// Returns true if `lookupFrom` has been explicitly set.
+  public var hasLookupFrom: Bool {_storage._lookupFrom != nil}
+  /// Clears the value of `lookupFrom`. Subsequent reads from it will return its default value.
   public mutating func clearLookupFrom() {_uniqueStorage()._lookupFrom = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3481,125 +4706,156 @@ public struct Qdrant_PrefetchQuery: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_QueryPoints: @unchecked Sendable {
+public nonisolated struct Qdrant_QueryPoints: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// Sub-requests to perform first.
   /// If present, the query will be performed on the results of the prefetches.
   public var prefetch: [Qdrant_PrefetchQuery] {
-    get {return _storage._prefetch}
+    get {_storage._prefetch}
     set {_uniqueStorage()._prefetch = newValue}
   }
 
   /// Query to perform. If missing, returns points ordered by their IDs.
   public var query: Qdrant_Query {
-    get {return _storage._query ?? Qdrant_Query()}
+    get {_storage._query ?? Qdrant_Query()}
     set {_uniqueStorage()._query = newValue}
   }
-  public var hasQuery: Bool {return _storage._query != nil}
+  /// Returns true if `query` has been explicitly set.
+  public var hasQuery: Bool {_storage._query != nil}
+  /// Clears the value of `query`. Subsequent reads from it will return its default value.
   public mutating func clearQuery() {_uniqueStorage()._query = nil}
 
   /// Define which vector to use for querying.
   /// If missing, the default vector is used.
+  /// For a `text` query, the payload field whose text index to search.
   public var using: String {
-    get {return _storage._using ?? String()}
+    get {_storage._using ?? String()}
     set {_uniqueStorage()._using = newValue}
   }
-  public var hasUsing: Bool {return _storage._using != nil}
+  /// Returns true if `using` has been explicitly set.
+  public var hasUsing: Bool {_storage._using != nil}
+  /// Clears the value of `using`. Subsequent reads from it will return its default value.
   public mutating func clearUsing() {_uniqueStorage()._using = nil}
 
   /// Filter conditions - return only those points that satisfy the specified conditions.
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Search params for when there is no prefetch.
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// Return points with scores better than this threshold.
   public var scoreThreshold: Float {
-    get {return _storage._scoreThreshold ?? 0}
+    get {_storage._scoreThreshold ?? 0}
     set {_uniqueStorage()._scoreThreshold = newValue}
   }
-  public var hasScoreThreshold: Bool {return _storage._scoreThreshold != nil}
+  /// Returns true if `scoreThreshold` has been explicitly set.
+  public var hasScoreThreshold: Bool {_storage._scoreThreshold != nil}
+  /// Clears the value of `scoreThreshold`. Subsequent reads from it will return its default value.
   public mutating func clearScoreThreshold() {_uniqueStorage()._scoreThreshold = nil}
 
   /// Max number of points. Default is 10.
   public var limit: UInt64 {
-    get {return _storage._limit ?? 0}
+    get {_storage._limit ?? 0}
     set {_uniqueStorage()._limit = newValue}
   }
-  public var hasLimit: Bool {return _storage._limit != nil}
+  /// Returns true if `limit` has been explicitly set.
+  public var hasLimit: Bool {_storage._limit != nil}
+  /// Clears the value of `limit`. Subsequent reads from it will return its default value.
   public mutating func clearLimit() {_uniqueStorage()._limit = nil}
 
   /// Offset of the result. Skip this many points. Default is 0.
   public var offset: UInt64 {
-    get {return _storage._offset ?? 0}
+    get {_storage._offset ?? 0}
     set {_uniqueStorage()._offset = newValue}
   }
-  public var hasOffset: Bool {return _storage._offset != nil}
+  /// Returns true if `offset` has been explicitly set.
+  public var hasOffset: Bool {_storage._offset != nil}
+  /// Clears the value of `offset`. Subsequent reads from it will return its default value.
   public mutating func clearOffset() {_uniqueStorage()._offset = nil}
 
   /// Options for specifying which vectors to include into the response.
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// Options for specifying which payload to include or not.
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Options for specifying read consistency guarantees.
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// Specify in which shards to look for the points.
   /// If not specified - look in all shards.
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   /// The location to use for IDs lookup.
   /// If not specified - use the current collection and the 'using' vector.
   public var lookupFrom: Qdrant_LookupLocation {
-    get {return _storage._lookupFrom ?? Qdrant_LookupLocation()}
+    get {_storage._lookupFrom ?? Qdrant_LookupLocation()}
     set {_uniqueStorage()._lookupFrom = newValue}
   }
-  public var hasLookupFrom: Bool {return _storage._lookupFrom != nil}
+  /// Returns true if `lookupFrom` has been explicitly set.
+  public var hasLookupFrom: Bool {_storage._lookupFrom != nil}
+  /// Clears the value of `lookupFrom`. Subsequent reads from it will return its default value.
   public mutating func clearLookupFrom() {_uniqueStorage()._lookupFrom = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3609,25 +4865,33 @@ public struct Qdrant_QueryPoints: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_QueryBatchPoints: Sendable {
+public nonisolated struct Qdrant_QueryBatchPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var collectionName: String = String()
 
   public var queryPoints: [Qdrant_QueryPoints] = []
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3638,140 +4902,173 @@ public struct Qdrant_QueryBatchPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_QueryPointGroups: @unchecked Sendable {
+public nonisolated struct Qdrant_QueryPointGroups: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String {
-    get {return _storage._collectionName}
+    get {_storage._collectionName}
     set {_uniqueStorage()._collectionName = newValue}
   }
 
   /// Sub-requests to perform first.
   /// If present, the query will be performed on the results of the prefetches.
   public var prefetch: [Qdrant_PrefetchQuery] {
-    get {return _storage._prefetch}
+    get {_storage._prefetch}
     set {_uniqueStorage()._prefetch = newValue}
   }
 
   /// Query to perform. If missing, returns points ordered by their IDs.
   public var query: Qdrant_Query {
-    get {return _storage._query ?? Qdrant_Query()}
+    get {_storage._query ?? Qdrant_Query()}
     set {_uniqueStorage()._query = newValue}
   }
-  public var hasQuery: Bool {return _storage._query != nil}
+  /// Returns true if `query` has been explicitly set.
+  public var hasQuery: Bool {_storage._query != nil}
+  /// Clears the value of `query`. Subsequent reads from it will return its default value.
   public mutating func clearQuery() {_uniqueStorage()._query = nil}
 
   /// Define which vector to use for querying.
   /// If missing, the default vector is used.
+  /// For a `text` query, the payload field whose text index to search.
   public var using: String {
-    get {return _storage._using ?? String()}
+    get {_storage._using ?? String()}
     set {_uniqueStorage()._using = newValue}
   }
-  public var hasUsing: Bool {return _storage._using != nil}
+  /// Returns true if `using` has been explicitly set.
+  public var hasUsing: Bool {_storage._using != nil}
+  /// Clears the value of `using`. Subsequent reads from it will return its default value.
   public mutating func clearUsing() {_uniqueStorage()._using = nil}
 
   /// Filter conditions - return only those points that satisfy the specified conditions.
   public var filter: Qdrant_Filter {
-    get {return _storage._filter ?? Qdrant_Filter()}
+    get {_storage._filter ?? Qdrant_Filter()}
     set {_uniqueStorage()._filter = newValue}
   }
-  public var hasFilter: Bool {return _storage._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {_storage._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {_uniqueStorage()._filter = nil}
 
   /// Search params for when there is no prefetch.
   public var params: Qdrant_SearchParams {
-    get {return _storage._params ?? Qdrant_SearchParams()}
+    get {_storage._params ?? Qdrant_SearchParams()}
     set {_uniqueStorage()._params = newValue}
   }
-  public var hasParams: Bool {return _storage._params != nil}
+  /// Returns true if `params` has been explicitly set.
+  public var hasParams: Bool {_storage._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
   public mutating func clearParams() {_uniqueStorage()._params = nil}
 
   /// Return points with scores better than this threshold.
   public var scoreThreshold: Float {
-    get {return _storage._scoreThreshold ?? 0}
+    get {_storage._scoreThreshold ?? 0}
     set {_uniqueStorage()._scoreThreshold = newValue}
   }
-  public var hasScoreThreshold: Bool {return _storage._scoreThreshold != nil}
+  /// Returns true if `scoreThreshold` has been explicitly set.
+  public var hasScoreThreshold: Bool {_storage._scoreThreshold != nil}
+  /// Clears the value of `scoreThreshold`. Subsequent reads from it will return its default value.
   public mutating func clearScoreThreshold() {_uniqueStorage()._scoreThreshold = nil}
 
   /// Options for specifying which payload to include or not
   public var withPayload: Qdrant_WithPayloadSelector {
-    get {return _storage._withPayload ?? Qdrant_WithPayloadSelector()}
+    get {_storage._withPayload ?? Qdrant_WithPayloadSelector()}
     set {_uniqueStorage()._withPayload = newValue}
   }
-  public var hasWithPayload: Bool {return _storage._withPayload != nil}
+  /// Returns true if `withPayload` has been explicitly set.
+  public var hasWithPayload: Bool {_storage._withPayload != nil}
+  /// Clears the value of `withPayload`. Subsequent reads from it will return its default value.
   public mutating func clearWithPayload() {_uniqueStorage()._withPayload = nil}
 
   /// Options for specifying which vectors to include into response
   public var withVectors: Qdrant_WithVectorsSelector {
-    get {return _storage._withVectors ?? Qdrant_WithVectorsSelector()}
+    get {_storage._withVectors ?? Qdrant_WithVectorsSelector()}
     set {_uniqueStorage()._withVectors = newValue}
   }
-  public var hasWithVectors: Bool {return _storage._withVectors != nil}
+  /// Returns true if `withVectors` has been explicitly set.
+  public var hasWithVectors: Bool {_storage._withVectors != nil}
+  /// Clears the value of `withVectors`. Subsequent reads from it will return its default value.
   public mutating func clearWithVectors() {_uniqueStorage()._withVectors = nil}
 
   /// The location to use for IDs lookup.
   /// If not specified - use the current collection and the 'using' vector.
   public var lookupFrom: Qdrant_LookupLocation {
-    get {return _storage._lookupFrom ?? Qdrant_LookupLocation()}
+    get {_storage._lookupFrom ?? Qdrant_LookupLocation()}
     set {_uniqueStorage()._lookupFrom = newValue}
   }
-  public var hasLookupFrom: Bool {return _storage._lookupFrom != nil}
+  /// Returns true if `lookupFrom` has been explicitly set.
+  public var hasLookupFrom: Bool {_storage._lookupFrom != nil}
+  /// Clears the value of `lookupFrom`. Subsequent reads from it will return its default value.
   public mutating func clearLookupFrom() {_uniqueStorage()._lookupFrom = nil}
 
   /// Max number of points. Default is 3.
   public var limit: UInt64 {
-    get {return _storage._limit ?? 0}
+    get {_storage._limit ?? 0}
     set {_uniqueStorage()._limit = newValue}
   }
-  public var hasLimit: Bool {return _storage._limit != nil}
+  /// Returns true if `limit` has been explicitly set.
+  public var hasLimit: Bool {_storage._limit != nil}
+  /// Clears the value of `limit`. Subsequent reads from it will return its default value.
   public mutating func clearLimit() {_uniqueStorage()._limit = nil}
 
   /// Maximum amount of points to return per group. Defaults to 10.
   public var groupSize: UInt64 {
-    get {return _storage._groupSize ?? 0}
+    get {_storage._groupSize ?? 0}
     set {_uniqueStorage()._groupSize = newValue}
   }
-  public var hasGroupSize: Bool {return _storage._groupSize != nil}
+  /// Returns true if `groupSize` has been explicitly set.
+  public var hasGroupSize: Bool {_storage._groupSize != nil}
+  /// Clears the value of `groupSize`. Subsequent reads from it will return its default value.
   public mutating func clearGroupSize() {_uniqueStorage()._groupSize = nil}
 
   /// Payload field to group by, must be a string or number field.
   /// If there are multiple values for the field, all of them will be used.
   /// One point can be in multiple groups.
   public var groupBy: String {
-    get {return _storage._groupBy}
+    get {_storage._groupBy}
     set {_uniqueStorage()._groupBy = newValue}
   }
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _storage._readConsistency ?? Qdrant_ReadConsistency()}
+    get {_storage._readConsistency ?? Qdrant_ReadConsistency()}
     set {_uniqueStorage()._readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return _storage._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {_storage._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {_uniqueStorage()._readConsistency = nil}
 
   /// Options for specifying how to use the group id to lookup points in another collection
   public var withLookup: Qdrant_WithLookup {
-    get {return _storage._withLookup ?? Qdrant_WithLookup()}
+    get {_storage._withLookup ?? Qdrant_WithLookup()}
     set {_uniqueStorage()._withLookup = newValue}
   }
-  public var hasWithLookup: Bool {return _storage._withLookup != nil}
+  /// Returns true if `withLookup` has been explicitly set.
+  public var hasWithLookup: Bool {_storage._withLookup != nil}
+  /// Clears the value of `withLookup`. Subsequent reads from it will return its default value.
   public mutating func clearWithLookup() {_uniqueStorage()._withLookup = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _storage._timeout ?? 0}
+    get {_storage._timeout ?? 0}
     set {_uniqueStorage()._timeout = newValue}
   }
-  public var hasTimeout: Bool {return _storage._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {_storage._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {_uniqueStorage()._timeout = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_storage._shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_uniqueStorage()._shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return _storage._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {_storage._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {_uniqueStorage()._shardKeySelector = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3781,7 +5078,11 @@ public struct Qdrant_QueryPointGroups: @unchecked Sendable {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Qdrant_FacetCounts: Sendable {
+public nonisolated struct Qdrant_FacetCounts: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String = String()
 
@@ -3790,50 +5091,62 @@ public struct Qdrant_FacetCounts: Sendable {
 
   /// Filter conditions - return only those points that satisfy the specified conditions.
   public var filter: Qdrant_Filter {
-    get {return _filter ?? Qdrant_Filter()}
+    get {_filter ?? Qdrant_Filter()}
     set {_filter = newValue}
   }
-  public var hasFilter: Bool {return self._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {self._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {self._filter = nil}
 
   /// Max number of facets. Default is 10.
   public var limit: UInt64 {
-    get {return _limit ?? 0}
+    get {_limit ?? 0}
     set {_limit = newValue}
   }
-  public var hasLimit: Bool {return self._limit != nil}
+  /// Returns true if `limit` has been explicitly set.
+  public var hasLimit: Bool {self._limit != nil}
+  /// Clears the value of `limit`. Subsequent reads from it will return its default value.
   public mutating func clearLimit() {self._limit = nil}
 
   /// If true, return exact counts, slower but useful for debugging purposes. Default is false.
   public var exact: Bool {
-    get {return _exact ?? false}
+    get {_exact ?? false}
     set {_exact = newValue}
   }
-  public var hasExact: Bool {return self._exact != nil}
+  /// Returns true if `exact` has been explicitly set.
+  public var hasExact: Bool {self._exact != nil}
+  /// Clears the value of `exact`. Subsequent reads from it will return its default value.
   public mutating func clearExact() {self._exact = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3848,7 +5161,11 @@ public struct Qdrant_FacetCounts: Sendable {
   fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
 }
 
-public struct Qdrant_FacetValue: Sendable {
+public nonisolated struct Qdrant_FacetValue: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var variant: Qdrant_FacetValue.OneOf_Variant? = nil
 
   /// String value from the facet
@@ -3880,7 +5197,7 @@ public struct Qdrant_FacetValue: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Variant: Equatable, Sendable {
+  public nonisolated enum OneOf_Variant: Equatable, Sendable {
     /// String value from the facet
     case stringValue(String)
     /// Integer value from the facet
@@ -3893,13 +5210,19 @@ public struct Qdrant_FacetValue: Sendable {
   public init() {}
 }
 
-public struct Qdrant_FacetHit: Sendable {
+public nonisolated struct Qdrant_FacetHit: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Value from the facet
   public var value: Qdrant_FacetValue {
-    get {return _value ?? Qdrant_FacetValue()}
+    get {_value ?? Qdrant_FacetValue()}
     set {_value = newValue}
   }
-  public var hasValue: Bool {return self._value != nil}
+  /// Returns true if `value` has been explicitly set.
+  public var hasValue: Bool {self._value != nil}
+  /// Clears the value of `value`. Subsequent reads from it will return its default value.
   public mutating func clearValue() {self._value = nil}
 
   /// Number of points with this value
@@ -3912,64 +5235,82 @@ public struct Qdrant_FacetHit: Sendable {
   fileprivate var _value: Qdrant_FacetValue? = nil
 }
 
-public struct Qdrant_SearchMatrixPoints: Sendable {
+public nonisolated struct Qdrant_SearchMatrixPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Name of the collection
   public var collectionName: String = String()
 
   /// Filter conditions - return only those points that satisfy the specified conditions.
   public var filter: Qdrant_Filter {
-    get {return _filter ?? Qdrant_Filter()}
+    get {_filter ?? Qdrant_Filter()}
     set {_filter = newValue}
   }
-  public var hasFilter: Bool {return self._filter != nil}
+  /// Returns true if `filter` has been explicitly set.
+  public var hasFilter: Bool {self._filter != nil}
+  /// Clears the value of `filter`. Subsequent reads from it will return its default value.
   public mutating func clearFilter() {self._filter = nil}
 
   /// How many points to select and search within. Default is 10.
   public var sample: UInt64 {
-    get {return _sample ?? 0}
+    get {_sample ?? 0}
     set {_sample = newValue}
   }
-  public var hasSample: Bool {return self._sample != nil}
+  /// Returns true if `sample` has been explicitly set.
+  public var hasSample: Bool {self._sample != nil}
+  /// Clears the value of `sample`. Subsequent reads from it will return its default value.
   public mutating func clearSample() {self._sample = nil}
 
   /// How many neighbours per sample to find. Default is 3.
   public var limit: UInt64 {
-    get {return _limit ?? 0}
+    get {_limit ?? 0}
     set {_limit = newValue}
   }
-  public var hasLimit: Bool {return self._limit != nil}
+  /// Returns true if `limit` has been explicitly set.
+  public var hasLimit: Bool {self._limit != nil}
+  /// Clears the value of `limit`. Subsequent reads from it will return its default value.
   public mutating func clearLimit() {self._limit = nil}
 
   /// Define which vector to use for querying. If missing, the default vector is used.
   public var using: String {
-    get {return _using ?? String()}
+    get {_using ?? String()}
     set {_using = newValue}
   }
-  public var hasUsing: Bool {return self._using != nil}
+  /// Returns true if `using` has been explicitly set.
+  public var hasUsing: Bool {self._using != nil}
+  /// Clears the value of `using`. Subsequent reads from it will return its default value.
   public mutating func clearUsing() {self._using = nil}
 
   /// If set, overrides global timeout setting for this request. Unit is seconds.
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   /// Options for specifying read consistency guarantees
   public var readConsistency: Qdrant_ReadConsistency {
-    get {return _readConsistency ?? Qdrant_ReadConsistency()}
+    get {_readConsistency ?? Qdrant_ReadConsistency()}
     set {_readConsistency = newValue}
   }
-  public var hasReadConsistency: Bool {return self._readConsistency != nil}
+  /// Returns true if `readConsistency` has been explicitly set.
+  public var hasReadConsistency: Bool {self._readConsistency != nil}
+  /// Clears the value of `readConsistency`. Subsequent reads from it will return its default value.
   public mutating func clearReadConsistency() {self._readConsistency = nil}
 
   /// Specify in which shards to look for the points, if not specified - look in all shards
   public var shardKeySelector: Qdrant_ShardKeySelector {
-    get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+    get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
     set {_shardKeySelector = newValue}
   }
-  public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
+  /// Returns true if `shardKeySelector` has been explicitly set.
+  public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+  /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
   public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -3985,7 +5326,11 @@ public struct Qdrant_SearchMatrixPoints: Sendable {
   fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
 }
 
-public struct Qdrant_SearchMatrixPairs: Sendable {
+public nonisolated struct Qdrant_SearchMatrixPairs: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// List of pairs of points with scores
   public var pairs: [Qdrant_SearchMatrixPair] = []
 
@@ -3994,21 +5339,29 @@ public struct Qdrant_SearchMatrixPairs: Sendable {
   public init() {}
 }
 
-public struct Qdrant_SearchMatrixPair: Sendable {
+public nonisolated struct Qdrant_SearchMatrixPair: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// first id of the pair
   public var a: Qdrant_PointId {
-    get {return _a ?? Qdrant_PointId()}
+    get {_a ?? Qdrant_PointId()}
     set {_a = newValue}
   }
-  public var hasA: Bool {return self._a != nil}
+  /// Returns true if `a` has been explicitly set.
+  public var hasA: Bool {self._a != nil}
+  /// Clears the value of `a`. Subsequent reads from it will return its default value.
   public mutating func clearA() {self._a = nil}
 
   /// second id of the pair
   public var b: Qdrant_PointId {
-    get {return _b ?? Qdrant_PointId()}
+    get {_b ?? Qdrant_PointId()}
     set {_b = newValue}
   }
-  public var hasB: Bool {return self._b != nil}
+  /// Returns true if `b` has been explicitly set.
+  public var hasB: Bool {self._b != nil}
+  /// Clears the value of `b`. Subsequent reads from it will return its default value.
   public mutating func clearB() {self._b = nil}
 
   /// score of the pair
@@ -4022,7 +5375,11 @@ public struct Qdrant_SearchMatrixPair: Sendable {
   fileprivate var _b: Qdrant_PointId? = nil
 }
 
-public struct Qdrant_SearchMatrixOffsets: Sendable {
+public nonisolated struct Qdrant_SearchMatrixOffsets: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Row indices of the matrix
   public var offsetsRow: [UInt64] = []
 
@@ -4040,7 +5397,11 @@ public struct Qdrant_SearchMatrixOffsets: Sendable {
   public init() {}
 }
 
-public struct Qdrant_PointsUpdateOperation: Sendable {
+public nonisolated struct Qdrant_PointsUpdateOperation: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var operation: Qdrant_PointsUpdateOperation.OneOf_Operation? = nil
 
   public var upsert: Qdrant_PointsUpdateOperation.PointStructList {
@@ -4127,7 +5488,7 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Operation: Equatable, Sendable {
+  public nonisolated enum OneOf_Operation: Equatable, Sendable {
     case upsert(Qdrant_PointsUpdateOperation.PointStructList)
     /// NOTE: This field was marked as deprecated in the .proto file.
     case deleteDeprecated(Qdrant_PointsSelector)
@@ -4143,24 +5504,43 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
 
   }
 
-  public struct PointStructList: Sendable {
+  public nonisolated struct PointStructList: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     public var points: [Qdrant_PointStruct] = []
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
-    /// If specified, only points that match this filter will be updated, others will be inserted
+    /// Filter to apply when updating existing points. Only points matching this filter will be updated.
+    /// Points that don't match will keep their current state. New points will be inserted regardless of the filter.
     public var updateFilter: Qdrant_Filter {
-      get {return _updateFilter ?? Qdrant_Filter()}
+      get {_updateFilter ?? Qdrant_Filter()}
       set {_updateFilter = newValue}
     }
-      public var hasUpdateFilter: Bool {return self._updateFilter != nil}
-      public mutating func clearUpdateFilter() {self._updateFilter = nil}
+    /// Returns true if `updateFilter` has been explicitly set.
+    public var hasUpdateFilter: Bool {self._updateFilter != nil}
+    /// Clears the value of `updateFilter`. Subsequent reads from it will return its default value.
+    public mutating func clearUpdateFilter() {self._updateFilter = nil}
+
+    /// Mode of the upsert operation: insert_only, upsert (default), update_only
+    public var updateMode: Qdrant_UpdateMode {
+      get {_updateMode ?? .upsert}
+      set {_updateMode = newValue}
+    }
+    /// Returns true if `updateMode` has been explicitly set.
+    public var hasUpdateMode: Bool {self._updateMode != nil}
+    /// Clears the value of `updateMode`. Subsequent reads from it will return its default value.
+    public mutating func clearUpdateMode() {self._updateMode = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4168,34 +5548,45 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
 
     fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
     fileprivate var _updateFilter: Qdrant_Filter? = nil
+    fileprivate var _updateMode: Qdrant_UpdateMode? = nil
   }
 
-  public struct SetPayload: Sendable {
+  public nonisolated struct SetPayload: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     public var payload: Dictionary<String,Qdrant_Value> = [:]
 
     /// Affected points
     public var pointsSelector: Qdrant_PointsSelector {
-      get {return _pointsSelector ?? Qdrant_PointsSelector()}
+      get {_pointsSelector ?? Qdrant_PointsSelector()}
       set {_pointsSelector = newValue}
     }
-      public var hasPointsSelector: Bool {return self._pointsSelector != nil}
-      public mutating func clearPointsSelector() {self._pointsSelector = nil}
+    /// Returns true if `pointsSelector` has been explicitly set.
+    public var hasPointsSelector: Bool {self._pointsSelector != nil}
+    /// Clears the value of `pointsSelector`. Subsequent reads from it will return its default value.
+    public mutating func clearPointsSelector() {self._pointsSelector = nil}
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
     /// Option for indicate property of payload
     public var key: String {
-      get {return _key ?? String()}
+      get {_key ?? String()}
       set {_key = newValue}
     }
-      public var hasKey: Bool {return self._key != nil}
-      public mutating func clearKey() {self._key = nil}
+    /// Returns true if `key` has been explicitly set.
+    public var hasKey: Bool {self._key != nil}
+    /// Clears the value of `key`. Subsequent reads from it will return its default value.
+    public mutating func clearKey() {self._key = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4206,32 +5597,42 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
     fileprivate var _key: String? = nil
   }
 
-  public struct OverwritePayload: Sendable {
+  public nonisolated struct OverwritePayload: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     public var payload: Dictionary<String,Qdrant_Value> = [:]
 
     /// Affected points
     public var pointsSelector: Qdrant_PointsSelector {
-      get {return _pointsSelector ?? Qdrant_PointsSelector()}
+      get {_pointsSelector ?? Qdrant_PointsSelector()}
       set {_pointsSelector = newValue}
     }
-      public var hasPointsSelector: Bool {return self._pointsSelector != nil}
-      public mutating func clearPointsSelector() {self._pointsSelector = nil}
+    /// Returns true if `pointsSelector` has been explicitly set.
+    public var hasPointsSelector: Bool {self._pointsSelector != nil}
+    /// Clears the value of `pointsSelector`. Subsequent reads from it will return its default value.
+    public mutating func clearPointsSelector() {self._pointsSelector = nil}
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
     /// Option for indicate property of payload
     public var key: String {
-      get {return _key ?? String()}
+      get {_key ?? String()}
       set {_key = newValue}
     }
-      public var hasKey: Bool {return self._key != nil}
-      public mutating func clearKey() {self._key = nil}
+    /// Returns true if `key` has been explicitly set.
+    public var hasKey: Bool {self._key != nil}
+    /// Clears the value of `key`. Subsequent reads from it will return its default value.
+    public mutating func clearKey() {self._key = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4242,24 +5643,32 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
     fileprivate var _key: String? = nil
   }
 
-  public struct DeletePayload: Sendable {
+  public nonisolated struct DeletePayload: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     public var keys: [String] = []
 
     /// Affected points
     public var pointsSelector: Qdrant_PointsSelector {
-      get {return _pointsSelector ?? Qdrant_PointsSelector()}
+      get {_pointsSelector ?? Qdrant_PointsSelector()}
       set {_pointsSelector = newValue}
     }
-      public var hasPointsSelector: Bool {return self._pointsSelector != nil}
-      public mutating func clearPointsSelector() {self._pointsSelector = nil}
+    /// Returns true if `pointsSelector` has been explicitly set.
+    public var hasPointsSelector: Bool {self._pointsSelector != nil}
+    /// Clears the value of `pointsSelector`. Subsequent reads from it will return its default value.
+    public mutating func clearPointsSelector() {self._pointsSelector = nil}
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4269,25 +5678,33 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
     fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
   }
 
-  public struct UpdateVectors: Sendable {
+  public nonisolated struct UpdateVectors: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     /// List of points and vectors to update
     public var points: [Qdrant_PointVectors] = []
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
     /// If specified, only points that match this filter will be updated
     public var updateFilter: Qdrant_Filter {
-      get {return _updateFilter ?? Qdrant_Filter()}
+      get {_updateFilter ?? Qdrant_Filter()}
       set {_updateFilter = newValue}
     }
-      public var hasUpdateFilter: Bool {return self._updateFilter != nil}
-      public mutating func clearUpdateFilter() {self._updateFilter = nil}
+    /// Returns true if `updateFilter` has been explicitly set.
+    public var hasUpdateFilter: Bool {self._updateFilter != nil}
+    /// Clears the value of `updateFilter`. Subsequent reads from it will return its default value.
+    public mutating func clearUpdateFilter() {self._updateFilter = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4297,30 +5714,40 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
     fileprivate var _updateFilter: Qdrant_Filter? = nil
   }
 
-  public struct DeleteVectors: Sendable {
+  public nonisolated struct DeleteVectors: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     /// Affected points
     public var pointsSelector: Qdrant_PointsSelector {
-      get {return _pointsSelector ?? Qdrant_PointsSelector()}
+      get {_pointsSelector ?? Qdrant_PointsSelector()}
       set {_pointsSelector = newValue}
     }
-      public var hasPointsSelector: Bool {return self._pointsSelector != nil}
-      public mutating func clearPointsSelector() {self._pointsSelector = nil}
+    /// Returns true if `pointsSelector` has been explicitly set.
+    public var hasPointsSelector: Bool {self._pointsSelector != nil}
+    /// Clears the value of `pointsSelector`. Subsequent reads from it will return its default value.
+    public mutating func clearPointsSelector() {self._pointsSelector = nil}
 
     /// List of vector names to delete
     public var vectors: Qdrant_VectorsSelector {
-      get {return _vectors ?? Qdrant_VectorsSelector()}
+      get {_vectors ?? Qdrant_VectorsSelector()}
       set {_vectors = newValue}
     }
-      public var hasVectors: Bool {return self._vectors != nil}
-      public mutating func clearVectors() {self._vectors = nil}
+    /// Returns true if `vectors` has been explicitly set.
+    public var hasVectors: Bool {self._vectors != nil}
+    /// Clears the value of `vectors`. Subsequent reads from it will return its default value.
+    public mutating func clearVectors() {self._vectors = nil}
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4331,22 +5758,30 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
     fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
   }
 
-  public struct DeletePoints: Sendable {
+  public nonisolated struct DeletePoints: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     /// Affected points
     public var points: Qdrant_PointsSelector {
-      get {return _points ?? Qdrant_PointsSelector()}
+      get {_points ?? Qdrant_PointsSelector()}
       set {_points = newValue}
     }
-      public var hasPoints: Bool {return self._points != nil}
-      public mutating func clearPoints() {self._points = nil}
+    /// Returns true if `points` has been explicitly set.
+    public var hasPoints: Bool {self._points != nil}
+    /// Clears the value of `points`. Subsequent reads from it will return its default value.
+    public mutating func clearPoints() {self._points = nil}
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4356,22 +5791,30 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
     fileprivate var _shardKeySelector: Qdrant_ShardKeySelector? = nil
   }
 
-  public struct ClearPayload: Sendable {
+  public nonisolated struct ClearPayload: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
     /// Affected points
     public var points: Qdrant_PointsSelector {
-      get {return _points ?? Qdrant_PointsSelector()}
+      get {_points ?? Qdrant_PointsSelector()}
       set {_points = newValue}
     }
-      public var hasPoints: Bool {return self._points != nil}
-      public mutating func clearPoints() {self._points = nil}
+    /// Returns true if `points` has been explicitly set.
+    public var hasPoints: Bool {self._points != nil}
+    /// Clears the value of `points`. Subsequent reads from it will return its default value.
+    public mutating func clearPoints() {self._points = nil}
 
     /// Option for custom sharding to specify used shard keys
     public var shardKeySelector: Qdrant_ShardKeySelector {
-      get {return _shardKeySelector ?? Qdrant_ShardKeySelector()}
+      get {_shardKeySelector ?? Qdrant_ShardKeySelector()}
       set {_shardKeySelector = newValue}
     }
-      public var hasShardKeySelector: Bool {return self._shardKeySelector != nil}
-      public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
+    /// Returns true if `shardKeySelector` has been explicitly set.
+    public var hasShardKeySelector: Bool {self._shardKeySelector != nil}
+    /// Clears the value of `shardKeySelector`. Subsequent reads from it will return its default value.
+    public mutating func clearShardKeySelector() {self._shardKeySelector = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -4384,34 +5827,44 @@ public struct Qdrant_PointsUpdateOperation: Sendable {
   public init() {}
 }
 
-public struct Qdrant_UpdateBatchPoints: Sendable {
+public nonisolated struct Qdrant_UpdateBatchPoints: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// name of the collection
   public var collectionName: String = String()
 
   /// Wait until the changes have been applied?
   public var wait: Bool {
-    get {return _wait ?? false}
+    get {_wait ?? false}
     set {_wait = newValue}
   }
-  public var hasWait: Bool {return self._wait != nil}
+  /// Returns true if `wait` has been explicitly set.
+  public var hasWait: Bool {self._wait != nil}
+  /// Clears the value of `wait`. Subsequent reads from it will return its default value.
   public mutating func clearWait() {self._wait = nil}
 
   public var operations: [Qdrant_PointsUpdateOperation] = []
 
   /// Write ordering guarantees
   public var ordering: Qdrant_WriteOrdering {
-    get {return _ordering ?? Qdrant_WriteOrdering()}
+    get {_ordering ?? Qdrant_WriteOrdering()}
     set {_ordering = newValue}
   }
-  public var hasOrdering: Bool {return self._ordering != nil}
+  /// Returns true if `ordering` has been explicitly set.
+  public var hasOrdering: Bool {self._ordering != nil}
+  /// Clears the value of `ordering`. Subsequent reads from it will return its default value.
   public mutating func clearOrdering() {self._ordering = nil}
 
   /// Timeout for the operation in seconds
   public var timeout: UInt64 {
-    get {return _timeout ?? 0}
+    get {_timeout ?? 0}
     set {_timeout = newValue}
   }
-  public var hasTimeout: Bool {return self._timeout != nil}
+  /// Returns true if `timeout` has been explicitly set.
+  public var hasTimeout: Bool {self._timeout != nil}
+  /// Clears the value of `timeout`. Subsequent reads from it will return its default value.
   public mutating func clearTimeout() {self._timeout = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4423,22 +5876,30 @@ public struct Qdrant_UpdateBatchPoints: Sendable {
   fileprivate var _timeout: UInt64? = nil
 }
 
-public struct Qdrant_PointsOperationResponse: Sendable {
+public nonisolated struct Qdrant_PointsOperationResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: Qdrant_UpdateResult {
-    get {return _result ?? Qdrant_UpdateResult()}
+    get {_result ?? Qdrant_UpdateResult()}
     set {_result = newValue}
   }
-  public var hasResult: Bool {return self._result != nil}
+  /// Returns true if `result` has been explicitly set.
+  public var hasResult: Bool {self._result != nil}
+  /// Clears the value of `result`. Subsequent reads from it will return its default value.
   public mutating func clearResult() {self._result = nil}
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4449,13 +5910,19 @@ public struct Qdrant_PointsOperationResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_UpdateResult: Sendable {
+public nonisolated struct Qdrant_UpdateResult: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Number of operation
   public var operationID: UInt64 {
-    get {return _operationID ?? 0}
+    get {_operationID ?? 0}
     set {_operationID = newValue}
   }
-  public var hasOperationID: Bool {return self._operationID != nil}
+  /// Returns true if `operationID` has been explicitly set.
+  public var hasOperationID: Bool {self._operationID != nil}
+  /// Clears the value of `operationID`. Subsequent reads from it will return its default value.
   public mutating func clearOperationID() {self._operationID = nil}
 
   /// Operation status
@@ -4468,7 +5935,11 @@ public struct Qdrant_UpdateResult: Sendable {
   fileprivate var _operationID: UInt64? = nil
 }
 
-public struct Qdrant_OrderValue: Sendable {
+public nonisolated struct Qdrant_OrderValue: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var variant: Qdrant_OrderValue.OneOf_Variant? = nil
 
   public var int: Int64 {
@@ -4489,7 +5960,7 @@ public struct Qdrant_OrderValue: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Variant: Equatable, Sendable {
+  public nonisolated enum OneOf_Variant: Equatable, Sendable {
     case int(Int64)
     case float(Double)
 
@@ -4498,13 +5969,19 @@ public struct Qdrant_OrderValue: Sendable {
   public init() {}
 }
 
-public struct Qdrant_ScoredPoint: Sendable {
+public nonisolated struct Qdrant_ScoredPoint: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Point id
   public var id: Qdrant_PointId {
-    get {return _id ?? Qdrant_PointId()}
+    get {_id ?? Qdrant_PointId()}
     set {_id = newValue}
   }
-  public var hasID: Bool {return self._id != nil}
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {self._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
   /// Payload
@@ -4518,26 +5995,32 @@ public struct Qdrant_ScoredPoint: Sendable {
 
   /// Vectors to search
   public var vectors: Qdrant_VectorsOutput {
-    get {return _vectors ?? Qdrant_VectorsOutput()}
+    get {_vectors ?? Qdrant_VectorsOutput()}
     set {_vectors = newValue}
   }
-  public var hasVectors: Bool {return self._vectors != nil}
+  /// Returns true if `vectors` has been explicitly set.
+  public var hasVectors: Bool {self._vectors != nil}
+  /// Clears the value of `vectors`. Subsequent reads from it will return its default value.
   public mutating func clearVectors() {self._vectors = nil}
 
   /// Shard key
   public var shardKey: Qdrant_ShardKey {
-    get {return _shardKey ?? Qdrant_ShardKey()}
+    get {_shardKey ?? Qdrant_ShardKey()}
     set {_shardKey = newValue}
   }
-  public var hasShardKey: Bool {return self._shardKey != nil}
+  /// Returns true if `shardKey` has been explicitly set.
+  public var hasShardKey: Bool {self._shardKey != nil}
+  /// Clears the value of `shardKey`. Subsequent reads from it will return its default value.
   public mutating func clearShardKey() {self._shardKey = nil}
 
   /// Order by value
   public var orderValue: Qdrant_OrderValue {
-    get {return _orderValue ?? Qdrant_OrderValue()}
+    get {_orderValue ?? Qdrant_OrderValue()}
     set {_orderValue = newValue}
   }
-  public var hasOrderValue: Bool {return self._orderValue != nil}
+  /// Returns true if `orderValue` has been explicitly set.
+  public var hasOrderValue: Bool {self._orderValue != nil}
+  /// Clears the value of `orderValue`. Subsequent reads from it will return its default value.
   public mutating func clearOrderValue() {self._orderValue = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4550,7 +6033,11 @@ public struct Qdrant_ScoredPoint: Sendable {
   fileprivate var _orderValue: Qdrant_OrderValue? = nil
 }
 
-public struct Qdrant_GroupId: Sendable {
+public nonisolated struct Qdrant_GroupId: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var kind: Qdrant_GroupId.OneOf_Kind? = nil
 
   /// Represents an unsigned integer value.
@@ -4582,7 +6069,7 @@ public struct Qdrant_GroupId: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Kind: Equatable, Sendable {
+  public nonisolated enum OneOf_Kind: Equatable, Sendable {
     /// Represents an unsigned integer value.
     case unsignedValue(UInt64)
     /// Represents an integer value
@@ -4595,13 +6082,19 @@ public struct Qdrant_GroupId: Sendable {
   public init() {}
 }
 
-public struct Qdrant_PointGroup: Sendable {
+public nonisolated struct Qdrant_PointGroup: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Group id
   public var id: Qdrant_GroupId {
-    get {return _id ?? Qdrant_GroupId()}
+    get {_id ?? Qdrant_GroupId()}
     set {_id = newValue}
   }
-  public var hasID: Bool {return self._id != nil}
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {self._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
   /// Points in the group
@@ -4609,10 +6102,12 @@ public struct Qdrant_PointGroup: Sendable {
 
   /// Point(s) from the lookup collection that matches the group id
   public var lookup: Qdrant_RetrievedPoint {
-    get {return _lookup ?? Qdrant_RetrievedPoint()}
+    get {_lookup ?? Qdrant_RetrievedPoint()}
     set {_lookup = newValue}
   }
-  public var hasLookup: Bool {return self._lookup != nil}
+  /// Returns true if `lookup` has been explicitly set.
+  public var hasLookup: Bool {self._lookup != nil}
+  /// Clears the value of `lookup`. Subsequent reads from it will return its default value.
   public mutating func clearLookup() {self._lookup = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4623,7 +6118,11 @@ public struct Qdrant_PointGroup: Sendable {
   fileprivate var _lookup: Qdrant_RetrievedPoint? = nil
 }
 
-public struct Qdrant_GroupsResult: Sendable {
+public nonisolated struct Qdrant_GroupsResult: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Groups
   public var groups: [Qdrant_PointGroup] = []
 
@@ -4632,17 +6131,23 @@ public struct Qdrant_GroupsResult: Sendable {
   public init() {}
 }
 
-public struct Qdrant_SearchResponse: Sendable {
+public nonisolated struct Qdrant_SearchResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_ScoredPoint] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4652,17 +6157,23 @@ public struct Qdrant_SearchResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_QueryResponse: Sendable {
+public nonisolated struct Qdrant_QueryResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_ScoredPoint] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4672,17 +6183,23 @@ public struct Qdrant_QueryResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_QueryBatchResponse: Sendable {
+public nonisolated struct Qdrant_QueryBatchResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_BatchResult] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4692,22 +6209,30 @@ public struct Qdrant_QueryBatchResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_QueryGroupsResponse: Sendable {
+public nonisolated struct Qdrant_QueryGroupsResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: Qdrant_GroupsResult {
-    get {return _result ?? Qdrant_GroupsResult()}
+    get {_result ?? Qdrant_GroupsResult()}
     set {_result = newValue}
   }
-  public var hasResult: Bool {return self._result != nil}
+  /// Returns true if `result` has been explicitly set.
+  public var hasResult: Bool {self._result != nil}
+  /// Clears the value of `result`. Subsequent reads from it will return its default value.
   public mutating func clearResult() {self._result = nil}
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4718,7 +6243,11 @@ public struct Qdrant_QueryGroupsResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_BatchResult: Sendable {
+public nonisolated struct Qdrant_BatchResult: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_ScoredPoint] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4726,17 +6255,23 @@ public struct Qdrant_BatchResult: Sendable {
   public init() {}
 }
 
-public struct Qdrant_SearchBatchResponse: Sendable {
+public nonisolated struct Qdrant_SearchBatchResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_BatchResult] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4746,22 +6281,30 @@ public struct Qdrant_SearchBatchResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_SearchGroupsResponse: Sendable {
+public nonisolated struct Qdrant_SearchGroupsResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: Qdrant_GroupsResult {
-    get {return _result ?? Qdrant_GroupsResult()}
+    get {_result ?? Qdrant_GroupsResult()}
     set {_result = newValue}
   }
-  public var hasResult: Bool {return self._result != nil}
+  /// Returns true if `result` has been explicitly set.
+  public var hasResult: Bool {self._result != nil}
+  /// Clears the value of `result`. Subsequent reads from it will return its default value.
   public mutating func clearResult() {self._result = nil}
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4772,22 +6315,30 @@ public struct Qdrant_SearchGroupsResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_CountResponse: Sendable {
+public nonisolated struct Qdrant_CountResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: Qdrant_CountResult {
-    get {return _result ?? Qdrant_CountResult()}
+    get {_result ?? Qdrant_CountResult()}
     set {_result = newValue}
   }
-  public var hasResult: Bool {return self._result != nil}
+  /// Returns true if `result` has been explicitly set.
+  public var hasResult: Bool {self._result != nil}
+  /// Clears the value of `result`. Subsequent reads from it will return its default value.
   public mutating func clearResult() {self._result = nil}
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4798,13 +6349,19 @@ public struct Qdrant_CountResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_ScrollResponse: Sendable {
+public nonisolated struct Qdrant_ScrollResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   /// Use this offset for the next query
   public var nextPageOffset: Qdrant_PointId {
-    get {return _nextPageOffset ?? Qdrant_PointId()}
+    get {_nextPageOffset ?? Qdrant_PointId()}
     set {_nextPageOffset = newValue}
   }
-  public var hasNextPageOffset: Bool {return self._nextPageOffset != nil}
+  /// Returns true if `nextPageOffset` has been explicitly set.
+  public var hasNextPageOffset: Bool {self._nextPageOffset != nil}
+  /// Clears the value of `nextPageOffset`. Subsequent reads from it will return its default value.
   public mutating func clearNextPageOffset() {self._nextPageOffset = nil}
 
   public var result: [Qdrant_RetrievedPoint] = []
@@ -4813,10 +6370,12 @@ public struct Qdrant_ScrollResponse: Sendable {
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4827,7 +6386,11 @@ public struct Qdrant_ScrollResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_CountResult: Sendable {
+public nonisolated struct Qdrant_CountResult: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var count: UInt64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4835,37 +6398,49 @@ public struct Qdrant_CountResult: Sendable {
   public init() {}
 }
 
-public struct Qdrant_RetrievedPoint: Sendable {
+public nonisolated struct Qdrant_RetrievedPoint: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var id: Qdrant_PointId {
-    get {return _id ?? Qdrant_PointId()}
+    get {_id ?? Qdrant_PointId()}
     set {_id = newValue}
   }
-  public var hasID: Bool {return self._id != nil}
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {self._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
   public var payload: Dictionary<String,Qdrant_Value> = [:]
 
   public var vectors: Qdrant_VectorsOutput {
-    get {return _vectors ?? Qdrant_VectorsOutput()}
+    get {_vectors ?? Qdrant_VectorsOutput()}
     set {_vectors = newValue}
   }
-  public var hasVectors: Bool {return self._vectors != nil}
+  /// Returns true if `vectors` has been explicitly set.
+  public var hasVectors: Bool {self._vectors != nil}
+  /// Clears the value of `vectors`. Subsequent reads from it will return its default value.
   public mutating func clearVectors() {self._vectors = nil}
 
   /// Shard key
   public var shardKey: Qdrant_ShardKey {
-    get {return _shardKey ?? Qdrant_ShardKey()}
+    get {_shardKey ?? Qdrant_ShardKey()}
     set {_shardKey = newValue}
   }
-  public var hasShardKey: Bool {return self._shardKey != nil}
+  /// Returns true if `shardKey` has been explicitly set.
+  public var hasShardKey: Bool {self._shardKey != nil}
+  /// Clears the value of `shardKey`. Subsequent reads from it will return its default value.
   public mutating func clearShardKey() {self._shardKey = nil}
 
   /// Order-by value
   public var orderValue: Qdrant_OrderValue {
-    get {return _orderValue ?? Qdrant_OrderValue()}
+    get {_orderValue ?? Qdrant_OrderValue()}
     set {_orderValue = newValue}
   }
-  public var hasOrderValue: Bool {return self._orderValue != nil}
+  /// Returns true if `orderValue` has been explicitly set.
+  public var hasOrderValue: Bool {self._orderValue != nil}
+  /// Clears the value of `orderValue`. Subsequent reads from it will return its default value.
   public mutating func clearOrderValue() {self._orderValue = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4878,17 +6453,23 @@ public struct Qdrant_RetrievedPoint: Sendable {
   fileprivate var _orderValue: Qdrant_OrderValue? = nil
 }
 
-public struct Qdrant_GetResponse: Sendable {
+public nonisolated struct Qdrant_GetResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_RetrievedPoint] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4898,17 +6479,23 @@ public struct Qdrant_GetResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_RecommendResponse: Sendable {
+public nonisolated struct Qdrant_RecommendResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_ScoredPoint] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4918,17 +6505,23 @@ public struct Qdrant_RecommendResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_RecommendBatchResponse: Sendable {
+public nonisolated struct Qdrant_RecommendBatchResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_BatchResult] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4938,17 +6531,23 @@ public struct Qdrant_RecommendBatchResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_DiscoverResponse: Sendable {
+public nonisolated struct Qdrant_DiscoverResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_ScoredPoint] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4958,17 +6557,23 @@ public struct Qdrant_DiscoverResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_DiscoverBatchResponse: Sendable {
+public nonisolated struct Qdrant_DiscoverBatchResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_BatchResult] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -4978,22 +6583,30 @@ public struct Qdrant_DiscoverBatchResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_RecommendGroupsResponse: Sendable {
+public nonisolated struct Qdrant_RecommendGroupsResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: Qdrant_GroupsResult {
-    get {return _result ?? Qdrant_GroupsResult()}
+    get {_result ?? Qdrant_GroupsResult()}
     set {_result = newValue}
   }
-  public var hasResult: Bool {return self._result != nil}
+  /// Returns true if `result` has been explicitly set.
+  public var hasResult: Bool {self._result != nil}
+  /// Clears the value of `result`. Subsequent reads from it will return its default value.
   public mutating func clearResult() {self._result = nil}
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5004,17 +6617,23 @@ public struct Qdrant_RecommendGroupsResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_UpdateBatchResponse: Sendable {
+public nonisolated struct Qdrant_UpdateBatchResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: [Qdrant_UpdateResult] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5024,17 +6643,23 @@ public struct Qdrant_UpdateBatchResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_FacetResponse: Sendable {
+public nonisolated struct Qdrant_FacetResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var hits: [Qdrant_FacetHit] = []
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5044,22 +6669,30 @@ public struct Qdrant_FacetResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_SearchMatrixPairsResponse: Sendable {
+public nonisolated struct Qdrant_SearchMatrixPairsResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: Qdrant_SearchMatrixPairs {
-    get {return _result ?? Qdrant_SearchMatrixPairs()}
+    get {_result ?? Qdrant_SearchMatrixPairs()}
     set {_result = newValue}
   }
-  public var hasResult: Bool {return self._result != nil}
+  /// Returns true if `result` has been explicitly set.
+  public var hasResult: Bool {self._result != nil}
+  /// Clears the value of `result`. Subsequent reads from it will return its default value.
   public mutating func clearResult() {self._result = nil}
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5070,22 +6703,30 @@ public struct Qdrant_SearchMatrixPairsResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_SearchMatrixOffsetsResponse: Sendable {
+public nonisolated struct Qdrant_SearchMatrixOffsetsResponse: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var result: Qdrant_SearchMatrixOffsets {
-    get {return _result ?? Qdrant_SearchMatrixOffsets()}
+    get {_result ?? Qdrant_SearchMatrixOffsets()}
     set {_result = newValue}
   }
-  public var hasResult: Bool {return self._result != nil}
+  /// Returns true if `result` has been explicitly set.
+  public var hasResult: Bool {self._result != nil}
+  /// Clears the value of `result`. Subsequent reads from it will return its default value.
   public mutating func clearResult() {self._result = nil}
 
   /// Time spent to process
   public var time: Double = 0
 
   public var usage: Qdrant_Usage {
-    get {return _usage ?? Qdrant_Usage()}
+    get {_usage ?? Qdrant_Usage()}
     set {_usage = newValue}
   }
-  public var hasUsage: Bool {return self._usage != nil}
+  /// Returns true if `usage` has been explicitly set.
+  public var hasUsage: Bool {self._usage != nil}
+  /// Clears the value of `usage`. Subsequent reads from it will return its default value.
   public mutating func clearUsage() {self._usage = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5096,7 +6737,11 @@ public struct Qdrant_SearchMatrixOffsetsResponse: Sendable {
   fileprivate var _usage: Qdrant_Usage? = nil
 }
 
-public struct Qdrant_PointsSelector: Sendable {
+public nonisolated struct Qdrant_PointsSelector: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var pointsSelectorOneOf: Qdrant_PointsSelector.OneOf_PointsSelectorOneOf? = nil
 
   public var points: Qdrant_PointsIdsList {
@@ -5117,7 +6762,7 @@ public struct Qdrant_PointsSelector: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_PointsSelectorOneOf: Equatable, Sendable {
+  public nonisolated enum OneOf_PointsSelectorOneOf: Equatable, Sendable {
     case points(Qdrant_PointsIdsList)
     case filter(Qdrant_Filter)
 
@@ -5126,7 +6771,11 @@ public struct Qdrant_PointsSelector: Sendable {
   public init() {}
 }
 
-public struct Qdrant_PointsIdsList: Sendable {
+public nonisolated struct Qdrant_PointsIdsList: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var ids: [Qdrant_PointId] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5134,21 +6783,29 @@ public struct Qdrant_PointsIdsList: Sendable {
   public init() {}
 }
 
-public struct Qdrant_PointStruct: Sendable {
+public nonisolated struct Qdrant_PointStruct: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var id: Qdrant_PointId {
-    get {return _id ?? Qdrant_PointId()}
+    get {_id ?? Qdrant_PointId()}
     set {_id = newValue}
   }
-  public var hasID: Bool {return self._id != nil}
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {self._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
   public var payload: Dictionary<String,Qdrant_Value> = [:]
 
   public var vectors: Qdrant_Vectors {
-    get {return _vectors ?? Qdrant_Vectors()}
+    get {_vectors ?? Qdrant_Vectors()}
     set {_vectors = newValue}
   }
-  public var hasVectors: Bool {return self._vectors != nil}
+  /// Returns true if `vectors` has been explicitly set.
+  public var hasVectors: Bool {self._vectors != nil}
+  /// Clears the value of `vectors`. Subsequent reads from it will return its default value.
   public mutating func clearVectors() {self._vectors = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5162,19 +6819,27 @@ public struct Qdrant_PointStruct: Sendable {
 /// ---------------------------------------------
 /// ----------- Measurements collector ----------
 /// ---------------------------------------------
-public struct Qdrant_Usage: Sendable {
+public nonisolated struct Qdrant_Usage: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var hardware: Qdrant_HardwareUsage {
-    get {return _hardware ?? Qdrant_HardwareUsage()}
+    get {_hardware ?? Qdrant_HardwareUsage()}
     set {_hardware = newValue}
   }
-  public var hasHardware: Bool {return self._hardware != nil}
+  /// Returns true if `hardware` has been explicitly set.
+  public var hasHardware: Bool {self._hardware != nil}
+  /// Clears the value of `hardware`. Subsequent reads from it will return its default value.
   public mutating func clearHardware() {self._hardware = nil}
 
   public var inference: Qdrant_InferenceUsage {
-    get {return _inference ?? Qdrant_InferenceUsage()}
+    get {_inference ?? Qdrant_InferenceUsage()}
     set {_inference = newValue}
   }
-  public var hasInference: Bool {return self._inference != nil}
+  /// Returns true if `inference` has been explicitly set.
+  public var hasInference: Bool {self._inference != nil}
+  /// Clears the value of `inference`. Subsequent reads from it will return its default value.
   public mutating func clearInference() {self._inference = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5185,7 +6850,11 @@ public struct Qdrant_Usage: Sendable {
   fileprivate var _inference: Qdrant_InferenceUsage? = nil
 }
 
-public struct Qdrant_InferenceUsage: Sendable {
+public nonisolated struct Qdrant_InferenceUsage: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var models: Dictionary<String,Qdrant_ModelUsage> = [:]
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5193,7 +6862,11 @@ public struct Qdrant_InferenceUsage: Sendable {
   public init() {}
 }
 
-public struct Qdrant_ModelUsage: Sendable {
+public nonisolated struct Qdrant_ModelUsage: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
   public var tokens: UInt64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -5201,69 +6874,155 @@ public struct Qdrant_ModelUsage: Sendable {
   public init() {}
 }
 
-public struct Qdrant_HardwareUsage: Sendable {
-  public var cpu: UInt64 = 0
+public nonisolated struct Qdrant_HardwareUsage: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
-  public var payloadIoRead: UInt64 = 0
+  public var cpu: UInt64 {
+    get {_cpu ?? 0}
+    set {_cpu = newValue}
+  }
+  /// Returns true if `cpu` has been explicitly set.
+  public var hasCpu: Bool {self._cpu != nil}
+  /// Clears the value of `cpu`. Subsequent reads from it will return its default value.
+  public mutating func clearCpu() {self._cpu = nil}
 
-  public var payloadIoWrite: UInt64 = 0
+  public var payloadIoRead: UInt64 {
+    get {_payloadIoRead ?? 0}
+    set {_payloadIoRead = newValue}
+  }
+  /// Returns true if `payloadIoRead` has been explicitly set.
+  public var hasPayloadIoRead: Bool {self._payloadIoRead != nil}
+  /// Clears the value of `payloadIoRead`. Subsequent reads from it will return its default value.
+  public mutating func clearPayloadIoRead() {self._payloadIoRead = nil}
 
-  public var payloadIndexIoRead: UInt64 = 0
+  public var payloadIoWrite: UInt64 {
+    get {_payloadIoWrite ?? 0}
+    set {_payloadIoWrite = newValue}
+  }
+  /// Returns true if `payloadIoWrite` has been explicitly set.
+  public var hasPayloadIoWrite: Bool {self._payloadIoWrite != nil}
+  /// Clears the value of `payloadIoWrite`. Subsequent reads from it will return its default value.
+  public mutating func clearPayloadIoWrite() {self._payloadIoWrite = nil}
 
-  public var payloadIndexIoWrite: UInt64 = 0
+  public var payloadIndexIoRead: UInt64 {
+    get {_payloadIndexIoRead ?? 0}
+    set {_payloadIndexIoRead = newValue}
+  }
+  /// Returns true if `payloadIndexIoRead` has been explicitly set.
+  public var hasPayloadIndexIoRead: Bool {self._payloadIndexIoRead != nil}
+  /// Clears the value of `payloadIndexIoRead`. Subsequent reads from it will return its default value.
+  public mutating func clearPayloadIndexIoRead() {self._payloadIndexIoRead = nil}
 
-  public var vectorIoRead: UInt64 = 0
+  public var payloadIndexIoWrite: UInt64 {
+    get {_payloadIndexIoWrite ?? 0}
+    set {_payloadIndexIoWrite = newValue}
+  }
+  /// Returns true if `payloadIndexIoWrite` has been explicitly set.
+  public var hasPayloadIndexIoWrite: Bool {self._payloadIndexIoWrite != nil}
+  /// Clears the value of `payloadIndexIoWrite`. Subsequent reads from it will return its default value.
+  public mutating func clearPayloadIndexIoWrite() {self._payloadIndexIoWrite = nil}
 
-  public var vectorIoWrite: UInt64 = 0
+  public var vectorIoRead: UInt64 {
+    get {_vectorIoRead ?? 0}
+    set {_vectorIoRead = newValue}
+  }
+  /// Returns true if `vectorIoRead` has been explicitly set.
+  public var hasVectorIoRead: Bool {self._vectorIoRead != nil}
+  /// Clears the value of `vectorIoRead`. Subsequent reads from it will return its default value.
+  public mutating func clearVectorIoRead() {self._vectorIoRead = nil}
+
+  public var vectorIoWrite: UInt64 {
+    get {_vectorIoWrite ?? 0}
+    set {_vectorIoWrite = newValue}
+  }
+  /// Returns true if `vectorIoWrite` has been explicitly set.
+  public var hasVectorIoWrite: Bool {self._vectorIoWrite != nil}
+  /// Clears the value of `vectorIoWrite`. Subsequent reads from it will return its default value.
+  public mutating func clearVectorIoWrite() {self._vectorIoWrite = nil}
+
+  public var remoteIoCachedRead: UInt64 {
+    get {_remoteIoCachedRead ?? 0}
+    set {_remoteIoCachedRead = newValue}
+  }
+  /// Returns true if `remoteIoCachedRead` has been explicitly set.
+  public var hasRemoteIoCachedRead: Bool {self._remoteIoCachedRead != nil}
+  /// Clears the value of `remoteIoCachedRead`. Subsequent reads from it will return its default value.
+  public mutating func clearRemoteIoCachedRead() {self._remoteIoCachedRead = nil}
+
+  public var remoteIoNonCachedRead: UInt64 {
+    get {_remoteIoNonCachedRead ?? 0}
+    set {_remoteIoNonCachedRead = newValue}
+  }
+  /// Returns true if `remoteIoNonCachedRead` has been explicitly set.
+  public var hasRemoteIoNonCachedRead: Bool {self._remoteIoNonCachedRead != nil}
+  /// Clears the value of `remoteIoNonCachedRead`. Subsequent reads from it will return its default value.
+  public mutating func clearRemoteIoNonCachedRead() {self._remoteIoNonCachedRead = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _cpu: UInt64? = nil
+  fileprivate var _payloadIoRead: UInt64? = nil
+  fileprivate var _payloadIoWrite: UInt64? = nil
+  fileprivate var _payloadIndexIoRead: UInt64? = nil
+  fileprivate var _payloadIndexIoWrite: UInt64? = nil
+  fileprivate var _vectorIoRead: UInt64? = nil
+  fileprivate var _vectorIoWrite: UInt64? = nil
+  fileprivate var _remoteIoCachedRead: UInt64? = nil
+  fileprivate var _remoteIoNonCachedRead: UInt64? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "qdrant"
+fileprivate nonisolated let _protobuf_package = "qdrant"
 
-extension Qdrant_WriteOrderingType: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_WriteOrderingType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0Weak\0\u{1}Medium\0\u{1}Strong\0")
 }
 
-extension Qdrant_ReadConsistencyType: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_UpdateMode: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0Upsert\0\u{1}InsertOnly\0\u{1}UpdateOnly\0")
+}
+
+nonisolated extension Qdrant_ReadConsistencyType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0All\0\u{1}Majority\0\u{1}Quorum\0")
 }
 
-extension Qdrant_FieldType: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_FieldType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0FieldTypeKeyword\0\u{1}FieldTypeInteger\0\u{1}FieldTypeFloat\0\u{1}FieldTypeGeo\0\u{1}FieldTypeText\0\u{1}FieldTypeBool\0\u{1}FieldTypeDatetime\0\u{1}FieldTypeUuid\0")
 }
 
-extension Qdrant_Direction: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Direction: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0Asc\0\u{1}Desc\0")
 }
 
-extension Qdrant_RecommendStrategy: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendStrategy: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0AverageVector\0\u{1}BestScore\0\u{1}SumScores\0")
 }
 
-extension Qdrant_Fusion: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Fusion: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0RRF\0\u{1}DBSF\0")
 }
 
-extension Qdrant_Sample: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Sample: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0Random\0")
 }
 
-extension Qdrant_UpdateStatus: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0UnknownUpdateStatus\0\u{1}Acknowledged\0\u{1}Completed\0\u{1}ClockRejected\0")
+nonisolated extension Qdrant_UpdateStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0UnknownUpdateStatus\0\u{1}Acknowledged\0\u{1}Completed\0\u{1}ClockRejected\0\u{1}WaitTimeout\0")
 }
 
-extension Qdrant_WriteOrdering: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_WriteOrdering: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WriteOrdering"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}type\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularEnumField(value: &self.type) }()
@@ -5286,13 +7045,14 @@ extension Qdrant_WriteOrdering: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_ReadConsistency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ReadConsistency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ReadConsistency"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}type\0\u{1}factor\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -5317,6 +7077,7 @@ extension Qdrant_ReadConsistency: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -5341,13 +7102,14 @@ extension Qdrant_ReadConsistency: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension Qdrant_SparseIndices: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SparseIndices: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SparseIndices"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}data\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedUInt32Field(value: &self.data) }()
@@ -5370,13 +7132,14 @@ extension Qdrant_SparseIndices: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_Document: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Document: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Document"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}text\0\u{2}\u{2}model\0\u{1}options\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.text) }()
@@ -5409,13 +7172,14 @@ extension Qdrant_Document: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension Qdrant_Image: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Image: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Image"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}image\0\u{1}model\0\u{1}options\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._image) }()
@@ -5427,6 +7191,7 @@ extension Qdrant_Image: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -5451,13 +7216,14 @@ extension Qdrant_Image: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension Qdrant_InferenceObject: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_InferenceObject: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".InferenceObject"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}object\0\u{1}model\0\u{1}options\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._object) }()
@@ -5469,6 +7235,7 @@ extension Qdrant_InferenceObject: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -5493,13 +7260,14 @@ extension Qdrant_InferenceObject: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension Qdrant_Vector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Vector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Vector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}data\0\u{1}indices\0\u{3}vectors_count\0\u{2}b\u{1}dense\0\u{1}sparse\0\u{3}multi_dense\0\u{1}document\0\u{1}image\0\u{1}object\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedFloatField(value: &self.data) }()
@@ -5589,6 +7357,7 @@ extension Qdrant_Vector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -5641,13 +7410,14 @@ extension Qdrant_Vector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
   }
 }
 
-extension Qdrant_VectorOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_VectorOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VectorOutput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}data\0\u{1}indices\0\u{3}vectors_count\0\u{2}b\u{1}dense\0\u{1}sparse\0\u{3}multi_dense\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedFloatField(value: &self.data) }()
@@ -5698,6 +7468,7 @@ extension Qdrant_VectorOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -5738,13 +7509,14 @@ extension Qdrant_VectorOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_DenseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DenseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DenseVector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}data\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedFloatField(value: &self.data) }()
@@ -5767,13 +7539,14 @@ extension Qdrant_DenseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_SparseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SparseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SparseVector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}values\0\u{1}indices\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedFloatField(value: &self.values) }()
@@ -5801,13 +7574,14 @@ extension Qdrant_SparseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_MultiDenseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_MultiDenseVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".MultiDenseVector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}vectors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.vectors) }()
@@ -5830,13 +7604,14 @@ extension Qdrant_MultiDenseVector: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_VectorInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_VectorInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VectorInput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}dense\0\u{1}sparse\0\u{3}multi_dense\0\u{1}document\0\u{1}image\0\u{1}object\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -5936,6 +7711,7 @@ extension Qdrant_VectorInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -5980,13 +7756,14 @@ extension Qdrant_VectorInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_ShardKeySelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ShardKeySelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ShardKeySelector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}shard_keys\0\u{1}fallback\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.shardKeys) }()
@@ -5997,6 +7774,7 @@ extension Qdrant_ShardKeySelector: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6017,13 +7795,14 @@ extension Qdrant_ShardKeySelector: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_UpsertPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_UpsertPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UpsertPoints"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}points\0\u{1}ordering\0\u{3}shard_key_selector\0\u{3}update_filter\0\u{1}timeout\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}points\0\u{1}ordering\0\u{3}shard_key_selector\0\u{3}update_filter\0\u{1}timeout\0\u{3}update_mode\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6033,12 +7812,14 @@ extension Qdrant_UpsertPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       case 5: try { try decoder.decodeSingularMessageField(value: &self._shardKeySelector) }()
       case 6: try { try decoder.decodeSingularMessageField(value: &self._updateFilter) }()
       case 7: try { try decoder.decodeSingularUInt64Field(value: &self._timeout) }()
+      case 8: try { try decoder.decodeSingularEnumField(value: &self._updateMode) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6063,6 +7844,9 @@ extension Qdrant_UpsertPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try { if let v = self._timeout {
       try visitor.visitSingularUInt64Field(value: v, fieldNumber: 7)
     } }()
+    try { if let v = self._updateMode {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 8)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -6074,18 +7858,20 @@ extension Qdrant_UpsertPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if lhs._shardKeySelector != rhs._shardKeySelector {return false}
     if lhs._updateFilter != rhs._updateFilter {return false}
     if lhs._timeout != rhs._timeout {return false}
+    if lhs._updateMode != rhs._updateMode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Qdrant_DeletePoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DeletePoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeletePoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}points\0\u{1}ordering\0\u{3}shard_key_selector\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6100,6 +7886,7 @@ extension Qdrant_DeletePoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6136,13 +7923,14 @@ extension Qdrant_DeletePoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_GetPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_GetPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}ids\0\u{4}\u{2}with_payload\0\u{3}with_vectors\0\u{3}read_consistency\0\u{3}shard_key_selector\0\u{1}timeout\0\u{c}\u{3}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6158,6 +7946,7 @@ extension Qdrant_GetPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6198,13 +7987,14 @@ extension Qdrant_GetPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension Qdrant_UpdatePointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_UpdatePointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UpdatePointVectors"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}points\0\u{1}ordering\0\u{3}shard_key_selector\0\u{3}update_filter\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6220,6 +8010,7 @@ extension Qdrant_UpdatePointVectors: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6260,13 +8051,14 @@ extension Qdrant_UpdatePointVectors: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_PointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PointVectors"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}vectors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._id) }()
@@ -6277,6 +8069,7 @@ extension Qdrant_PointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6297,13 +8090,14 @@ extension Qdrant_PointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_DeletePointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DeletePointVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeletePointVectors"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{3}points_selector\0\u{1}vectors\0\u{1}ordering\0\u{3}shard_key_selector\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6319,6 +8113,7 @@ extension Qdrant_DeletePointVectors: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6359,13 +8154,14 @@ extension Qdrant_DeletePointVectors: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_SetPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SetPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SetPayloadPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}payload\0\u{4}\u{2}points_selector\0\u{1}ordering\0\u{3}shard_key_selector\0\u{1}key\0\u{1}timeout\0\u{c}\u{4}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6382,6 +8178,7 @@ extension Qdrant_SetPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6426,13 +8223,14 @@ extension Qdrant_SetPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_DeletePayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DeletePayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeletePayloadPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}keys\0\u{4}\u{2}points_selector\0\u{1}ordering\0\u{3}shard_key_selector\0\u{1}timeout\0\u{c}\u{4}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6448,6 +8246,7 @@ extension Qdrant_DeletePayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6488,13 +8287,14 @@ extension Qdrant_DeletePayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_ClearPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ClearPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ClearPayloadPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}points\0\u{1}ordering\0\u{3}shard_key_selector\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6509,6 +8309,7 @@ extension Qdrant_ClearPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6545,75 +8346,126 @@ extension Qdrant_ClearPayloadPoints: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_CreateFieldIndexCollection: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_CreateFieldIndexCollection: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CreateFieldIndexCollection"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{3}field_name\0\u{3}field_type\0\u{3}field_index_params\0\u{1}ordering\0\u{1}timeout\0")
 
+  fileprivate class _StorageClass {
+    var _collectionName: String = String()
+    var _wait: Bool? = nil
+    var _fieldName: String = String()
+    var _fieldType: Qdrant_FieldType? = nil
+    var _fieldIndexParams: Qdrant_PayloadIndexParams? = nil
+    var _ordering: Qdrant_WriteOrdering? = nil
+    var _timeout: UInt64? = nil
+
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _collectionName = source._collectionName
+      _wait = source._wait
+      _fieldName = source._fieldName
+      _fieldType = source._fieldType
+      _fieldIndexParams = source._fieldIndexParams
+      _ordering = source._ordering
+      _timeout = source._timeout
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
         // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
-      case 2: try { try decoder.decodeSingularBoolField(value: &self._wait) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.fieldName) }()
-      case 4: try { try decoder.decodeSingularEnumField(value: &self._fieldType) }()
-      case 5: try { try decoder.decodeSingularMessageField(value: &self._fieldIndexParams) }()
-      case 6: try { try decoder.decodeSingularMessageField(value: &self._ordering) }()
-      case 7: try { try decoder.decodeSingularUInt64Field(value: &self._timeout) }()
-      default: break
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
+        case 2: try { try decoder.decodeSingularBoolField(value: &_storage._wait) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._fieldName) }()
+        case 4: try { try decoder.decodeSingularEnumField(value: &_storage._fieldType) }()
+        case 5: try { try decoder.decodeSingularMessageField(value: &_storage._fieldIndexParams) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._ordering) }()
+        case 7: try { try decoder.decodeSingularUInt64Field(value: &_storage._timeout) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.collectionName.isEmpty {
-      try visitor.visitSingularStringField(value: self.collectionName, fieldNumber: 1)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if !_storage._collectionName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._collectionName, fieldNumber: 1)
+      }
+      try { if let v = _storage._wait {
+        try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
+      } }()
+      if !_storage._fieldName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._fieldName, fieldNumber: 3)
+      }
+      try { if let v = _storage._fieldType {
+        try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
+      } }()
+      try { if let v = _storage._fieldIndexParams {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      } }()
+      try { if let v = _storage._ordering {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      } }()
+      try { if let v = _storage._timeout {
+        try visitor.visitSingularUInt64Field(value: v, fieldNumber: 7)
+      } }()
     }
-    try { if let v = self._wait {
-      try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
-    } }()
-    if !self.fieldName.isEmpty {
-      try visitor.visitSingularStringField(value: self.fieldName, fieldNumber: 3)
-    }
-    try { if let v = self._fieldType {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
-    } }()
-    try { if let v = self._fieldIndexParams {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    } }()
-    try { if let v = self._ordering {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    } }()
-    try { if let v = self._timeout {
-      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 7)
-    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Qdrant_CreateFieldIndexCollection, rhs: Qdrant_CreateFieldIndexCollection) -> Bool {
-    if lhs.collectionName != rhs.collectionName {return false}
-    if lhs._wait != rhs._wait {return false}
-    if lhs.fieldName != rhs.fieldName {return false}
-    if lhs._fieldType != rhs._fieldType {return false}
-    if lhs._fieldIndexParams != rhs._fieldIndexParams {return false}
-    if lhs._ordering != rhs._ordering {return false}
-    if lhs._timeout != rhs._timeout {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._collectionName != rhs_storage._collectionName {return false}
+        if _storage._wait != rhs_storage._wait {return false}
+        if _storage._fieldName != rhs_storage._fieldName {return false}
+        if _storage._fieldType != rhs_storage._fieldType {return false}
+        if _storage._fieldIndexParams != rhs_storage._fieldIndexParams {return false}
+        if _storage._ordering != rhs_storage._ordering {return false}
+        if _storage._timeout != rhs_storage._timeout {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Qdrant_DeleteFieldIndexCollection: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DeleteFieldIndexCollection: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteFieldIndexCollection"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{3}field_name\0\u{1}ordering\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -6627,6 +8479,7 @@ extension Qdrant_DeleteFieldIndexCollection: SwiftProtobuf.Message, SwiftProtobu
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6659,13 +8512,248 @@ extension Qdrant_DeleteFieldIndexCollection: SwiftProtobuf.Message, SwiftProtobu
   }
 }
 
-extension Qdrant_PayloadIncludeSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DenseVectorCreationConfig: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DenseVectorCreationConfig"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}size\0\u{1}distance\0\u{3}multivector_config\0\u{1}datatype\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.size) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.distance) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._multivectorConfig) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self._datatype) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.size != 0 {
+      try visitor.visitSingularUInt64Field(value: self.size, fieldNumber: 1)
+    }
+    if self.distance != .unknownDistance {
+      try visitor.visitSingularEnumField(value: self.distance, fieldNumber: 2)
+    }
+    try { if let v = self._multivectorConfig {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._datatype {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_DenseVectorCreationConfig, rhs: Qdrant_DenseVectorCreationConfig) -> Bool {
+    if lhs.size != rhs.size {return false}
+    if lhs.distance != rhs.distance {return false}
+    if lhs._multivectorConfig != rhs._multivectorConfig {return false}
+    if lhs._datatype != rhs._datatype {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_SparseVectorCreationConfig: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SparseVectorCreationConfig"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}modifier\0\u{1}datatype\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self._modifier) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self._datatype) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._modifier {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._datatype {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_SparseVectorCreationConfig, rhs: Qdrant_SparseVectorCreationConfig) -> Bool {
+    if lhs._modifier != rhs._modifier {return false}
+    if lhs._datatype != rhs._datatype {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_CreateVectorNameRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateVectorNameRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{3}vector_name\0\u{3}dense_config\0\u{3}sparse_config\0\u{1}timeout\0\u{1}ordering\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self._wait) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.vectorName) }()
+      case 4: try {
+        var v: Qdrant_DenseVectorCreationConfig?
+        var hadOneofValue = false
+        if let current = self.vectorConfig {
+          hadOneofValue = true
+          if case .denseConfig(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.vectorConfig = .denseConfig(v)
+        }
+      }()
+      case 5: try {
+        var v: Qdrant_SparseVectorCreationConfig?
+        var hadOneofValue = false
+        if let current = self.vectorConfig {
+          hadOneofValue = true
+          if case .sparseConfig(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.vectorConfig = .sparseConfig(v)
+        }
+      }()
+      case 6: try { try decoder.decodeSingularUInt64Field(value: &self._timeout) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._ordering) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.collectionName.isEmpty {
+      try visitor.visitSingularStringField(value: self.collectionName, fieldNumber: 1)
+    }
+    try { if let v = self._wait {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
+    } }()
+    if !self.vectorName.isEmpty {
+      try visitor.visitSingularStringField(value: self.vectorName, fieldNumber: 3)
+    }
+    switch self.vectorConfig {
+    case .denseConfig?: try {
+      guard case .denseConfig(let v)? = self.vectorConfig else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }()
+    case .sparseConfig?: try {
+      guard case .sparseConfig(let v)? = self.vectorConfig else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }()
+    case nil: break
+    }
+    try { if let v = self._timeout {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._ordering {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_CreateVectorNameRequest, rhs: Qdrant_CreateVectorNameRequest) -> Bool {
+    if lhs.collectionName != rhs.collectionName {return false}
+    if lhs._wait != rhs._wait {return false}
+    if lhs.vectorName != rhs.vectorName {return false}
+    if lhs.vectorConfig != rhs.vectorConfig {return false}
+    if lhs._timeout != rhs._timeout {return false}
+    if lhs._ordering != rhs._ordering {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_DeleteVectorNameRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DeleteVectorNameRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{3}vector_name\0\u{1}timeout\0\u{1}ordering\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self._wait) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.vectorName) }()
+      case 4: try { try decoder.decodeSingularUInt64Field(value: &self._timeout) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._ordering) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.collectionName.isEmpty {
+      try visitor.visitSingularStringField(value: self.collectionName, fieldNumber: 1)
+    }
+    try { if let v = self._wait {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
+    } }()
+    if !self.vectorName.isEmpty {
+      try visitor.visitSingularStringField(value: self.vectorName, fieldNumber: 3)
+    }
+    try { if let v = self._timeout {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._ordering {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_DeleteVectorNameRequest, rhs: Qdrant_DeleteVectorNameRequest) -> Bool {
+    if lhs.collectionName != rhs.collectionName {return false}
+    if lhs._wait != rhs._wait {return false}
+    if lhs.vectorName != rhs.vectorName {return false}
+    if lhs._timeout != rhs._timeout {return false}
+    if lhs._ordering != rhs._ordering {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_PayloadIncludeSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PayloadIncludeSelector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}fields\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedStringField(value: &self.fields) }()
@@ -6688,13 +8776,14 @@ extension Qdrant_PayloadIncludeSelector: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension Qdrant_PayloadExcludeSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PayloadExcludeSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PayloadExcludeSelector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}fields\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedStringField(value: &self.fields) }()
@@ -6717,13 +8806,14 @@ extension Qdrant_PayloadExcludeSelector: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension Qdrant_WithPayloadSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_WithPayloadSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WithPayloadSelector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enable\0\u{1}include\0\u{1}exclude\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -6766,6 +8856,7 @@ extension Qdrant_WithPayloadSelector: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6794,13 +8885,14 @@ extension Qdrant_WithPayloadSelector: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_NamedVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_NamedVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".NamedVectors"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}vectors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Qdrant_Vector>.self, value: &self.vectors) }()
@@ -6823,13 +8915,14 @@ extension Qdrant_NamedVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_NamedVectorsOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_NamedVectorsOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".NamedVectorsOutput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}vectors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Qdrant_VectorOutput>.self, value: &self.vectors) }()
@@ -6852,13 +8945,14 @@ extension Qdrant_NamedVectorsOutput: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_Vectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Vectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Vectors"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}vector\0\u{1}vectors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -6893,6 +8987,7 @@ extension Qdrant_Vectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6917,13 +9012,14 @@ extension Qdrant_Vectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension Qdrant_VectorsOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_VectorsOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VectorsOutput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}vector\0\u{1}vectors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -6958,6 +9054,7 @@ extension Qdrant_VectorsOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -6982,13 +9079,14 @@ extension Qdrant_VectorsOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_VectorsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_VectorsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VectorsSelector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}names\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedStringField(value: &self.names) }()
@@ -7011,13 +9109,14 @@ extension Qdrant_VectorsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension Qdrant_WithVectorsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_WithVectorsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WithVectorsSelector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enable\0\u{1}include\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -7047,6 +9146,7 @@ extension Qdrant_WithVectorsSelector: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7071,13 +9171,14 @@ extension Qdrant_WithVectorsSelector: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_QuantizationSearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_QuantizationSearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QuantizationSearchParams"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}ignore\0\u{1}rescore\0\u{1}oversampling\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBoolField(value: &self._ignore) }()
@@ -7089,6 +9190,7 @@ extension Qdrant_QuantizationSearchParams: SwiftProtobuf.Message, SwiftProtobuf.
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7113,13 +9215,14 @@ extension Qdrant_QuantizationSearchParams: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
-extension Qdrant_AcornSearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_AcornSearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AcornSearchParams"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enable\0\u{3}max_selectivity\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBoolField(value: &self._enable) }()
@@ -7130,6 +9233,7 @@ extension Qdrant_AcornSearchParams: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7150,13 +9254,48 @@ extension Qdrant_AcornSearchParams: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Qdrant_SearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SearchParams"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}hnsw_ef\0\u{1}exact\0\u{1}quantization\0\u{3}indexed_only\0\u{1}acorn\0")
+nonisolated extension Qdrant_IdfParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".IdfParams"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}corpus\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._corpus) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._corpus {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_IdfParams, rhs: Qdrant_IdfParams) -> Bool {
+    if lhs._corpus != rhs._corpus {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_SearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SearchParams"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}hnsw_ef\0\u{1}exact\0\u{1}quantization\0\u{3}indexed_only\0\u{1}acorn\0\u{1}idf\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt64Field(value: &self._hnswEf) }()
@@ -7164,12 +9303,14 @@ extension Qdrant_SearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       case 3: try { try decoder.decodeSingularMessageField(value: &self._quantization) }()
       case 4: try { try decoder.decodeSingularBoolField(value: &self._indexedOnly) }()
       case 5: try { try decoder.decodeSingularMessageField(value: &self._acorn) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._idf) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7188,6 +9329,9 @@ extension Qdrant_SearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try { if let v = self._acorn {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     } }()
+    try { if let v = self._idf {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -7197,12 +9341,13 @@ extension Qdrant_SearchParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if lhs._quantization != rhs._quantization {return false}
     if lhs._indexedOnly != rhs._indexedOnly {return false}
     if lhs._acorn != rhs._acorn {return false}
+    if lhs._idf != rhs._idf {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Qdrant_SearchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}vector\0\u{1}filter\0\u{1}limit\0\u{4}\u{2}with_payload\0\u{1}params\0\u{3}score_threshold\0\u{1}offset\0\u{3}vector_name\0\u{3}with_vectors\0\u{3}read_consistency\0\u{1}timeout\0\u{3}shard_key_selector\0\u{3}sparse_indices\0\u{c}\u{5}\u{1}")
 
@@ -7259,7 +9404,8 @@ extension Qdrant_SearchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -7284,7 +9430,8 @@ extension Qdrant_SearchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -7361,13 +9508,14 @@ extension Qdrant_SearchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_SearchBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchBatchPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{3}search_points\0\u{3}read_consistency\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -7380,6 +9528,7 @@ extension Qdrant_SearchBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7408,13 +9557,14 @@ extension Qdrant_SearchBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Qdrant_WithLookup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_WithLookup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WithLookup"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}collection\0\u{3}with_payload\0\u{3}with_vectors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collection) }()
@@ -7426,6 +9576,7 @@ extension Qdrant_WithLookup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7450,7 +9601,7 @@ extension Qdrant_WithLookup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension Qdrant_SearchPointGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchPointGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchPointGroups"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}vector\0\u{1}filter\0\u{1}limit\0\u{3}with_payload\0\u{1}params\0\u{3}score_threshold\0\u{3}vector_name\0\u{3}with_vectors\0\u{3}group_by\0\u{3}group_size\0\u{3}read_consistency\0\u{3}with_lookup\0\u{1}timeout\0\u{3}shard_key_selector\0\u{3}sparse_indices\0")
 
@@ -7511,7 +9662,8 @@ extension Qdrant_SearchPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Messag
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -7538,7 +9690,8 @@ extension Qdrant_SearchPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -7623,13 +9776,14 @@ extension Qdrant_SearchPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Qdrant_StartFrom: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_StartFrom: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".StartFrom"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}float\0\u{1}integer\0\u{1}timestamp\0\u{1}datetime\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -7675,6 +9829,7 @@ extension Qdrant_StartFrom: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7707,13 +9862,14 @@ extension Qdrant_StartFrom: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 }
 
-extension Qdrant_OrderBy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_OrderBy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".OrderBy"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}key\0\u{1}direction\0\u{3}start_from\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.key) }()
@@ -7725,6 +9881,7 @@ extension Qdrant_OrderBy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7749,7 +9906,7 @@ extension Qdrant_OrderBy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension Qdrant_ScrollPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ScrollPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ScrollPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}filter\0\u{1}offset\0\u{1}limit\0\u{4}\u{2}with_payload\0\u{3}with_vectors\0\u{3}read_consistency\0\u{3}shard_key_selector\0\u{3}order_by\0\u{1}timeout\0\u{c}\u{5}\u{1}")
 
@@ -7798,7 +9955,8 @@ extension Qdrant_ScrollPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -7819,7 +9977,8 @@ extension Qdrant_ScrollPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -7880,13 +10039,14 @@ extension Qdrant_ScrollPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_LookupLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_LookupLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LookupLocation"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{3}vector_name\0\u{3}shard_key_selector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -7898,6 +10058,7 @@ extension Qdrant_LookupLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -7922,7 +10083,7 @@ extension Qdrant_LookupLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_RecommendPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecommendPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}positive\0\u{1}negative\0\u{1}filter\0\u{1}limit\0\u{4}\u{2}with_payload\0\u{1}params\0\u{3}score_threshold\0\u{1}offset\0\u{1}using\0\u{3}with_vectors\0\u{3}lookup_from\0\u{3}read_consistency\0\u{2}\u{2}strategy\0\u{3}positive_vectors\0\u{3}negative_vectors\0\u{1}timeout\0\u{3}shard_key_selector\0\u{c}\u{6}\u{1}")
 
@@ -7987,7 +10148,8 @@ extension Qdrant_RecommendPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -8016,7 +10178,8 @@ extension Qdrant_RecommendPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -8109,13 +10272,14 @@ extension Qdrant_RecommendPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 }
 
-extension Qdrant_RecommendBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecommendBatchPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{3}recommend_points\0\u{3}read_consistency\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -8128,6 +10292,7 @@ extension Qdrant_RecommendBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8156,7 +10321,7 @@ extension Qdrant_RecommendBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension Qdrant_RecommendPointGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendPointGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecommendPointGroups"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}positive\0\u{1}negative\0\u{1}filter\0\u{1}limit\0\u{3}with_payload\0\u{1}params\0\u{3}score_threshold\0\u{1}using\0\u{3}with_vectors\0\u{3}lookup_from\0\u{3}group_by\0\u{3}group_size\0\u{3}read_consistency\0\u{3}with_lookup\0\u{2}\u{2}strategy\0\u{3}positive_vectors\0\u{3}negative_vectors\0\u{1}timeout\0\u{3}shard_key_selector\0")
 
@@ -8225,7 +10390,8 @@ extension Qdrant_RecommendPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Mes
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -8256,7 +10422,8 @@ extension Qdrant_RecommendPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -8357,13 +10524,14 @@ extension Qdrant_RecommendPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension Qdrant_TargetVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_TargetVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TargetVector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}single\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -8385,6 +10553,7 @@ extension Qdrant_TargetVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8401,13 +10570,14 @@ extension Qdrant_TargetVector: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_VectorExample: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_VectorExample: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".VectorExample"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}vector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -8442,6 +10612,7 @@ extension Qdrant_VectorExample: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8466,13 +10637,14 @@ extension Qdrant_VectorExample: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_ContextExamplePair: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ContextExamplePair: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ContextExamplePair"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}positive\0\u{1}negative\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._positive) }()
@@ -8483,6 +10655,7 @@ extension Qdrant_ContextExamplePair: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8503,7 +10676,7 @@ extension Qdrant_ContextExamplePair: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_DiscoverPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DiscoverPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DiscoverPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}target\0\u{1}context\0\u{1}filter\0\u{1}limit\0\u{3}with_payload\0\u{1}params\0\u{1}offset\0\u{1}using\0\u{3}with_vectors\0\u{3}lookup_from\0\u{3}read_consistency\0\u{1}timeout\0\u{3}shard_key_selector\0")
 
@@ -8560,7 +10733,8 @@ extension Qdrant_DiscoverPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -8585,7 +10759,8 @@ extension Qdrant_DiscoverPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -8662,13 +10837,14 @@ extension Qdrant_DiscoverPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_DiscoverBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DiscoverBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DiscoverBatchPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{3}discover_points\0\u{3}read_consistency\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -8681,6 +10857,7 @@ extension Qdrant_DiscoverBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8709,13 +10886,14 @@ extension Qdrant_DiscoverBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_CountPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_CountPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CountPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}filter\0\u{1}exact\0\u{3}read_consistency\0\u{3}shard_key_selector\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -8730,6 +10908,7 @@ extension Qdrant_CountPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8766,13 +10945,14 @@ extension Qdrant_CountPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_RecommendInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecommendInput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}positive\0\u{1}negative\0\u{1}strategy\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.positive) }()
@@ -8784,6 +10964,7 @@ extension Qdrant_RecommendInput: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8808,13 +10989,14 @@ extension Qdrant_RecommendInput: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_ContextInputPair: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ContextInputPair: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ContextInputPair"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}positive\0\u{1}negative\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._positive) }()
@@ -8825,6 +11007,7 @@ extension Qdrant_ContextInputPair: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8845,13 +11028,14 @@ extension Qdrant_ContextInputPair: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_DiscoverInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DiscoverInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DiscoverInput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}target\0\u{1}context\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._target) }()
@@ -8862,6 +11046,7 @@ extension Qdrant_DiscoverInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8882,13 +11067,14 @@ extension Qdrant_DiscoverInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_ContextInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ContextInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ContextInput"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}pairs\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.pairs) }()
@@ -8911,13 +11097,183 @@ extension Qdrant_ContextInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_Formula: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RelevanceFeedbackInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RelevanceFeedbackInput"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}target\0\u{1}feedback\0\u{1}strategy\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._target) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.feedback) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._strategy) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._target {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.feedback.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.feedback, fieldNumber: 2)
+    }
+    try { if let v = self._strategy {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_RelevanceFeedbackInput, rhs: Qdrant_RelevanceFeedbackInput) -> Bool {
+    if lhs._target != rhs._target {return false}
+    if lhs.feedback != rhs.feedback {return false}
+    if lhs._strategy != rhs._strategy {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_FeedbackItem: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".FeedbackItem"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}example\0\u{1}score\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._example) }()
+      case 2: try { try decoder.decodeSingularFloatField(value: &self.score) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._example {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if self.score.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.score, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_FeedbackItem, rhs: Qdrant_FeedbackItem) -> Bool {
+    if lhs._example != rhs._example {return false}
+    if lhs.score != rhs.score {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_FeedbackStrategy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".FeedbackStrategy"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}naive\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try {
+        var v: Qdrant_NaiveFeedbackStrategy?
+        var hadOneofValue = false
+        if let current = self.variant {
+          hadOneofValue = true
+          if case .naive(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.variant = .naive(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if case .naive(let v)? = self.variant {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_FeedbackStrategy, rhs: Qdrant_FeedbackStrategy) -> Bool {
+    if lhs.variant != rhs.variant {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_NaiveFeedbackStrategy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".NaiveFeedbackStrategy"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}a\0\u{1}b\0\u{1}c\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularFloatField(value: &self.a) }()
+      case 2: try { try decoder.decodeSingularFloatField(value: &self.b) }()
+      case 3: try { try decoder.decodeSingularFloatField(value: &self.c) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.a.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.a, fieldNumber: 1)
+    }
+    if self.b.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.b, fieldNumber: 2)
+    }
+    if self.c.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.c, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_NaiveFeedbackStrategy, rhs: Qdrant_NaiveFeedbackStrategy) -> Bool {
+    if lhs.a != rhs.a {return false}
+    if lhs.b != rhs.b {return false}
+    if lhs.c != rhs.c {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_Formula: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Formula"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}expression\0\u{1}defaults\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._expression) }()
@@ -8928,6 +11284,7 @@ extension Qdrant_Formula: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -8948,9 +11305,9 @@ extension Qdrant_Formula: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension Qdrant_Expression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Expression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Expression"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}constant\0\u{1}variable\0\u{1}condition\0\u{3}geo_distance\0\u{1}datetime\0\u{3}datetime_key\0\u{1}mult\0\u{1}sum\0\u{1}div\0\u{1}neg\0\u{1}abs\0\u{1}sqrt\0\u{1}pow\0\u{1}exp\0\u{1}log10\0\u{1}ln\0\u{3}exp_decay\0\u{3}gauss_decay\0\u{3}lin_decay\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}constant\0\u{1}variable\0\u{1}condition\0\u{3}geo_distance\0\u{1}datetime\0\u{3}datetime_key\0\u{1}mult\0\u{1}sum\0\u{1}div\0\u{1}neg\0\u{1}abs\0\u{1}sqrt\0\u{1}pow\0\u{1}exp\0\u{1}log10\0\u{1}ln\0\u{3}exp_decay\0\u{3}gauss_decay\0\u{3}lin_decay\0\u{1}acosh\0\u{1}max\0\u{1}min\0")
 
   fileprivate class _StorageClass {
     var _variant: Qdrant_Expression.OneOf_Variant?
@@ -8979,7 +11336,8 @@ extension Qdrant_Expression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try {
@@ -9209,6 +11567,45 @@ extension Qdrant_Expression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
             _storage._variant = .linDecay(v)
           }
         }()
+        case 20: try {
+          var v: Qdrant_Expression?
+          var hadOneofValue = false
+          if let current = _storage._variant {
+            hadOneofValue = true
+            if case .acosh(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {
+            if hadOneofValue {try decoder.handleConflictingOneOf()}
+            _storage._variant = .acosh(v)
+          }
+        }()
+        case 21: try {
+          var v: Qdrant_MaxExpression?
+          var hadOneofValue = false
+          if let current = _storage._variant {
+            hadOneofValue = true
+            if case .max(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {
+            if hadOneofValue {try decoder.handleConflictingOneOf()}
+            _storage._variant = .max(v)
+          }
+        }()
+        case 22: try {
+          var v: Qdrant_MinExpression?
+          var hadOneofValue = false
+          if let current = _storage._variant {
+            hadOneofValue = true
+            if case .min(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {
+            if hadOneofValue {try decoder.handleConflictingOneOf()}
+            _storage._variant = .min(v)
+          }
+        }()
         default: break
         }
       }
@@ -9217,7 +11614,8 @@ extension Qdrant_Expression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       switch _storage._variant {
@@ -9297,6 +11695,18 @@ extension Qdrant_Expression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
         guard case .linDecay(let v)? = _storage._variant else { preconditionFailure() }
         try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
       }()
+      case .acosh?: try {
+        guard case .acosh(let v)? = _storage._variant else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
+      }()
+      case .max?: try {
+        guard case .max(let v)? = _storage._variant else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
+      }()
+      case .min?: try {
+        guard case .min(let v)? = _storage._variant else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
+      }()
       case nil: break
       }
     }
@@ -9318,13 +11728,14 @@ extension Qdrant_Expression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension Qdrant_GeoDistance: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_GeoDistance: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GeoDistance"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}origin\0\u{1}to\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._origin) }()
@@ -9335,6 +11746,7 @@ extension Qdrant_GeoDistance: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -9355,13 +11767,14 @@ extension Qdrant_GeoDistance: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_MultExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_MultExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".MultExpression"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}mult\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.mult) }()
@@ -9384,13 +11797,14 @@ extension Qdrant_MultExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_SumExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SumExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SumExpression"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}sum\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.sum) }()
@@ -9413,7 +11827,67 @@ extension Qdrant_SumExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_DivExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_MaxExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MaxExpression"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}max\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.max) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.max.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.max, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_MaxExpression, rhs: Qdrant_MaxExpression) -> Bool {
+    if lhs.max != rhs.max {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_MinExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MinExpression"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}min\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.min) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.min.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.min, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_MinExpression, rhs: Qdrant_MinExpression) -> Bool {
+    if lhs.min != rhs.min {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_DivExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DivExpression"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}left\0\u{1}right\0\u{3}by_zero_default\0")
 
@@ -9448,7 +11922,8 @@ extension Qdrant_DivExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularMessageField(value: &_storage._left) }()
@@ -9462,7 +11937,8 @@ extension Qdrant_DivExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       try { if let v = _storage._left {
@@ -9495,7 +11971,7 @@ extension Qdrant_DivExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_PowExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PowExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PowExpression"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}base\0\u{1}exponent\0")
 
@@ -9528,7 +12004,8 @@ extension Qdrant_PowExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularMessageField(value: &_storage._base) }()
@@ -9541,7 +12018,8 @@ extension Qdrant_PowExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       try { if let v = _storage._base {
@@ -9570,7 +12048,7 @@ extension Qdrant_PowExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_DecayParamsExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DecayParamsExpression: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DecayParamsExpression"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}x\0\u{1}target\0\u{1}scale\0\u{1}midpoint\0")
 
@@ -9607,7 +12085,8 @@ extension Qdrant_DecayParamsExpression: SwiftProtobuf.Message, SwiftProtobuf._Me
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularMessageField(value: &_storage._x) }()
@@ -9622,7 +12101,8 @@ extension Qdrant_DecayParamsExpression: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       try { if let v = _storage._x {
@@ -9659,13 +12139,14 @@ extension Qdrant_DecayParamsExpression: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension Qdrant_NearestInputWithMmr: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_NearestInputWithMmr: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".NearestInputWithMmr"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}nearest\0\u{1}mmr\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._nearest) }()
@@ -9676,6 +12157,7 @@ extension Qdrant_NearestInputWithMmr: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -9696,13 +12178,14 @@ extension Qdrant_NearestInputWithMmr: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_Mmr: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Mmr: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Mmr"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}diversity\0\u{3}candidates_limit\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 2: try { try decoder.decodeSingularFloatField(value: &self._diversity) }()
@@ -9713,6 +12196,7 @@ extension Qdrant_Mmr: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -9733,45 +12217,53 @@ extension Qdrant_Mmr: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
   }
 }
 
-extension Qdrant_Rrf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Rrf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Rrf"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}k\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}k\0\u{1}weights\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt32Field(value: &self._k) }()
+      case 2: try { try decoder.decodeRepeatedFloatField(value: &self.weights) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
     try { if let v = self._k {
       try visitor.visitSingularUInt32Field(value: v, fieldNumber: 1)
     } }()
+    if !self.weights.isEmpty {
+      try visitor.visitPackedFloatField(value: self.weights, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Qdrant_Rrf, rhs: Qdrant_Rrf) -> Bool {
     if lhs._k != rhs._k {return false}
+    if lhs.weights != rhs.weights {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Qdrant_Query: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Query: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Query"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}nearest\0\u{1}recommend\0\u{1}discover\0\u{1}context\0\u{3}order_by\0\u{1}fusion\0\u{1}sample\0\u{1}formula\0\u{3}nearest_with_mmr\0\u{1}rrf\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}nearest\0\u{1}recommend\0\u{1}discover\0\u{1}context\0\u{3}order_by\0\u{1}fusion\0\u{1}sample\0\u{1}formula\0\u{3}nearest_with_mmr\0\u{1}rrf\0\u{3}relevance_feedback\0\u{1}text\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -9894,12 +12386,39 @@ extension Qdrant_Query: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.variant = .rrf(v)
         }
       }()
+      case 11: try {
+        var v: Qdrant_RelevanceFeedbackInput?
+        var hadOneofValue = false
+        if let current = self.variant {
+          hadOneofValue = true
+          if case .relevanceFeedback(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.variant = .relevanceFeedback(v)
+        }
+      }()
+      case 12: try {
+        var v: Qdrant_TextQuery?
+        var hadOneofValue = false
+        if let current = self.variant {
+          hadOneofValue = true
+          if case .text(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.variant = .text(v)
+        }
+      }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -9944,6 +12463,14 @@ extension Qdrant_Query: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
       guard case .rrf(let v)? = self.variant else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
     }()
+    case .relevanceFeedback?: try {
+      guard case .relevanceFeedback(let v)? = self.variant else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+    }()
+    case .text?: try {
+      guard case .text(let v)? = self.variant else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -9956,7 +12483,97 @@ extension Qdrant_Query: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension Qdrant_PrefetchQuery: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_TextQuery: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TextQuery"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}query\0\u{1}bm25\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.query) }()
+      case 2: try {
+        var v: Qdrant_Bm25Params?
+        var hadOneofValue = false
+        if let current = self.scoring {
+          hadOneofValue = true
+          if case .bm25(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.scoring = .bm25(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.query.isEmpty {
+      try visitor.visitSingularStringField(value: self.query, fieldNumber: 1)
+    }
+    try { if case .bm25(let v)? = self.scoring {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_TextQuery, rhs: Qdrant_TextQuery) -> Bool {
+    if lhs.query != rhs.query {return false}
+    if lhs.scoring != rhs.scoring {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_Bm25Params: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Bm25Params"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}k\0\u{1}b\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularFloatField(value: &self._k) }()
+      case 2: try { try decoder.decodeSingularFloatField(value: &self._b) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._k {
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._b {
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Qdrant_Bm25Params, rhs: Qdrant_Bm25Params) -> Bool {
+    if lhs._k != rhs._k {return false}
+    if lhs._b != rhs._b {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+nonisolated extension Qdrant_PrefetchQuery: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PrefetchQuery"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}prefetch\0\u{1}query\0\u{1}using\0\u{1}filter\0\u{1}params\0\u{3}score_threshold\0\u{1}limit\0\u{3}lookup_from\0")
 
@@ -10001,7 +12618,8 @@ extension Qdrant_PrefetchQuery: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeRepeatedMessageField(value: &_storage._prefetch) }()
@@ -10020,7 +12638,8 @@ extension Qdrant_PrefetchQuery: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._prefetch.isEmpty {
@@ -10073,7 +12692,7 @@ extension Qdrant_PrefetchQuery: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_QueryPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_QueryPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}prefetch\0\u{1}query\0\u{1}using\0\u{1}filter\0\u{1}params\0\u{3}score_threshold\0\u{1}limit\0\u{1}offset\0\u{3}with_vectors\0\u{3}with_payload\0\u{3}read_consistency\0\u{3}shard_key_selector\0\u{3}lookup_from\0\u{1}timeout\0")
 
@@ -10132,7 +12751,8 @@ extension Qdrant_QueryPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -10158,7 +12778,8 @@ extension Qdrant_QueryPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -10239,13 +12860,14 @@ extension Qdrant_QueryPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_QueryBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_QueryBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryBatchPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{3}query_points\0\u{3}read_consistency\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -10258,6 +12880,7 @@ extension Qdrant_QueryBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -10286,7 +12909,7 @@ extension Qdrant_QueryBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_QueryPointGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_QueryPointGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryPointGroups"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}prefetch\0\u{1}query\0\u{1}using\0\u{1}filter\0\u{1}params\0\u{3}score_threshold\0\u{3}with_payload\0\u{3}with_vectors\0\u{3}lookup_from\0\u{1}limit\0\u{3}group_size\0\u{3}group_by\0\u{3}read_consistency\0\u{3}with_lookup\0\u{1}timeout\0\u{3}shard_key_selector\0")
 
@@ -10349,7 +12972,8 @@ extension Qdrant_QueryPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Message
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
-            // allocates stack space for every case branch when no optimizations are
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
         // enabled. https://github.com/apple/swift-protobuf/issues/1034
         switch fieldNumber {
         case 1: try { try decoder.decodeSingularStringField(value: &_storage._collectionName) }()
@@ -10377,7 +13001,8 @@ extension Qdrant_QueryPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        // allocates stack space for every if/case branch local when no optimizations
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
       // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
       // https://github.com/apple/swift-protobuf/issues/1182
       if !_storage._collectionName.isEmpty {
@@ -10466,13 +13091,14 @@ extension Qdrant_QueryPointGroups: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_FacetCounts: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_FacetCounts: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FacetCounts"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}key\0\u{1}filter\0\u{1}limit\0\u{1}exact\0\u{1}timeout\0\u{3}read_consistency\0\u{3}shard_key_selector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -10489,6 +13115,7 @@ extension Qdrant_FacetCounts: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -10533,13 +13160,14 @@ extension Qdrant_FacetCounts: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_FacetValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_FacetValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FacetValue"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}string_value\0\u{3}integer_value\0\u{3}bool_value\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -10572,6 +13200,7 @@ extension Qdrant_FacetValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -10600,13 +13229,14 @@ extension Qdrant_FacetValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension Qdrant_FacetHit: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_FacetHit: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FacetHit"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}value\0\u{1}count\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._value) }()
@@ -10617,6 +13247,7 @@ extension Qdrant_FacetHit: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -10637,13 +13268,14 @@ extension Qdrant_FacetHit: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
-extension Qdrant_SearchMatrixPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchMatrixPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchMatrixPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}filter\0\u{1}sample\0\u{1}limit\0\u{1}using\0\u{1}timeout\0\u{3}read_consistency\0\u{3}shard_key_selector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -10660,6 +13292,7 @@ extension Qdrant_SearchMatrixPoints: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -10704,13 +13337,14 @@ extension Qdrant_SearchMatrixPoints: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_SearchMatrixPairs: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchMatrixPairs: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchMatrixPairs"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}pairs\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.pairs) }()
@@ -10733,13 +13367,14 @@ extension Qdrant_SearchMatrixPairs: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Qdrant_SearchMatrixPair: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchMatrixPair: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchMatrixPair"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}a\0\u{1}b\0\u{1}score\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._a) }()
@@ -10751,6 +13386,7 @@ extension Qdrant_SearchMatrixPair: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -10775,13 +13411,14 @@ extension Qdrant_SearchMatrixPair: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_SearchMatrixOffsets: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchMatrixOffsets: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchMatrixOffsets"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}offsets_row\0\u{3}offsets_col\0\u{1}scores\0\u{1}ids\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedUInt64Field(value: &self.offsetsRow) }()
@@ -10819,13 +13456,14 @@ extension Qdrant_SearchMatrixOffsets: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_PointsUpdateOperation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PointsUpdateOperation"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}upsert\0\u{3}delete_deprecated\0\u{3}set_payload\0\u{3}overwrite_payload\0\u{3}delete_payload\0\u{3}clear_payload_deprecated\0\u{3}update_vectors\0\u{3}delete_vectors\0\u{3}delete_points\0\u{3}clear_payload\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -10964,6 +13602,7 @@ extension Qdrant_PointsUpdateOperation: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11020,24 +13659,27 @@ extension Qdrant_PointsUpdateOperation: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension Qdrant_PointsUpdateOperation.PointStructList: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.PointStructList: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".PointStructList"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}points\0\u{3}shard_key_selector\0\u{3}update_filter\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}points\0\u{3}shard_key_selector\0\u{3}update_filter\0\u{3}update_mode\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.points) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._shardKeySelector) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._updateFilter) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self._updateMode) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11050,6 +13692,9 @@ extension Qdrant_PointsUpdateOperation.PointStructList: SwiftProtobuf.Message, S
     try { if let v = self._updateFilter {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     } }()
+    try { if let v = self._updateMode {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -11057,18 +13702,20 @@ extension Qdrant_PointsUpdateOperation.PointStructList: SwiftProtobuf.Message, S
     if lhs.points != rhs.points {return false}
     if lhs._shardKeySelector != rhs._shardKeySelector {return false}
     if lhs._updateFilter != rhs._updateFilter {return false}
+    if lhs._updateMode != rhs._updateMode {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Qdrant_PointsUpdateOperation.SetPayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.SetPayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".SetPayload"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}payload\0\u{3}points_selector\0\u{3}shard_key_selector\0\u{1}key\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Qdrant_Value>.self, value: &self.payload) }()
@@ -11081,6 +13728,7 @@ extension Qdrant_PointsUpdateOperation.SetPayload: SwiftProtobuf.Message, SwiftP
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11109,13 +13757,14 @@ extension Qdrant_PointsUpdateOperation.SetPayload: SwiftProtobuf.Message, SwiftP
   }
 }
 
-extension Qdrant_PointsUpdateOperation.OverwritePayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.OverwritePayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".OverwritePayload"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}payload\0\u{3}points_selector\0\u{3}shard_key_selector\0\u{1}key\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Qdrant_Value>.self, value: &self.payload) }()
@@ -11128,6 +13777,7 @@ extension Qdrant_PointsUpdateOperation.OverwritePayload: SwiftProtobuf.Message, 
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11156,13 +13806,14 @@ extension Qdrant_PointsUpdateOperation.OverwritePayload: SwiftProtobuf.Message, 
   }
 }
 
-extension Qdrant_PointsUpdateOperation.DeletePayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.DeletePayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".DeletePayload"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}keys\0\u{3}points_selector\0\u{3}shard_key_selector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedStringField(value: &self.keys) }()
@@ -11174,6 +13825,7 @@ extension Qdrant_PointsUpdateOperation.DeletePayload: SwiftProtobuf.Message, Swi
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11198,13 +13850,14 @@ extension Qdrant_PointsUpdateOperation.DeletePayload: SwiftProtobuf.Message, Swi
   }
 }
 
-extension Qdrant_PointsUpdateOperation.UpdateVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.UpdateVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".UpdateVectors"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}points\0\u{3}shard_key_selector\0\u{3}update_filter\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.points) }()
@@ -11216,6 +13869,7 @@ extension Qdrant_PointsUpdateOperation.UpdateVectors: SwiftProtobuf.Message, Swi
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11240,13 +13894,14 @@ extension Qdrant_PointsUpdateOperation.UpdateVectors: SwiftProtobuf.Message, Swi
   }
 }
 
-extension Qdrant_PointsUpdateOperation.DeleteVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.DeleteVectors: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".DeleteVectors"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}points_selector\0\u{1}vectors\0\u{3}shard_key_selector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._pointsSelector) }()
@@ -11258,6 +13913,7 @@ extension Qdrant_PointsUpdateOperation.DeleteVectors: SwiftProtobuf.Message, Swi
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11282,13 +13938,14 @@ extension Qdrant_PointsUpdateOperation.DeleteVectors: SwiftProtobuf.Message, Swi
   }
 }
 
-extension Qdrant_PointsUpdateOperation.DeletePoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.DeletePoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".DeletePoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}points\0\u{3}shard_key_selector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._points) }()
@@ -11299,6 +13956,7 @@ extension Qdrant_PointsUpdateOperation.DeletePoints: SwiftProtobuf.Message, Swif
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11319,13 +13977,14 @@ extension Qdrant_PointsUpdateOperation.DeletePoints: SwiftProtobuf.Message, Swif
   }
 }
 
-extension Qdrant_PointsUpdateOperation.ClearPayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsUpdateOperation.ClearPayload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = Qdrant_PointsUpdateOperation.protoMessageName + ".ClearPayload"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}points\0\u{3}shard_key_selector\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._points) }()
@@ -11336,6 +13995,7 @@ extension Qdrant_PointsUpdateOperation.ClearPayload: SwiftProtobuf.Message, Swif
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11356,13 +14016,14 @@ extension Qdrant_PointsUpdateOperation.ClearPayload: SwiftProtobuf.Message, Swif
   }
 }
 
-extension Qdrant_UpdateBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_UpdateBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UpdateBatchPoints"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{1}wait\0\u{1}operations\0\u{1}ordering\0\u{1}timeout\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.collectionName) }()
@@ -11376,6 +14037,7 @@ extension Qdrant_UpdateBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11408,13 +14070,14 @@ extension Qdrant_UpdateBatchPoints: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Qdrant_PointsOperationResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsOperationResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PointsOperationResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._result) }()
@@ -11426,6 +14089,7 @@ extension Qdrant_PointsOperationResponse: SwiftProtobuf.Message, SwiftProtobuf._
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11450,13 +14114,14 @@ extension Qdrant_PointsOperationResponse: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension Qdrant_UpdateResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_UpdateResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UpdateResult"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}operation_id\0\u{1}status\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt64Field(value: &self._operationID) }()
@@ -11467,6 +14132,7 @@ extension Qdrant_UpdateResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11487,13 +14153,14 @@ extension Qdrant_UpdateResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_OrderValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_OrderValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".OrderValue"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}int\0\u{1}float\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -11518,6 +14185,7 @@ extension Qdrant_OrderValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11542,13 +14210,14 @@ extension Qdrant_OrderValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension Qdrant_ScoredPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ScoredPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ScoredPoint"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}payload\0\u{1}score\0\u{2}\u{2}version\0\u{1}vectors\0\u{3}shard_key\0\u{3}order_value\0\u{c}\u{4}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._id) }()
@@ -11564,6 +14233,7 @@ extension Qdrant_ScoredPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11604,13 +14274,14 @@ extension Qdrant_ScoredPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_GroupId: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_GroupId: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GroupId"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}unsigned_value\0\u{3}integer_value\0\u{3}string_value\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -11643,6 +14314,7 @@ extension Qdrant_GroupId: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11671,13 +14343,14 @@ extension Qdrant_GroupId: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
-extension Qdrant_PointGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PointGroup"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}hits\0\u{1}lookup\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._id) }()
@@ -11689,6 +14362,7 @@ extension Qdrant_PointGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11713,13 +14387,14 @@ extension Qdrant_PointGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension Qdrant_GroupsResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_GroupsResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GroupsResult"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}groups\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.groups) }()
@@ -11742,13 +14417,14 @@ extension Qdrant_GroupsResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
-extension Qdrant_SearchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -11760,6 +14436,7 @@ extension Qdrant_SearchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11784,13 +14461,14 @@ extension Qdrant_SearchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_QueryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_QueryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -11802,6 +14480,7 @@ extension Qdrant_QueryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11826,13 +14505,14 @@ extension Qdrant_QueryResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_QueryBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_QueryBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryBatchResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -11844,6 +14524,7 @@ extension Qdrant_QueryBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11868,13 +14549,14 @@ extension Qdrant_QueryBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Messa
   }
 }
 
-extension Qdrant_QueryGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_QueryGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".QueryGroupsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._result) }()
@@ -11886,6 +14568,7 @@ extension Qdrant_QueryGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11910,13 +14593,14 @@ extension Qdrant_QueryGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_BatchResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_BatchResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".BatchResult"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -11939,13 +14623,14 @@ extension Qdrant_BatchResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_SearchBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchBatchResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -11957,6 +14642,7 @@ extension Qdrant_SearchBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -11981,13 +14667,14 @@ extension Qdrant_SearchBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_SearchGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchGroupsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._result) }()
@@ -11999,6 +14686,7 @@ extension Qdrant_SearchGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12023,13 +14711,14 @@ extension Qdrant_SearchGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension Qdrant_CountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_CountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CountResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._result) }()
@@ -12041,6 +14730,7 @@ extension Qdrant_CountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12065,13 +14755,14 @@ extension Qdrant_CountResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_ScrollResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ScrollResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ScrollResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}next_page_offset\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._nextPageOffset) }()
@@ -12084,6 +14775,7 @@ extension Qdrant_ScrollResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12112,13 +14804,14 @@ extension Qdrant_ScrollResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_CountResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_CountResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CountResult"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}count\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt64Field(value: &self.count) }()
@@ -12141,13 +14834,14 @@ extension Qdrant_CountResult: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_RetrievedPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RetrievedPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RetrievedPoint"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}payload\0\u{2}\u{2}vectors\0\u{3}shard_key\0\u{3}order_value\0\u{c}\u{3}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._id) }()
@@ -12161,6 +14855,7 @@ extension Qdrant_RetrievedPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12193,13 +14888,14 @@ extension Qdrant_RetrievedPoint: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_GetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_GetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".GetResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -12211,6 +14907,7 @@ extension Qdrant_GetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12235,13 +14932,14 @@ extension Qdrant_GetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_RecommendResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecommendResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -12253,6 +14951,7 @@ extension Qdrant_RecommendResponse: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12277,13 +14976,14 @@ extension Qdrant_RecommendResponse: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Qdrant_RecommendBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecommendBatchResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -12295,6 +14995,7 @@ extension Qdrant_RecommendBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12319,13 +15020,14 @@ extension Qdrant_RecommendBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension Qdrant_DiscoverResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DiscoverResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DiscoverResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -12337,6 +15039,7 @@ extension Qdrant_DiscoverResponse: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12361,13 +15064,14 @@ extension Qdrant_DiscoverResponse: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Qdrant_DiscoverBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DiscoverBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DiscoverBatchResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -12379,6 +15083,7 @@ extension Qdrant_DiscoverBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12403,13 +15108,14 @@ extension Qdrant_DiscoverBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension Qdrant_RecommendGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_RecommendGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecommendGroupsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._result) }()
@@ -12421,6 +15127,7 @@ extension Qdrant_RecommendGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12445,13 +15152,14 @@ extension Qdrant_RecommendGroupsResponse: SwiftProtobuf.Message, SwiftProtobuf._
   }
 }
 
-extension Qdrant_UpdateBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_UpdateBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".UpdateBatchResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.result) }()
@@ -12463,6 +15171,7 @@ extension Qdrant_UpdateBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12487,13 +15196,14 @@ extension Qdrant_UpdateBatchResponse: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_FacetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_FacetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FacetResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}hits\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.hits) }()
@@ -12505,6 +15215,7 @@ extension Qdrant_FacetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12529,13 +15240,14 @@ extension Qdrant_FacetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_SearchMatrixPairsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchMatrixPairsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchMatrixPairsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._result) }()
@@ -12547,6 +15259,7 @@ extension Qdrant_SearchMatrixPairsResponse: SwiftProtobuf.Message, SwiftProtobuf
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12571,13 +15284,14 @@ extension Qdrant_SearchMatrixPairsResponse: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension Qdrant_SearchMatrixOffsetsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SearchMatrixOffsetsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SearchMatrixOffsetsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}time\0\u{1}usage\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._result) }()
@@ -12589,6 +15303,7 @@ extension Qdrant_SearchMatrixOffsetsResponse: SwiftProtobuf.Message, SwiftProtob
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12613,13 +15328,14 @@ extension Qdrant_SearchMatrixOffsetsResponse: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Qdrant_PointsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PointsSelector"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}points\0\u{1}filter\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
@@ -12654,6 +15370,7 @@ extension Qdrant_PointsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12678,13 +15395,14 @@ extension Qdrant_PointsSelector: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_PointsIdsList: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointsIdsList: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PointsIdsList"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}ids\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.ids) }()
@@ -12707,13 +15425,14 @@ extension Qdrant_PointsIdsList: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
-extension Qdrant_PointStruct: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_PointStruct: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PointStruct"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{2}\u{2}payload\0\u{1}vectors\0\u{c}\u{2}\u{1}")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._id) }()
@@ -12725,6 +15444,7 @@ extension Qdrant_PointStruct: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12749,13 +15469,14 @@ extension Qdrant_PointStruct: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension Qdrant_Usage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_Usage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Usage"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}hardware\0\u{1}inference\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._hardware) }()
@@ -12766,6 +15487,7 @@ extension Qdrant_Usage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
@@ -12786,13 +15508,14 @@ extension Qdrant_Usage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   }
 }
 
-extension Qdrant_InferenceUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_InferenceUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".InferenceUsage"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}models\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Qdrant_ModelUsage>.self, value: &self.models) }()
@@ -12815,13 +15538,14 @@ extension Qdrant_InferenceUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension Qdrant_ModelUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ModelUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ModelUsage"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}tokens\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularUInt64Field(value: &self.tokens) }()
@@ -12844,60 +15568,75 @@ extension Qdrant_ModelUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension Qdrant_HardwareUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_HardwareUsage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HardwareUsage"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}cpu\0\u{3}payload_io_read\0\u{3}payload_io_write\0\u{3}payload_index_io_read\0\u{3}payload_index_io_write\0\u{3}vector_io_read\0\u{3}vector_io_write\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}cpu\0\u{3}payload_io_read\0\u{3}payload_io_write\0\u{3}payload_index_io_read\0\u{3}payload_index_io_write\0\u{3}vector_io_read\0\u{3}vector_io_write\0\u{3}remote_io_cached_read\0\u{3}remote_io_non_cached_read\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
-        // allocates stack space for every case branch when no optimizations are
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.cpu) }()
-      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.payloadIoRead) }()
-      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.payloadIoWrite) }()
-      case 4: try { try decoder.decodeSingularUInt64Field(value: &self.payloadIndexIoRead) }()
-      case 5: try { try decoder.decodeSingularUInt64Field(value: &self.payloadIndexIoWrite) }()
-      case 6: try { try decoder.decodeSingularUInt64Field(value: &self.vectorIoRead) }()
-      case 7: try { try decoder.decodeSingularUInt64Field(value: &self.vectorIoWrite) }()
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self._cpu) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self._payloadIoRead) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self._payloadIoWrite) }()
+      case 4: try { try decoder.decodeSingularUInt64Field(value: &self._payloadIndexIoRead) }()
+      case 5: try { try decoder.decodeSingularUInt64Field(value: &self._payloadIndexIoWrite) }()
+      case 6: try { try decoder.decodeSingularUInt64Field(value: &self._vectorIoRead) }()
+      case 7: try { try decoder.decodeSingularUInt64Field(value: &self._vectorIoWrite) }()
+      case 8: try { try decoder.decodeSingularUInt64Field(value: &self._remoteIoCachedRead) }()
+      case 9: try { try decoder.decodeSingularUInt64Field(value: &self._remoteIoNonCachedRead) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.cpu != 0 {
-      try visitor.visitSingularUInt64Field(value: self.cpu, fieldNumber: 1)
-    }
-    if self.payloadIoRead != 0 {
-      try visitor.visitSingularUInt64Field(value: self.payloadIoRead, fieldNumber: 2)
-    }
-    if self.payloadIoWrite != 0 {
-      try visitor.visitSingularUInt64Field(value: self.payloadIoWrite, fieldNumber: 3)
-    }
-    if self.payloadIndexIoRead != 0 {
-      try visitor.visitSingularUInt64Field(value: self.payloadIndexIoRead, fieldNumber: 4)
-    }
-    if self.payloadIndexIoWrite != 0 {
-      try visitor.visitSingularUInt64Field(value: self.payloadIndexIoWrite, fieldNumber: 5)
-    }
-    if self.vectorIoRead != 0 {
-      try visitor.visitSingularUInt64Field(value: self.vectorIoRead, fieldNumber: 6)
-    }
-    if self.vectorIoWrite != 0 {
-      try visitor.visitSingularUInt64Field(value: self.vectorIoWrite, fieldNumber: 7)
-    }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._cpu {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._payloadIoRead {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._payloadIoWrite {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._payloadIndexIoRead {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._payloadIndexIoWrite {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._vectorIoRead {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._vectorIoWrite {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._remoteIoCachedRead {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._remoteIoNonCachedRead {
+      try visitor.visitSingularUInt64Field(value: v, fieldNumber: 9)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Qdrant_HardwareUsage, rhs: Qdrant_HardwareUsage) -> Bool {
-    if lhs.cpu != rhs.cpu {return false}
-    if lhs.payloadIoRead != rhs.payloadIoRead {return false}
-    if lhs.payloadIoWrite != rhs.payloadIoWrite {return false}
-    if lhs.payloadIndexIoRead != rhs.payloadIndexIoRead {return false}
-    if lhs.payloadIndexIoWrite != rhs.payloadIndexIoWrite {return false}
-    if lhs.vectorIoRead != rhs.vectorIoRead {return false}
-    if lhs.vectorIoWrite != rhs.vectorIoWrite {return false}
+    if lhs._cpu != rhs._cpu {return false}
+    if lhs._payloadIoRead != rhs._payloadIoRead {return false}
+    if lhs._payloadIoWrite != rhs._payloadIoWrite {return false}
+    if lhs._payloadIndexIoRead != rhs._payloadIndexIoRead {return false}
+    if lhs._payloadIndexIoWrite != rhs._payloadIndexIoWrite {return false}
+    if lhs._vectorIoRead != rhs._vectorIoRead {return false}
+    if lhs._vectorIoWrite != rhs._vectorIoWrite {return false}
+    if lhs._remoteIoCachedRead != rhs._remoteIoCachedRead {return false}
+    if lhs._remoteIoNonCachedRead != rhs._remoteIoNonCachedRead {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

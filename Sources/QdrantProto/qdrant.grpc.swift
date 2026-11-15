@@ -1,3 +1,9 @@
+/// Public client subset of Qdrant v1.20.1 lib/api/src/grpc/proto/qdrant.proto.
+/// Internal service imports (collections_internal_service, points_internal_service,
+/// qdrant_internal_service, raft_service, shard_snapshots_service, storage_read_service,
+/// and the public service imports that only exist to register those RPCs) are omitted.
+/// HealthCheckRequest / HealthCheckReply match the upstream message definitions.
+
 // DO NOT EDIT.
 // swift-format-ignore-file
 // swiftlint:disable all
@@ -6,7 +12,7 @@
 // Source: qdrant.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -29,7 +35,8 @@ public enum Qdrant_Qdrant: Sendable {
             /// Descriptor for "HealthCheck".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Qdrant"),
-                method: "HealthCheck"
+                method: "HealthCheck",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "qdrant.Qdrant" service.
@@ -61,9 +68,9 @@ extension Qdrant_Qdrant {
         ///   - serializer: A serializer for `Qdrant_HealthCheckRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_HealthCheckReply` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func healthCheck<Result>(
             request: GRPCCore.ClientRequest<Qdrant_HealthCheckRequest>,
@@ -97,9 +104,9 @@ extension Qdrant_Qdrant {
         ///   - serializer: A serializer for `Qdrant_HealthCheckRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_HealthCheckReply` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func healthCheck<Result>(
             request: GRPCCore.ClientRequest<Qdrant_HealthCheckRequest>,
@@ -130,9 +137,9 @@ extension Qdrant_Qdrant.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_HealthCheckRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func healthCheck<Result>(
         request: GRPCCore.ClientRequest<Qdrant_HealthCheckRequest>,
@@ -160,9 +167,9 @@ extension Qdrant_Qdrant.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func healthCheck<Result>(
         _ message: Qdrant_HealthCheckRequest,

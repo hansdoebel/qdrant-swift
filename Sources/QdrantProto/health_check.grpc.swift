@@ -8,7 +8,7 @@
 // Source: health_check.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -31,7 +31,8 @@ public enum Grpc_Health_V1_Health: Sendable {
             /// Descriptor for "Check".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "grpc.health.v1.Health"),
-                method: "Check"
+                method: "Check",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "grpc.health.v1.Health" service.
@@ -63,9 +64,9 @@ extension Grpc_Health_V1_Health {
         ///   - serializer: A serializer for `Grpc_Health_V1_HealthCheckRequest` messages.
         ///   - deserializer: A deserializer for `Grpc_Health_V1_HealthCheckResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func check<Result>(
             request: GRPCCore.ClientRequest<Grpc_Health_V1_HealthCheckRequest>,
@@ -99,9 +100,9 @@ extension Grpc_Health_V1_Health {
         ///   - serializer: A serializer for `Grpc_Health_V1_HealthCheckRequest` messages.
         ///   - deserializer: A deserializer for `Grpc_Health_V1_HealthCheckResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func check<Result>(
             request: GRPCCore.ClientRequest<Grpc_Health_V1_HealthCheckRequest>,
@@ -132,9 +133,9 @@ extension Grpc_Health_V1_Health.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Grpc_Health_V1_HealthCheckRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func check<Result>(
         request: GRPCCore.ClientRequest<Grpc_Health_V1_HealthCheckRequest>,
@@ -162,9 +163,9 @@ extension Grpc_Health_V1_Health.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func check<Result>(
         _ message: Grpc_Health_V1_HealthCheckRequest,
