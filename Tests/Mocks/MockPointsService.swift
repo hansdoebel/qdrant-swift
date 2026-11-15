@@ -71,6 +71,11 @@ public final class MockPointsService: PointsServiceProtocol, @unchecked Sendable
     public private(set) var deleteFieldIndexCalls:
         [(collection: String, fieldName: String, wait: Bool)] = []
 
+    public private(set) var queryCallCount = 0
+    public private(set) var queryCalls: [QueryRequest] = []
+    public private(set) var queryBatchCallCount = 0
+    public private(set) var queryGroupsCallCount = 0
+
     // MARK: - Stubbed Results
 
     public var upsertResult: Result<Void, Error> = .success(())
@@ -87,6 +92,9 @@ public final class MockPointsService: PointsServiceProtocol, @unchecked Sendable
     public var clearPayloadResult: Result<Void, Error> = .success(())
     public var createFieldIndexResult: Result<Void, Error> = .success(())
     public var deleteFieldIndexResult: Result<Void, Error> = .success(())
+    public var queryResult: Result<[ScoredPoint], Error> = .success([])
+    public var queryBatchResult: Result<[[ScoredPoint]], Error> = .success([])
+    public var queryGroupsResult: Result<[PointGroup], Error> = .success([])
 
     // MARK: - Initialization
 
@@ -121,6 +129,10 @@ public final class MockPointsService: PointsServiceProtocol, @unchecked Sendable
         createFieldIndexCalls = []
         deleteFieldIndexCallCount = 0
         deleteFieldIndexCalls = []
+        queryCallCount = 0
+        queryCalls = []
+        queryBatchCallCount = 0
+        queryGroupsCallCount = 0
     }
 
     // MARK: - PointsServiceProtocol
@@ -287,5 +299,78 @@ public final class MockPointsService: PointsServiceProtocol, @unchecked Sendable
         deleteFieldIndexCallCount += 1
         deleteFieldIndexCalls.append((collection: collection, fieldName: fieldName, wait: wait))
         try deleteFieldIndexResult.get()
+    }
+
+    public func query(
+        collection: String,
+        query: QueryInput?,
+        prefetch: [PrefetchQuery],
+        using: String?,
+        filter: Filter?,
+        limit: UInt64,
+        offset: UInt64?,
+        scoreThreshold: Float?,
+        withPayload: Bool,
+        withVectors: Bool,
+        idf: IdfParams?
+    ) async throws -> [ScoredPoint] {
+        queryCallCount += 1
+        queryCalls.append(
+            QueryRequest(
+                query: query,
+                prefetch: prefetch,
+                using: using,
+                filter: filter,
+                limit: limit,
+                scoreThreshold: scoreThreshold,
+                withPayload: withPayload,
+                idf: idf
+            )
+        )
+        _ = offset
+        _ = withVectors
+        return try queryResult.get()
+    }
+
+    public func queryBatch(
+        collection: String,
+        queries: [QueryRequest]
+    ) async throws -> [[ScoredPoint]] {
+        queryBatchCallCount += 1
+        queryCalls.append(contentsOf: queries)
+        _ = collection
+        return try queryBatchResult.get()
+    }
+
+    public func queryGroups(
+        collection: String,
+        query: QueryInput?,
+        groupBy: String,
+        limit: UInt64,
+        groupSize: UInt64,
+        prefetch: [PrefetchQuery],
+        using: String?,
+        filter: Filter?,
+        scoreThreshold: Float?,
+        withPayload: Bool,
+        idf: IdfParams?
+    ) async throws -> [PointGroup] {
+        queryGroupsCallCount += 1
+        queryCalls.append(
+            QueryRequest(
+                query: query,
+                prefetch: prefetch,
+                using: using,
+                filter: filter,
+                limit: limit,
+                scoreThreshold: scoreThreshold,
+                withPayload: withPayload,
+                idf: idf
+            )
+        )
+        _ = collection
+        _ = groupBy
+        _ = groupSize
+        return try queryGroupsResult.get()
     }
 }

@@ -6,7 +6,7 @@ import QdrantProto
 
 /// Service for managing points in Qdrant collections.
 /// This facade delegates to specialized internal services for each operation category.
-public final class PointsService: Sendable {
+public final class PointsService: PointsServiceProtocol, Sendable {
     private let base: PointsServiceBase
     private let crud: PointsCRUDService
     private let search: SearchService
@@ -248,12 +248,13 @@ public final class PointsService: Sendable {
         offset: UInt64? = nil,
         scoreThreshold: Float? = nil,
         withPayload: Bool = true,
-        withVectors: Bool = false
+        withVectors: Bool = false,
+        idf: IdfParams? = nil
     ) async throws -> [ScoredPoint] {
         try await self.query.query(
             collection: collection, query: queryInput, prefetch: prefetch, using: using,
             filter: filter, limit: limit, offset: offset, scoreThreshold: scoreThreshold,
-            withPayload: withPayload, withVectors: withVectors)
+            withPayload: withPayload, withVectors: withVectors, idf: idf)
     }
 
     /// Performs multiple queries in a single batch request.
@@ -275,12 +276,13 @@ public final class PointsService: Sendable {
         using: String? = nil,
         filter: Filter? = nil,
         scoreThreshold: Float? = nil,
-        withPayload: Bool = true
+        withPayload: Bool = true,
+        idf: IdfParams? = nil
     ) async throws -> [PointGroup] {
         try await query.queryGroups(
             collection: collection, query: queryInput, groupBy: groupBy, limit: limit,
             groupSize: groupSize, prefetch: prefetch, using: using, filter: filter,
-            scoreThreshold: scoreThreshold, withPayload: withPayload)
+            scoreThreshold: scoreThreshold, withPayload: withPayload, idf: idf)
     }
 
     /// Finds points similar to the given positive examples and dissimilar to negative examples.

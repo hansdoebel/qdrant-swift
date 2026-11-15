@@ -23,7 +23,8 @@ internal final class QueryService: Sendable {
         offset: UInt64?,
         scoreThreshold: Float?,
         withPayload: Bool,
-        withVectors: Bool
+        withVectors: Bool,
+        idf: IdfParams?
     ) async throws -> [ScoredPoint] {
         let client = Qdrant_Points.Client(wrapping: base.grpcClient)
 
@@ -50,6 +51,10 @@ internal final class QueryService: Sendable {
 
         if let scoreThreshold = scoreThreshold {
             grpcRequest.scoreThreshold = scoreThreshold
+        }
+
+        if let idf {
+            grpcRequest.params = .idf(idf)
         }
 
         var payloadSelector = Qdrant_WithPayloadSelector()
@@ -101,6 +106,10 @@ internal final class QueryService: Sendable {
                 qp.scoreThreshold = scoreThreshold
             }
 
+            if let idf = queryReq.idf {
+                qp.params = .idf(idf)
+            }
+
             var payloadSelector = Qdrant_WithPayloadSelector()
             payloadSelector.enable = queryReq.withPayload
             qp.withPayload = payloadSelector
@@ -131,7 +140,8 @@ internal final class QueryService: Sendable {
         using: String?,
         filter: Filter?,
         scoreThreshold: Float?,
-        withPayload: Bool
+        withPayload: Bool,
+        idf: IdfParams?
     ) async throws -> [PointGroup] {
         let client = Qdrant_Points.Client(wrapping: base.grpcClient)
 
@@ -156,6 +166,10 @@ internal final class QueryService: Sendable {
 
         if let scoreThreshold = scoreThreshold {
             grpcRequest.scoreThreshold = scoreThreshold
+        }
+
+        if let idf {
+            grpcRequest.params = .idf(idf)
         }
 
         var payloadSelector = Qdrant_WithPayloadSelector()

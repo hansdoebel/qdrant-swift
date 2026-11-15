@@ -193,14 +193,15 @@ public final class PointsService: Sendable {
     /// - Returns: Array of scored points.
     public func query(
         collection: String,
-        query: RestQuery? = nil,
-        prefetch: [RestPrefetchQuery]? = nil,
+        query: QueryInput? = nil,
+        prefetch: [PrefetchQuery] = [],
         using: String? = nil,
         filter: Filter? = nil,
         limit: Int = 10,
         offset: Int? = nil,
         withPayload: Bool = true,
-        withVectors: Bool = false
+        withVectors: Bool = false,
+        idf: IdfParams? = nil
     ) async throws -> [ScoredPoint] {
         let request = QueryRequestBody(
             query: query,
@@ -210,7 +211,8 @@ public final class PointsService: Sendable {
             limit: limit,
             offset: offset,
             withPayload: withPayload,
-            withVector: withVectors
+            withVector: withVectors,
+            params: idf.map { SearchParamsBody(idf: IdfParamsBody(corpus: $0.corpus)) }
         )
         let response: QueryResponse = try await client.post(
             path: "/collections/\(collection)/points/query",
@@ -502,13 +504,14 @@ public final class PointsService: Sendable {
     /// - Returns: Grouped query results.
     public func queryGroups(
         collection: String,
-        query: RestQuery? = nil,
+        query: QueryInput? = nil,
         groupBy: String,
         groupSize: Int = 1,
         limit: Int = 10,
         filter: Filter? = nil,
         withPayload: Bool = true,
-        withVectors: Bool = false
+        withVectors: Bool = false,
+        idf: IdfParams? = nil
     ) async throws -> RestSearchGroupsResult {
         let request = QueryGroupsRequest(
             query: query,
@@ -517,7 +520,8 @@ public final class PointsService: Sendable {
             limit: limit,
             filter: filter,
             withPayload: withPayload,
-            withVector: withVectors
+            withVector: withVectors,
+            params: idf.map { SearchParamsBody(idf: IdfParamsBody(corpus: $0.corpus)) }
         )
         let response: QueryGroupsResponse = try await client.post(
             path: "/collections/\(collection)/points/query/groups",
@@ -763,15 +767,24 @@ struct SearchRequestBody: Encodable {
     let scoreThreshold: Float?
 }
 
+struct IdfParamsBody: Encodable {
+    let corpus: Filter?
+}
+
+struct SearchParamsBody: Encodable {
+    let idf: IdfParamsBody
+}
+
 struct QueryRequestBody: Encodable {
-    let query: RestQuery?
-    let prefetch: [RestPrefetchQuery]?
+    let query: QueryInput?
+    let prefetch: [PrefetchQuery]
     let using: String?
     let filter: Filter?
     let limit: Int
     let offset: Int?
     let withPayload: Bool
     let withVector: Bool
+    let params: SearchParamsBody?
 }
 
 struct RecommendRequestBody: Encodable {
@@ -848,13 +861,14 @@ struct SearchGroupsRequest: Encodable {
 }
 
 struct QueryGroupsRequest: Encodable {
-    let query: RestQuery?
+    let query: QueryInput?
     let groupBy: String
     let groupSize: Int
     let limit: Int
     let filter: Filter?
     let withPayload: Bool
     let withVector: Bool
+    let params: SearchParamsBody?
 }
 
 struct RecommendGroupsRequest: Encodable {
