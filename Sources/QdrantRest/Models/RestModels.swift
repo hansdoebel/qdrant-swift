@@ -400,69 +400,13 @@ extension HealthCheckResult: Codable {
     }
 }
 
-/// A query for the universal query API.
-public enum RestQuery: Codable, Sendable {
-    /// Find nearest neighbors to a vector.
-    case nearest([Float])
-
-    /// Find nearest neighbors to a point ID.
-    case nearestId(PointID)
-
-    /// Fusion of prefetch results.
-    case fusion(RestFusion)
-
-    enum CodingKeys: String, CodingKey {
-        case nearest, fusion
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-
-        if let array = try? container.decode([Float].self) {
-            self = .nearest(array)
-        } else if let id = try? container.decode(PointID.self) {
-            self = .nearestId(id)
-        } else {
-            let keyed = try decoder.container(keyedBy: CodingKeys.self)
-            if let fusion = try? keyed.decode(RestFusion.self, forKey: .fusion) {
-                self = .fusion(fusion)
-            } else {
-                throw DecodingError.typeMismatch(
-                    RestQuery.self,
-                    DecodingError.Context(
-                        codingPath: decoder.codingPath, debugDescription: "Unable to decode query")
-                )
-            }
-        }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        switch self {
-        case .nearest(let vector):
-            var container = encoder.singleValueContainer()
-            try container.encode(vector)
-        case .nearestId(let id):
-            var container = encoder.singleValueContainer()
-            try container.encode(id)
-        case .fusion(let fusion):
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(fusion, forKey: .fusion)
-        }
-    }
-}
-
-/// Fusion type for combining results.
-public enum RestFusion: String, Codable, Sendable {
-    case rrf
-}
-
 /// A prefetch query for multi-stage queries.
 public struct RestPrefetchQuery: Codable, Sendable {
     /// Nested prefetches.
     public let prefetch: [RestPrefetchQuery]?
 
     /// The query to perform.
-    public let query: RestQuery?
+    public let query: QueryInput?
 
     /// Vector name to use.
     public let using: String?
@@ -475,7 +419,7 @@ public struct RestPrefetchQuery: Codable, Sendable {
 
     public init(
         prefetch: [RestPrefetchQuery]? = nil,
-        query: RestQuery? = nil,
+        query: QueryInput? = nil,
         using: String? = nil,
         filter: Filter? = nil,
         limit: Int? = nil
@@ -652,7 +596,7 @@ public struct SearchBatchQuery: Codable, Sendable {
 
 /// A single query request in a batch.
 public struct QueryBatchQuery: Codable, Sendable {
-    public let query: RestQuery?
+    public let query: QueryInput?
     public let prefetch: [RestPrefetchQuery]?
     public let filter: Filter?
     public let limit: Int?
@@ -667,7 +611,7 @@ public struct QueryBatchQuery: Codable, Sendable {
     }
 
     public init(
-        query: RestQuery? = nil,
+        query: QueryInput? = nil,
         prefetch: [RestPrefetchQuery]? = nil,
         filter: Filter? = nil,
         limit: Int? = nil,

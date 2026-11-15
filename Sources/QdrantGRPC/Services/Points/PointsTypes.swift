@@ -4,6 +4,20 @@ import GRPCNIOTransportHTTP2
 import QdrantCore
 import QdrantProto
 
+public typealias QueryInput = QdrantCore.QueryInput
+public typealias VectorInput = QdrantCore.VectorInput
+public typealias PrefetchQuery = QdrantCore.PrefetchQuery
+public typealias QueryRequest = QdrantCore.QueryRequest
+public typealias FusionType = QdrantCore.FusionType
+public typealias SampleType = QdrantCore.SampleType
+public typealias PointGroup = QdrantCore.PointGroup
+public typealias GroupId = QdrantCore.GroupId
+public typealias Formula = QdrantCore.Formula
+public typealias Expression = QdrantCore.Expression
+public typealias TextQuery = QdrantCore.TextQuery
+public typealias Mmr = QdrantCore.Mmr
+public typealias Rrf = QdrantCore.Rrf
+
 /// A search request for batch search operations.
 public struct SearchRequest: Sendable {
     public let vector: [Float]
@@ -22,35 +36,6 @@ public struct SearchRequest: Sendable {
         self.vector = vector
         self.limit = limit
         self.filter = filter
-        self.scoreThreshold = scoreThreshold
-        self.withPayload = withPayload
-    }
-}
-
-/// A query request for batch query operations.
-public struct QueryRequest: Sendable {
-    public let query: QueryInput?
-    public let prefetch: [PrefetchQuery]
-    public let using: String?
-    public let filter: Filter?
-    public let limit: UInt64
-    public let scoreThreshold: Float?
-    public let withPayload: Bool
-
-    public init(
-        query: QueryInput? = nil,
-        prefetch: [PrefetchQuery] = [],
-        using: String? = nil,
-        filter: Filter? = nil,
-        limit: UInt64 = 10,
-        scoreThreshold: Float? = nil,
-        withPayload: Bool = true
-    ) {
-        self.query = query
-        self.prefetch = prefetch
-        self.using = using
-        self.filter = filter
-        self.limit = limit
         self.scoreThreshold = scoreThreshold
         self.withPayload = withPayload
     }
@@ -102,34 +87,6 @@ public struct RecommendRequest: Sendable {
     }
 }
 
-/// A group of points from grouped search.
-public struct PointGroup: Sendable {
-    public let id: GroupId
-    public let hits: [ScoredPoint]
-
-    internal init(grpc: Qdrant_PointGroup) {
-        self.id = GroupId(grpc: grpc.id)
-        self.hits = grpc.hits.compactMap { ScoredPoint(grpc: $0) }
-    }
-}
-
-/// Group identifier for grouped search results.
-public enum GroupId: Sendable, Hashable {
-    case unsigned(UInt64)
-    case integer(Int64)
-    case string(String)
-
-    internal init(grpc: Qdrant_GroupId) {
-        self =
-            switch grpc.kind {
-            case .unsignedValue(let value): .unsigned(value)
-            case .integerValue(let value): .integer(value)
-            case .stringValue(let value): .string(value)
-            case .none: .string("")
-            }
-    }
-}
-
 /// Target for discover operations.
 public enum DiscoverTarget: Sendable {
     case vector([Float])
@@ -147,173 +104,6 @@ public struct ContextPair: Sendable {
     }
 }
 
-/// Input for query operations.
-public enum QueryInput: Sendable {
-    case nearest([Float])
-    case nearestId(PointID)
-    case recommend(positive: [VectorInput], negative: [VectorInput])
-    case discover(target: VectorInput, context: [ContextInputPair])
-    case orderBy(field: String, direction: OrderDirection?)
-    case fusion(FusionType)
-    case sample(SampleType)
-
-    internal var grpc: Qdrant_Query {
-        var query = Qdrant_Query()
-        switch self {
-        case .nearest(let vector):
-            var vectorInput = Qdrant_VectorInput()
-            var dense = Qdrant_DenseVector()
-            dense.data = vector
-            vectorInput.dense = dense
-            query.nearest = vectorInput
-        case .nearestId(let id):
-            var vectorInput = Qdrant_VectorInput()
-            vectorInput.id = id.grpc
-            query.nearest = vectorInput
-        case .recommend(let positive, let negative):
-            var recommendInput = Qdrant_RecommendInput()
-            recommendInput.positive = positive.map { $0.grpc }
-            recommendInput.negative = negative.map { $0.grpc }
-            query.recommend = recommendInput
-        case .discover(let target, let context):
-            var discoverInput = Qdrant_DiscoverInput()
-            discoverInput.target = target.grpc
-            var contextInput = Qdrant_ContextInput()
-            contextInput.pairs = context.map { pair in
-                var contextPair = Qdrant_ContextInputPair()
-                contextPair.positive = pair.positive.grpc
-                contextPair.negative = pair.negative.grpc
-                return contextPair
-            }
-            discoverInput.context = contextInput
-            query.discover = discoverInput
-        case .orderBy(let field, let direction):
-            var orderBy = Qdrant_OrderBy()
-            orderBy.key = field
-            if let direction = direction {
-                orderBy.direction = direction.grpc
-            }
-            query.orderBy = orderBy
-        case .fusion(let fusionType):
-            query.fusion = fusionType.grpc
-        case .sample(let sampleType):
-            query.sample = sampleType.grpc
-        }
-        return query
-    }
-}
-
-/// Vector input for query operations.
-public enum VectorInput: Sendable {
-    case dense([Float])
-    case id(PointID)
-
-    internal var grpc: Qdrant_VectorInput {
-        var input = Qdrant_VectorInput()
-        switch self {
-        case .dense(let vector):
-            var dense = Qdrant_DenseVector()
-            dense.data = vector
-            input.dense = dense
-        case .id(let pointId):
-            input.id = pointId.grpc
-        }
-        return input
-    }
-}
-
-/// Context input pair for discover queries.
-public struct ContextInputPair: Sendable {
-    public let positive: VectorInput
-    public let negative: VectorInput
-
-    public init(positive: VectorInput, negative: VectorInput) {
-        self.positive = positive
-        self.negative = negative
-    }
-}
-
-/// Order direction for ordering queries.
-public enum OrderDirection: Sendable {
-    case ascending
-    case descending
-
-    internal var grpc: Qdrant_Direction {
-        switch self {
-        case .ascending: .asc
-        case .descending: .desc
-        }
-    }
-}
-
-/// Fusion type for combining prefetch results.
-public enum FusionType: Sendable {
-    case rrf
-
-    internal var grpc: Qdrant_Fusion {
-        switch self {
-        case .rrf: .rrf
-        }
-    }
-}
-
-/// Sample type for random sampling.
-public enum SampleType: Sendable {
-    case random
-
-    internal var grpc: Qdrant_Sample {
-        switch self {
-        case .random: .random
-        }
-    }
-}
-
-/// A prefetch query for multi-stage queries.
-public struct PrefetchQuery: Sendable {
-    public let prefetch: [PrefetchQuery]
-    public let query: QueryInput?
-    public let using: String?
-    public let filter: Filter?
-    public let scoreThreshold: Float?
-    public let limit: UInt64?
-
-    public init(
-        prefetch: [PrefetchQuery] = [],
-        query: QueryInput? = nil,
-        using: String? = nil,
-        filter: Filter? = nil,
-        scoreThreshold: Float? = nil,
-        limit: UInt64? = nil
-    ) {
-        self.prefetch = prefetch
-        self.query = query
-        self.using = using
-        self.filter = filter
-        self.scoreThreshold = scoreThreshold
-        self.limit = limit
-    }
-
-    internal var grpc: Qdrant_PrefetchQuery {
-        var pq = Qdrant_PrefetchQuery()
-        pq.prefetch = prefetch.map { $0.grpc }
-        if let query = query {
-            pq.query = query.grpc
-        }
-        if let using = using {
-            pq.using = using
-        }
-        if let filter = filter {
-            pq.filter = filter.grpc
-        }
-        if let scoreThreshold = scoreThreshold {
-            pq.scoreThreshold = scoreThreshold
-        }
-        if let limit = limit {
-            pq.limit = limit
-        }
-        return pq
-    }
-}
 
 /// Result of a facet operation.
 public struct FacetResult: Sendable {

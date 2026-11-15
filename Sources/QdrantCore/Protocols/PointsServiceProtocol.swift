@@ -96,6 +96,39 @@ public protocol PointsServiceProtocol: Sendable {
         fieldName: String,
         wait: Bool
     ) async throws
+
+    func query(
+        collection: String,
+        query: QueryInput?,
+        prefetch: [PrefetchQuery],
+        using: String?,
+        filter: Filter?,
+        limit: UInt64,
+        offset: UInt64?,
+        scoreThreshold: Float?,
+        withPayload: Bool,
+        withVectors: Bool,
+        idf: IdfParams?
+    ) async throws -> [ScoredPoint]
+
+    func queryBatch(
+        collection: String,
+        queries: [QueryRequest]
+    ) async throws -> [[ScoredPoint]]
+
+    func queryGroups(
+        collection: String,
+        query: QueryInput?,
+        groupBy: String,
+        limit: UInt64,
+        groupSize: UInt64,
+        prefetch: [PrefetchQuery],
+        using: String?,
+        filter: Filter?,
+        scoreThreshold: Float?,
+        withPayload: Bool,
+        idf: IdfParams?
+    ) async throws -> [PointGroup]
 }
 
 public enum FieldType: Sendable {

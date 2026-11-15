@@ -9,12 +9,12 @@ Public protos are vendored under `Sources/QdrantGRPC/Protos` and generated into 
 | Toolchain: grpc-swift-2 2.4.4, nio-transport 2.x, grpc-protobuf 2.x, swift-protobuf 1.41.0, tools 6.4, macOS 27 / iOS 27 | n/a | done | done |
 | `Package.resolved` committed, Makefile `generate` writes `Sources/QdrantProto` | done | n/a | n/a |
 | CI unit tests on `xcode-27` / Xcode 27.2; integration tests on Linux against `qdrant/qdrant:v1.20.1` | n/a | done | done |
-| MMR (`nearest_with_mmr`) | generated | pending | pending |
-| Formula rescoring, including `acosh`, `max`, `min` | generated | pending | pending |
-| Parameterized RRF (`k`, `weights`) and DBSF fusion | generated | pending | pending |
-| `VectorInput`: sparse, multi-dense, `Document`, `Image`, `InferenceObject` | generated | pending | pending |
-| `TextQuery` + `Bm25Params`, `IdfParams`, `RelevanceFeedbackInput`, prefetch nesting | generated | pending | pending |
-| `query` / `queryBatch` / `queryGroups` on `PointsServiceProtocol` (mocks) | generated | pending | pending |
+| MMR (`nearest_with_mmr`) | generated | done | done |
+| Formula rescoring, including `acosh`, `max`, `min` | generated | done | done |
+| Parameterized RRF (`k`, `weights`) and DBSF fusion | generated | done | done |
+| `VectorInput`: sparse, multi-dense, `Document`, `Image`, `InferenceObject` | generated | done | done |
+| `TextQuery` + `Bm25Params`, `IdfParams`, `RelevanceFeedbackInput`, prefetch nesting | generated | done | done |
+| `query` / `queryBatch` / `queryGroups` on `PointsServiceProtocol` (mocks) | generated | done | done |
 | Filter: `minShould`, nested, `hasVector`, phrase, `textAny`, `valuesCount`, datetime range, geo polygon | generated | pending | pending |
 | Match: `prefix`, `substring` | generated | pending | pending |
 | `SliceCondition` | generated | pending | pending |
