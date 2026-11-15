@@ -313,6 +313,7 @@ extension FieldType {
         case .text: .text
         case .bool: .bool
         case .datetime: .datetime
+        case .uuid: .uuid
         }
     }
 }

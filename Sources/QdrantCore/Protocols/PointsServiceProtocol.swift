@@ -91,6 +91,13 @@ public protocol PointsServiceProtocol: Sendable {
         wait: Bool
     ) async throws
 
+    func createFieldIndex(
+        collection: String,
+        fieldName: String,
+        schema: FieldIndexSchema,
+        wait: Bool
+    ) async throws
+
     func deleteFieldIndex(
         collection: String,
         fieldName: String,
@@ -145,4 +152,6 @@ public enum FieldType: Sendable {
     case bool
 
     case datetime
+
+    case uuid
 }
