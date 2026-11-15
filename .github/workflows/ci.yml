@@ -30,7 +30,6 @@ concurrency:
 
 permissions:
   contents: read
-  actions: write
 
 jobs:
   unit-macos:
