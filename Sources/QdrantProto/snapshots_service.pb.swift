@@ -15,12 +15,12 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
-public struct Qdrant_CreateFullSnapshotRequest: Sendable {
+public nonisolated struct Qdrant_CreateFullSnapshotRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -30,7 +30,7 @@ public struct Qdrant_CreateFullSnapshotRequest: Sendable {
   public init() {}
 }
 
-public struct Qdrant_ListFullSnapshotsRequest: Sendable {
+public nonisolated struct Qdrant_ListFullSnapshotsRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -40,7 +40,7 @@ public struct Qdrant_ListFullSnapshotsRequest: Sendable {
   public init() {}
 }
 
-public struct Qdrant_DeleteFullSnapshotRequest: Sendable {
+public nonisolated struct Qdrant_DeleteFullSnapshotRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -53,7 +53,7 @@ public struct Qdrant_DeleteFullSnapshotRequest: Sendable {
   public init() {}
 }
 
-public struct Qdrant_CreateSnapshotRequest: Sendable {
+public nonisolated struct Qdrant_CreateSnapshotRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -66,7 +66,7 @@ public struct Qdrant_CreateSnapshotRequest: Sendable {
   public init() {}
 }
 
-public struct Qdrant_ListSnapshotsRequest: Sendable {
+public nonisolated struct Qdrant_ListSnapshotsRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -79,7 +79,7 @@ public struct Qdrant_ListSnapshotsRequest: Sendable {
   public init() {}
 }
 
-public struct Qdrant_DeleteSnapshotRequest: Sendable {
+public nonisolated struct Qdrant_DeleteSnapshotRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -95,7 +95,7 @@ public struct Qdrant_DeleteSnapshotRequest: Sendable {
   public init() {}
 }
 
-public struct Qdrant_SnapshotDescription: Sendable {
+public nonisolated struct Qdrant_SnapshotDescription: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -105,11 +105,11 @@ public struct Qdrant_SnapshotDescription: Sendable {
 
   /// Creation time of the snapshot
   public var creationTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _creationTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    get {_creationTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_creationTime = newValue}
   }
   /// Returns true if `creationTime` has been explicitly set.
-  public var hasCreationTime: Bool {return self._creationTime != nil}
+  public var hasCreationTime: Bool {self._creationTime != nil}
   /// Clears the value of `creationTime`. Subsequent reads from it will return its default value.
   public mutating func clearCreationTime() {self._creationTime = nil}
 
@@ -118,11 +118,11 @@ public struct Qdrant_SnapshotDescription: Sendable {
 
   /// SHA256 digest of the snapshot file
   public var checksum: String {
-    get {return _checksum ?? String()}
+    get {_checksum ?? String()}
     set {_checksum = newValue}
   }
   /// Returns true if `checksum` has been explicitly set.
-  public var hasChecksum: Bool {return self._checksum != nil}
+  public var hasChecksum: Bool {self._checksum != nil}
   /// Clears the value of `checksum`. Subsequent reads from it will return its default value.
   public mutating func clearChecksum() {self._checksum = nil}
 
@@ -134,17 +134,17 @@ public struct Qdrant_SnapshotDescription: Sendable {
   fileprivate var _checksum: String? = nil
 }
 
-public struct Qdrant_CreateSnapshotResponse: Sendable {
+public nonisolated struct Qdrant_CreateSnapshotResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var snapshotDescription: Qdrant_SnapshotDescription {
-    get {return _snapshotDescription ?? Qdrant_SnapshotDescription()}
+    get {_snapshotDescription ?? Qdrant_SnapshotDescription()}
     set {_snapshotDescription = newValue}
   }
   /// Returns true if `snapshotDescription` has been explicitly set.
-  public var hasSnapshotDescription: Bool {return self._snapshotDescription != nil}
+  public var hasSnapshotDescription: Bool {self._snapshotDescription != nil}
   /// Clears the value of `snapshotDescription`. Subsequent reads from it will return its default value.
   public mutating func clearSnapshotDescription() {self._snapshotDescription = nil}
 
@@ -158,7 +158,7 @@ public struct Qdrant_CreateSnapshotResponse: Sendable {
   fileprivate var _snapshotDescription: Qdrant_SnapshotDescription? = nil
 }
 
-public struct Qdrant_ListSnapshotsResponse: Sendable {
+public nonisolated struct Qdrant_ListSnapshotsResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -173,7 +173,7 @@ public struct Qdrant_ListSnapshotsResponse: Sendable {
   public init() {}
 }
 
-public struct Qdrant_DeleteSnapshotResponse: Sendable {
+public nonisolated struct Qdrant_DeleteSnapshotResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -188,9 +188,9 @@ public struct Qdrant_DeleteSnapshotResponse: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "qdrant"
+fileprivate nonisolated let _protobuf_package = "qdrant"
 
-extension Qdrant_CreateFullSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_CreateFullSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CreateFullSnapshotRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -209,7 +209,7 @@ extension Qdrant_CreateFullSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension Qdrant_ListFullSnapshotsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ListFullSnapshotsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListFullSnapshotsRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -228,7 +228,7 @@ extension Qdrant_ListFullSnapshotsRequest: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
-extension Qdrant_DeleteFullSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DeleteFullSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteFullSnapshotRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}snapshot_name\0")
 
@@ -258,7 +258,7 @@ extension Qdrant_DeleteFullSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension Qdrant_CreateSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_CreateSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CreateSnapshotRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0")
 
@@ -288,7 +288,7 @@ extension Qdrant_CreateSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension Qdrant_ListSnapshotsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ListSnapshotsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListSnapshotsRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0")
 
@@ -318,7 +318,7 @@ extension Qdrant_ListSnapshotsRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension Qdrant_DeleteSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DeleteSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteSnapshotRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}collection_name\0\u{3}snapshot_name\0")
 
@@ -353,7 +353,7 @@ extension Qdrant_DeleteSnapshotRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension Qdrant_SnapshotDescription: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_SnapshotDescription: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SnapshotDescription"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{3}creation_time\0\u{1}size\0\u{1}checksum\0")
 
@@ -402,7 +402,7 @@ extension Qdrant_SnapshotDescription: SwiftProtobuf.Message, SwiftProtobuf._Mess
   }
 }
 
-extension Qdrant_CreateSnapshotResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_CreateSnapshotResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CreateSnapshotResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}snapshot_description\0\u{1}time\0")
 
@@ -441,7 +441,7 @@ extension Qdrant_CreateSnapshotResponse: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension Qdrant_ListSnapshotsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_ListSnapshotsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ListSnapshotsResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}snapshot_descriptions\0\u{1}time\0")
 
@@ -476,7 +476,7 @@ extension Qdrant_ListSnapshotsResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension Qdrant_DeleteSnapshotResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Qdrant_DeleteSnapshotResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DeleteSnapshotResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}time\0")
 

@@ -1,3 +1,8 @@
+// Public client subset of Qdrant v1.20.1 lib/api/src/grpc/proto/qdrant.proto.
+// Internal service imports (collections_internal_service, points_internal_service,
+// qdrant_internal_service, raft_service, shard_snapshots_service, storage_read_service,
+// and the public service imports that only exist to register those RPCs) are omitted.
+// HealthCheckRequest / HealthCheckReply match the upstream message definitions.
 syntax = "proto3";
 
 package qdrant;

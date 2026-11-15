@@ -6,7 +6,7 @@
 // Source: snapshots_service.proto
 //
 // For information on using the generated types, please see the documentation:
-//   https://github.com/grpc/grpc-swift
+//   https://github.com/grpc/grpc-swift-2
 
 import GRPCCore
 import GRPCProtobuf
@@ -29,7 +29,8 @@ public enum Qdrant_Snapshots: Sendable {
             /// Descriptor for "Create".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Snapshots"),
-                method: "Create"
+                method: "Create",
+                type: .unary
             )
         }
         /// Namespace for "List" metadata.
@@ -41,7 +42,8 @@ public enum Qdrant_Snapshots: Sendable {
             /// Descriptor for "List".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Snapshots"),
-                method: "List"
+                method: "List",
+                type: .unary
             )
         }
         /// Namespace for "Delete" metadata.
@@ -53,7 +55,8 @@ public enum Qdrant_Snapshots: Sendable {
             /// Descriptor for "Delete".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Snapshots"),
-                method: "Delete"
+                method: "Delete",
+                type: .unary
             )
         }
         /// Namespace for "CreateFull" metadata.
@@ -65,7 +68,8 @@ public enum Qdrant_Snapshots: Sendable {
             /// Descriptor for "CreateFull".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Snapshots"),
-                method: "CreateFull"
+                method: "CreateFull",
+                type: .unary
             )
         }
         /// Namespace for "ListFull" metadata.
@@ -77,7 +81,8 @@ public enum Qdrant_Snapshots: Sendable {
             /// Descriptor for "ListFull".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Snapshots"),
-                method: "ListFull"
+                method: "ListFull",
+                type: .unary
             )
         }
         /// Namespace for "DeleteFull" metadata.
@@ -89,7 +94,8 @@ public enum Qdrant_Snapshots: Sendable {
             /// Descriptor for "DeleteFull".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "qdrant.Snapshots"),
-                method: "DeleteFull"
+                method: "DeleteFull",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "qdrant.Snapshots" service.
@@ -130,9 +136,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_CreateSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CreateSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func create<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateSnapshotRequest>,
@@ -153,9 +159,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_ListSnapshotsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListSnapshotsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func list<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListSnapshotsRequest>,
@@ -176,9 +182,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_DeleteSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_DeleteSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func delete<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteSnapshotRequest>,
@@ -199,9 +205,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_CreateFullSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CreateSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func createFull<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateFullSnapshotRequest>,
@@ -222,9 +228,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_ListFullSnapshotsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListSnapshotsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func listFull<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListFullSnapshotsRequest>,
@@ -245,9 +251,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_DeleteFullSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_DeleteSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         func deleteFull<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteFullSnapshotRequest>,
@@ -285,9 +291,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_CreateSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CreateSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func create<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateSnapshotRequest>,
@@ -319,9 +325,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_ListSnapshotsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListSnapshotsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func list<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListSnapshotsRequest>,
@@ -353,9 +359,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_DeleteSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_DeleteSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func delete<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteSnapshotRequest>,
@@ -387,9 +393,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_CreateFullSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_CreateSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func createFull<Result>(
             request: GRPCCore.ClientRequest<Qdrant_CreateFullSnapshotRequest>,
@@ -421,9 +427,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_ListFullSnapshotsRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_ListSnapshotsResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func listFull<Result>(
             request: GRPCCore.ClientRequest<Qdrant_ListFullSnapshotsRequest>,
@@ -455,9 +461,9 @@ extension Qdrant_Snapshots {
         ///   - serializer: A serializer for `Qdrant_DeleteFullSnapshotRequest` messages.
         ///   - deserializer: A deserializer for `Qdrant_DeleteSnapshotResponse` messages.
         ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
+        ///   - handleResponse: A closure which handles the response and returns its result to
+        ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+        ///       already finished.
         /// - Returns: The result of `handleResponse`.
         public func deleteFull<Result>(
             request: GRPCCore.ClientRequest<Qdrant_DeleteFullSnapshotRequest>,
@@ -492,9 +498,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CreateSnapshotRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func create<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CreateSnapshotRequest>,
@@ -521,9 +527,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ListSnapshotsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func list<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ListSnapshotsRequest>,
@@ -550,9 +556,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeleteSnapshotRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func delete<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeleteSnapshotRequest>,
@@ -579,9 +585,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_CreateFullSnapshotRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createFull<Result>(
         request: GRPCCore.ClientRequest<Qdrant_CreateFullSnapshotRequest>,
@@ -608,9 +614,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_ListFullSnapshotsRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listFull<Result>(
         request: GRPCCore.ClientRequest<Qdrant_ListFullSnapshotsRequest>,
@@ -637,9 +643,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     /// - Parameters:
     ///   - request: A request containing a single `Qdrant_DeleteFullSnapshotRequest` message.
     ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteFull<Result>(
         request: GRPCCore.ClientRequest<Qdrant_DeleteFullSnapshotRequest>,
@@ -671,9 +677,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func create<Result>(
         _ message: Qdrant_CreateSnapshotRequest,
@@ -704,9 +710,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func list<Result>(
         _ message: Qdrant_ListSnapshotsRequest,
@@ -737,9 +743,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func delete<Result>(
         _ message: Qdrant_DeleteSnapshotRequest,
@@ -770,9 +776,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func createFull<Result>(
         _ message: Qdrant_CreateFullSnapshotRequest,
@@ -803,9 +809,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func listFull<Result>(
         _ message: Qdrant_ListFullSnapshotsRequest,
@@ -836,9 +842,9 @@ extension Qdrant_Snapshots.ClientProtocol {
     ///   - message: request message to send.
     ///   - metadata: Additional metadata to send, defaults to empty.
     ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
+    ///   - handleResponse: A closure which handles the response and returns its result to
+    ///       the caller. Returning from the closure will cancel the RPC if it hasn't
+    ///       already finished.
     /// - Returns: The result of `handleResponse`.
     public func deleteFull<Result>(
         _ message: Qdrant_DeleteFullSnapshotRequest,

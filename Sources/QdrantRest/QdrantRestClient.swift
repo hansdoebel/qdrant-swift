@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import QdrantCore
 
 /// A REST client for interacting with Qdrant vector database.

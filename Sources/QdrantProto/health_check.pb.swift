@@ -17,12 +17,12 @@ import SwiftProtobuf
 // incompatible with the version of SwiftProtobuf to which you are linking.
 // Please ensure that you are building against the same version of the API
 // that was used to generate this file.
-fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
+fileprivate nonisolated struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAPIVersionCheck {
   struct _2: SwiftProtobuf.ProtobufAPIVersion_2 {}
   typealias Version = _2
 }
 
-public struct Grpc_Health_V1_HealthCheckRequest: Sendable {
+public nonisolated struct Grpc_Health_V1_HealthCheckRequest: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -34,7 +34,7 @@ public struct Grpc_Health_V1_HealthCheckRequest: Sendable {
   public init() {}
 }
 
-public struct Grpc_Health_V1_HealthCheckResponse: Sendable {
+public nonisolated struct Grpc_Health_V1_HealthCheckResponse: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -43,7 +43,7 @@ public struct Grpc_Health_V1_HealthCheckResponse: Sendable {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum ServingStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public nonisolated enum ServingStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     public typealias RawValue = Int
     case unknown // = 0
     case serving // = 1
@@ -77,6 +77,7 @@ public struct Grpc_Health_V1_HealthCheckResponse: Sendable {
       }
     }
 
+    // The compiler won't synthesize support with the UNRECOGNIZED case.
     public static let allCases: [Grpc_Health_V1_HealthCheckResponse.ServingStatus] = [
       .unknown,
       .serving,
@@ -91,14 +92,17 @@ public struct Grpc_Health_V1_HealthCheckResponse: Sendable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "grpc.health.v1"
+fileprivate nonisolated let _protobuf_package = "grpc.health.v1"
 
-extension Grpc_Health_V1_HealthCheckRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Grpc_Health_V1_HealthCheckRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HealthCheckRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}service\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.service) }()
       default: break
@@ -120,12 +124,15 @@ extension Grpc_Health_V1_HealthCheckRequest: SwiftProtobuf.Message, SwiftProtobu
   }
 }
 
-extension Grpc_Health_V1_HealthCheckResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Grpc_Health_V1_HealthCheckResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HealthCheckResponse"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}status\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularEnumField(value: &self.status) }()
       default: break
@@ -147,6 +154,6 @@ extension Grpc_Health_V1_HealthCheckResponse: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Grpc_Health_V1_HealthCheckResponse.ServingStatus: SwiftProtobuf._ProtoNameProviding {
+nonisolated extension Grpc_Health_V1_HealthCheckResponse.ServingStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0UNKNOWN\0\u{1}SERVING\0\u{1}NOT_SERVING\0\u{1}SERVICE_UNKNOWN\0")
 }
