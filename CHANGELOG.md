@@ -1,8 +1,6 @@
 # Changelog
 
-## 2.0.0
-
-Suggested release. This tag has not been created.
+## 2.0.0 - 2026-11-15
 
 This release targets Qdrant 1.20.1 and drops the previous toolchain. Swift 6.4, macOS 27, and iOS 27 are required. The gRPC stack is `grpc-swift-2` 2.4.4, `grpc-swift-nio-transport` 2.12.0, `grpc-swift-protobuf` 2.5.0, and `swift-protobuf` 1.41.0.
 
@@ -33,4 +31,13 @@ This release targets Qdrant 1.20.1 and drops the previous toolchain. Swift 6.4, 
 
 - `Package.resolved` is committed.
 - `make generate` reads `Sources/QdrantGRPC/Protos` and writes `Sources/QdrantProto`.
-- GitHub Actions runs unit tests on the `xcode-27` runner with Xcode 27.2, and integration tests on Linux against `qdrant/qdrant:v1.20.1`. Service containers are not available on macOS runners.
+- GitHub Actions runs unit tests on the `xcode-27` runner with Xcode 27.2, and integration tests on Linux against `qdrant/qdrant:v1.20.1`. Service containers are not available on macOS runners. Fork pull requests do not run on that self-hosted runner.
+
+### Fixes
+
+- REST datetime bounds keep microseconds.
+- gRPC timestamps before 1970 use a non-negative `nanos` field.
+- Named-vector create and delete report a wait timeout.
+- REST grouped and batch text queries send `using`.
+- Query JSON round-trips recommend, discover, order-by, document, image, and inference values, including model options.
+- REST collection info reads `createdAt` and `updateQueue`.
