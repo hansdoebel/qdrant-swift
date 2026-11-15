@@ -44,7 +44,7 @@ struct RestFilterParityTests {
             datetimeRange: DatetimeRange(gte: Date(timeIntervalSince1970: 1_700_000_000))
         )
         let datedJSON = try jsonObject(dated)
-        #expect((datedJSON["datetime_range"] as? [String: Any])?["gte"] as? String == "2023-11-14T22:13:20.000Z")
+        #expect((datedJSON["datetime_range"] as? [String: Any])?["gte"] as? String == "2023-11-14T22:13:20.000000Z")
 
         let counted = try jsonObject(FieldCondition(key: "tags", valuesCount: ValuesCount(gte: 2)))
         #expect((counted["values_count"] as? [String: Any])?["gte"] != nil)
@@ -78,11 +78,11 @@ struct RestFilterParityTests {
 
     @Test("Datetime bounds keep fractional seconds")
     func fractionalDatetime() throws {
-        let date = Date(timeIntervalSince1970: 1_700_000_000.5)
+        let date = Date(timeIntervalSince1970: 1_700_000_000).addingTimeInterval(0.123456)
         let data = try JSONEncoder().encode(DatetimeRange(lt: date))
-        #expect(String(data: data, encoding: .utf8)?.contains(".") == true)
+        #expect(String(data: data, encoding: .utf8)?.contains(".123456") == true)
         let loaded = try JSONDecoder().decode(DatetimeRange.self, from: data)
         let delta = abs((loaded.lt?.timeIntervalSince1970 ?? 0) - date.timeIntervalSince1970)
-        #expect(delta < 0.001)
+        #expect(delta < 0.000001)
     }
 }

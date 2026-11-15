@@ -401,6 +401,7 @@ struct GeoLineJSON: Codable {
 }
 
 private func parseTimestamp(_ value: String) -> Date? {
+    if let parsed = parseZuluTimestamp(value) { return parsed }
     let formatter = ISO8601DateFormatter()
     formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
     if let date = formatter.date(from: value) { return date }
@@ -408,10 +409,39 @@ private func parseTimestamp(_ value: String) -> Date? {
     return formatter.date(from: value)
 }
 
-private func formatTimestamp(_ date: Date) -> String {
+private func parseZuluTimestamp(_ value: String) -> Date? {
+    guard value.hasSuffix("Z") else { return nil }
+    let body = String(value.dropLast())
+    let pieces = body.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
+    guard pieces.count == 1 || pieces.count == 2 else { return nil }
     let formatter = ISO8601DateFormatter()
-    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-    return formatter.string(from: date)
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.formatOptions = [.withInternetDateTime]
+    guard let whole = formatter.date(from: pieces[0] + "Z") else { return nil }
+    guard pieces.count == 2 else { return whole }
+    let digits = pieces[1]
+    guard !digits.isEmpty, digits.allSatisfy({ $0 >= "0" && $0 <= "9" }) else { return nil }
+    var scale = 1.0
+    for _ in digits { scale *= 10 }
+    guard let numerator = Double(digits) else { return nil }
+    return whole.addingTimeInterval(numerator / scale)
+}
+
+private func formatTimestamp(_ date: Date) -> String {
+    let interval = date.timeIntervalSince1970
+    var seconds = Int64(floor(interval))
+    var micros = Int(((interval - Double(seconds)) * 1_000_000).rounded())
+    if micros >= 1_000_000 {
+        seconds += 1
+        micros = 0
+    }
+    if micros < 0 { micros = 0 }
+    let formatter = ISO8601DateFormatter()
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.formatOptions = [.withInternetDateTime]
+    let stamp = formatter.string(from: Date(timeIntervalSince1970: Double(seconds)))
+    let prefix = stamp.hasSuffix("Z") ? String(stamp.dropLast()) : stamp
+    return String(format: "%@.%06dZ", prefix, micros)
 }
 
 extension Point: Codable {
