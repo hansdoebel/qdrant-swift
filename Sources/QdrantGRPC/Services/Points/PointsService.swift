@@ -39,9 +39,28 @@ public final class PointsService: PointsServiceProtocol, Sendable {
     public func upsert(
         collection: String,
         points: [Point],
+        wait: Bool = true,
+        updateMode: UpdateMode = .upsert
+    ) async throws {
+        try await crud.upsert(
+            collection: collection, points: points, wait: wait, updateMode: updateMode)
+    }
+
+    public func createVectorName(
+        collection: String,
+        name: String,
+        spec: NamedVectorSpec,
         wait: Bool = true
     ) async throws {
-        try await crud.upsert(collection: collection, points: points, wait: wait)
+        try await crud.createVectorName(collection: collection, name: name, spec: spec, wait: wait)
+    }
+
+    public func deleteVectorName(
+        collection: String,
+        name: String,
+        wait: Bool = true
+    ) async throws {
+        try await crud.deleteVectorName(collection: collection, name: name, wait: wait)
     }
 
     /// Retrieves points by their IDs.

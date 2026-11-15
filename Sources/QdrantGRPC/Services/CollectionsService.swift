@@ -161,6 +161,17 @@ public final class CollectionsService: Sendable {
         }
     }
 
+    public func create(name: String, options: CollectionOptions) async throws {
+        let client = Qdrant_Collections.Client(wrapping: grpcClient)
+        var grpcRequest = options.grpc
+        grpcRequest.collectionName = name
+        let request = ClientRequest(message: grpcRequest, metadata: metadata)
+        let response: Qdrant_CollectionOperationResponse = try await client.create(request: request)
+        if !response.result {
+            throw QdrantError.unexpectedResponse("Collection creation failed")
+        }
+    }
+
     /// Updates collection parameters.
     /// - Parameters:
     ///   - name: The name of the collection.

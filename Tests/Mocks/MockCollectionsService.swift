@@ -99,6 +99,15 @@ public final class MockCollectionsService: CollectionsServiceProtocol, @unchecke
         try createResult.get()
     }
 
+    public private(set) var optionCreates: [CollectionOptions] = []
+
+    public func create(name: String, options: CollectionOptions) async throws {
+        createCallCount += 1
+        optionCreates.append(options)
+        _ = name
+        try createResult.get()
+    }
+
     public func delete(name: String) async throws {
         deleteCallCount += 1
         deleteCalls.append(name)

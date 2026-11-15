@@ -20,12 +20,12 @@ Public protos are vendored under `Sources/QdrantGRPC/Protos` and generated into 
 | `SliceCondition` | generated | done | done |
 | `FieldType` uuid | generated | done | done |
 | Text index: BM25 `TextScoringParams`, `code` tokenizer, `DisabledStemmer`, per-element `nested` | generated | done | done |
-| TurboQuant datatypes (`turbo8` / `turbo16`) and `TurboQuantization` | generated | pending | pending |
-| Memory placement; `on_disk` / `always_ram` / `on_disk_payload` deprecated, not removed | generated | pending | pending |
-| `IdTrackerParams`, `PayloadStorageParams` | generated | pending | pending |
-| Collection info `created_at`, `update_queue` | generated | pending | pending |
-| Strict mode `require_tenant_filter`, `search_max_batchsize`; `max_resident_memory_percent` deprecated | generated | pending | pending |
-| Upsert `UpdateMode` (`insert_only` / `update_only`) | generated | pending | pending |
-| `CreateVectorName` / `DeleteVectorName` | generated | pending | pending |
+| TurboQuant datatypes (`turbo8` / `turbo16`) and `TurboQuantization` | generated | done | done |
+| Memory placement; `on_disk` / `always_ram` / `on_disk_payload` deprecated, not removed | generated | done | done |
+| `IdTrackerParams`, `PayloadStorageParams` | generated | done | done |
+| Collection info `created_at`, `update_queue` | generated | done | done |
+| Strict mode `require_tenant_filter`, `search_max_batchsize`; `max_resident_memory_percent` deprecated | generated | done | done |
+| Upsert `UpdateMode` (`insert_only` / `update_only`) | generated | done | done |
+| `CreateVectorName` / `DeleteVectorName` | generated | done | done |
 
 Internal-only protos are intentionally not vendored. Snapshot storage backends (GCS, Azure), audit-log sinks, and `cluster.p2p.host` are server configuration, not client RPCs.

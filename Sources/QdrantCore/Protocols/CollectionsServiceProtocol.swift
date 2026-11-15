@@ -19,18 +19,36 @@ public struct CollectionInfo: Sendable {
 
     public let segmentsCount: UInt64?
 
+    public let createdAt: Date?
+
+    public let updateQueue: UpdateQueueInfo?
+
     public init(
         name: String,
         status: CollectionStatus,
         indexedVectorsCount: UInt64? = nil,
         pointsCount: UInt64? = nil,
-        segmentsCount: UInt64? = nil
+        segmentsCount: UInt64? = nil,
+        createdAt: Date? = nil,
+        updateQueue: UpdateQueueInfo? = nil
     ) {
         self.name = name
         self.status = status
         self.indexedVectorsCount = indexedVectorsCount
         self.pointsCount = pointsCount
         self.segmentsCount = segmentsCount
+        self.createdAt = createdAt
+        self.updateQueue = updateQueue
+    }
+}
+
+public struct UpdateQueueInfo: Sendable {
+    public var length: UInt64
+    public var deferredPoints: UInt64?
+
+    public init(length: UInt64, deferredPoints: UInt64? = nil) {
+        self.length = length
+        self.deferredPoints = deferredPoints
     }
 }
 
@@ -58,18 +76,41 @@ public struct VectorConfig: Sendable {
 
     public let distance: Distance
 
+    @available(*, deprecated, message: "Use memory instead")
     public let onDisk: Bool?
 
-    public init(size: UInt64, distance: Distance, onDisk: Bool? = nil) {
+    public let datatype: VectorDatatype?
+
+    public let memory: MemoryTier?
+
+    public init(
+        size: UInt64,
+        distance: Distance,
+        datatype: VectorDatatype? = nil,
+        memory: MemoryTier? = nil,
+        onDisk: Bool? = nil
+    ) {
         self.size = size
         self.distance = distance
+        self.datatype = datatype
+        self.memory = memory
         self.onDisk = onDisk
     }
 
-    public init(size: Int, distance: Distance, onDisk: Bool? = nil) {
-        self.size = UInt64(size)
-        self.distance = distance
-        self.onDisk = onDisk
+    public init(
+        size: Int,
+        distance: Distance,
+        datatype: VectorDatatype? = nil,
+        memory: MemoryTier? = nil,
+        onDisk: Bool? = nil
+    ) {
+        self.init(
+            size: UInt64(size),
+            distance: distance,
+            datatype: datatype,
+            memory: memory,
+            onDisk: onDisk
+        )
     }
 }
 
@@ -85,12 +126,15 @@ public protocol CollectionsServiceProtocol: Sendable {
 
     func exists(name: String) async throws -> Bool
 
+    @available(*, deprecated, message: "Use create(name:options:) and payload.memory instead of onDiskPayload")
     func create(
         name: String,
         vectorSize: UInt64,
         distance: Distance,
         onDiskPayload: Bool?
     ) async throws
+
+    func create(name: String, options: CollectionOptions) async throws
 
     func delete(name: String) async throws
 
