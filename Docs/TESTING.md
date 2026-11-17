@@ -1,6 +1,6 @@
 # Testing Guide
 
-Unit tests run on Swift 6.4. The macOS CI job uses Xcode 27.2 at `/Applications/Xcode_27.2.app`. Integration tests use `qdrant/qdrant:v1.20.1`.
+Unit tests run on Swift 6.4. The macOS CI job uses Xcode 27.2 at `/Applications/Xcode_27.2.app`. Integration tests use `qdrant/qdrant:v1.20.2`.
 
 This guide explains how to run tests and use mocks for the Qdrant Swift client.
 
@@ -106,7 +106,7 @@ Contents of `docker-compose.test.yml`:
 version: '3.8'
 services:
   qdrant:
-    image: qdrant/qdrant:v1.20.1
+    image: qdrant/qdrant:v1.20.2
     ports:
       - "6333:6333"
       - "6334:6334"
@@ -372,7 +372,7 @@ env:
 
 services:
   qdrant:
-    image: qdrant/qdrant:v1.20.1
+    image: qdrant/qdrant:v1.20.2
     ports:
       - 6333:6333
       - 6334:6334

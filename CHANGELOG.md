@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Qdrant 1.20.2 compatibility
+
+- Regenerated public protobufs expose optional updated-byte usage counters.
+- REST result decoding accepts absent, null and extended usage metrics.
+- Integration fixtures target 1.20.2; no existing collection settings are changed.
+
 ## 2.0.0 - 2026-11-15
 
 This release targets Qdrant 1.20.1 and drops the previous toolchain. Swift 6.4, macOS 27, and iOS 27 are required. The gRPC stack is `grpc-swift-2` 2.4.4, `grpc-swift-nio-transport` 2.12.0, `grpc-swift-protobuf` 2.5.0, and `swift-protobuf` 1.41.0.

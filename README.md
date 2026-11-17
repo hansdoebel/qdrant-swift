@@ -118,12 +118,12 @@ Both clients have identical APIs. Use gRPC for production, REST for simplicity.
 
 - Swift 6.4+
 - macOS 27+ / iOS 27+
-- Qdrant 1.20.1
+- Qdrant 1.20.2
 
 ## Running Qdrant
 
 ```bash
-docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant:v1.20.1
+docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant:v1.20.2
 ```
 
 ## Project Structure
@@ -170,7 +170,7 @@ make generate
 - [Usage Examples](Docs/USAGE.md) - Detailed examples and common patterns
 - [API Reference](Docs/API.md) - Complete API documentation
 - [Testing Guide](Docs/TESTING.md) - How to run and write tests
-- [Parity checklist](Docs/PARITY.md) - Qdrant 1.20.1 coverage
+- [Parity checklist](Docs/PARITY.md) - Qdrant 1.20.2 coverage
 - [Changelog](CHANGELOG.md) - 2.0.0 notes. The tag is not created.
 
 ## Resources
