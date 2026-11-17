@@ -38,11 +38,11 @@ jobs:
     runs-on: xcode-27
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Select Xcode 27.2
         run: sudo xcode-select -s /Applications/Xcode_27.2.app
       - name: Cache SwiftPM build
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: .build
           key: swiftpm-${{ runner.os }}-xcode-27.2-${{ hashFiles('Package.swift', 'Package.resolved') }}-${{ github.sha }}
@@ -74,9 +74,9 @@ jobs:
     env:
       QDRANT_URL: http://127.0.0.1:6333
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Cache Swift toolchain tarball
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: .swift-toolchain-cache/swift-6.4.2-RELEASE-ubuntu24.04.tar.gz
           key: swift-tarball-6.4.2-RELEASE-ubuntu24.04
@@ -95,7 +95,7 @@ jobs:
           sudo tar -xzf "$tarball" -C /opt
           echo "/opt/swift-6.4.2-RELEASE-ubuntu24.04/usr/bin" >> "$GITHUB_PATH"
       - name: Cache SwiftPM build
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: .build
           key: swiftpm-${{ runner.os }}-swift-6.4.2-${{ hashFiles('Package.swift', 'Package.resolved') }}-${{ github.sha }}

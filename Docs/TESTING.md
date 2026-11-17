@@ -382,3 +382,9 @@ steps:
   - name: Run tests
     run: swift test
 ```
+
+## CI action versions
+
+CI pins [actions/checkout 7.0.1](https://github.com/actions/checkout/releases/tag/v7.0.1) to `3d3c42e5aac5ba805825da76410c181273ba90b1` and [actions/cache 6.1.0](https://github.com/actions/cache/releases/tag/v6.1.0) to `55cc8345863c7cc4c66a329aec7e433d2d1c52a9` (verified 2026-11-17). Both run on Node 24 and require Actions Runner 2.327.1 or newer. The existing hosted Linux and macOS workflows validate these pins.
+
+Checkout 7's fork restrictions apply to `pull_request_target` and `workflow_run`; this repository uses `pull_request`, `push` and `workflow_dispatch`. Checkout stores persisted credentials under the runner temporary directory. No authenticated Git commands run inside Docker actions. Cache 6 retains the existing paths, keys and restore behavior while updating its action toolkit and ESM runtime. Workflow permissions and test selection remain unchanged.
