@@ -296,6 +296,7 @@ extension IdTrackerParams: Encodable {
 
 extension StrictModeConfig: Encodable {
     enum CodingKeys: String, CodingKey {
+        case enabled
         case requireTenantFilter = "require_tenant_filter"
         case searchMaxBatchsize = "search_max_batchsize"
         case maxResidentMemoryPercent = "max_resident_memory_percent"
@@ -303,6 +304,7 @@ extension StrictModeConfig: Encodable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(enabled, forKey: .enabled)
         try container.encodeIfPresent(requireTenantFilter, forKey: .requireTenantFilter)
         try container.encodeIfPresent(searchMaxBatchsize, forKey: .searchMaxBatchsize)
         try container.encodeIfPresent(maxResidentMemoryPercent, forKey: .maxResidentMemoryPercent)

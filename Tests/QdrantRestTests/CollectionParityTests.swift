@@ -6,6 +6,17 @@ import Testing
 
 @Suite("Collection and point REST encoding")
 struct RestCollectionParityTests {
+    @Test func strictModeActivationPresence() throws {
+        let omitted = try JSONSerialization.jsonObject(with: JSONEncoder().encode(StrictModeConfig(searchMaxBatchsize: 1))) as! [String: Any]
+        #expect(omitted["enabled"] == nil)
+        #expect(omitted["search_max_batchsize"] as? Int == 1)
+        for enabled in [false, true] {
+            let value = try JSONSerialization.jsonObject(with: JSONEncoder().encode(StrictModeConfig(enabled: enabled, searchMaxBatchsize: 1))) as! [String: Any]
+            #expect(value["enabled"] as? Bool == enabled)
+            #expect(value["search_max_batchsize"] as? Int == 1)
+        }
+    }
+
     @Test("Collection options encode TurboQuant, memory placement, and strict mode")
     func options() throws {
         let options = CollectionOptions(

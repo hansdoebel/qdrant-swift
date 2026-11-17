@@ -7,6 +7,18 @@ import QdrantProto
 
 @Suite("Collection and point gRPC mapping")
 struct CollectionParityTests {
+    @Test func strictModeActivationPresence() {
+        let omitted = StrictModeConfig(searchMaxBatchsize: 1).grpc
+        #expect(!omitted.hasEnabled)
+        #expect(omitted.searchMaxBatchsize == 1)
+        for enabled in [false, true] {
+            let value = StrictModeConfig(enabled: enabled, searchMaxBatchsize: 1).grpc
+            #expect(value.hasEnabled)
+            #expect(value.enabled == enabled)
+            #expect(value.searchMaxBatchsize == 1)
+        }
+    }
+
     @Test("TurboQuant datatype and quantization map onto the proto")
     func turboQuant() {
         let config = VectorConfig(size: 128, distance: .cosine, datatype: .turbo16, memory: .cached)
