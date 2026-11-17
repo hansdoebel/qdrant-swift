@@ -103,6 +103,9 @@ public final class MockPointsService: PointsServiceProtocol, @unchecked Sendable
     // MARK: - Reset
 
     public func reset() {
+        lastUpdateMode = nil
+        vectorNameCalls.removeAll()
+        createFieldSchemaCalls.removeAll()
         upsertCallCount = 0
         upsertCalls = []
         getCallCount = 0

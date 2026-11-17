@@ -782,7 +782,7 @@ try await client.collections.create(
         quantization: .turbo(TurboQuantization(bits: .bits8, memory: .cold)),
         payload: PayloadStorageParams(memory: .cached),
         idTracker: IdTrackerParams(memory: .cold),
-        strictMode: StrictModeConfig(requireTenantFilter: true, searchMaxBatchsize: 64)
+        strictMode: StrictModeConfig(enabled: true, requireTenantFilter: true, searchMaxBatchsize: 64)
     )
 )
 ```
@@ -814,3 +814,5 @@ try await client.points.createFieldIndex(
     schema: .text(TextIndexOptions(tokenizer: .code, scoring: .bm25, stemmer: .disabled, nested: "offers"))
 )
 ```
+
+Strict-mode limits require `enabled: true`. Omitting `enabled` preserves the server default; explicit `false` disables enforcement. Options-based collection creation reports the same typed `QdrantError` values as the legacy overload.

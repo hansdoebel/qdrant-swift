@@ -24,7 +24,7 @@ Public protos are vendored under `Sources/QdrantGRPC/Protos` and generated into 
 | Memory placement; `on_disk` / `always_ram` / `on_disk_payload` deprecated, not removed | generated | done | done |
 | `IdTrackerParams`, `PayloadStorageParams` | generated | done | done |
 | Collection info `created_at`, `update_queue` | generated | done | done |
-| Strict mode `require_tenant_filter`, `search_max_batchsize`; `max_resident_memory_percent` deprecated | generated | done | done |
+| Strict mode `enabled`, `require_tenant_filter`, `search_max_batchsize`; `max_resident_memory_percent` deprecated | generated | done | done |
 | Upsert `UpdateMode` (`insert_only` / `update_only`) | generated | done | done |
 | `CreateVectorName` / `DeleteVectorName` | generated | done | done |
 

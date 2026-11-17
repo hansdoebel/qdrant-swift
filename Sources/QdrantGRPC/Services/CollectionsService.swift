@@ -166,9 +166,15 @@ public final class CollectionsService: Sendable {
         var grpcRequest = options.grpc
         grpcRequest.collectionName = name
         let request = ClientRequest(message: grpcRequest, metadata: metadata)
-        let response: Qdrant_CollectionOperationResponse = try await client.create(request: request)
-        if !response.result {
-            throw QdrantError.unexpectedResponse("Collection creation failed")
+        do {
+            let response: Qdrant_CollectionOperationResponse = try await client.create(request: request)
+            if !response.result {
+                throw QdrantError.unexpectedResponse("Collection creation failed")
+            }
+        } catch let error as QdrantError {
+            throw error
+        } catch {
+            throw QdrantError.from(error)
         }
     }
 

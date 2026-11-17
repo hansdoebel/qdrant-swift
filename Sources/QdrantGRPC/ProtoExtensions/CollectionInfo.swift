@@ -109,6 +109,7 @@ extension Quantization {
 extension StrictModeConfig {
     var grpc: Qdrant_StrictModeConfig {
         var message = Qdrant_StrictModeConfig()
+        if let enabled { message.enabled = enabled }
         if let requireTenantFilter { message.requireTenantFilter = requireTenantFilter }
         if let searchMaxBatchsize { message.searchMaxBatchsize = searchMaxBatchsize }
         if let maxResidentMemoryPercent { message.maxResidentMemoryPercent = maxResidentMemoryPercent }

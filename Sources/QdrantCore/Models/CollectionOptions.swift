@@ -58,6 +58,7 @@ public struct IdTrackerParams: Sendable {
 }
 
 public struct StrictModeConfig: Sendable {
+    public var enabled: Bool?
     public var requireTenantFilter: Bool?
 
     public var searchMaxBatchsize: UInt64?
@@ -66,10 +67,12 @@ public struct StrictModeConfig: Sendable {
     public var maxResidentMemoryPercent: UInt32?
 
     public init(
+        enabled: Bool? = nil,
         requireTenantFilter: Bool? = nil,
         searchMaxBatchsize: UInt64? = nil,
         maxResidentMemoryPercent: UInt32? = nil
     ) {
+        self.enabled = enabled
         self.requireTenantFilter = requireTenantFilter
         self.searchMaxBatchsize = searchMaxBatchsize
         self.maxResidentMemoryPercent = maxResidentMemoryPercent
