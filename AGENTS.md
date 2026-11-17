@@ -2,7 +2,7 @@
 
 ## Overview
 
-`qdrant-swift` is the Swift client for Qdrant 1.20.1. It ships three libraries:
+`qdrant-swift` is the Swift client for Qdrant 1.20.2. It ships three libraries:
 
 - `QdrantCore` holds the shared models and service protocols.
 - `QdrantGRPC` is the gRPC client.
@@ -28,7 +28,7 @@ Docs/                        usage, API, testing, and the parity checklist
 
 ## Generated protos and handwritten code
 
-`Sources/QdrantGRPC/Protos` is the public subset of Qdrant v1.20.1 `lib/api/src/grpc/proto`. `qdrant.proto` keeps the upstream `HealthCheck` messages and omits the internal service imports.
+`Sources/QdrantGRPC/Protos` is the public subset of Qdrant v1.20.2 `lib/api/src/grpc/proto`. `qdrant.proto` keeps the upstream `HealthCheck` messages and omits the internal service imports.
 
 `make generate` writes `Sources/QdrantProto`. Do not edit those files by hand. Handwritten mapping lives in `Sources/QdrantGRPC/ProtoExtensions` and the service types. REST JSON lives in `Sources/QdrantRest`.
 
@@ -36,7 +36,7 @@ Field names come from the protos and the Qdrant REST schema. Do not invent field
 
 ## Build and test
 
-Toolchain: Swift 6.4. Apple platforms: macOS 27 and iOS 27. The macOS CI job uses the GitHub-hosted `xcode-27` runner (macOS, 3-core) and `/Applications/Xcode_27.2.app`. It runs on push to `main` and on `workflow_dispatch`. Pull requests run only the Linux job: the same unit tests, plus integration tests against `qdrant/qdrant:v1.20.1`.
+Toolchain: Swift 6.4. Apple platforms: macOS 27 and iOS 27. The macOS CI job uses the GitHub-hosted `xcode-27` runner (macOS, 3-core) and `/Applications/Xcode_27.2.app`. It runs on push to `main` and on `workflow_dispatch`. Pull requests run only the Linux job: the same unit tests, plus integration tests against `qdrant/qdrant:v1.20.2`.
 
 Docs-only changes skip CI: `README.md`, `CHANGELOG.md`, `Docs/**`, and `AGENTS.md`. `AGENTS.md` is in that ignore list, so an edit that touches only this file does not run CI. A pull request that also changes the workflow under `.github/` still runs CI.
 
@@ -45,7 +45,7 @@ swift test --skip IntegrationTests
 swift test --filter IntegrationTests
 ```
 
-Integration tests need `QDRANT_URL` (for local Docker, `http://localhost:6333`) and `qdrant/qdrant:v1.20.1` from `docker-compose.test.yml`. GitHub Actions service containers are not supported on macOS runners, so the live Qdrant job runs on Linux.
+Integration tests need `QDRANT_URL` (for local Docker, `http://localhost:6333`) and `qdrant/qdrant:v1.20.2` from `docker-compose.test.yml`. GitHub Actions service containers are not supported on macOS runners, so the live Qdrant job runs on Linux.
 
 Regenerate protos with `make generate` after `protoc`, `protoc-gen-swift`, and `protoc-gen-grpc-swift-2` are on `PATH`. `make update-deps` reports available package updates. `Package.resolved` is committed.
 
@@ -61,6 +61,6 @@ A public behavior change needs a unit test that checks the gRPC message or the R
 
 Open each pull request against `main`. Keep it focused. The body lists the unit test command and counts, plus anything that still needs a live Qdrant or a manual check.
 
-Squash-merge a pull request only after the Linux job is green. That job runs the unit tests and the integration tests against `qdrant/qdrant:v1.20.1`. macOS unit tests run on push to `main` and via `workflow_dispatch`, not on the pull request.
+Squash-merge a pull request only after the Linux job is green. That job runs the unit tests and the integration tests against `qdrant/qdrant:v1.20.2`. macOS unit tests run on push to `main` and via `workflow_dispatch`, not on the pull request.
 
 Do not create or push a git tag or GitHub release.
