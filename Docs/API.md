@@ -815,4 +815,4 @@ try await client.points.createFieldIndex(
 )
 ```
 
-Strict-mode limits require `enabled: true`. Omitting `enabled` preserves the server default; explicit `false` disables enforcement. Options-based collection creation reports the same typed `QdrantError` values as the legacy overload.
+Strict-mode limits require `enabled: true`. Omitting `enabled` preserves the server default; explicit `false` disables enforcement. Options-based collection creation reports the same typed errors as the legacy overload: `QdrantError` for gRPC and `RESTError` for REST.

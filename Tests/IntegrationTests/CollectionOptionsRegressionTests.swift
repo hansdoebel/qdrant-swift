@@ -5,9 +5,16 @@ import QdrantGRPC
 
 @Suite("Collection options regressions", .serialized)
 struct CollectionOptionsRegressionTests {
-    @Test func duplicateOptionsCreationPreservesTypedError() async throws {
+    private func createClient() async throws -> QdrantGRPCClient {
+        let config = try IntegrationTestConfig.load()
+        let url = try #require(URL(string: config.url))
+        let host = try #require(url.host)
         let port = Int(ProcessInfo.processInfo.environment["QDRANT_GRPC_PORT"] ?? "6334") ?? 6334
-        let client = try await QdrantGRPCClient(host: "127.0.0.1", port: port, useTLS: false)
+        return try await QdrantGRPCClient(host: host, port: port, apiKey: config.apiKey, useTLS: url.scheme == "https")
+    }
+
+    @Test func duplicateOptionsCreationPreservesTypedError() async throws {
+        let client = try await createClient()
         defer { client.close() }
         let name = "chunky-duplicate-" + UUID().uuidString.lowercased()
         let options = CollectionOptions(vectors: .single(VectorConfig(size: 3, distance: .cosine)))
@@ -28,8 +35,7 @@ struct CollectionOptionsRegressionTests {
     }
 
     @Test func strictModeEnforcesBatchLimitOnlyWhenEnabled() async throws {
-        let port = Int(ProcessInfo.processInfo.environment["QDRANT_GRPC_PORT"] ?? "6334") ?? 6334
-        let client = try await QdrantGRPCClient(host: "127.0.0.1", port: port, useTLS: false)
+        let client = try await createClient()
         defer { client.close() }
         for enabled in [false, true] {
             let name = "chunky-strict-" + UUID().uuidString.lowercased()
