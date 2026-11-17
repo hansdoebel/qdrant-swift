@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Resolve grpc-swift-nio-transport 2.13.0, an additive minor release for listener addresses and peer credentials. Other dependency pins are unchanged.
+
 - Preserve omitted, false and true strict-mode activation across REST and gRPC.
 - Map options-based collection creation failures to typed `QdrantError` values.
 - Clear all modern request tracking when resetting protocol mocks.
