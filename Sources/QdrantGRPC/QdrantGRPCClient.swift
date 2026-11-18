@@ -28,10 +28,7 @@ public final class QdrantGRPCClient: Sendable {
     public init(configuration: QdrantConfiguration) async throws {
         self.configuration = configuration
 
-        let transport = try HTTP2ClientTransport.Posix(
-            target: .dns(host: configuration.host, port: configuration.port),
-            transportSecurity: configuration.useTLS ? .tls : .plaintext
-        )
+        let transport = try Self.makeTransport(configuration: configuration)
 
         let client = GRPCClient(transport: transport)
         self.grpcClient = client
@@ -43,6 +40,16 @@ public final class QdrantGRPCClient: Sendable {
         self._collections = CollectionsService(client: grpcClient, apiKey: configuration.apiKey)
         self._points = PointsService(client: grpcClient, apiKey: configuration.apiKey)
         self._snapshots = SnapshotsService(client: grpcClient, apiKey: configuration.apiKey)
+    }
+
+    internal static func makeTransport(configuration: QdrantConfiguration) throws -> HTTP2ClientTransport.Posix {
+        try HTTP2ClientTransport.Posix(
+            target: .dns(host: configuration.host, port: configuration.port),
+            transportSecurity: configuration.useTLS ? .tls : .plaintext,
+            serviceConfig: ServiceConfig(methodConfig: [
+                MethodConfig(names: [.init(service: "")], timeout: configuration.timeout)
+            ])
+        )
     }
 
     /// Creates a new Qdrant client with the specified connection parameters.
