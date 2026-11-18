@@ -1459,3 +1459,9 @@ struct ImageSearchService {
 
 - See [API Reference](API.md) for complete method documentation
 - See [Testing Guide](TESTING.md) for running tests
+
+## gRPC request deadlines
+
+`QdrantConfiguration.timeout` defaults to 30 seconds and applies as a client RPC deadline to health checks, collection operations, point operations and snapshots. The transport installs a default method configuration for every RPC, including methods added later. A custom duration, including subsecond values, is preserved. This bounds an individual RPC rather than an entire sequence of application calls.
+
+This deadline is separate from Qdrant's server-side operation timeout fields. A deadline or cancellation does not prove that a write was rolled back: the server may have applied it before the response was interrupted. The client does not add a retry or hedging policy; inspect uncertain mutation outcomes before deciding whether to retry. Existing typed error conversion remains in each service.
